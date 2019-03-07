@@ -16,7 +16,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.SerializerProvider;
 /**
  * null返回空字符串
- * @author 戴旌旗
+ * @author tty
  *
  */
 @Configuration
