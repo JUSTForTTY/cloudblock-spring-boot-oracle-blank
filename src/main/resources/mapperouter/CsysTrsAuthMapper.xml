@@ -1,0 +1,212 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.company.project.outer.dao.CsysTrsAuthMapper">
+  <resultMap id="BaseResultMap" type="com.company.project.outer.model.CsysTrsAuth">
+    <!--
+      WARNING - @mbg.generated
+    -->
+    <id column="CSYS_TRS_AUTH_ID" jdbcType="VARCHAR" property="csysTrsAuthId" />
+    <result column="CSYS_WORKFLOW_ID" jdbcType="VARCHAR" property="csysWorkflowId" />
+    <result column="CSYS_WORKFLOW_NAME" jdbcType="VARCHAR" property="csysWorkflowName" />
+    <result column="CSYS_POINT_TRS_ID" jdbcType="VARCHAR" property="csysPointTrsId" />
+    <result column="CSYS_TRS_AUTH_TYPE" jdbcType="CHAR" property="csysTrsAuthType" />
+    <result column="CSYS_ROLE_ID" jdbcType="VARCHAR" property="csysRoleId" />
+    <result column="CSYS_USER_ID" jdbcType="VARCHAR" property="csysUserId" />
+    <result column="CSYS_TRS_AUTH_DESC" jdbcType="VARCHAR" property="csysTrsAuthDesc" />
+    <result column="CSYS_TRS_AUTH_CREATE_TIME" jdbcType="TIMESTAMP" property="csysTrsAuthCreateTime" />
+    <result column="CSYS_TRS_AUTH_MODIFY_TIME" jdbcType="TIMESTAMP" property="csysTrsAuthModifyTime" />
+    <result column="CSYS_TRS_AUTH_CREATE_USER" jdbcType="VARCHAR" property="csysTrsAuthCreateUser" />
+    <result column="CSYS_TRS_AUTH_MODIFY_USER" jdbcType="VARCHAR" property="csysTrsAuthModifyUser" />
+    <result column="CSYS_TRS_AUTH_IS_DELETE" jdbcType="CHAR" property="csysTrsAuthIsDelete" />
+    <result column="CSYS_TRS_AUTH_TIME" jdbcType="TIMESTAMP" property="csysTrsAuthTime" />
+    <result column="CSYS_TRS_AUTH_DATE" jdbcType="TIMESTAMP" property="csysTrsAuthDate" />
+  </resultMap>
+  <sql id="Example_Where_Clause">
+    <!--
+      WARNING - @mbg.generated
+    -->
+    <where>
+      <foreach collection="oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause">
+    <!--
+      WARNING - @mbg.generated
+    -->
+    <where>
+      <foreach collection="example.oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List">
+    <!--
+      WARNING - @mbg.generated
+    -->
+    CSYS_TRS_AUTH_ID, CSYS_WORKFLOW_ID, CSYS_WORKFLOW_NAME, CSYS_POINT_TRS_ID, CSYS_TRS_AUTH_TYPE, 
+    CSYS_ROLE_ID, CSYS_USER_ID, CSYS_TRS_AUTH_DESC, CSYS_TRS_AUTH_CREATE_TIME, CSYS_TRS_AUTH_MODIFY_TIME, 
+    CSYS_TRS_AUTH_CREATE_USER, CSYS_TRS_AUTH_MODIFY_USER, CSYS_TRS_AUTH_IS_DELETE, CSYS_TRS_AUTH_TIME, 
+    CSYS_TRS_AUTH_DATE
+  </sql>
+  <select id="selectByExample" parameterType="com.company.project.outer.model.CsysTrsAuthExample" resultMap="BaseResultMap">
+    <!--
+      WARNING - @mbg.generated
+    -->
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from CSYS_TRS_AUTH
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+  </select>
+  <delete id="deleteByExample" parameterType="com.company.project.outer.model.CsysTrsAuthExample">
+    <!--
+      WARNING - @mbg.generated
+    -->
+    delete from CSYS_TRS_AUTH
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <select id="countByExample" parameterType="com.company.project.outer.model.CsysTrsAuthExample" resultType="java.lang.Long">
+    <!--
+      WARNING - @mbg.generated
+    -->
+    select count(*) from CSYS_TRS_AUTH
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map">
+    <!--
+      WARNING - @mbg.generated
+    -->
+    update CSYS_TRS_AUTH
+    <set>
+      <if test="record.csysTrsAuthId != null">
+        CSYS_TRS_AUTH_ID = #{record.csysTrsAuthId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.csysWorkflowId != null">
+        CSYS_WORKFLOW_ID = #{record.csysWorkflowId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.csysWorkflowName != null">
+        CSYS_WORKFLOW_NAME = #{record.csysWorkflowName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.csysPointTrsId != null">
+        CSYS_POINT_TRS_ID = #{record.csysPointTrsId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.csysTrsAuthType != null">
+        CSYS_TRS_AUTH_TYPE = #{record.csysTrsAuthType,jdbcType=CHAR},
+      </if>
+      <if test="record.csysRoleId != null">
+        CSYS_ROLE_ID = #{record.csysRoleId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.csysUserId != null">
+        CSYS_USER_ID = #{record.csysUserId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.csysTrsAuthDesc != null">
+        CSYS_TRS_AUTH_DESC = #{record.csysTrsAuthDesc,jdbcType=VARCHAR},
+      </if>
+      <if test="record.csysTrsAuthCreateTime != null">
+        CSYS_TRS_AUTH_CREATE_TIME = #{record.csysTrsAuthCreateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.csysTrsAuthModifyTime != null">
+        CSYS_TRS_AUTH_MODIFY_TIME = #{record.csysTrsAuthModifyTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.csysTrsAuthCreateUser != null">
+        CSYS_TRS_AUTH_CREATE_USER = #{record.csysTrsAuthCreateUser,jdbcType=VARCHAR},
+      </if>
+      <if test="record.csysTrsAuthModifyUser != null">
+        CSYS_TRS_AUTH_MODIFY_USER = #{record.csysTrsAuthModifyUser,jdbcType=VARCHAR},
+      </if>
+      <if test="record.csysTrsAuthIsDelete != null">
+        CSYS_TRS_AUTH_IS_DELETE = #{record.csysTrsAuthIsDelete,jdbcType=CHAR},
+      </if>
+      <if test="record.csysTrsAuthTime != null">
+        CSYS_TRS_AUTH_TIME = #{record.csysTrsAuthTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.csysTrsAuthDate != null">
+        CSYS_TRS_AUTH_DATE = #{record.csysTrsAuthDate,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map">
+    <!--
+      WARNING - @mbg.generated
+    -->
+    update CSYS_TRS_AUTH
+    set CSYS_TRS_AUTH_ID = #{record.csysTrsAuthId,jdbcType=VARCHAR},
+      CSYS_WORKFLOW_ID = #{record.csysWorkflowId,jdbcType=VARCHAR},
+      CSYS_WORKFLOW_NAME = #{record.csysWorkflowName,jdbcType=VARCHAR},
+      CSYS_POINT_TRS_ID = #{record.csysPointTrsId,jdbcType=VARCHAR},
+      CSYS_TRS_AUTH_TYPE = #{record.csysTrsAuthType,jdbcType=CHAR},
+      CSYS_ROLE_ID = #{record.csysRoleId,jdbcType=VARCHAR},
+      CSYS_USER_ID = #{record.csysUserId,jdbcType=VARCHAR},
+      CSYS_TRS_AUTH_DESC = #{record.csysTrsAuthDesc,jdbcType=VARCHAR},
+      CSYS_TRS_AUTH_CREATE_TIME = #{record.csysTrsAuthCreateTime,jdbcType=TIMESTAMP},
+      CSYS_TRS_AUTH_MODIFY_TIME = #{record.csysTrsAuthModifyTime,jdbcType=TIMESTAMP},
+      CSYS_TRS_AUTH_CREATE_USER = #{record.csysTrsAuthCreateUser,jdbcType=VARCHAR},
+      CSYS_TRS_AUTH_MODIFY_USER = #{record.csysTrsAuthModifyUser,jdbcType=VARCHAR},
+      CSYS_TRS_AUTH_IS_DELETE = #{record.csysTrsAuthIsDelete,jdbcType=CHAR},
+      CSYS_TRS_AUTH_TIME = #{record.csysTrsAuthTime,jdbcType=TIMESTAMP},
+      CSYS_TRS_AUTH_DATE = #{record.csysTrsAuthDate,jdbcType=TIMESTAMP}
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+</mapper>

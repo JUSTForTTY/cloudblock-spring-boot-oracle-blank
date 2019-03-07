@@ -1,0 +1,255 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.company.project.outer.dao.CsysFieldInfoMapper">
+  <resultMap id="BaseResultMap" type="com.company.project.outer.model.CsysFieldInfo">
+    <!--
+      WARNING - @mbg.generated
+    -->
+    <id column="CSYS_FIELD_INFO_ID" jdbcType="VARCHAR" property="csysFieldInfoId" />
+    <result column="CSYS_FIELD_INFO_NAME" jdbcType="VARCHAR" property="csysFieldInfoName" />
+    <result column="CSYS_FIELD_INFO_RELNAME" jdbcType="VARCHAR" property="csysFieldInfoRelname" />
+    <result column="CSYS_FIELD_INFO_ALIASNAME" jdbcType="VARCHAR" property="csysFieldInfoAliasname" />
+    <result column="CSYS_FIELD_INFO_REGION" jdbcType="VARCHAR" property="csysFieldInfoRegion" />
+    <result column="CSYS_FIELD_INFO_ATTRIBUTE" jdbcType="VARCHAR" property="csysFieldInfoAttribute" />
+    <result column="CSYS_FIELD_INFO_TYPE" jdbcType="VARCHAR" property="csysFieldInfoType" />
+    <result column="CSYS_FIELD_INFO_IS_NULL" jdbcType="CHAR" property="csysFieldInfoIsNull" />
+    <result column="CSYS_FIELD_INFO_DEFAULT" jdbcType="VARCHAR" property="csysFieldInfoDefault" />
+    <result column="CSYS_FIELD_INFO_REMARK" jdbcType="VARCHAR" property="csysFieldInfoRemark" />
+    <result column="CSYS_FIELD_INFO_IS_ENCRYPT" jdbcType="CHAR" property="csysFieldInfoIsEncrypt" />
+    <result column="CSYS_FIELD_INFO_ENCRYPT_TYPE" jdbcType="VARCHAR" property="csysFieldInfoEncryptType" />
+    <result column="CSYS_FIELD_INFO_LENGTH" jdbcType="VARCHAR" property="csysFieldInfoLength" />
+    <result column="CSYS_FIELD_INFO_EXISTS_KEY" jdbcType="CHAR" property="csysFieldInfoExistsKey" />
+    <result column="CSYS_FIELD_INFO_EXISTS_OUTKEYS" jdbcType="CHAR" property="csysFieldInfoExistsOutkeys" />
+    <result column="CSYS_FIELD_INFO_FOREIGN_REGION" jdbcType="VARCHAR" property="csysFieldInfoForeignRegion" />
+    <result column="CSYS_FIELD_INFO_CREATE_TIME" jdbcType="TIMESTAMP" property="csysFieldInfoCreateTime" />
+    <result column="CSYS_FIELD_INFO_CREATE_USER" jdbcType="VARCHAR" property="csysFieldInfoCreateUser" />
+    <result column="CSYS_FIELD_INFO_MODIFY_TIME" jdbcType="TIMESTAMP" property="csysFieldInfoModifyTime" />
+    <result column="CSYS_FIELD_INFO_MODIFY_USER" jdbcType="VARCHAR" property="csysFieldInfoModifyUser" />
+    <result column="CSYS_FIELD_INFO_IS_DELETE" jdbcType="CHAR" property="csysFieldInfoIsDelete" />
+    <result column="CSYS_FIELD_INFO_TIME" jdbcType="TIMESTAMP" property="csysFieldInfoTime" />
+    <result column="CSYS_FIELD_INFO_DATE" jdbcType="TIMESTAMP" property="csysFieldInfoDate" />
+  </resultMap>
+  <sql id="Example_Where_Clause">
+    <!--
+      WARNING - @mbg.generated
+    -->
+    <where>
+      <foreach collection="oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause">
+    <!--
+      WARNING - @mbg.generated
+    -->
+    <where>
+      <foreach collection="example.oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List">
+    <!--
+      WARNING - @mbg.generated
+    -->
+    CSYS_FIELD_INFO_ID, CSYS_FIELD_INFO_NAME, CSYS_FIELD_INFO_RELNAME, CSYS_FIELD_INFO_ALIASNAME, 
+    CSYS_FIELD_INFO_REGION, CSYS_FIELD_INFO_ATTRIBUTE, CSYS_FIELD_INFO_TYPE, CSYS_FIELD_INFO_IS_NULL, 
+    CSYS_FIELD_INFO_DEFAULT, CSYS_FIELD_INFO_REMARK, CSYS_FIELD_INFO_IS_ENCRYPT, CSYS_FIELD_INFO_ENCRYPT_TYPE, 
+    CSYS_FIELD_INFO_LENGTH, CSYS_FIELD_INFO_EXISTS_KEY, CSYS_FIELD_INFO_EXISTS_OUTKEYS, 
+    CSYS_FIELD_INFO_FOREIGN_REGION, CSYS_FIELD_INFO_CREATE_TIME, CSYS_FIELD_INFO_CREATE_USER, 
+    CSYS_FIELD_INFO_MODIFY_TIME, CSYS_FIELD_INFO_MODIFY_USER, CSYS_FIELD_INFO_IS_DELETE, 
+    CSYS_FIELD_INFO_TIME, CSYS_FIELD_INFO_DATE
+  </sql>
+  <select id="selectByExample" parameterType="com.company.project.outer.model.CsysFieldInfoExample" resultMap="BaseResultMap">
+    <!--
+      WARNING - @mbg.generated
+    -->
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from CSYS_FIELD_INFO
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+  </select>
+  <delete id="deleteByExample" parameterType="com.company.project.outer.model.CsysFieldInfoExample">
+    <!--
+      WARNING - @mbg.generated
+    -->
+    delete from CSYS_FIELD_INFO
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <select id="countByExample" parameterType="com.company.project.outer.model.CsysFieldInfoExample" resultType="java.lang.Long">
+    <!--
+      WARNING - @mbg.generated
+    -->
+    select count(*) from CSYS_FIELD_INFO
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map">
+    <!--
+      WARNING - @mbg.generated
+    -->
+    update CSYS_FIELD_INFO
+    <set>
+      <if test="record.csysFieldInfoId != null">
+        CSYS_FIELD_INFO_ID = #{record.csysFieldInfoId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.csysFieldInfoName != null">
+        CSYS_FIELD_INFO_NAME = #{record.csysFieldInfoName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.csysFieldInfoRelname != null">
+        CSYS_FIELD_INFO_RELNAME = #{record.csysFieldInfoRelname,jdbcType=VARCHAR},
+      </if>
+      <if test="record.csysFieldInfoAliasname != null">
+        CSYS_FIELD_INFO_ALIASNAME = #{record.csysFieldInfoAliasname,jdbcType=VARCHAR},
+      </if>
+      <if test="record.csysFieldInfoRegion != null">
+        CSYS_FIELD_INFO_REGION = #{record.csysFieldInfoRegion,jdbcType=VARCHAR},
+      </if>
+      <if test="record.csysFieldInfoAttribute != null">
+        CSYS_FIELD_INFO_ATTRIBUTE = #{record.csysFieldInfoAttribute,jdbcType=VARCHAR},
+      </if>
+      <if test="record.csysFieldInfoType != null">
+        CSYS_FIELD_INFO_TYPE = #{record.csysFieldInfoType,jdbcType=VARCHAR},
+      </if>
+      <if test="record.csysFieldInfoIsNull != null">
+        CSYS_FIELD_INFO_IS_NULL = #{record.csysFieldInfoIsNull,jdbcType=CHAR},
+      </if>
+      <if test="record.csysFieldInfoDefault != null">
+        CSYS_FIELD_INFO_DEFAULT = #{record.csysFieldInfoDefault,jdbcType=VARCHAR},
+      </if>
+      <if test="record.csysFieldInfoRemark != null">
+        CSYS_FIELD_INFO_REMARK = #{record.csysFieldInfoRemark,jdbcType=VARCHAR},
+      </if>
+      <if test="record.csysFieldInfoIsEncrypt != null">
+        CSYS_FIELD_INFO_IS_ENCRYPT = #{record.csysFieldInfoIsEncrypt,jdbcType=CHAR},
+      </if>
+      <if test="record.csysFieldInfoEncryptType != null">
+        CSYS_FIELD_INFO_ENCRYPT_TYPE = #{record.csysFieldInfoEncryptType,jdbcType=VARCHAR},
+      </if>
+      <if test="record.csysFieldInfoLength != null">
+        CSYS_FIELD_INFO_LENGTH = #{record.csysFieldInfoLength,jdbcType=VARCHAR},
+      </if>
+      <if test="record.csysFieldInfoExistsKey != null">
+        CSYS_FIELD_INFO_EXISTS_KEY = #{record.csysFieldInfoExistsKey,jdbcType=CHAR},
+      </if>
+      <if test="record.csysFieldInfoExistsOutkeys != null">
+        CSYS_FIELD_INFO_EXISTS_OUTKEYS = #{record.csysFieldInfoExistsOutkeys,jdbcType=CHAR},
+      </if>
+      <if test="record.csysFieldInfoForeignRegion != null">
+        CSYS_FIELD_INFO_FOREIGN_REGION = #{record.csysFieldInfoForeignRegion,jdbcType=VARCHAR},
+      </if>
+      <if test="record.csysFieldInfoCreateTime != null">
+        CSYS_FIELD_INFO_CREATE_TIME = #{record.csysFieldInfoCreateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.csysFieldInfoCreateUser != null">
+        CSYS_FIELD_INFO_CREATE_USER = #{record.csysFieldInfoCreateUser,jdbcType=VARCHAR},
+      </if>
+      <if test="record.csysFieldInfoModifyTime != null">
+        CSYS_FIELD_INFO_MODIFY_TIME = #{record.csysFieldInfoModifyTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.csysFieldInfoModifyUser != null">
+        CSYS_FIELD_INFO_MODIFY_USER = #{record.csysFieldInfoModifyUser,jdbcType=VARCHAR},
+      </if>
+      <if test="record.csysFieldInfoIsDelete != null">
+        CSYS_FIELD_INFO_IS_DELETE = #{record.csysFieldInfoIsDelete,jdbcType=CHAR},
+      </if>
+      <if test="record.csysFieldInfoTime != null">
+        CSYS_FIELD_INFO_TIME = #{record.csysFieldInfoTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.csysFieldInfoDate != null">
+        CSYS_FIELD_INFO_DATE = #{record.csysFieldInfoDate,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map">
+    <!--
+      WARNING - @mbg.generated
+    -->
+    update CSYS_FIELD_INFO
+    set CSYS_FIELD_INFO_ID = #{record.csysFieldInfoId,jdbcType=VARCHAR},
+      CSYS_FIELD_INFO_NAME = #{record.csysFieldInfoName,jdbcType=VARCHAR},
+      CSYS_FIELD_INFO_RELNAME = #{record.csysFieldInfoRelname,jdbcType=VARCHAR},
+      CSYS_FIELD_INFO_ALIASNAME = #{record.csysFieldInfoAliasname,jdbcType=VARCHAR},
+      CSYS_FIELD_INFO_REGION = #{record.csysFieldInfoRegion,jdbcType=VARCHAR},
+      CSYS_FIELD_INFO_ATTRIBUTE = #{record.csysFieldInfoAttribute,jdbcType=VARCHAR},
+      CSYS_FIELD_INFO_TYPE = #{record.csysFieldInfoType,jdbcType=VARCHAR},
+      CSYS_FIELD_INFO_IS_NULL = #{record.csysFieldInfoIsNull,jdbcType=CHAR},
+      CSYS_FIELD_INFO_DEFAULT = #{record.csysFieldInfoDefault,jdbcType=VARCHAR},
+      CSYS_FIELD_INFO_REMARK = #{record.csysFieldInfoRemark,jdbcType=VARCHAR},
+      CSYS_FIELD_INFO_IS_ENCRYPT = #{record.csysFieldInfoIsEncrypt,jdbcType=CHAR},
+      CSYS_FIELD_INFO_ENCRYPT_TYPE = #{record.csysFieldInfoEncryptType,jdbcType=VARCHAR},
+      CSYS_FIELD_INFO_LENGTH = #{record.csysFieldInfoLength,jdbcType=VARCHAR},
+      CSYS_FIELD_INFO_EXISTS_KEY = #{record.csysFieldInfoExistsKey,jdbcType=CHAR},
+      CSYS_FIELD_INFO_EXISTS_OUTKEYS = #{record.csysFieldInfoExistsOutkeys,jdbcType=CHAR},
+      CSYS_FIELD_INFO_FOREIGN_REGION = #{record.csysFieldInfoForeignRegion,jdbcType=VARCHAR},
+      CSYS_FIELD_INFO_CREATE_TIME = #{record.csysFieldInfoCreateTime,jdbcType=TIMESTAMP},
+      CSYS_FIELD_INFO_CREATE_USER = #{record.csysFieldInfoCreateUser,jdbcType=VARCHAR},
+      CSYS_FIELD_INFO_MODIFY_TIME = #{record.csysFieldInfoModifyTime,jdbcType=TIMESTAMP},
+      CSYS_FIELD_INFO_MODIFY_USER = #{record.csysFieldInfoModifyUser,jdbcType=VARCHAR},
+      CSYS_FIELD_INFO_IS_DELETE = #{record.csysFieldInfoIsDelete,jdbcType=CHAR},
+      CSYS_FIELD_INFO_TIME = #{record.csysFieldInfoTime,jdbcType=TIMESTAMP},
+      CSYS_FIELD_INFO_DATE = #{record.csysFieldInfoDate,jdbcType=TIMESTAMP}
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+</mapper>

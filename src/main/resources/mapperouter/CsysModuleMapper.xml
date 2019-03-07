@@ -1,0 +1,263 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.company.project.outer.dao.CsysModuleMapper">
+  <resultMap id="BaseResultMap" type="com.company.project.outer.model.CsysModule">
+    <!--
+      WARNING - @mbg.generated
+    -->
+    <id column="CSYS_MODULE_ID" jdbcType="VARCHAR" property="csysModuleId" />
+    <result column="CSYS_PAGE_ID" jdbcType="VARCHAR" property="csysPageId" />
+    <result column="CSYS_LAYOUT_ID" jdbcType="VARCHAR" property="csysLayoutId" />
+    <result column="CSYS_MODULE_NAME" jdbcType="VARCHAR" property="csysModuleName" />
+    <result column="CSYS_MODULE_ISMULTIPLEX" jdbcType="CHAR" property="csysModuleIsmultiplex" />
+    <result column="CSYS_MODULE_MULTIPLEX_TYPE" jdbcType="CHAR" property="csysModuleMultiplexType" />
+    <result column="CSYS_MODULE_CREATE_TIME" jdbcType="TIMESTAMP" property="csysModuleCreateTime" />
+    <result column="CSYS_MODULE_CREATE_USER" jdbcType="VARCHAR" property="csysModuleCreateUser" />
+    <result column="CSYS_MODULE_MODIFY_TIME" jdbcType="TIMESTAMP" property="csysModuleModifyTime" />
+    <result column="CSYS_MODULE_MODIFY_USER" jdbcType="VARCHAR" property="csysModuleModifyUser" />
+    <result column="CSYS_MODULE_IS_DELETE" jdbcType="CHAR" property="csysModuleIsDelete" />
+    <result column="CSYS_MODULE_TIME" jdbcType="TIMESTAMP" property="csysModuleTime" />
+    <result column="CSYS_MODULE_DATE" jdbcType="TIMESTAMP" property="csysModuleDate" />
+  </resultMap>
+  <resultMap extends="BaseResultMap" id="ResultMapWithBLOBs" type="com.company.project.outer.model.CsysModule">
+    <!--
+      WARNING - @mbg.generated
+    -->
+    <result column="CSYS_MODULE_HTML_CODE" jdbcType="CLOB" property="csysModuleHtmlCode" />
+    <result column="CSYS_MODULE_HTML_DROP_CODE" jdbcType="CLOB" property="csysModuleHtmlDropCode" />
+  </resultMap>
+  <sql id="Example_Where_Clause">
+    <!--
+      WARNING - @mbg.generated
+    -->
+    <where>
+      <foreach collection="oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause">
+    <!--
+      WARNING - @mbg.generated
+    -->
+    <where>
+      <foreach collection="example.oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List">
+    <!--
+      WARNING - @mbg.generated
+    -->
+    CSYS_MODULE_ID, CSYS_PAGE_ID, CSYS_LAYOUT_ID, CSYS_MODULE_NAME, CSYS_MODULE_ISMULTIPLEX, 
+    CSYS_MODULE_MULTIPLEX_TYPE, CSYS_MODULE_CREATE_TIME, CSYS_MODULE_CREATE_USER, CSYS_MODULE_MODIFY_TIME, 
+    CSYS_MODULE_MODIFY_USER, CSYS_MODULE_IS_DELETE, CSYS_MODULE_TIME, CSYS_MODULE_DATE
+  </sql>
+  <sql id="Blob_Column_List">
+    <!--
+      WARNING - @mbg.generated
+    -->
+    CSYS_MODULE_HTML_CODE, CSYS_MODULE_HTML_DROP_CODE
+  </sql>
+  <select id="selectByExampleWithBLOBs" parameterType="com.company.project.outer.model.CsysModuleExample" resultMap="ResultMapWithBLOBs">
+    <!--
+      WARNING - @mbg.generated
+    -->
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from CSYS_MODULE
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByExample" parameterType="com.company.project.outer.model.CsysModuleExample" resultMap="BaseResultMap">
+    <!--
+      WARNING - @mbg.generated
+    -->
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from CSYS_MODULE
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+  </select>
+  <delete id="deleteByExample" parameterType="com.company.project.outer.model.CsysModuleExample">
+    <!--
+      WARNING - @mbg.generated
+    -->
+    delete from CSYS_MODULE
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <select id="countByExample" parameterType="com.company.project.outer.model.CsysModuleExample" resultType="java.lang.Long">
+    <!--
+      WARNING - @mbg.generated
+    -->
+    select count(*) from CSYS_MODULE
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map">
+    <!--
+      WARNING - @mbg.generated
+    -->
+    update CSYS_MODULE
+    <set>
+      <if test="record.csysModuleId != null">
+        CSYS_MODULE_ID = #{record.csysModuleId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.csysPageId != null">
+        CSYS_PAGE_ID = #{record.csysPageId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.csysLayoutId != null">
+        CSYS_LAYOUT_ID = #{record.csysLayoutId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.csysModuleName != null">
+        CSYS_MODULE_NAME = #{record.csysModuleName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.csysModuleIsmultiplex != null">
+        CSYS_MODULE_ISMULTIPLEX = #{record.csysModuleIsmultiplex,jdbcType=CHAR},
+      </if>
+      <if test="record.csysModuleMultiplexType != null">
+        CSYS_MODULE_MULTIPLEX_TYPE = #{record.csysModuleMultiplexType,jdbcType=CHAR},
+      </if>
+      <if test="record.csysModuleCreateTime != null">
+        CSYS_MODULE_CREATE_TIME = #{record.csysModuleCreateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.csysModuleCreateUser != null">
+        CSYS_MODULE_CREATE_USER = #{record.csysModuleCreateUser,jdbcType=VARCHAR},
+      </if>
+      <if test="record.csysModuleModifyTime != null">
+        CSYS_MODULE_MODIFY_TIME = #{record.csysModuleModifyTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.csysModuleModifyUser != null">
+        CSYS_MODULE_MODIFY_USER = #{record.csysModuleModifyUser,jdbcType=VARCHAR},
+      </if>
+      <if test="record.csysModuleIsDelete != null">
+        CSYS_MODULE_IS_DELETE = #{record.csysModuleIsDelete,jdbcType=CHAR},
+      </if>
+      <if test="record.csysModuleTime != null">
+        CSYS_MODULE_TIME = #{record.csysModuleTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.csysModuleDate != null">
+        CSYS_MODULE_DATE = #{record.csysModuleDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.csysModuleHtmlCode != null">
+        CSYS_MODULE_HTML_CODE = #{record.csysModuleHtmlCode,jdbcType=CLOB},
+      </if>
+      <if test="record.csysModuleHtmlDropCode != null">
+        CSYS_MODULE_HTML_DROP_CODE = #{record.csysModuleHtmlDropCode,jdbcType=CLOB},
+      </if>
+    </set>
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExampleWithBLOBs" parameterType="map">
+    <!--
+      WARNING - @mbg.generated
+    -->
+    update CSYS_MODULE
+    set CSYS_MODULE_ID = #{record.csysModuleId,jdbcType=VARCHAR},
+      CSYS_PAGE_ID = #{record.csysPageId,jdbcType=VARCHAR},
+      CSYS_LAYOUT_ID = #{record.csysLayoutId,jdbcType=VARCHAR},
+      CSYS_MODULE_NAME = #{record.csysModuleName,jdbcType=VARCHAR},
+      CSYS_MODULE_ISMULTIPLEX = #{record.csysModuleIsmultiplex,jdbcType=CHAR},
+      CSYS_MODULE_MULTIPLEX_TYPE = #{record.csysModuleMultiplexType,jdbcType=CHAR},
+      CSYS_MODULE_CREATE_TIME = #{record.csysModuleCreateTime,jdbcType=TIMESTAMP},
+      CSYS_MODULE_CREATE_USER = #{record.csysModuleCreateUser,jdbcType=VARCHAR},
+      CSYS_MODULE_MODIFY_TIME = #{record.csysModuleModifyTime,jdbcType=TIMESTAMP},
+      CSYS_MODULE_MODIFY_USER = #{record.csysModuleModifyUser,jdbcType=VARCHAR},
+      CSYS_MODULE_IS_DELETE = #{record.csysModuleIsDelete,jdbcType=CHAR},
+      CSYS_MODULE_TIME = #{record.csysModuleTime,jdbcType=TIMESTAMP},
+      CSYS_MODULE_DATE = #{record.csysModuleDate,jdbcType=TIMESTAMP},
+      CSYS_MODULE_HTML_CODE = #{record.csysModuleHtmlCode,jdbcType=CLOB},
+      CSYS_MODULE_HTML_DROP_CODE = #{record.csysModuleHtmlDropCode,jdbcType=CLOB}
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map">
+    <!--
+      WARNING - @mbg.generated
+    -->
+    update CSYS_MODULE
+    set CSYS_MODULE_ID = #{record.csysModuleId,jdbcType=VARCHAR},
+      CSYS_PAGE_ID = #{record.csysPageId,jdbcType=VARCHAR},
+      CSYS_LAYOUT_ID = #{record.csysLayoutId,jdbcType=VARCHAR},
+      CSYS_MODULE_NAME = #{record.csysModuleName,jdbcType=VARCHAR},
+      CSYS_MODULE_ISMULTIPLEX = #{record.csysModuleIsmultiplex,jdbcType=CHAR},
+      CSYS_MODULE_MULTIPLEX_TYPE = #{record.csysModuleMultiplexType,jdbcType=CHAR},
+      CSYS_MODULE_CREATE_TIME = #{record.csysModuleCreateTime,jdbcType=TIMESTAMP},
+      CSYS_MODULE_CREATE_USER = #{record.csysModuleCreateUser,jdbcType=VARCHAR},
+      CSYS_MODULE_MODIFY_TIME = #{record.csysModuleModifyTime,jdbcType=TIMESTAMP},
+      CSYS_MODULE_MODIFY_USER = #{record.csysModuleModifyUser,jdbcType=VARCHAR},
+      CSYS_MODULE_IS_DELETE = #{record.csysModuleIsDelete,jdbcType=CHAR},
+      CSYS_MODULE_TIME = #{record.csysModuleTime,jdbcType=TIMESTAMP},
+      CSYS_MODULE_DATE = #{record.csysModuleDate,jdbcType=TIMESTAMP}
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+</mapper>

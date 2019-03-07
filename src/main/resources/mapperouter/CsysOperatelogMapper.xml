@@ -1,0 +1,212 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.company.project.outer.dao.CsysOperatelogMapper">
+  <resultMap id="BaseResultMap" type="com.company.project.outer.model.CsysOperatelog">
+    <!--
+      WARNING - @mbg.generated
+    -->
+    <result column="CSYS_OPERATELOG_ID" jdbcType="VARCHAR" property="csysOperatelogId" />
+    <result column="CSYS_OPERATELOG_NAME" jdbcType="VARCHAR" property="csysOperatelogName" />
+    <result column="CSYS_OPERATELOG_TYPE" jdbcType="CHAR" property="csysOperatelogType" />
+    <result column="CSYS_OPERATELOG_RESOURCE" jdbcType="VARCHAR" property="csysOperatelogResource" />
+    <result column="CSYS_OPERATELOG_RESOURCE_ID" jdbcType="VARCHAR" property="csysOperatelogResourceId" />
+    <result column="CSYS_OPERATELOG_STATUS" jdbcType="CHAR" property="csysOperatelogStatus" />
+    <result column="CSYS_OPERATELOG_OPERATOR" jdbcType="VARCHAR" property="csysOperatelogOperator" />
+    <result column="CSYS_OPERATELOG_DESC" jdbcType="VARCHAR" property="csysOperatelogDesc" />
+    <result column="CSYS_OPERATELOG_CREATE_TIME" jdbcType="TIMESTAMP" property="csysOperatelogCreateTime" />
+    <result column="CSYS_OPERATELOG_CREATE_USER" jdbcType="VARCHAR" property="csysOperatelogCreateUser" />
+    <result column="CSYS_OPERATELOG_MODIFY_TIME" jdbcType="TIMESTAMP" property="csysOperatelogModifyTime" />
+    <result column="CSYS_OPERATELOG_MODIFY_USER" jdbcType="VARCHAR" property="csysOperatelogModifyUser" />
+    <result column="CSYS_OPERATELOG_IS_DELETE" jdbcType="CHAR" property="csysOperatelogIsDelete" />
+    <result column="CSYS_OPERATELOG_TIME" jdbcType="TIMESTAMP" property="csysOperatelogTime" />
+    <result column="CSYS_OPERATELOG_DATE" jdbcType="TIMESTAMP" property="csysOperatelogDate" />
+  </resultMap>
+  <sql id="Example_Where_Clause">
+    <!--
+      WARNING - @mbg.generated
+    -->
+    <where>
+      <foreach collection="oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause">
+    <!--
+      WARNING - @mbg.generated
+    -->
+    <where>
+      <foreach collection="example.oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List">
+    <!--
+      WARNING - @mbg.generated
+    -->
+    CSYS_OPERATELOG_ID, CSYS_OPERATELOG_NAME, CSYS_OPERATELOG_TYPE, CSYS_OPERATELOG_RESOURCE, 
+    CSYS_OPERATELOG_RESOURCE_ID, CSYS_OPERATELOG_STATUS, CSYS_OPERATELOG_OPERATOR, CSYS_OPERATELOG_DESC, 
+    CSYS_OPERATELOG_CREATE_TIME, CSYS_OPERATELOG_CREATE_USER, CSYS_OPERATELOG_MODIFY_TIME, 
+    CSYS_OPERATELOG_MODIFY_USER, CSYS_OPERATELOG_IS_DELETE, CSYS_OPERATELOG_TIME, CSYS_OPERATELOG_DATE
+  </sql>
+  <select id="selectByExample" parameterType="com.company.project.outer.model.CsysOperatelogExample" resultMap="BaseResultMap">
+    <!--
+      WARNING - @mbg.generated
+    -->
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from CSYS_OPERATELOG
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+  </select>
+  <delete id="deleteByExample" parameterType="com.company.project.outer.model.CsysOperatelogExample">
+    <!--
+      WARNING - @mbg.generated
+    -->
+    delete from CSYS_OPERATELOG
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <select id="countByExample" parameterType="com.company.project.outer.model.CsysOperatelogExample" resultType="java.lang.Long">
+    <!--
+      WARNING - @mbg.generated
+    -->
+    select count(*) from CSYS_OPERATELOG
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map">
+    <!--
+      WARNING - @mbg.generated
+    -->
+    update CSYS_OPERATELOG
+    <set>
+      <if test="record.csysOperatelogId != null">
+        CSYS_OPERATELOG_ID = #{record.csysOperatelogId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.csysOperatelogName != null">
+        CSYS_OPERATELOG_NAME = #{record.csysOperatelogName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.csysOperatelogType != null">
+        CSYS_OPERATELOG_TYPE = #{record.csysOperatelogType,jdbcType=CHAR},
+      </if>
+      <if test="record.csysOperatelogResource != null">
+        CSYS_OPERATELOG_RESOURCE = #{record.csysOperatelogResource,jdbcType=VARCHAR},
+      </if>
+      <if test="record.csysOperatelogResourceId != null">
+        CSYS_OPERATELOG_RESOURCE_ID = #{record.csysOperatelogResourceId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.csysOperatelogStatus != null">
+        CSYS_OPERATELOG_STATUS = #{record.csysOperatelogStatus,jdbcType=CHAR},
+      </if>
+      <if test="record.csysOperatelogOperator != null">
+        CSYS_OPERATELOG_OPERATOR = #{record.csysOperatelogOperator,jdbcType=VARCHAR},
+      </if>
+      <if test="record.csysOperatelogDesc != null">
+        CSYS_OPERATELOG_DESC = #{record.csysOperatelogDesc,jdbcType=VARCHAR},
+      </if>
+      <if test="record.csysOperatelogCreateTime != null">
+        CSYS_OPERATELOG_CREATE_TIME = #{record.csysOperatelogCreateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.csysOperatelogCreateUser != null">
+        CSYS_OPERATELOG_CREATE_USER = #{record.csysOperatelogCreateUser,jdbcType=VARCHAR},
+      </if>
+      <if test="record.csysOperatelogModifyTime != null">
+        CSYS_OPERATELOG_MODIFY_TIME = #{record.csysOperatelogModifyTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.csysOperatelogModifyUser != null">
+        CSYS_OPERATELOG_MODIFY_USER = #{record.csysOperatelogModifyUser,jdbcType=VARCHAR},
+      </if>
+      <if test="record.csysOperatelogIsDelete != null">
+        CSYS_OPERATELOG_IS_DELETE = #{record.csysOperatelogIsDelete,jdbcType=CHAR},
+      </if>
+      <if test="record.csysOperatelogTime != null">
+        CSYS_OPERATELOG_TIME = #{record.csysOperatelogTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.csysOperatelogDate != null">
+        CSYS_OPERATELOG_DATE = #{record.csysOperatelogDate,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map">
+    <!--
+      WARNING - @mbg.generated
+    -->
+    update CSYS_OPERATELOG
+    set CSYS_OPERATELOG_ID = #{record.csysOperatelogId,jdbcType=VARCHAR},
+      CSYS_OPERATELOG_NAME = #{record.csysOperatelogName,jdbcType=VARCHAR},
+      CSYS_OPERATELOG_TYPE = #{record.csysOperatelogType,jdbcType=CHAR},
+      CSYS_OPERATELOG_RESOURCE = #{record.csysOperatelogResource,jdbcType=VARCHAR},
+      CSYS_OPERATELOG_RESOURCE_ID = #{record.csysOperatelogResourceId,jdbcType=VARCHAR},
+      CSYS_OPERATELOG_STATUS = #{record.csysOperatelogStatus,jdbcType=CHAR},
+      CSYS_OPERATELOG_OPERATOR = #{record.csysOperatelogOperator,jdbcType=VARCHAR},
+      CSYS_OPERATELOG_DESC = #{record.csysOperatelogDesc,jdbcType=VARCHAR},
+      CSYS_OPERATELOG_CREATE_TIME = #{record.csysOperatelogCreateTime,jdbcType=TIMESTAMP},
+      CSYS_OPERATELOG_CREATE_USER = #{record.csysOperatelogCreateUser,jdbcType=VARCHAR},
+      CSYS_OPERATELOG_MODIFY_TIME = #{record.csysOperatelogModifyTime,jdbcType=TIMESTAMP},
+      CSYS_OPERATELOG_MODIFY_USER = #{record.csysOperatelogModifyUser,jdbcType=VARCHAR},
+      CSYS_OPERATELOG_IS_DELETE = #{record.csysOperatelogIsDelete,jdbcType=CHAR},
+      CSYS_OPERATELOG_TIME = #{record.csysOperatelogTime,jdbcType=TIMESTAMP},
+      CSYS_OPERATELOG_DATE = #{record.csysOperatelogDate,jdbcType=TIMESTAMP}
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+</mapper>

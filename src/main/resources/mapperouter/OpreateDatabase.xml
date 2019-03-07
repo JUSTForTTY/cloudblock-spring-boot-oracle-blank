@@ -1,0 +1,207 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.company.project.outer.dao.OperateDataBaseMapper">
+
+	<select id="selectDatabeseShemel" parameterType="com.company.project.core.bean.DataBaseBean"
+		resultType="java.util.Map">
+
+		select
+		ENGINE,TABLE_NAME,CREATE_TIME,UPDATE_TIME,TABLE_COMMENT,TABLE_COLLATION,(@i
+		:=@i + 1) AS currency from information_schema.tables ,(SELECT @i := 0)
+		AS it where TABLE_SCHEMA='${databaseName}' and TABLE_NAME not like
+		'cy_%'
+
+
+	</select>
+
+	<select id="selectData" parameterType="com.company.project.core.bean.DataBaseBean"
+		resultType="java.util.Map">
+
+		select
+		ENGINE,TABLE_NAME,CREATE_TIME,UPDATE_TIME,TABLE_COMMENT,TABLE_COLLATION,(@i
+		:=@i + 1) AS currency from information_schema.tables ,(SELECT @i := 0)
+		AS it where TABLE_SCHEMA='${databaseName}'
+		and TABLE_NAME=
+		<if test="elementName != null">
+			'${elementName}'
+		</if>
+
+	</select>
+
+	<select id="getAllColumnData" parameterType="com.company.project.core.bean.DataBaseBean"
+		resultType="java.util.Map">
+		select * from INFORMATION_SCHEMA.Columns
+		<where>
+			<if test="databaseName != null ">TABLE_SCHEMA=#{databaseName}</if>
+
+			<if test="elementName != null">and TABLE_NAME=#{elementName}</if>
+		</where>
+
+	</select>
+
+	<select id="getAllColumnField" parameterType="com.company.project.core.bean.DataBaseBean"
+		resultType="java.util.Map">
+
+		select * from INFORMATION_SCHEMA.Columns
+		<where>
+			<choose>
+				<when test="elementName != null">
+					TABLE_NAME=#{elementName}
+				</when>
+				<otherwise>
+					TABLE_SCHEMA=#{databaseName}
+					and TABLE_NAME not like
+					'cy_%'
+				</otherwise>
+			</choose>
+		</where>
+	</select>
+
+
+
+
+
+	<insert id="createTable" parameterType="com.company.project.core.bean.DataTableBean">
+
+		create table if not exists ${tableName}
+		<foreach close=")" collection="value" item="col" open="("
+			separator=",">
+			<if test="col.columnName != null">
+				${col.columnName}
+			</if>
+			<if test="col.columnType != null">
+				${col.columnType}
+			</if>
+			<if test="col.size != null">
+				(${col.size})
+			</if>
+			<if test="col.unSigned != null">
+				${col.unSigned}
+			</if>
+			<if test="col.isEmpty != null">
+				${col.isEmpty}
+			</if>
+			<if test="col.primaryKey != null">
+				${col.primaryKey }
+			</if>
+
+			<if test="col.autoIncrement != null">
+				${col.autoIncrement}
+			</if>
+			<if test="col.columnRemark != null">
+				comment '${col.columnRemark} '
+			</if>
+		</foreach>
+		ENGINE=${enGine} DEFAULT CHARSET=${utf_comparsion}
+		COLLATE=${utf_comprasion} ROW_FORMAT=${format}
+		COMMENT='${tableRemark}'
+	</insert>
+
+	<delete id="deleteTable" parameterType="com.company.project.core.bean.DataTableBean">
+
+		drop table
+
+		${tableName}
+
+	</delete>
+
+	<update id="updateTable" parameterType="com.company.project.core.bean.updateTableBean">
+		alter table
+		${oldTableName} rename to ${newTableName}
+	</update>
+
+
+
+
+
+	<update id="updateColumn" parameterType="com.company.project.core.bean.updateTableBean">
+		alter table ${oldTableName} add column
+		<foreach close=");" collection="value" item="col" open="("
+			separator=",">
+			${col.fieldName} ${col.type}
+			<if test="col.size != null">
+				(${col.size})
+			</if>
+			<if test="col.empty != null">
+				${col.empty}
+			</if>
+			<if test="col. primaryKey != null">
+				${col.primaryKey}
+			</if>
+			<if test="col.autoIncrement != null">
+				${col.autoIncrement}
+			</if>
+			comment
+			<if test="col.remark != null">
+				'${col.remark}'
+			</if>
+
+
+		</foreach>
+
+
+	</update>
+
+	<update id="deleteColumn" parameterType="com.company.project.core.bean.updateTableBean">
+		alter table
+		${oldTableName} drop column
+
+
+		${field}
+
+	</update>
+
+	<update id="updateColumnField" parameterType="com.company.project.core.bean.updateTableBean">
+		alter table ${oldTableName} change ${field}
+		<foreach close=" " collection="value" item="col" open=" "
+			separator=",">
+			${col.fieldName} ${col.type}
+			<if test="col.size != null">
+				(${col.size})
+			</if>
+			<if test="col. primaryKey != null">
+				${col.primaryKey}
+			</if>
+			<if test="col.autoIncrement != null">
+				${col.autoIncrement}
+			</if>
+			comment
+			<if test="col.columnRemark != null">
+				' ${col.columnRemark}'
+			</if>
+		</foreach>
+	</update>
+
+
+	<update id="updateEngine" parameterType="com.company.project.core.bean.DataTableBean">
+		alter table ${tableName}
+		ENGINE=${enGine}
+	</update>
+
+
+	<select id="selectOracleTable" parameterType="com.company.project.core.bean.DataBaseBean"
+		resultType="java.util.Map">
+		SELECT count(*) as length FROM User_Tables WHERE table_name
+		= #{tableName}
+	</select>
+
+	<select id="selectOracleTableColumn" parameterType="com.company.project.core.bean.DataBaseBean"
+		resultType="com.company.project.core.bean.TableFiled">
+		<!-- SELECT -->
+		<!-- a.COLUMN_NAME,a.TABLE_NAME,DATA_TYPE,DATA_LENGTH,NULLABLE,DATA_DEFAULT,COMMENTS 
+			FROM -->
+		<!-- USER_COL_COMMENTS a,USER_TAB_COLUMNS b where a.TABLE_NAME = -->
+		<!-- b.TABLE_NAME and b.COLUMN_NAME = a.COLUMN_NAME and a.table_name = -->
+		<!-- #{tableName} -->
+		SELECT DATA_DEFAULT as
+		dataDefault,comments,a.COLUMN_NAME as
+		columnName,a.TABLE_NAME as tableName,DATA_TYPE as dataType,DATA_LENGTH
+		as dataLength,NULLABLE as nullAble
+		FROM
+		USER_COL_COMMENTS
+		a,USER_TAB_COLUMNS b where a.TABLE_NAME =
+		b.TABLE_NAME and
+		b.COLUMN_NAME = a.COLUMN_NAME and a.table_name =
+		#{tableName}
+	</select>
+</mapper>

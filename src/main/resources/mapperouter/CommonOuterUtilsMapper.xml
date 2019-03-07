@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.company.project.outer.dao.CommonOuterUtilsMapper">
+
+	<select id="selectBySequence" parameterType="com.company.project.model.CommonBean"
+		resultType="string">
+
+		call pro_getRunningNO('${code}');
+
+	</select>
+
+
+	<resultMap type="java.util.HashMap" id="cursorMap">
+		<result column ="CSYS_SEQUENCE_SEQNO" property="CSYS_SEQUENCE_SEQNO" />
+	</resultMap>
+
+	<!--调用存储过程 -->
+	<select id="getOracleSequence" parameterType="HashMap"
+		statementType="CALLABLE">
+		call pro_getRunningNO(#{tableName,mode=IN,jdbcType=VARCHAR}, #{cursor, mode=OUT, jdbcType=CURSOR, resultMap=cursorMap})
+	</select>
+</mapper>

@@ -1,0 +1,270 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.company.project.outer.dao.CsysOrgStruceMapper">
+  <resultMap id="BaseResultMap" type="com.company.project.outer.model.CsysOrgStruce">
+    <!--
+      WARNING - @mbg.generated
+    -->
+    <id column="CSYS_ORG_STRUCE_ID" jdbcType="VARCHAR" property="csysOrgStruceId" />
+    <result column="CSYS_ORG_STRUCE_NAME" jdbcType="VARCHAR" property="csysOrgStruceName" />
+    <result column="CSYS_ORG_STRUCE_TYPE" jdbcType="CHAR" property="csysOrgStruceType" />
+    <result column="CSYS_ORG_STRUCE_IS_ENABLED" jdbcType="CHAR" property="csysOrgStruceIsEnabled" />
+    <result column="CSYS_ORG_STRUCE_COLORTHEME" jdbcType="VARCHAR" property="csysOrgStruceColortheme" />
+    <result column="CSYS_ORG_STRUCE_STYLE" jdbcType="VARCHAR" property="csysOrgStruceStyle" />
+    <result column="CSYS_ORG_STRUCE_ORIENTE" jdbcType="VARCHAR" property="csysOrgStruceOriente" />
+    <result column="CSYS_ORG_STRUCE_CREATE_TIME" jdbcType="TIMESTAMP" property="csysOrgStruceCreateTime" />
+    <result column="CSYS_ORG_STRUCE_MODIFY_TIME" jdbcType="TIMESTAMP" property="csysOrgStruceModifyTime" />
+    <result column="CSYS_ORG_STRUCE_CREATE_USER" jdbcType="VARCHAR" property="csysOrgStruceCreateUser" />
+    <result column="CSYS_ORG_STRUCE_MODIFY_USER" jdbcType="VARCHAR" property="csysOrgStruceModifyUser" />
+    <result column="CSYS_ORG_STRUCE_IS_DELETE" jdbcType="CHAR" property="csysOrgStruceIsDelete" />
+    <result column="CSYS_ORG_STRUCE_TIME" jdbcType="TIMESTAMP" property="csysOrgStruceTime" />
+    <result column="CSYS_ORG_STRUCE_DATE" jdbcType="TIMESTAMP" property="csysOrgStruceDate" />
+  </resultMap>
+  <resultMap extends="BaseResultMap" id="ResultMapWithBLOBs" type="com.company.project.outer.model.CsysOrgStruce">
+    <!--
+      WARNING - @mbg.generated
+    -->
+    <result column="CSYS_ORG_STRUCE_NODES" jdbcType="CLOB" property="csysOrgStruceNodes" />
+    <result column="CSYS_ORG_STRUCE_LINKS" jdbcType="CLOB" property="csysOrgStruceLinks" />
+  </resultMap>
+  <sql id="Example_Where_Clause">
+    <!--
+      WARNING - @mbg.generated
+    -->
+    <where>
+      <foreach collection="oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause">
+    <!--
+      WARNING - @mbg.generated
+    -->
+    <where>
+      <foreach collection="example.oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List">
+    <!--
+      WARNING - @mbg.generated
+    -->
+    CSYS_ORG_STRUCE_ID, CSYS_ORG_STRUCE_NAME, CSYS_ORG_STRUCE_TYPE, CSYS_ORG_STRUCE_IS_ENABLED, 
+    CSYS_ORG_STRUCE_COLORTHEME, CSYS_ORG_STRUCE_STYLE, CSYS_ORG_STRUCE_ORIENTE, CSYS_ORG_STRUCE_CREATE_TIME, 
+    CSYS_ORG_STRUCE_MODIFY_TIME, CSYS_ORG_STRUCE_CREATE_USER, CSYS_ORG_STRUCE_MODIFY_USER, 
+    CSYS_ORG_STRUCE_IS_DELETE, CSYS_ORG_STRUCE_TIME, CSYS_ORG_STRUCE_DATE
+  </sql>
+  <sql id="Blob_Column_List">
+    <!--
+      WARNING - @mbg.generated
+    -->
+    CSYS_ORG_STRUCE_NODES, CSYS_ORG_STRUCE_LINKS
+  </sql>
+  <select id="selectByExampleWithBLOBs" parameterType="com.company.project.outer.model.CsysOrgStruceExample" resultMap="ResultMapWithBLOBs">
+    <!--
+      WARNING - @mbg.generated
+    -->
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from CSYS_ORG_STRUCE
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByExample" parameterType="com.company.project.outer.model.CsysOrgStruceExample" resultMap="BaseResultMap">
+    <!--
+      WARNING - @mbg.generated
+    -->
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from CSYS_ORG_STRUCE
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+  </select>
+  <delete id="deleteByExample" parameterType="com.company.project.outer.model.CsysOrgStruceExample">
+    <!--
+      WARNING - @mbg.generated
+    -->
+    delete from CSYS_ORG_STRUCE
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <select id="countByExample" parameterType="com.company.project.outer.model.CsysOrgStruceExample" resultType="java.lang.Long">
+    <!--
+      WARNING - @mbg.generated
+    -->
+    select count(*) from CSYS_ORG_STRUCE
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map">
+    <!--
+      WARNING - @mbg.generated
+    -->
+    update CSYS_ORG_STRUCE
+    <set>
+      <if test="record.csysOrgStruceId != null">
+        CSYS_ORG_STRUCE_ID = #{record.csysOrgStruceId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.csysOrgStruceName != null">
+        CSYS_ORG_STRUCE_NAME = #{record.csysOrgStruceName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.csysOrgStruceType != null">
+        CSYS_ORG_STRUCE_TYPE = #{record.csysOrgStruceType,jdbcType=CHAR},
+      </if>
+      <if test="record.csysOrgStruceIsEnabled != null">
+        CSYS_ORG_STRUCE_IS_ENABLED = #{record.csysOrgStruceIsEnabled,jdbcType=CHAR},
+      </if>
+      <if test="record.csysOrgStruceColortheme != null">
+        CSYS_ORG_STRUCE_COLORTHEME = #{record.csysOrgStruceColortheme,jdbcType=VARCHAR},
+      </if>
+      <if test="record.csysOrgStruceStyle != null">
+        CSYS_ORG_STRUCE_STYLE = #{record.csysOrgStruceStyle,jdbcType=VARCHAR},
+      </if>
+      <if test="record.csysOrgStruceOriente != null">
+        CSYS_ORG_STRUCE_ORIENTE = #{record.csysOrgStruceOriente,jdbcType=VARCHAR},
+      </if>
+      <if test="record.csysOrgStruceCreateTime != null">
+        CSYS_ORG_STRUCE_CREATE_TIME = #{record.csysOrgStruceCreateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.csysOrgStruceModifyTime != null">
+        CSYS_ORG_STRUCE_MODIFY_TIME = #{record.csysOrgStruceModifyTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.csysOrgStruceCreateUser != null">
+        CSYS_ORG_STRUCE_CREATE_USER = #{record.csysOrgStruceCreateUser,jdbcType=VARCHAR},
+      </if>
+      <if test="record.csysOrgStruceModifyUser != null">
+        CSYS_ORG_STRUCE_MODIFY_USER = #{record.csysOrgStruceModifyUser,jdbcType=VARCHAR},
+      </if>
+      <if test="record.csysOrgStruceIsDelete != null">
+        CSYS_ORG_STRUCE_IS_DELETE = #{record.csysOrgStruceIsDelete,jdbcType=CHAR},
+      </if>
+      <if test="record.csysOrgStruceTime != null">
+        CSYS_ORG_STRUCE_TIME = #{record.csysOrgStruceTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.csysOrgStruceDate != null">
+        CSYS_ORG_STRUCE_DATE = #{record.csysOrgStruceDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.csysOrgStruceNodes != null">
+        CSYS_ORG_STRUCE_NODES = #{record.csysOrgStruceNodes,jdbcType=CLOB},
+      </if>
+      <if test="record.csysOrgStruceLinks != null">
+        CSYS_ORG_STRUCE_LINKS = #{record.csysOrgStruceLinks,jdbcType=CLOB},
+      </if>
+    </set>
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExampleWithBLOBs" parameterType="map">
+    <!--
+      WARNING - @mbg.generated
+    -->
+    update CSYS_ORG_STRUCE
+    set CSYS_ORG_STRUCE_ID = #{record.csysOrgStruceId,jdbcType=VARCHAR},
+      CSYS_ORG_STRUCE_NAME = #{record.csysOrgStruceName,jdbcType=VARCHAR},
+      CSYS_ORG_STRUCE_TYPE = #{record.csysOrgStruceType,jdbcType=CHAR},
+      CSYS_ORG_STRUCE_IS_ENABLED = #{record.csysOrgStruceIsEnabled,jdbcType=CHAR},
+      CSYS_ORG_STRUCE_COLORTHEME = #{record.csysOrgStruceColortheme,jdbcType=VARCHAR},
+      CSYS_ORG_STRUCE_STYLE = #{record.csysOrgStruceStyle,jdbcType=VARCHAR},
+      CSYS_ORG_STRUCE_ORIENTE = #{record.csysOrgStruceOriente,jdbcType=VARCHAR},
+      CSYS_ORG_STRUCE_CREATE_TIME = #{record.csysOrgStruceCreateTime,jdbcType=TIMESTAMP},
+      CSYS_ORG_STRUCE_MODIFY_TIME = #{record.csysOrgStruceModifyTime,jdbcType=TIMESTAMP},
+      CSYS_ORG_STRUCE_CREATE_USER = #{record.csysOrgStruceCreateUser,jdbcType=VARCHAR},
+      CSYS_ORG_STRUCE_MODIFY_USER = #{record.csysOrgStruceModifyUser,jdbcType=VARCHAR},
+      CSYS_ORG_STRUCE_IS_DELETE = #{record.csysOrgStruceIsDelete,jdbcType=CHAR},
+      CSYS_ORG_STRUCE_TIME = #{record.csysOrgStruceTime,jdbcType=TIMESTAMP},
+      CSYS_ORG_STRUCE_DATE = #{record.csysOrgStruceDate,jdbcType=TIMESTAMP},
+      CSYS_ORG_STRUCE_NODES = #{record.csysOrgStruceNodes,jdbcType=CLOB},
+      CSYS_ORG_STRUCE_LINKS = #{record.csysOrgStruceLinks,jdbcType=CLOB}
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map">
+    <!--
+      WARNING - @mbg.generated
+    -->
+    update CSYS_ORG_STRUCE
+    set CSYS_ORG_STRUCE_ID = #{record.csysOrgStruceId,jdbcType=VARCHAR},
+      CSYS_ORG_STRUCE_NAME = #{record.csysOrgStruceName,jdbcType=VARCHAR},
+      CSYS_ORG_STRUCE_TYPE = #{record.csysOrgStruceType,jdbcType=CHAR},
+      CSYS_ORG_STRUCE_IS_ENABLED = #{record.csysOrgStruceIsEnabled,jdbcType=CHAR},
+      CSYS_ORG_STRUCE_COLORTHEME = #{record.csysOrgStruceColortheme,jdbcType=VARCHAR},
+      CSYS_ORG_STRUCE_STYLE = #{record.csysOrgStruceStyle,jdbcType=VARCHAR},
+      CSYS_ORG_STRUCE_ORIENTE = #{record.csysOrgStruceOriente,jdbcType=VARCHAR},
+      CSYS_ORG_STRUCE_CREATE_TIME = #{record.csysOrgStruceCreateTime,jdbcType=TIMESTAMP},
+      CSYS_ORG_STRUCE_MODIFY_TIME = #{record.csysOrgStruceModifyTime,jdbcType=TIMESTAMP},
+      CSYS_ORG_STRUCE_CREATE_USER = #{record.csysOrgStruceCreateUser,jdbcType=VARCHAR},
+      CSYS_ORG_STRUCE_MODIFY_USER = #{record.csysOrgStruceModifyUser,jdbcType=VARCHAR},
+      CSYS_ORG_STRUCE_IS_DELETE = #{record.csysOrgStruceIsDelete,jdbcType=CHAR},
+      CSYS_ORG_STRUCE_TIME = #{record.csysOrgStruceTime,jdbcType=TIMESTAMP},
+      CSYS_ORG_STRUCE_DATE = #{record.csysOrgStruceDate,jdbcType=TIMESTAMP}
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+</mapper>

@@ -1,0 +1,292 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.company.project.outer.dao.CsysWorkflowRunMapper">
+  <resultMap id="BaseResultMap" type="com.company.project.outer.model.CsysWorkflowRun">
+    <!--
+      WARNING - @mbg.generated
+    -->
+    <id column="CSYS_WORKFLOW_RUN_ID" jdbcType="VARCHAR" property="csysWorkflowRunId" />
+    <result column="CSYS_WORKFLOW_ID" jdbcType="VARCHAR" property="csysWorkflowId" />
+    <result column="CSYS_WORKFLOW_NAME" jdbcType="VARCHAR" property="csysWorkflowName" />
+    <result column="CSYS_WORKFLOW_RUN_PARENT_ID" jdbcType="VARCHAR" property="csysWorkflowRunParentId" />
+    <result column="CSYS_POT_TRS_ID" jdbcType="VARCHAR" property="csysPotTrsId" />
+    <result column="CY_SYS_BLOCK_ID" jdbcType="VARCHAR" property="cySysBlockId" />
+    <result column="CY_SYS_BLOCK_RUNTIME_ID" jdbcType="VARCHAR" property="cySysBlockRuntimeId" />
+    <result column="CSYS_WORKFLOW_RUN_TABLE" jdbcType="VARCHAR" property="csysWorkflowRunTable" />
+    <result column="CSYS_WORKFLOW_RUN_TABLE_VAL" jdbcType="VARCHAR" property="csysWorkflowRunTableVal" />
+    <result column="CSYS_POT_ID" jdbcType="VARCHAR" property="csysPotId" />
+    <result column="CSYS_POT_NAME" jdbcType="VARCHAR" property="csysPotName" />
+    <result column="CSYS_WORKFLOW_RUN_STATE" jdbcType="CHAR" property="csysWorkflowRunState" />
+    <result column="CSYS_WORKFLOW_RUN_NUMBE" jdbcType="VARCHAR" property="csysWorkflowRunNumbe" />
+    <result column="CSYS_WORKFLOW_RUN_START_TIME" jdbcType="TIMESTAMP" property="csysWorkflowRunStartTime" />
+    <result column="CSYS_WORKFLOW_RUN_CLOSE_TIME" jdbcType="TIMESTAMP" property="csysWorkflowRunCloseTime" />
+    <result column="CSYS_WORKFLOW_RUN_END_TIME" jdbcType="TIMESTAMP" property="csysWorkflowRunEndTime" />
+    <result column="CSYS_WORKFLOW_RUN_FREEZE_TIME" jdbcType="TIMESTAMP" property="csysWorkflowRunFreezeTime" />
+    <result column="CSYS_WORKFLOW_RUN_DESC" jdbcType="VARCHAR" property="csysWorkflowRunDesc" />
+    <result column="CSYS_WORKFLOW_RUN_CREATE_TIME" jdbcType="TIMESTAMP" property="csysWorkflowRunCreateTime" />
+    <result column="CSYS_WORKFLOW_RUN_MODIFY_TIME" jdbcType="TIMESTAMP" property="csysWorkflowRunModifyTime" />
+    <result column="CSYS_WORKFLOW_RUN_CREATE_USER" jdbcType="VARCHAR" property="csysWorkflowRunCreateUser" />
+    <result column="CSYS_WORKFLOW_RUN_MODIFY_USER" jdbcType="VARCHAR" property="csysWorkflowRunModifyUser" />
+    <result column="CSYS_WORKFLOW_RUN_IS_DELETE" jdbcType="CHAR" property="csysWorkflowRunIsDelete" />
+    <result column="CSYS_WORKFLOW_RUN_TIME" jdbcType="TIMESTAMP" property="csysWorkflowRunTime" />
+    <result column="CSYS_WORKFLOW_RUN_DATE" jdbcType="TIMESTAMP" property="csysWorkflowRunDate" />
+    <result column="CSYS_WORKFLOW_RUN_PSTART_TIME" jdbcType="TIMESTAMP" property="csysWorkflowRunPstartTime" />
+    <result column="CSYS_WORKFLOW_RUN_PCLOSE_TIME" jdbcType="TIMESTAMP" property="csysWorkflowRunPcloseTime" />
+    <result column="CSYS_WORKFLOW_RUN_PEND_TIME" jdbcType="TIMESTAMP" property="csysWorkflowRunPendTime" />
+    <result column="CSYS_WORKFLOW_RUN_PFREEZE_TIME" jdbcType="TIMESTAMP" property="csysWorkflowRunPfreezeTime" />
+    <result column="CSYS_WORKFLOW_RUN_PLEAST_TIME" jdbcType="TIMESTAMP" property="csysWorkflowRunPleastTime" />
+  </resultMap>
+  <sql id="Example_Where_Clause">
+    <!--
+      WARNING - @mbg.generated
+    -->
+    <where>
+      <foreach collection="oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause">
+    <!--
+      WARNING - @mbg.generated
+    -->
+    <where>
+      <foreach collection="example.oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List">
+    <!--
+      WARNING - @mbg.generated
+    -->
+    CSYS_WORKFLOW_RUN_ID, CSYS_WORKFLOW_ID, CSYS_WORKFLOW_NAME, CSYS_WORKFLOW_RUN_PARENT_ID, 
+    CSYS_POT_TRS_ID, CY_SYS_BLOCK_ID, CY_SYS_BLOCK_RUNTIME_ID, CSYS_WORKFLOW_RUN_TABLE, 
+    CSYS_WORKFLOW_RUN_TABLE_VAL, CSYS_POT_ID, CSYS_POT_NAME, CSYS_WORKFLOW_RUN_STATE, 
+    CSYS_WORKFLOW_RUN_NUMBE, CSYS_WORKFLOW_RUN_START_TIME, CSYS_WORKFLOW_RUN_CLOSE_TIME, 
+    CSYS_WORKFLOW_RUN_END_TIME, CSYS_WORKFLOW_RUN_FREEZE_TIME, CSYS_WORKFLOW_RUN_DESC, 
+    CSYS_WORKFLOW_RUN_CREATE_TIME, CSYS_WORKFLOW_RUN_MODIFY_TIME, CSYS_WORKFLOW_RUN_CREATE_USER, 
+    CSYS_WORKFLOW_RUN_MODIFY_USER, CSYS_WORKFLOW_RUN_IS_DELETE, CSYS_WORKFLOW_RUN_TIME, 
+    CSYS_WORKFLOW_RUN_DATE, CSYS_WORKFLOW_RUN_PSTART_TIME, CSYS_WORKFLOW_RUN_PCLOSE_TIME, 
+    CSYS_WORKFLOW_RUN_PEND_TIME, CSYS_WORKFLOW_RUN_PFREEZE_TIME, CSYS_WORKFLOW_RUN_PLEAST_TIME
+  </sql>
+  <select id="selectByExample" parameterType="com.company.project.outer.model.CsysWorkflowRunExample" resultMap="BaseResultMap">
+    <!--
+      WARNING - @mbg.generated
+    -->
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from CSYS_WORKFLOW_RUN
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+  </select>
+  <delete id="deleteByExample" parameterType="com.company.project.outer.model.CsysWorkflowRunExample">
+    <!--
+      WARNING - @mbg.generated
+    -->
+    delete from CSYS_WORKFLOW_RUN
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <select id="countByExample" parameterType="com.company.project.outer.model.CsysWorkflowRunExample" resultType="java.lang.Long">
+    <!--
+      WARNING - @mbg.generated
+    -->
+    select count(*) from CSYS_WORKFLOW_RUN
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map">
+    <!--
+      WARNING - @mbg.generated
+    -->
+    update CSYS_WORKFLOW_RUN
+    <set>
+      <if test="record.csysWorkflowRunId != null">
+        CSYS_WORKFLOW_RUN_ID = #{record.csysWorkflowRunId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.csysWorkflowId != null">
+        CSYS_WORKFLOW_ID = #{record.csysWorkflowId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.csysWorkflowName != null">
+        CSYS_WORKFLOW_NAME = #{record.csysWorkflowName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.csysWorkflowRunParentId != null">
+        CSYS_WORKFLOW_RUN_PARENT_ID = #{record.csysWorkflowRunParentId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.csysPotTrsId != null">
+        CSYS_POT_TRS_ID = #{record.csysPotTrsId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.cySysBlockId != null">
+        CY_SYS_BLOCK_ID = #{record.cySysBlockId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.cySysBlockRuntimeId != null">
+        CY_SYS_BLOCK_RUNTIME_ID = #{record.cySysBlockRuntimeId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.csysWorkflowRunTable != null">
+        CSYS_WORKFLOW_RUN_TABLE = #{record.csysWorkflowRunTable,jdbcType=VARCHAR},
+      </if>
+      <if test="record.csysWorkflowRunTableVal != null">
+        CSYS_WORKFLOW_RUN_TABLE_VAL = #{record.csysWorkflowRunTableVal,jdbcType=VARCHAR},
+      </if>
+      <if test="record.csysPotId != null">
+        CSYS_POT_ID = #{record.csysPotId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.csysPotName != null">
+        CSYS_POT_NAME = #{record.csysPotName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.csysWorkflowRunState != null">
+        CSYS_WORKFLOW_RUN_STATE = #{record.csysWorkflowRunState,jdbcType=CHAR},
+      </if>
+      <if test="record.csysWorkflowRunNumbe != null">
+        CSYS_WORKFLOW_RUN_NUMBE = #{record.csysWorkflowRunNumbe,jdbcType=VARCHAR},
+      </if>
+      <if test="record.csysWorkflowRunStartTime != null">
+        CSYS_WORKFLOW_RUN_START_TIME = #{record.csysWorkflowRunStartTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.csysWorkflowRunCloseTime != null">
+        CSYS_WORKFLOW_RUN_CLOSE_TIME = #{record.csysWorkflowRunCloseTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.csysWorkflowRunEndTime != null">
+        CSYS_WORKFLOW_RUN_END_TIME = #{record.csysWorkflowRunEndTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.csysWorkflowRunFreezeTime != null">
+        CSYS_WORKFLOW_RUN_FREEZE_TIME = #{record.csysWorkflowRunFreezeTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.csysWorkflowRunDesc != null">
+        CSYS_WORKFLOW_RUN_DESC = #{record.csysWorkflowRunDesc,jdbcType=VARCHAR},
+      </if>
+      <if test="record.csysWorkflowRunCreateTime != null">
+        CSYS_WORKFLOW_RUN_CREATE_TIME = #{record.csysWorkflowRunCreateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.csysWorkflowRunModifyTime != null">
+        CSYS_WORKFLOW_RUN_MODIFY_TIME = #{record.csysWorkflowRunModifyTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.csysWorkflowRunCreateUser != null">
+        CSYS_WORKFLOW_RUN_CREATE_USER = #{record.csysWorkflowRunCreateUser,jdbcType=VARCHAR},
+      </if>
+      <if test="record.csysWorkflowRunModifyUser != null">
+        CSYS_WORKFLOW_RUN_MODIFY_USER = #{record.csysWorkflowRunModifyUser,jdbcType=VARCHAR},
+      </if>
+      <if test="record.csysWorkflowRunIsDelete != null">
+        CSYS_WORKFLOW_RUN_IS_DELETE = #{record.csysWorkflowRunIsDelete,jdbcType=CHAR},
+      </if>
+      <if test="record.csysWorkflowRunTime != null">
+        CSYS_WORKFLOW_RUN_TIME = #{record.csysWorkflowRunTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.csysWorkflowRunDate != null">
+        CSYS_WORKFLOW_RUN_DATE = #{record.csysWorkflowRunDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.csysWorkflowRunPstartTime != null">
+        CSYS_WORKFLOW_RUN_PSTART_TIME = #{record.csysWorkflowRunPstartTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.csysWorkflowRunPcloseTime != null">
+        CSYS_WORKFLOW_RUN_PCLOSE_TIME = #{record.csysWorkflowRunPcloseTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.csysWorkflowRunPendTime != null">
+        CSYS_WORKFLOW_RUN_PEND_TIME = #{record.csysWorkflowRunPendTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.csysWorkflowRunPfreezeTime != null">
+        CSYS_WORKFLOW_RUN_PFREEZE_TIME = #{record.csysWorkflowRunPfreezeTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.csysWorkflowRunPleastTime != null">
+        CSYS_WORKFLOW_RUN_PLEAST_TIME = #{record.csysWorkflowRunPleastTime,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map">
+    <!--
+      WARNING - @mbg.generated
+    -->
+    update CSYS_WORKFLOW_RUN
+    set CSYS_WORKFLOW_RUN_ID = #{record.csysWorkflowRunId,jdbcType=VARCHAR},
+      CSYS_WORKFLOW_ID = #{record.csysWorkflowId,jdbcType=VARCHAR},
+      CSYS_WORKFLOW_NAME = #{record.csysWorkflowName,jdbcType=VARCHAR},
+      CSYS_WORKFLOW_RUN_PARENT_ID = #{record.csysWorkflowRunParentId,jdbcType=VARCHAR},
+      CSYS_POT_TRS_ID = #{record.csysPotTrsId,jdbcType=VARCHAR},
+      CY_SYS_BLOCK_ID = #{record.cySysBlockId,jdbcType=VARCHAR},
+      CY_SYS_BLOCK_RUNTIME_ID = #{record.cySysBlockRuntimeId,jdbcType=VARCHAR},
+      CSYS_WORKFLOW_RUN_TABLE = #{record.csysWorkflowRunTable,jdbcType=VARCHAR},
+      CSYS_WORKFLOW_RUN_TABLE_VAL = #{record.csysWorkflowRunTableVal,jdbcType=VARCHAR},
+      CSYS_POT_ID = #{record.csysPotId,jdbcType=VARCHAR},
+      CSYS_POT_NAME = #{record.csysPotName,jdbcType=VARCHAR},
+      CSYS_WORKFLOW_RUN_STATE = #{record.csysWorkflowRunState,jdbcType=CHAR},
+      CSYS_WORKFLOW_RUN_NUMBE = #{record.csysWorkflowRunNumbe,jdbcType=VARCHAR},
+      CSYS_WORKFLOW_RUN_START_TIME = #{record.csysWorkflowRunStartTime,jdbcType=TIMESTAMP},
+      CSYS_WORKFLOW_RUN_CLOSE_TIME = #{record.csysWorkflowRunCloseTime,jdbcType=TIMESTAMP},
+      CSYS_WORKFLOW_RUN_END_TIME = #{record.csysWorkflowRunEndTime,jdbcType=TIMESTAMP},
+      CSYS_WORKFLOW_RUN_FREEZE_TIME = #{record.csysWorkflowRunFreezeTime,jdbcType=TIMESTAMP},
+      CSYS_WORKFLOW_RUN_DESC = #{record.csysWorkflowRunDesc,jdbcType=VARCHAR},
+      CSYS_WORKFLOW_RUN_CREATE_TIME = #{record.csysWorkflowRunCreateTime,jdbcType=TIMESTAMP},
+      CSYS_WORKFLOW_RUN_MODIFY_TIME = #{record.csysWorkflowRunModifyTime,jdbcType=TIMESTAMP},
+      CSYS_WORKFLOW_RUN_CREATE_USER = #{record.csysWorkflowRunCreateUser,jdbcType=VARCHAR},
+      CSYS_WORKFLOW_RUN_MODIFY_USER = #{record.csysWorkflowRunModifyUser,jdbcType=VARCHAR},
+      CSYS_WORKFLOW_RUN_IS_DELETE = #{record.csysWorkflowRunIsDelete,jdbcType=CHAR},
+      CSYS_WORKFLOW_RUN_TIME = #{record.csysWorkflowRunTime,jdbcType=TIMESTAMP},
+      CSYS_WORKFLOW_RUN_DATE = #{record.csysWorkflowRunDate,jdbcType=TIMESTAMP},
+      CSYS_WORKFLOW_RUN_PSTART_TIME = #{record.csysWorkflowRunPstartTime,jdbcType=TIMESTAMP},
+      CSYS_WORKFLOW_RUN_PCLOSE_TIME = #{record.csysWorkflowRunPcloseTime,jdbcType=TIMESTAMP},
+      CSYS_WORKFLOW_RUN_PEND_TIME = #{record.csysWorkflowRunPendTime,jdbcType=TIMESTAMP},
+      CSYS_WORKFLOW_RUN_PFREEZE_TIME = #{record.csysWorkflowRunPfreezeTime,jdbcType=TIMESTAMP},
+      CSYS_WORKFLOW_RUN_PLEAST_TIME = #{record.csysWorkflowRunPleastTime,jdbcType=TIMESTAMP}
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+</mapper>

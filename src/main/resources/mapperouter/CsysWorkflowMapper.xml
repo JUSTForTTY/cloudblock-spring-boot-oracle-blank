@@ -1,0 +1,289 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.company.project.outer.dao.CsysWorkflowMapper">
+  <resultMap id="BaseResultMap" type="com.company.project.outer.model.CsysWorkflow">
+    <!--
+      WARNING - @mbg.generated
+    -->
+    <id column="CSYS_WORKFLOW_ID" jdbcType="VARCHAR" property="csysWorkflowId" />
+    <result column="CSYS_WORKFLOW_TYPE" jdbcType="CHAR" property="csysWorkflowType" />
+    <result column="CSYS_WORKFLOW_NAME" jdbcType="VARCHAR" property="csysWorkflowName" />
+    <result column="CSYS_WORKFLOW_COLORTHEME" jdbcType="VARCHAR" property="csysWorkflowColortheme" />
+    <result column="CSYS_WORKFLOW_LINESTYLE" jdbcType="VARCHAR" property="csysWorkflowLinestyle" />
+    <result column="CSYS_WORKFLOW_ORIENTATION" jdbcType="VARCHAR" property="csysWorkflowOrientation" />
+    <result column="CSYS_WORKFLOW_PARENT_ID" jdbcType="VARCHAR" property="csysWorkflowParentId" />
+    <result column="CSYS_WORKFLOW_VERSION" jdbcType="VARCHAR" property="csysWorkflowVersion" />
+    <result column="CSYS_WORKFLOW_DUE_DATE" jdbcType="DECIMAL" property="csysWorkflowDueDate" />
+    <result column="CSYS_WORKFLOW_DESC" jdbcType="VARCHAR" property="csysWorkflowDesc" />
+    <result column="CSYS_WORKFLOW_CREATE_TIME" jdbcType="TIMESTAMP" property="csysWorkflowCreateTime" />
+    <result column="CSYS_WORKFLOW_CREATE_USER" jdbcType="VARCHAR" property="csysWorkflowCreateUser" />
+    <result column="CSYS_WORKFLOW_MODIFY_USER" jdbcType="VARCHAR" property="csysWorkflowModifyUser" />
+    <result column="CSYS_WORKFLOW_MODIFY_TIME" jdbcType="TIMESTAMP" property="csysWorkflowModifyTime" />
+    <result column="CSYS_WORKFLOW_IS_DELETE" jdbcType="CHAR" property="csysWorkflowIsDelete" />
+    <result column="CSYS_WORKFLOW_DATE" jdbcType="TIMESTAMP" property="csysWorkflowDate" />
+    <result column="CSYS_WORKFLOW_TIME" jdbcType="TIMESTAMP" property="csysWorkflowTime" />
+  </resultMap>
+  <resultMap extends="BaseResultMap" id="ResultMapWithBLOBs" type="com.company.project.outer.model.CsysWorkflow">
+    <!--
+      WARNING - @mbg.generated
+    -->
+    <result column="CSYS_WORKFLOW_NODES" jdbcType="CLOB" property="csysWorkflowNodes" />
+    <result column="CSYS_WORKFLOW_LINKS" jdbcType="CLOB" property="csysWorkflowLinks" />
+  </resultMap>
+  <sql id="Example_Where_Clause">
+    <!--
+      WARNING - @mbg.generated
+    -->
+    <where>
+      <foreach collection="oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause">
+    <!--
+      WARNING - @mbg.generated
+    -->
+    <where>
+      <foreach collection="example.oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List">
+    <!--
+      WARNING - @mbg.generated
+    -->
+    CSYS_WORKFLOW_ID, CSYS_WORKFLOW_TYPE, CSYS_WORKFLOW_NAME, CSYS_WORKFLOW_COLORTHEME, 
+    CSYS_WORKFLOW_LINESTYLE, CSYS_WORKFLOW_ORIENTATION, CSYS_WORKFLOW_PARENT_ID, CSYS_WORKFLOW_VERSION, 
+    CSYS_WORKFLOW_DUE_DATE, CSYS_WORKFLOW_DESC, CSYS_WORKFLOW_CREATE_TIME, CSYS_WORKFLOW_CREATE_USER, 
+    CSYS_WORKFLOW_MODIFY_USER, CSYS_WORKFLOW_MODIFY_TIME, CSYS_WORKFLOW_IS_DELETE, CSYS_WORKFLOW_DATE, 
+    CSYS_WORKFLOW_TIME
+  </sql>
+  <sql id="Blob_Column_List">
+    <!--
+      WARNING - @mbg.generated
+    -->
+    CSYS_WORKFLOW_NODES, CSYS_WORKFLOW_LINKS
+  </sql>
+  <select id="selectByExampleWithBLOBs" parameterType="com.company.project.outer.model.CsysWorkflowExample" resultMap="ResultMapWithBLOBs">
+    <!--
+      WARNING - @mbg.generated
+    -->
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from CSYS_WORKFLOW
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByExample" parameterType="com.company.project.outer.model.CsysWorkflowExample" resultMap="BaseResultMap">
+    <!--
+      WARNING - @mbg.generated
+    -->
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from CSYS_WORKFLOW
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+  </select>
+  <delete id="deleteByExample" parameterType="com.company.project.outer.model.CsysWorkflowExample">
+    <!--
+      WARNING - @mbg.generated
+    -->
+    delete from CSYS_WORKFLOW
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <select id="countByExample" parameterType="com.company.project.outer.model.CsysWorkflowExample" resultType="java.lang.Long">
+    <!--
+      WARNING - @mbg.generated
+    -->
+    select count(*) from CSYS_WORKFLOW
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map">
+    <!--
+      WARNING - @mbg.generated
+    -->
+    update CSYS_WORKFLOW
+    <set>
+      <if test="record.csysWorkflowId != null">
+        CSYS_WORKFLOW_ID = #{record.csysWorkflowId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.csysWorkflowType != null">
+        CSYS_WORKFLOW_TYPE = #{record.csysWorkflowType,jdbcType=CHAR},
+      </if>
+      <if test="record.csysWorkflowName != null">
+        CSYS_WORKFLOW_NAME = #{record.csysWorkflowName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.csysWorkflowColortheme != null">
+        CSYS_WORKFLOW_COLORTHEME = #{record.csysWorkflowColortheme,jdbcType=VARCHAR},
+      </if>
+      <if test="record.csysWorkflowLinestyle != null">
+        CSYS_WORKFLOW_LINESTYLE = #{record.csysWorkflowLinestyle,jdbcType=VARCHAR},
+      </if>
+      <if test="record.csysWorkflowOrientation != null">
+        CSYS_WORKFLOW_ORIENTATION = #{record.csysWorkflowOrientation,jdbcType=VARCHAR},
+      </if>
+      <if test="record.csysWorkflowParentId != null">
+        CSYS_WORKFLOW_PARENT_ID = #{record.csysWorkflowParentId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.csysWorkflowVersion != null">
+        CSYS_WORKFLOW_VERSION = #{record.csysWorkflowVersion,jdbcType=VARCHAR},
+      </if>
+      <if test="record.csysWorkflowDueDate != null">
+        CSYS_WORKFLOW_DUE_DATE = #{record.csysWorkflowDueDate,jdbcType=DECIMAL},
+      </if>
+      <if test="record.csysWorkflowDesc != null">
+        CSYS_WORKFLOW_DESC = #{record.csysWorkflowDesc,jdbcType=VARCHAR},
+      </if>
+      <if test="record.csysWorkflowCreateTime != null">
+        CSYS_WORKFLOW_CREATE_TIME = #{record.csysWorkflowCreateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.csysWorkflowCreateUser != null">
+        CSYS_WORKFLOW_CREATE_USER = #{record.csysWorkflowCreateUser,jdbcType=VARCHAR},
+      </if>
+      <if test="record.csysWorkflowModifyUser != null">
+        CSYS_WORKFLOW_MODIFY_USER = #{record.csysWorkflowModifyUser,jdbcType=VARCHAR},
+      </if>
+      <if test="record.csysWorkflowModifyTime != null">
+        CSYS_WORKFLOW_MODIFY_TIME = #{record.csysWorkflowModifyTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.csysWorkflowIsDelete != null">
+        CSYS_WORKFLOW_IS_DELETE = #{record.csysWorkflowIsDelete,jdbcType=CHAR},
+      </if>
+      <if test="record.csysWorkflowDate != null">
+        CSYS_WORKFLOW_DATE = #{record.csysWorkflowDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.csysWorkflowTime != null">
+        CSYS_WORKFLOW_TIME = #{record.csysWorkflowTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.csysWorkflowNodes != null">
+        CSYS_WORKFLOW_NODES = #{record.csysWorkflowNodes,jdbcType=CLOB},
+      </if>
+      <if test="record.csysWorkflowLinks != null">
+        CSYS_WORKFLOW_LINKS = #{record.csysWorkflowLinks,jdbcType=CLOB},
+      </if>
+    </set>
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExampleWithBLOBs" parameterType="map">
+    <!--
+      WARNING - @mbg.generated
+    -->
+    update CSYS_WORKFLOW
+    set CSYS_WORKFLOW_ID = #{record.csysWorkflowId,jdbcType=VARCHAR},
+      CSYS_WORKFLOW_TYPE = #{record.csysWorkflowType,jdbcType=CHAR},
+      CSYS_WORKFLOW_NAME = #{record.csysWorkflowName,jdbcType=VARCHAR},
+      CSYS_WORKFLOW_COLORTHEME = #{record.csysWorkflowColortheme,jdbcType=VARCHAR},
+      CSYS_WORKFLOW_LINESTYLE = #{record.csysWorkflowLinestyle,jdbcType=VARCHAR},
+      CSYS_WORKFLOW_ORIENTATION = #{record.csysWorkflowOrientation,jdbcType=VARCHAR},
+      CSYS_WORKFLOW_PARENT_ID = #{record.csysWorkflowParentId,jdbcType=VARCHAR},
+      CSYS_WORKFLOW_VERSION = #{record.csysWorkflowVersion,jdbcType=VARCHAR},
+      CSYS_WORKFLOW_DUE_DATE = #{record.csysWorkflowDueDate,jdbcType=DECIMAL},
+      CSYS_WORKFLOW_DESC = #{record.csysWorkflowDesc,jdbcType=VARCHAR},
+      CSYS_WORKFLOW_CREATE_TIME = #{record.csysWorkflowCreateTime,jdbcType=TIMESTAMP},
+      CSYS_WORKFLOW_CREATE_USER = #{record.csysWorkflowCreateUser,jdbcType=VARCHAR},
+      CSYS_WORKFLOW_MODIFY_USER = #{record.csysWorkflowModifyUser,jdbcType=VARCHAR},
+      CSYS_WORKFLOW_MODIFY_TIME = #{record.csysWorkflowModifyTime,jdbcType=TIMESTAMP},
+      CSYS_WORKFLOW_IS_DELETE = #{record.csysWorkflowIsDelete,jdbcType=CHAR},
+      CSYS_WORKFLOW_DATE = #{record.csysWorkflowDate,jdbcType=TIMESTAMP},
+      CSYS_WORKFLOW_TIME = #{record.csysWorkflowTime,jdbcType=TIMESTAMP},
+      CSYS_WORKFLOW_NODES = #{record.csysWorkflowNodes,jdbcType=CLOB},
+      CSYS_WORKFLOW_LINKS = #{record.csysWorkflowLinks,jdbcType=CLOB}
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map">
+    <!--
+      WARNING - @mbg.generated
+    -->
+    update CSYS_WORKFLOW
+    set CSYS_WORKFLOW_ID = #{record.csysWorkflowId,jdbcType=VARCHAR},
+      CSYS_WORKFLOW_TYPE = #{record.csysWorkflowType,jdbcType=CHAR},
+      CSYS_WORKFLOW_NAME = #{record.csysWorkflowName,jdbcType=VARCHAR},
+      CSYS_WORKFLOW_COLORTHEME = #{record.csysWorkflowColortheme,jdbcType=VARCHAR},
+      CSYS_WORKFLOW_LINESTYLE = #{record.csysWorkflowLinestyle,jdbcType=VARCHAR},
+      CSYS_WORKFLOW_ORIENTATION = #{record.csysWorkflowOrientation,jdbcType=VARCHAR},
+      CSYS_WORKFLOW_PARENT_ID = #{record.csysWorkflowParentId,jdbcType=VARCHAR},
+      CSYS_WORKFLOW_VERSION = #{record.csysWorkflowVersion,jdbcType=VARCHAR},
+      CSYS_WORKFLOW_DUE_DATE = #{record.csysWorkflowDueDate,jdbcType=DECIMAL},
+      CSYS_WORKFLOW_DESC = #{record.csysWorkflowDesc,jdbcType=VARCHAR},
+      CSYS_WORKFLOW_CREATE_TIME = #{record.csysWorkflowCreateTime,jdbcType=TIMESTAMP},
+      CSYS_WORKFLOW_CREATE_USER = #{record.csysWorkflowCreateUser,jdbcType=VARCHAR},
+      CSYS_WORKFLOW_MODIFY_USER = #{record.csysWorkflowModifyUser,jdbcType=VARCHAR},
+      CSYS_WORKFLOW_MODIFY_TIME = #{record.csysWorkflowModifyTime,jdbcType=TIMESTAMP},
+      CSYS_WORKFLOW_IS_DELETE = #{record.csysWorkflowIsDelete,jdbcType=CHAR},
+      CSYS_WORKFLOW_DATE = #{record.csysWorkflowDate,jdbcType=TIMESTAMP},
+      CSYS_WORKFLOW_TIME = #{record.csysWorkflowTime,jdbcType=TIMESTAMP}
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+</mapper>

@@ -1,0 +1,311 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.company.project.outer.dao.CsysUserMapper">
+  <resultMap id="BaseResultMap" type="com.company.project.outer.model.CsysUser">
+    <!--
+      WARNING - @mbg.generated
+    -->
+    <id column="CSYS_USER_ID" jdbcType="VARCHAR" property="csysUserId" />
+    <result column="CSYS_USER_USERNAME" jdbcType="VARCHAR" property="csysUserUsername" />
+    <result column="CSYS_USER_PASSWORD" jdbcType="VARCHAR" property="csysUserPassword" />
+    <result column="CSYS_USER_OPEN_ID" jdbcType="VARCHAR" property="csysUserOpenId" />
+    <result column="CSYS_USER_NICKNAME" jdbcType="VARCHAR" property="csysUserNickname" />
+    <result column="CSYS_USER_NAME" jdbcType="VARCHAR" property="csysUserName" />
+    <result column="CSYS_USER_ACCOUNT" jdbcType="DECIMAL" property="csysUserAccount" />
+    <result column="CSYS_USER_LEVEL" jdbcType="VARCHAR" property="csysUserLevel" />
+    <result column="CSYS_USER_HP" jdbcType="VARCHAR" property="csysUserHp" />
+    <result column="CSYS_USER_ACCESS_TOKEN" jdbcType="VARCHAR" property="csysUserAccessToken" />
+    <result column="CSYS_USER_REFRESH_TOKEN" jdbcType="VARCHAR" property="csysUserRefreshToken" />
+    <result column="CSYS_USER_REALNAME" jdbcType="VARCHAR" property="csysUserRealname" />
+    <result column="CSYS_USER_NUMBER" jdbcType="VARCHAR" property="csysUserNumber" />
+    <result column="CSYS_USER_GENDER" jdbcType="VARCHAR" property="csysUserGender" />
+    <result column="CSYS_USER_AGE" jdbcType="DECIMAL" property="csysUserAge" />
+    <result column="CSYS_USER_PHONE" jdbcType="VARCHAR" property="csysUserPhone" />
+    <result column="CSYS_USER_MOBILE" jdbcType="VARCHAR" property="csysUserMobile" />
+    <result column="CSYS_USER_EMAIL" jdbcType="VARCHAR" property="csysUserEmail" />
+    <result column="CSYS_USER_ADDRESS" jdbcType="VARCHAR" property="csysUserAddress" />
+    <result column="CSYS_USER_EDUCATION" jdbcType="VARCHAR" property="csysUserEducation" />
+    <result column="CSYS_USER_MENO" jdbcType="VARCHAR" property="csysUserMeno" />
+    <result column="CSYS_USER_EWCODE" jdbcType="VARCHAR" property="csysUserEwcode" />
+    <result column="CSYS_USER_HEADIMAGE" jdbcType="VARCHAR" property="csysUserHeadimage" />
+    <result column="CSYS_USER_CITY" jdbcType="VARCHAR" property="csysUserCity" />
+    <result column="CSYS_USER_PROVICE" jdbcType="VARCHAR" property="csysUserProvice" />
+    <result column="CSYS_USER_COUNTRY" jdbcType="VARCHAR" property="csysUserCountry" />
+    <result column="CSYS_USER_LANGUAGE" jdbcType="VARCHAR" property="csysUserLanguage" />
+    <result column="CSYS_USER_CREATE_TIME" jdbcType="TIMESTAMP" property="csysUserCreateTime" />
+    <result column="CSYS_USER_CREATE_USER" jdbcType="VARCHAR" property="csysUserCreateUser" />
+    <result column="CSYS_USER_MODIFY_TIME" jdbcType="TIMESTAMP" property="csysUserModifyTime" />
+    <result column="CSYS_USER_MODIFY_USER" jdbcType="VARCHAR" property="csysUserModifyUser" />
+    <result column="CSYS_USER_IS_DELETE" jdbcType="CHAR" property="csysUserIsDelete" />
+    <result column="CSYS_USER_TIME" jdbcType="TIMESTAMP" property="csysUserTime" />
+    <result column="CSYS_USER_DATE" jdbcType="TIMESTAMP" property="csysUserDate" />
+  </resultMap>
+  <sql id="Example_Where_Clause">
+    <!--
+      WARNING - @mbg.generated
+    -->
+    <where>
+      <foreach collection="oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause">
+    <!--
+      WARNING - @mbg.generated
+    -->
+    <where>
+      <foreach collection="example.oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List">
+    <!--
+      WARNING - @mbg.generated
+    -->
+    CSYS_USER_ID, CSYS_USER_USERNAME, CSYS_USER_PASSWORD, CSYS_USER_OPEN_ID, CSYS_USER_NICKNAME, 
+    CSYS_USER_NAME, CSYS_USER_ACCOUNT, CSYS_USER_LEVEL, CSYS_USER_HP, CSYS_USER_ACCESS_TOKEN, 
+    CSYS_USER_REFRESH_TOKEN, CSYS_USER_REALNAME, CSYS_USER_NUMBER, CSYS_USER_GENDER, 
+    CSYS_USER_AGE, CSYS_USER_PHONE, CSYS_USER_MOBILE, CSYS_USER_EMAIL, CSYS_USER_ADDRESS, 
+    CSYS_USER_EDUCATION, CSYS_USER_MENO, CSYS_USER_EWCODE, CSYS_USER_HEADIMAGE, CSYS_USER_CITY, 
+    CSYS_USER_PROVICE, CSYS_USER_COUNTRY, CSYS_USER_LANGUAGE, CSYS_USER_CREATE_TIME, 
+    CSYS_USER_CREATE_USER, CSYS_USER_MODIFY_TIME, CSYS_USER_MODIFY_USER, CSYS_USER_IS_DELETE, 
+    CSYS_USER_TIME, CSYS_USER_DATE
+  </sql>
+  <select id="selectByExample" parameterType="com.company.project.outer.model.CsysUserExample" resultMap="BaseResultMap">
+    <!--
+      WARNING - @mbg.generated
+    -->
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from CSYS_USER
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+  </select>
+  <delete id="deleteByExample" parameterType="com.company.project.outer.model.CsysUserExample">
+    <!--
+      WARNING - @mbg.generated
+    -->
+    delete from CSYS_USER
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <select id="countByExample" parameterType="com.company.project.outer.model.CsysUserExample" resultType="java.lang.Long">
+    <!--
+      WARNING - @mbg.generated
+    -->
+    select count(*) from CSYS_USER
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map">
+    <!--
+      WARNING - @mbg.generated
+    -->
+    update CSYS_USER
+    <set>
+      <if test="record.csysUserId != null">
+        CSYS_USER_ID = #{record.csysUserId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.csysUserUsername != null">
+        CSYS_USER_USERNAME = #{record.csysUserUsername,jdbcType=VARCHAR},
+      </if>
+      <if test="record.csysUserPassword != null">
+        CSYS_USER_PASSWORD = #{record.csysUserPassword,jdbcType=VARCHAR},
+      </if>
+      <if test="record.csysUserOpenId != null">
+        CSYS_USER_OPEN_ID = #{record.csysUserOpenId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.csysUserNickname != null">
+        CSYS_USER_NICKNAME = #{record.csysUserNickname,jdbcType=VARCHAR},
+      </if>
+      <if test="record.csysUserName != null">
+        CSYS_USER_NAME = #{record.csysUserName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.csysUserAccount != null">
+        CSYS_USER_ACCOUNT = #{record.csysUserAccount,jdbcType=DECIMAL},
+      </if>
+      <if test="record.csysUserLevel != null">
+        CSYS_USER_LEVEL = #{record.csysUserLevel,jdbcType=VARCHAR},
+      </if>
+      <if test="record.csysUserHp != null">
+        CSYS_USER_HP = #{record.csysUserHp,jdbcType=VARCHAR},
+      </if>
+      <if test="record.csysUserAccessToken != null">
+        CSYS_USER_ACCESS_TOKEN = #{record.csysUserAccessToken,jdbcType=VARCHAR},
+      </if>
+      <if test="record.csysUserRefreshToken != null">
+        CSYS_USER_REFRESH_TOKEN = #{record.csysUserRefreshToken,jdbcType=VARCHAR},
+      </if>
+      <if test="record.csysUserRealname != null">
+        CSYS_USER_REALNAME = #{record.csysUserRealname,jdbcType=VARCHAR},
+      </if>
+      <if test="record.csysUserNumber != null">
+        CSYS_USER_NUMBER = #{record.csysUserNumber,jdbcType=VARCHAR},
+      </if>
+      <if test="record.csysUserGender != null">
+        CSYS_USER_GENDER = #{record.csysUserGender,jdbcType=VARCHAR},
+      </if>
+      <if test="record.csysUserAge != null">
+        CSYS_USER_AGE = #{record.csysUserAge,jdbcType=DECIMAL},
+      </if>
+      <if test="record.csysUserPhone != null">
+        CSYS_USER_PHONE = #{record.csysUserPhone,jdbcType=VARCHAR},
+      </if>
+      <if test="record.csysUserMobile != null">
+        CSYS_USER_MOBILE = #{record.csysUserMobile,jdbcType=VARCHAR},
+      </if>
+      <if test="record.csysUserEmail != null">
+        CSYS_USER_EMAIL = #{record.csysUserEmail,jdbcType=VARCHAR},
+      </if>
+      <if test="record.csysUserAddress != null">
+        CSYS_USER_ADDRESS = #{record.csysUserAddress,jdbcType=VARCHAR},
+      </if>
+      <if test="record.csysUserEducation != null">
+        CSYS_USER_EDUCATION = #{record.csysUserEducation,jdbcType=VARCHAR},
+      </if>
+      <if test="record.csysUserMeno != null">
+        CSYS_USER_MENO = #{record.csysUserMeno,jdbcType=VARCHAR},
+      </if>
+      <if test="record.csysUserEwcode != null">
+        CSYS_USER_EWCODE = #{record.csysUserEwcode,jdbcType=VARCHAR},
+      </if>
+      <if test="record.csysUserHeadimage != null">
+        CSYS_USER_HEADIMAGE = #{record.csysUserHeadimage,jdbcType=VARCHAR},
+      </if>
+      <if test="record.csysUserCity != null">
+        CSYS_USER_CITY = #{record.csysUserCity,jdbcType=VARCHAR},
+      </if>
+      <if test="record.csysUserProvice != null">
+        CSYS_USER_PROVICE = #{record.csysUserProvice,jdbcType=VARCHAR},
+      </if>
+      <if test="record.csysUserCountry != null">
+        CSYS_USER_COUNTRY = #{record.csysUserCountry,jdbcType=VARCHAR},
+      </if>
+      <if test="record.csysUserLanguage != null">
+        CSYS_USER_LANGUAGE = #{record.csysUserLanguage,jdbcType=VARCHAR},
+      </if>
+      <if test="record.csysUserCreateTime != null">
+        CSYS_USER_CREATE_TIME = #{record.csysUserCreateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.csysUserCreateUser != null">
+        CSYS_USER_CREATE_USER = #{record.csysUserCreateUser,jdbcType=VARCHAR},
+      </if>
+      <if test="record.csysUserModifyTime != null">
+        CSYS_USER_MODIFY_TIME = #{record.csysUserModifyTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.csysUserModifyUser != null">
+        CSYS_USER_MODIFY_USER = #{record.csysUserModifyUser,jdbcType=VARCHAR},
+      </if>
+      <if test="record.csysUserIsDelete != null">
+        CSYS_USER_IS_DELETE = #{record.csysUserIsDelete,jdbcType=CHAR},
+      </if>
+      <if test="record.csysUserTime != null">
+        CSYS_USER_TIME = #{record.csysUserTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.csysUserDate != null">
+        CSYS_USER_DATE = #{record.csysUserDate,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map">
+    <!--
+      WARNING - @mbg.generated
+    -->
+    update CSYS_USER
+    set CSYS_USER_ID = #{record.csysUserId,jdbcType=VARCHAR},
+      CSYS_USER_USERNAME = #{record.csysUserUsername,jdbcType=VARCHAR},
+      CSYS_USER_PASSWORD = #{record.csysUserPassword,jdbcType=VARCHAR},
+      CSYS_USER_OPEN_ID = #{record.csysUserOpenId,jdbcType=VARCHAR},
+      CSYS_USER_NICKNAME = #{record.csysUserNickname,jdbcType=VARCHAR},
+      CSYS_USER_NAME = #{record.csysUserName,jdbcType=VARCHAR},
+      CSYS_USER_ACCOUNT = #{record.csysUserAccount,jdbcType=DECIMAL},
+      CSYS_USER_LEVEL = #{record.csysUserLevel,jdbcType=VARCHAR},
+      CSYS_USER_HP = #{record.csysUserHp,jdbcType=VARCHAR},
+      CSYS_USER_ACCESS_TOKEN = #{record.csysUserAccessToken,jdbcType=VARCHAR},
+      CSYS_USER_REFRESH_TOKEN = #{record.csysUserRefreshToken,jdbcType=VARCHAR},
+      CSYS_USER_REALNAME = #{record.csysUserRealname,jdbcType=VARCHAR},
+      CSYS_USER_NUMBER = #{record.csysUserNumber,jdbcType=VARCHAR},
+      CSYS_USER_GENDER = #{record.csysUserGender,jdbcType=VARCHAR},
+      CSYS_USER_AGE = #{record.csysUserAge,jdbcType=DECIMAL},
+      CSYS_USER_PHONE = #{record.csysUserPhone,jdbcType=VARCHAR},
+      CSYS_USER_MOBILE = #{record.csysUserMobile,jdbcType=VARCHAR},
+      CSYS_USER_EMAIL = #{record.csysUserEmail,jdbcType=VARCHAR},
+      CSYS_USER_ADDRESS = #{record.csysUserAddress,jdbcType=VARCHAR},
+      CSYS_USER_EDUCATION = #{record.csysUserEducation,jdbcType=VARCHAR},
+      CSYS_USER_MENO = #{record.csysUserMeno,jdbcType=VARCHAR},
+      CSYS_USER_EWCODE = #{record.csysUserEwcode,jdbcType=VARCHAR},
+      CSYS_USER_HEADIMAGE = #{record.csysUserHeadimage,jdbcType=VARCHAR},
+      CSYS_USER_CITY = #{record.csysUserCity,jdbcType=VARCHAR},
+      CSYS_USER_PROVICE = #{record.csysUserProvice,jdbcType=VARCHAR},
+      CSYS_USER_COUNTRY = #{record.csysUserCountry,jdbcType=VARCHAR},
+      CSYS_USER_LANGUAGE = #{record.csysUserLanguage,jdbcType=VARCHAR},
+      CSYS_USER_CREATE_TIME = #{record.csysUserCreateTime,jdbcType=TIMESTAMP},
+      CSYS_USER_CREATE_USER = #{record.csysUserCreateUser,jdbcType=VARCHAR},
+      CSYS_USER_MODIFY_TIME = #{record.csysUserModifyTime,jdbcType=TIMESTAMP},
+      CSYS_USER_MODIFY_USER = #{record.csysUserModifyUser,jdbcType=VARCHAR},
+      CSYS_USER_IS_DELETE = #{record.csysUserIsDelete,jdbcType=CHAR},
+      CSYS_USER_TIME = #{record.csysUserTime,jdbcType=TIMESTAMP},
+      CSYS_USER_DATE = #{record.csysUserDate,jdbcType=TIMESTAMP}
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+</mapper>

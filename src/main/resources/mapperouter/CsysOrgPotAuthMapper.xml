@@ -1,0 +1,212 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.company.project.outer.dao.CsysOrgPotAuthMapper">
+  <resultMap id="BaseResultMap" type="com.company.project.outer.model.CsysOrgPotAuth">
+    <!--
+      WARNING - @mbg.generated
+    -->
+    <id column="CSYS_ORG_POT_AUTH_ID" jdbcType="VARCHAR" property="csysOrgPotAuthId" />
+    <result column="CSYS_ORG_STRUCE_ID" jdbcType="VARCHAR" property="csysOrgStruceId" />
+    <result column="CSYS_ORG_STRUCE_NAME" jdbcType="VARCHAR" property="csysOrgStruceName" />
+    <result column="CSYS_ORG_POT_ID" jdbcType="VARCHAR" property="csysOrgPotId" />
+    <result column="CSYS_ORG_POT_NAME" jdbcType="VARCHAR" property="csysOrgPotName" />
+    <result column="CSYS_USER_ID" jdbcType="VARCHAR" property="csysUserId" />
+    <result column="CSYS_ORG_POT_AUTH_TYPE" jdbcType="CHAR" property="csysOrgPotAuthType" />
+    <result column="CSYS_ORG_POT_AUTH_DESC" jdbcType="VARCHAR" property="csysOrgPotAuthDesc" />
+    <result column="CSYS_ORG_POT_AUTH_IS_DELETE" jdbcType="CHAR" property="csysOrgPotAuthIsDelete" />
+    <result column="CSYS_ORG_POT_AUTH_TIME" jdbcType="TIMESTAMP" property="csysOrgPotAuthTime" />
+    <result column="CSYS_ORG_POT_AUTH_DATE" jdbcType="TIMESTAMP" property="csysOrgPotAuthDate" />
+    <result column="CSYS_ORG_POT_AUTH_CREATE_USER" jdbcType="VARCHAR" property="csysOrgPotAuthCreateUser" />
+    <result column="CSYS_ORG_POT_AUTH_MODIFY_USER" jdbcType="VARCHAR" property="csysOrgPotAuthModifyUser" />
+    <result column="CSYS_ORG_POT_AUTH_CREATE_TIME" jdbcType="TIMESTAMP" property="csysOrgPotAuthCreateTime" />
+    <result column="CSYS_ORG_POT_AUTH_MODIFY_TIME" jdbcType="TIMESTAMP" property="csysOrgPotAuthModifyTime" />
+  </resultMap>
+  <sql id="Example_Where_Clause">
+    <!--
+      WARNING - @mbg.generated
+    -->
+    <where>
+      <foreach collection="oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause">
+    <!--
+      WARNING - @mbg.generated
+    -->
+    <where>
+      <foreach collection="example.oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List">
+    <!--
+      WARNING - @mbg.generated
+    -->
+    CSYS_ORG_POT_AUTH_ID, CSYS_ORG_STRUCE_ID, CSYS_ORG_STRUCE_NAME, CSYS_ORG_POT_ID, 
+    CSYS_ORG_POT_NAME, CSYS_USER_ID, CSYS_ORG_POT_AUTH_TYPE, CSYS_ORG_POT_AUTH_DESC, 
+    CSYS_ORG_POT_AUTH_IS_DELETE, CSYS_ORG_POT_AUTH_TIME, CSYS_ORG_POT_AUTH_DATE, CSYS_ORG_POT_AUTH_CREATE_USER, 
+    CSYS_ORG_POT_AUTH_MODIFY_USER, CSYS_ORG_POT_AUTH_CREATE_TIME, CSYS_ORG_POT_AUTH_MODIFY_TIME
+  </sql>
+  <select id="selectByExample" parameterType="com.company.project.outer.model.CsysOrgPotAuthExample" resultMap="BaseResultMap">
+    <!--
+      WARNING - @mbg.generated
+    -->
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from CSYS_ORG_POT_AUTH
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+  </select>
+  <delete id="deleteByExample" parameterType="com.company.project.outer.model.CsysOrgPotAuthExample">
+    <!--
+      WARNING - @mbg.generated
+    -->
+    delete from CSYS_ORG_POT_AUTH
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <select id="countByExample" parameterType="com.company.project.outer.model.CsysOrgPotAuthExample" resultType="java.lang.Long">
+    <!--
+      WARNING - @mbg.generated
+    -->
+    select count(*) from CSYS_ORG_POT_AUTH
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map">
+    <!--
+      WARNING - @mbg.generated
+    -->
+    update CSYS_ORG_POT_AUTH
+    <set>
+      <if test="record.csysOrgPotAuthId != null">
+        CSYS_ORG_POT_AUTH_ID = #{record.csysOrgPotAuthId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.csysOrgStruceId != null">
+        CSYS_ORG_STRUCE_ID = #{record.csysOrgStruceId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.csysOrgStruceName != null">
+        CSYS_ORG_STRUCE_NAME = #{record.csysOrgStruceName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.csysOrgPotId != null">
+        CSYS_ORG_POT_ID = #{record.csysOrgPotId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.csysOrgPotName != null">
+        CSYS_ORG_POT_NAME = #{record.csysOrgPotName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.csysUserId != null">
+        CSYS_USER_ID = #{record.csysUserId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.csysOrgPotAuthType != null">
+        CSYS_ORG_POT_AUTH_TYPE = #{record.csysOrgPotAuthType,jdbcType=CHAR},
+      </if>
+      <if test="record.csysOrgPotAuthDesc != null">
+        CSYS_ORG_POT_AUTH_DESC = #{record.csysOrgPotAuthDesc,jdbcType=VARCHAR},
+      </if>
+      <if test="record.csysOrgPotAuthIsDelete != null">
+        CSYS_ORG_POT_AUTH_IS_DELETE = #{record.csysOrgPotAuthIsDelete,jdbcType=CHAR},
+      </if>
+      <if test="record.csysOrgPotAuthTime != null">
+        CSYS_ORG_POT_AUTH_TIME = #{record.csysOrgPotAuthTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.csysOrgPotAuthDate != null">
+        CSYS_ORG_POT_AUTH_DATE = #{record.csysOrgPotAuthDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.csysOrgPotAuthCreateUser != null">
+        CSYS_ORG_POT_AUTH_CREATE_USER = #{record.csysOrgPotAuthCreateUser,jdbcType=VARCHAR},
+      </if>
+      <if test="record.csysOrgPotAuthModifyUser != null">
+        CSYS_ORG_POT_AUTH_MODIFY_USER = #{record.csysOrgPotAuthModifyUser,jdbcType=VARCHAR},
+      </if>
+      <if test="record.csysOrgPotAuthCreateTime != null">
+        CSYS_ORG_POT_AUTH_CREATE_TIME = #{record.csysOrgPotAuthCreateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.csysOrgPotAuthModifyTime != null">
+        CSYS_ORG_POT_AUTH_MODIFY_TIME = #{record.csysOrgPotAuthModifyTime,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map">
+    <!--
+      WARNING - @mbg.generated
+    -->
+    update CSYS_ORG_POT_AUTH
+    set CSYS_ORG_POT_AUTH_ID = #{record.csysOrgPotAuthId,jdbcType=VARCHAR},
+      CSYS_ORG_STRUCE_ID = #{record.csysOrgStruceId,jdbcType=VARCHAR},
+      CSYS_ORG_STRUCE_NAME = #{record.csysOrgStruceName,jdbcType=VARCHAR},
+      CSYS_ORG_POT_ID = #{record.csysOrgPotId,jdbcType=VARCHAR},
+      CSYS_ORG_POT_NAME = #{record.csysOrgPotName,jdbcType=VARCHAR},
+      CSYS_USER_ID = #{record.csysUserId,jdbcType=VARCHAR},
+      CSYS_ORG_POT_AUTH_TYPE = #{record.csysOrgPotAuthType,jdbcType=CHAR},
+      CSYS_ORG_POT_AUTH_DESC = #{record.csysOrgPotAuthDesc,jdbcType=VARCHAR},
+      CSYS_ORG_POT_AUTH_IS_DELETE = #{record.csysOrgPotAuthIsDelete,jdbcType=CHAR},
+      CSYS_ORG_POT_AUTH_TIME = #{record.csysOrgPotAuthTime,jdbcType=TIMESTAMP},
+      CSYS_ORG_POT_AUTH_DATE = #{record.csysOrgPotAuthDate,jdbcType=TIMESTAMP},
+      CSYS_ORG_POT_AUTH_CREATE_USER = #{record.csysOrgPotAuthCreateUser,jdbcType=VARCHAR},
+      CSYS_ORG_POT_AUTH_MODIFY_USER = #{record.csysOrgPotAuthModifyUser,jdbcType=VARCHAR},
+      CSYS_ORG_POT_AUTH_CREATE_TIME = #{record.csysOrgPotAuthCreateTime,jdbcType=TIMESTAMP},
+      CSYS_ORG_POT_AUTH_MODIFY_TIME = #{record.csysOrgPotAuthModifyTime,jdbcType=TIMESTAMP}
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+</mapper>

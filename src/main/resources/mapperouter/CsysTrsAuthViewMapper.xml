@@ -1,0 +1,243 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.company.project.outer.dao.CsysTrsAuthViewMapper">
+  <resultMap id="BaseResultMap" type="com.company.project.outer.model.CsysTrsAuthView">
+    <!--
+      WARNING - @mbg.generated
+    -->
+    <result column="CSYS_POT_TRS_ID" jdbcType="VARCHAR" property="csysPotTrsId" />
+    <result column="CSYS_WORKFLOW_ID" jdbcType="VARCHAR" property="csysWorkflowId" />
+    <result column="CSYS_WORKFLOW_NAME" jdbcType="VARCHAR" property="csysWorkflowName" />
+    <result column="CSYS_POT_CURRENT_ID" jdbcType="VARCHAR" property="csysPotCurrentId" />
+    <result column="CSYS_POT_CURRENT_NAME" jdbcType="VARCHAR" property="csysPotCurrentName" />
+    <result column="CSYS_POT_CURRENT_TABLE" jdbcType="VARCHAR" property="csysPotCurrentTable" />
+    <result column="CSYS_POT_TRS_POINT_ID" jdbcType="VARCHAR" property="csysPotTrsPointId" />
+    <result column="CSYS_POT_TRS_POINT_NAME" jdbcType="VARCHAR" property="csysPotTrsPointName" />
+    <result column="CSYS_POT_TRS_TABLE" jdbcType="VARCHAR" property="csysPotTrsTable" />
+    <result column="CSYS_POT_TRS_LONGEST_TIME" jdbcType="DECIMAL" property="csysPotTrsLongestTime" />
+    <result column="CSYS_POT_TRS_LEAST_TIME" jdbcType="DECIMAL" property="csysPotTrsLeastTime" />
+    <result column="CSYS_POT_TRS_CONFIRM" jdbcType="DECIMAL" property="csysPotTrsConfirm" />
+    <result column="CSYS_POT_TRS_ALL_EXE" jdbcType="CHAR" property="csysPotTrsAllExe" />
+    <result column="CSYS_POT_TRS_AUTO_EXE" jdbcType="CHAR" property="csysPotTrsAutoExe" />
+    <result column="CSYS_POT_TRS_REMAIND" jdbcType="CHAR" property="csysPotTrsRemaind" />
+    <result column="CSYS_POT_TRS_DESC" jdbcType="VARCHAR" property="csysPotTrsDesc" />
+    <result column="CSYS_POT_TRS_TIME" jdbcType="TIMESTAMP" property="csysPotTrsTime" />
+    <result column="CSYS_POT_TRS_DATE" jdbcType="TIMESTAMP" property="csysPotTrsDate" />
+    <result column="CSYS_TRS_AUTH_ID" jdbcType="VARCHAR" property="csysTrsAuthId" />
+    <result column="CSYS_ROLE_ID" jdbcType="VARCHAR" property="csysRoleId" />
+    <result column="CSYS_TRS_AUTH_DESC" jdbcType="VARCHAR" property="csysTrsAuthDesc" />
+  </resultMap>
+  <sql id="Example_Where_Clause">
+    <!--
+      WARNING - @mbg.generated
+    -->
+    <where>
+      <foreach collection="oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause">
+    <!--
+      WARNING - @mbg.generated
+    -->
+    <where>
+      <foreach collection="example.oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List">
+    <!--
+      WARNING - @mbg.generated
+    -->
+    CSYS_POT_TRS_ID, CSYS_WORKFLOW_ID, CSYS_WORKFLOW_NAME, CSYS_POT_CURRENT_ID, CSYS_POT_CURRENT_NAME, 
+    CSYS_POT_CURRENT_TABLE, CSYS_POT_TRS_POINT_ID, CSYS_POT_TRS_POINT_NAME, CSYS_POT_TRS_TABLE, 
+    CSYS_POT_TRS_LONGEST_TIME, CSYS_POT_TRS_LEAST_TIME, CSYS_POT_TRS_CONFIRM, CSYS_POT_TRS_ALL_EXE, 
+    CSYS_POT_TRS_AUTO_EXE, CSYS_POT_TRS_REMAIND, CSYS_POT_TRS_DESC, CSYS_POT_TRS_TIME, 
+    CSYS_POT_TRS_DATE, CSYS_TRS_AUTH_ID, CSYS_ROLE_ID, CSYS_TRS_AUTH_DESC
+  </sql>
+  <select id="selectByExample" parameterType="com.company.project.outer.model.CsysTrsAuthViewExample" resultMap="BaseResultMap">
+    <!--
+      WARNING - @mbg.generated
+    -->
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from CSYS_TRS_AUTH_VIEW
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+  </select>
+  <delete id="deleteByExample" parameterType="com.company.project.outer.model.CsysTrsAuthViewExample">
+    <!--
+      WARNING - @mbg.generated
+    -->
+    delete from CSYS_TRS_AUTH_VIEW
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <select id="countByExample" parameterType="com.company.project.outer.model.CsysTrsAuthViewExample" resultType="java.lang.Long">
+    <!--
+      WARNING - @mbg.generated
+    -->
+    select count(*) from CSYS_TRS_AUTH_VIEW
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map">
+    <!--
+      WARNING - @mbg.generated
+    -->
+    update CSYS_TRS_AUTH_VIEW
+    <set>
+      <if test="record.csysPotTrsId != null">
+        CSYS_POT_TRS_ID = #{record.csysPotTrsId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.csysWorkflowId != null">
+        CSYS_WORKFLOW_ID = #{record.csysWorkflowId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.csysWorkflowName != null">
+        CSYS_WORKFLOW_NAME = #{record.csysWorkflowName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.csysPotCurrentId != null">
+        CSYS_POT_CURRENT_ID = #{record.csysPotCurrentId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.csysPotCurrentName != null">
+        CSYS_POT_CURRENT_NAME = #{record.csysPotCurrentName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.csysPotCurrentTable != null">
+        CSYS_POT_CURRENT_TABLE = #{record.csysPotCurrentTable,jdbcType=VARCHAR},
+      </if>
+      <if test="record.csysPotTrsPointId != null">
+        CSYS_POT_TRS_POINT_ID = #{record.csysPotTrsPointId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.csysPotTrsPointName != null">
+        CSYS_POT_TRS_POINT_NAME = #{record.csysPotTrsPointName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.csysPotTrsTable != null">
+        CSYS_POT_TRS_TABLE = #{record.csysPotTrsTable,jdbcType=VARCHAR},
+      </if>
+      <if test="record.csysPotTrsLongestTime != null">
+        CSYS_POT_TRS_LONGEST_TIME = #{record.csysPotTrsLongestTime,jdbcType=DECIMAL},
+      </if>
+      <if test="record.csysPotTrsLeastTime != null">
+        CSYS_POT_TRS_LEAST_TIME = #{record.csysPotTrsLeastTime,jdbcType=DECIMAL},
+      </if>
+      <if test="record.csysPotTrsConfirm != null">
+        CSYS_POT_TRS_CONFIRM = #{record.csysPotTrsConfirm,jdbcType=DECIMAL},
+      </if>
+      <if test="record.csysPotTrsAllExe != null">
+        CSYS_POT_TRS_ALL_EXE = #{record.csysPotTrsAllExe,jdbcType=CHAR},
+      </if>
+      <if test="record.csysPotTrsAutoExe != null">
+        CSYS_POT_TRS_AUTO_EXE = #{record.csysPotTrsAutoExe,jdbcType=CHAR},
+      </if>
+      <if test="record.csysPotTrsRemaind != null">
+        CSYS_POT_TRS_REMAIND = #{record.csysPotTrsRemaind,jdbcType=CHAR},
+      </if>
+      <if test="record.csysPotTrsDesc != null">
+        CSYS_POT_TRS_DESC = #{record.csysPotTrsDesc,jdbcType=VARCHAR},
+      </if>
+      <if test="record.csysPotTrsTime != null">
+        CSYS_POT_TRS_TIME = #{record.csysPotTrsTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.csysPotTrsDate != null">
+        CSYS_POT_TRS_DATE = #{record.csysPotTrsDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.csysTrsAuthId != null">
+        CSYS_TRS_AUTH_ID = #{record.csysTrsAuthId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.csysRoleId != null">
+        CSYS_ROLE_ID = #{record.csysRoleId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.csysTrsAuthDesc != null">
+        CSYS_TRS_AUTH_DESC = #{record.csysTrsAuthDesc,jdbcType=VARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map">
+    <!--
+      WARNING - @mbg.generated
+    -->
+    update CSYS_TRS_AUTH_VIEW
+    set CSYS_POT_TRS_ID = #{record.csysPotTrsId,jdbcType=VARCHAR},
+      CSYS_WORKFLOW_ID = #{record.csysWorkflowId,jdbcType=VARCHAR},
+      CSYS_WORKFLOW_NAME = #{record.csysWorkflowName,jdbcType=VARCHAR},
+      CSYS_POT_CURRENT_ID = #{record.csysPotCurrentId,jdbcType=VARCHAR},
+      CSYS_POT_CURRENT_NAME = #{record.csysPotCurrentName,jdbcType=VARCHAR},
+      CSYS_POT_CURRENT_TABLE = #{record.csysPotCurrentTable,jdbcType=VARCHAR},
+      CSYS_POT_TRS_POINT_ID = #{record.csysPotTrsPointId,jdbcType=VARCHAR},
+      CSYS_POT_TRS_POINT_NAME = #{record.csysPotTrsPointName,jdbcType=VARCHAR},
+      CSYS_POT_TRS_TABLE = #{record.csysPotTrsTable,jdbcType=VARCHAR},
+      CSYS_POT_TRS_LONGEST_TIME = #{record.csysPotTrsLongestTime,jdbcType=DECIMAL},
+      CSYS_POT_TRS_LEAST_TIME = #{record.csysPotTrsLeastTime,jdbcType=DECIMAL},
+      CSYS_POT_TRS_CONFIRM = #{record.csysPotTrsConfirm,jdbcType=DECIMAL},
+      CSYS_POT_TRS_ALL_EXE = #{record.csysPotTrsAllExe,jdbcType=CHAR},
+      CSYS_POT_TRS_AUTO_EXE = #{record.csysPotTrsAutoExe,jdbcType=CHAR},
+      CSYS_POT_TRS_REMAIND = #{record.csysPotTrsRemaind,jdbcType=CHAR},
+      CSYS_POT_TRS_DESC = #{record.csysPotTrsDesc,jdbcType=VARCHAR},
+      CSYS_POT_TRS_TIME = #{record.csysPotTrsTime,jdbcType=TIMESTAMP},
+      CSYS_POT_TRS_DATE = #{record.csysPotTrsDate,jdbcType=TIMESTAMP},
+      CSYS_TRS_AUTH_ID = #{record.csysTrsAuthId,jdbcType=VARCHAR},
+      CSYS_ROLE_ID = #{record.csysRoleId,jdbcType=VARCHAR},
+      CSYS_TRS_AUTH_DESC = #{record.csysTrsAuthDesc,jdbcType=VARCHAR}
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+</mapper>

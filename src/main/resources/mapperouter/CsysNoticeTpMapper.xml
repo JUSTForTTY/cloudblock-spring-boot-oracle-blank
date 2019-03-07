@@ -1,0 +1,327 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.company.project.outer.dao.CsysNoticeTpMapper">
+  <resultMap id="BaseResultMap" type="com.company.project.outer.model.CsysNoticeTp">
+    <!--
+      WARNING - @mbg.generated
+    -->
+    <id column="CSYS_NOTICE_TP_ID" jdbcType="VARCHAR" property="csysNoticeTpId" />
+    <result column="CSYS_NOTICE_TP_NAME" jdbcType="VARCHAR" property="csysNoticeTpName" />
+    <result column="CSYS_NOTICE_TP_TYPE" jdbcType="CHAR" property="csysNoticeTpType" />
+    <result column="CSYS_WORKFLOW_ID" jdbcType="VARCHAR" property="csysWorkflowId" />
+    <result column="CSYS_POINT_TRS_ID" jdbcType="VARCHAR" property="csysPointTrsId" />
+    <result column="CSYS_POINT_TRS_CATEGORY" jdbcType="CHAR" property="csysPointTrsCategory" />
+    <result column="CSYS_NOTICE_TP_CYCLE" jdbcType="CHAR" property="csysNoticeTpCycle" />
+    <result column="CSYS_NOTICE_TP_EXECUTE" jdbcType="TIMESTAMP" property="csysNoticeTpExecute" />
+    <result column="CSYS_NOTICE_TP_YEAR" jdbcType="VARCHAR" property="csysNoticeTpYear" />
+    <result column="CSYS_NOTICE_TP_MONTH" jdbcType="VARCHAR" property="csysNoticeTpMonth" />
+    <result column="CSYS_NOTICE_TP_MANY_DAY" jdbcType="VARCHAR" property="csysNoticeTpManyDay" />
+    <result column="CSYS_NOTICE_TP_QUARTERS" jdbcType="VARCHAR" property="csysNoticeTpQuarters" />
+    <result column="CSYS_NOTICE_TP_WEEK" jdbcType="VARCHAR" property="csysNoticeTpWeek" />
+    <result column="CSYS_NOTICE_TP_CTIME" jdbcType="VARCHAR" property="csysNoticeTpCtime" />
+    <result column="CSYS_NOTICE_TP_ST_TIME" jdbcType="TIMESTAMP" property="csysNoticeTpStTime" />
+    <result column="CSYS_NOTICE_TP_END_TIME" jdbcType="TIMESTAMP" property="csysNoticeTpEndTime" />
+    <result column="CSYS_NOTICE_TP_ENABLED" jdbcType="CHAR" property="csysNoticeTpEnabled" />
+    <result column="CSYS_NOTICE_TP_CREATE_TIME" jdbcType="TIMESTAMP" property="csysNoticeTpCreateTime" />
+    <result column="CSYS_NOTICE_TP_MODIFY_TIME" jdbcType="TIMESTAMP" property="csysNoticeTpModifyTime" />
+    <result column="CSYS_NOTICE_TP_CREATE_USER" jdbcType="VARCHAR" property="csysNoticeTpCreateUser" />
+    <result column="CSYS_NOTICE_TP_MODIFY_USER" jdbcType="VARCHAR" property="csysNoticeTpModifyUser" />
+    <result column="CSYS_NOTICE_TP_IS_DELETE" jdbcType="CHAR" property="csysNoticeTpIsDelete" />
+    <result column="CSYS_NOTICE_TP_TIME" jdbcType="TIMESTAMP" property="csysNoticeTpTime" />
+    <result column="CSYS_NOTICE_TP_DATE" jdbcType="TIMESTAMP" property="csysNoticeTpDate" />
+  </resultMap>
+  <resultMap extends="BaseResultMap" id="ResultMapWithBLOBs" type="com.company.project.outer.model.CsysNoticeTp">
+    <!--
+      WARNING - @mbg.generated
+    -->
+    <result column="CSYS_NOTICE_TP_CONTENT" jdbcType="CLOB" property="csysNoticeTpContent" />
+  </resultMap>
+  <sql id="Example_Where_Clause">
+    <!--
+      WARNING - @mbg.generated
+    -->
+    <where>
+      <foreach collection="oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause">
+    <!--
+      WARNING - @mbg.generated
+    -->
+    <where>
+      <foreach collection="example.oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List">
+    <!--
+      WARNING - @mbg.generated
+    -->
+    CSYS_NOTICE_TP_ID, CSYS_NOTICE_TP_NAME, CSYS_NOTICE_TP_TYPE, CSYS_WORKFLOW_ID, CSYS_POINT_TRS_ID, 
+    CSYS_POINT_TRS_CATEGORY, CSYS_NOTICE_TP_CYCLE, CSYS_NOTICE_TP_EXECUTE, CSYS_NOTICE_TP_YEAR, 
+    CSYS_NOTICE_TP_MONTH, CSYS_NOTICE_TP_MANY_DAY, CSYS_NOTICE_TP_QUARTERS, CSYS_NOTICE_TP_WEEK, 
+    CSYS_NOTICE_TP_CTIME, CSYS_NOTICE_TP_ST_TIME, CSYS_NOTICE_TP_END_TIME, CSYS_NOTICE_TP_ENABLED, 
+    CSYS_NOTICE_TP_CREATE_TIME, CSYS_NOTICE_TP_MODIFY_TIME, CSYS_NOTICE_TP_CREATE_USER, 
+    CSYS_NOTICE_TP_MODIFY_USER, CSYS_NOTICE_TP_IS_DELETE, CSYS_NOTICE_TP_TIME, CSYS_NOTICE_TP_DATE
+  </sql>
+  <sql id="Blob_Column_List">
+    <!--
+      WARNING - @mbg.generated
+    -->
+    CSYS_NOTICE_TP_CONTENT
+  </sql>
+  <select id="selectByExampleWithBLOBs" parameterType="com.company.project.outer.model.CsysNoticeTpExample" resultMap="ResultMapWithBLOBs">
+    <!--
+      WARNING - @mbg.generated
+    -->
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from CSYS_NOTICE_TP
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByExample" parameterType="com.company.project.outer.model.CsysNoticeTpExample" resultMap="BaseResultMap">
+    <!--
+      WARNING - @mbg.generated
+    -->
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from CSYS_NOTICE_TP
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+  </select>
+  <delete id="deleteByExample" parameterType="com.company.project.outer.model.CsysNoticeTpExample">
+    <!--
+      WARNING - @mbg.generated
+    -->
+    delete from CSYS_NOTICE_TP
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <select id="countByExample" parameterType="com.company.project.outer.model.CsysNoticeTpExample" resultType="java.lang.Long">
+    <!--
+      WARNING - @mbg.generated
+    -->
+    select count(*) from CSYS_NOTICE_TP
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map">
+    <!--
+      WARNING - @mbg.generated
+    -->
+    update CSYS_NOTICE_TP
+    <set>
+      <if test="record.csysNoticeTpId != null">
+        CSYS_NOTICE_TP_ID = #{record.csysNoticeTpId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.csysNoticeTpName != null">
+        CSYS_NOTICE_TP_NAME = #{record.csysNoticeTpName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.csysNoticeTpType != null">
+        CSYS_NOTICE_TP_TYPE = #{record.csysNoticeTpType,jdbcType=CHAR},
+      </if>
+      <if test="record.csysWorkflowId != null">
+        CSYS_WORKFLOW_ID = #{record.csysWorkflowId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.csysPointTrsId != null">
+        CSYS_POINT_TRS_ID = #{record.csysPointTrsId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.csysPointTrsCategory != null">
+        CSYS_POINT_TRS_CATEGORY = #{record.csysPointTrsCategory,jdbcType=CHAR},
+      </if>
+      <if test="record.csysNoticeTpCycle != null">
+        CSYS_NOTICE_TP_CYCLE = #{record.csysNoticeTpCycle,jdbcType=CHAR},
+      </if>
+      <if test="record.csysNoticeTpExecute != null">
+        CSYS_NOTICE_TP_EXECUTE = #{record.csysNoticeTpExecute,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.csysNoticeTpYear != null">
+        CSYS_NOTICE_TP_YEAR = #{record.csysNoticeTpYear,jdbcType=VARCHAR},
+      </if>
+      <if test="record.csysNoticeTpMonth != null">
+        CSYS_NOTICE_TP_MONTH = #{record.csysNoticeTpMonth,jdbcType=VARCHAR},
+      </if>
+      <if test="record.csysNoticeTpManyDay != null">
+        CSYS_NOTICE_TP_MANY_DAY = #{record.csysNoticeTpManyDay,jdbcType=VARCHAR},
+      </if>
+      <if test="record.csysNoticeTpQuarters != null">
+        CSYS_NOTICE_TP_QUARTERS = #{record.csysNoticeTpQuarters,jdbcType=VARCHAR},
+      </if>
+      <if test="record.csysNoticeTpWeek != null">
+        CSYS_NOTICE_TP_WEEK = #{record.csysNoticeTpWeek,jdbcType=VARCHAR},
+      </if>
+      <if test="record.csysNoticeTpCtime != null">
+        CSYS_NOTICE_TP_CTIME = #{record.csysNoticeTpCtime,jdbcType=VARCHAR},
+      </if>
+      <if test="record.csysNoticeTpStTime != null">
+        CSYS_NOTICE_TP_ST_TIME = #{record.csysNoticeTpStTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.csysNoticeTpEndTime != null">
+        CSYS_NOTICE_TP_END_TIME = #{record.csysNoticeTpEndTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.csysNoticeTpEnabled != null">
+        CSYS_NOTICE_TP_ENABLED = #{record.csysNoticeTpEnabled,jdbcType=CHAR},
+      </if>
+      <if test="record.csysNoticeTpCreateTime != null">
+        CSYS_NOTICE_TP_CREATE_TIME = #{record.csysNoticeTpCreateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.csysNoticeTpModifyTime != null">
+        CSYS_NOTICE_TP_MODIFY_TIME = #{record.csysNoticeTpModifyTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.csysNoticeTpCreateUser != null">
+        CSYS_NOTICE_TP_CREATE_USER = #{record.csysNoticeTpCreateUser,jdbcType=VARCHAR},
+      </if>
+      <if test="record.csysNoticeTpModifyUser != null">
+        CSYS_NOTICE_TP_MODIFY_USER = #{record.csysNoticeTpModifyUser,jdbcType=VARCHAR},
+      </if>
+      <if test="record.csysNoticeTpIsDelete != null">
+        CSYS_NOTICE_TP_IS_DELETE = #{record.csysNoticeTpIsDelete,jdbcType=CHAR},
+      </if>
+      <if test="record.csysNoticeTpTime != null">
+        CSYS_NOTICE_TP_TIME = #{record.csysNoticeTpTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.csysNoticeTpDate != null">
+        CSYS_NOTICE_TP_DATE = #{record.csysNoticeTpDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.csysNoticeTpContent != null">
+        CSYS_NOTICE_TP_CONTENT = #{record.csysNoticeTpContent,jdbcType=CLOB},
+      </if>
+    </set>
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExampleWithBLOBs" parameterType="map">
+    <!--
+      WARNING - @mbg.generated
+    -->
+    update CSYS_NOTICE_TP
+    set CSYS_NOTICE_TP_ID = #{record.csysNoticeTpId,jdbcType=VARCHAR},
+      CSYS_NOTICE_TP_NAME = #{record.csysNoticeTpName,jdbcType=VARCHAR},
+      CSYS_NOTICE_TP_TYPE = #{record.csysNoticeTpType,jdbcType=CHAR},
+      CSYS_WORKFLOW_ID = #{record.csysWorkflowId,jdbcType=VARCHAR},
+      CSYS_POINT_TRS_ID = #{record.csysPointTrsId,jdbcType=VARCHAR},
+      CSYS_POINT_TRS_CATEGORY = #{record.csysPointTrsCategory,jdbcType=CHAR},
+      CSYS_NOTICE_TP_CYCLE = #{record.csysNoticeTpCycle,jdbcType=CHAR},
+      CSYS_NOTICE_TP_EXECUTE = #{record.csysNoticeTpExecute,jdbcType=TIMESTAMP},
+      CSYS_NOTICE_TP_YEAR = #{record.csysNoticeTpYear,jdbcType=VARCHAR},
+      CSYS_NOTICE_TP_MONTH = #{record.csysNoticeTpMonth,jdbcType=VARCHAR},
+      CSYS_NOTICE_TP_MANY_DAY = #{record.csysNoticeTpManyDay,jdbcType=VARCHAR},
+      CSYS_NOTICE_TP_QUARTERS = #{record.csysNoticeTpQuarters,jdbcType=VARCHAR},
+      CSYS_NOTICE_TP_WEEK = #{record.csysNoticeTpWeek,jdbcType=VARCHAR},
+      CSYS_NOTICE_TP_CTIME = #{record.csysNoticeTpCtime,jdbcType=VARCHAR},
+      CSYS_NOTICE_TP_ST_TIME = #{record.csysNoticeTpStTime,jdbcType=TIMESTAMP},
+      CSYS_NOTICE_TP_END_TIME = #{record.csysNoticeTpEndTime,jdbcType=TIMESTAMP},
+      CSYS_NOTICE_TP_ENABLED = #{record.csysNoticeTpEnabled,jdbcType=CHAR},
+      CSYS_NOTICE_TP_CREATE_TIME = #{record.csysNoticeTpCreateTime,jdbcType=TIMESTAMP},
+      CSYS_NOTICE_TP_MODIFY_TIME = #{record.csysNoticeTpModifyTime,jdbcType=TIMESTAMP},
+      CSYS_NOTICE_TP_CREATE_USER = #{record.csysNoticeTpCreateUser,jdbcType=VARCHAR},
+      CSYS_NOTICE_TP_MODIFY_USER = #{record.csysNoticeTpModifyUser,jdbcType=VARCHAR},
+      CSYS_NOTICE_TP_IS_DELETE = #{record.csysNoticeTpIsDelete,jdbcType=CHAR},
+      CSYS_NOTICE_TP_TIME = #{record.csysNoticeTpTime,jdbcType=TIMESTAMP},
+      CSYS_NOTICE_TP_DATE = #{record.csysNoticeTpDate,jdbcType=TIMESTAMP},
+      CSYS_NOTICE_TP_CONTENT = #{record.csysNoticeTpContent,jdbcType=CLOB}
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map">
+    <!--
+      WARNING - @mbg.generated
+    -->
+    update CSYS_NOTICE_TP
+    set CSYS_NOTICE_TP_ID = #{record.csysNoticeTpId,jdbcType=VARCHAR},
+      CSYS_NOTICE_TP_NAME = #{record.csysNoticeTpName,jdbcType=VARCHAR},
+      CSYS_NOTICE_TP_TYPE = #{record.csysNoticeTpType,jdbcType=CHAR},
+      CSYS_WORKFLOW_ID = #{record.csysWorkflowId,jdbcType=VARCHAR},
+      CSYS_POINT_TRS_ID = #{record.csysPointTrsId,jdbcType=VARCHAR},
+      CSYS_POINT_TRS_CATEGORY = #{record.csysPointTrsCategory,jdbcType=CHAR},
+      CSYS_NOTICE_TP_CYCLE = #{record.csysNoticeTpCycle,jdbcType=CHAR},
+      CSYS_NOTICE_TP_EXECUTE = #{record.csysNoticeTpExecute,jdbcType=TIMESTAMP},
+      CSYS_NOTICE_TP_YEAR = #{record.csysNoticeTpYear,jdbcType=VARCHAR},
+      CSYS_NOTICE_TP_MONTH = #{record.csysNoticeTpMonth,jdbcType=VARCHAR},
+      CSYS_NOTICE_TP_MANY_DAY = #{record.csysNoticeTpManyDay,jdbcType=VARCHAR},
+      CSYS_NOTICE_TP_QUARTERS = #{record.csysNoticeTpQuarters,jdbcType=VARCHAR},
+      CSYS_NOTICE_TP_WEEK = #{record.csysNoticeTpWeek,jdbcType=VARCHAR},
+      CSYS_NOTICE_TP_CTIME = #{record.csysNoticeTpCtime,jdbcType=VARCHAR},
+      CSYS_NOTICE_TP_ST_TIME = #{record.csysNoticeTpStTime,jdbcType=TIMESTAMP},
+      CSYS_NOTICE_TP_END_TIME = #{record.csysNoticeTpEndTime,jdbcType=TIMESTAMP},
+      CSYS_NOTICE_TP_ENABLED = #{record.csysNoticeTpEnabled,jdbcType=CHAR},
+      CSYS_NOTICE_TP_CREATE_TIME = #{record.csysNoticeTpCreateTime,jdbcType=TIMESTAMP},
+      CSYS_NOTICE_TP_MODIFY_TIME = #{record.csysNoticeTpModifyTime,jdbcType=TIMESTAMP},
+      CSYS_NOTICE_TP_CREATE_USER = #{record.csysNoticeTpCreateUser,jdbcType=VARCHAR},
+      CSYS_NOTICE_TP_MODIFY_USER = #{record.csysNoticeTpModifyUser,jdbcType=VARCHAR},
+      CSYS_NOTICE_TP_IS_DELETE = #{record.csysNoticeTpIsDelete,jdbcType=CHAR},
+      CSYS_NOTICE_TP_TIME = #{record.csysNoticeTpTime,jdbcType=TIMESTAMP},
+      CSYS_NOTICE_TP_DATE = #{record.csysNoticeTpDate,jdbcType=TIMESTAMP}
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+</mapper>

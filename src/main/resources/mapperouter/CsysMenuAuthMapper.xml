@@ -1,0 +1,206 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.company.project.outer.dao.CsysMenuAuthMapper">
+  <resultMap id="BaseResultMap" type="com.company.project.outer.model.CsysMenuAuth">
+    <!--
+      WARNING - @mbg.generated
+    -->
+    <id column="CSYS_MENU_AUTH_ID" jdbcType="VARCHAR" property="csysMenuAuthId" />
+    <result column="CSYS_MENU_ID" jdbcType="VARCHAR" property="csysMenuId" />
+    <result column="CSYS_MENU_NAME" jdbcType="VARCHAR" property="csysMenuName" />
+    <result column="CSYS_ROLE_ID" jdbcType="VARCHAR" property="csysRoleId" />
+    <result column="CSYS_ROLE_NAME" jdbcType="VARCHAR" property="csysRoleName" />
+    <result column="CSYS_DEPARTMENT_ID" jdbcType="VARCHAR" property="csysDepartmentId" />
+    <result column="CSYS_DEPARTMENT_NAME" jdbcType="VARCHAR" property="csysDepartmentName" />
+    <result column="CSYS_MENU_AUTH_CREATE_TIME" jdbcType="TIMESTAMP" property="csysMenuAuthCreateTime" />
+    <result column="CSYS_MENU_AUTH_CREATE_USER" jdbcType="VARCHAR" property="csysMenuAuthCreateUser" />
+    <result column="CSYS_MENU_AUTH_MODIFY_TIME" jdbcType="TIMESTAMP" property="csysMenuAuthModifyTime" />
+    <result column="CSYS_MENU_AUTH_MODIFY_USER" jdbcType="VARCHAR" property="csysMenuAuthModifyUser" />
+    <result column="CSYS_MENU_AUTH_IS_DELETE" jdbcType="CHAR" property="csysMenuAuthIsDelete" />
+    <result column="CSYS_MENU_AUTH_TIME" jdbcType="TIMESTAMP" property="csysMenuAuthTime" />
+    <result column="CSYS_MENU_AUTH_DATE" jdbcType="TIMESTAMP" property="csysMenuAuthDate" />
+  </resultMap>
+  <sql id="Example_Where_Clause">
+    <!--
+      WARNING - @mbg.generated
+    -->
+    <where>
+      <foreach collection="oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause">
+    <!--
+      WARNING - @mbg.generated
+    -->
+    <where>
+      <foreach collection="example.oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List">
+    <!--
+      WARNING - @mbg.generated
+    -->
+    CSYS_MENU_AUTH_ID, CSYS_MENU_ID, CSYS_MENU_NAME, CSYS_ROLE_ID, CSYS_ROLE_NAME, CSYS_DEPARTMENT_ID, 
+    CSYS_DEPARTMENT_NAME, CSYS_MENU_AUTH_CREATE_TIME, CSYS_MENU_AUTH_CREATE_USER, CSYS_MENU_AUTH_MODIFY_TIME, 
+    CSYS_MENU_AUTH_MODIFY_USER, CSYS_MENU_AUTH_IS_DELETE, CSYS_MENU_AUTH_TIME, CSYS_MENU_AUTH_DATE
+  </sql>
+  <select id="selectByExample" parameterType="com.company.project.outer.model.CsysMenuAuthExample" resultMap="BaseResultMap">
+    <!--
+      WARNING - @mbg.generated
+    -->
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from CSYS_MENU_AUTH
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+  </select>
+  <delete id="deleteByExample" parameterType="com.company.project.outer.model.CsysMenuAuthExample">
+    <!--
+      WARNING - @mbg.generated
+    -->
+    delete from CSYS_MENU_AUTH
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <select id="countByExample" parameterType="com.company.project.outer.model.CsysMenuAuthExample" resultType="java.lang.Long">
+    <!--
+      WARNING - @mbg.generated
+    -->
+    select count(*) from CSYS_MENU_AUTH
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map">
+    <!--
+      WARNING - @mbg.generated
+    -->
+    update CSYS_MENU_AUTH
+    <set>
+      <if test="record.csysMenuAuthId != null">
+        CSYS_MENU_AUTH_ID = #{record.csysMenuAuthId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.csysMenuId != null">
+        CSYS_MENU_ID = #{record.csysMenuId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.csysMenuName != null">
+        CSYS_MENU_NAME = #{record.csysMenuName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.csysRoleId != null">
+        CSYS_ROLE_ID = #{record.csysRoleId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.csysRoleName != null">
+        CSYS_ROLE_NAME = #{record.csysRoleName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.csysDepartmentId != null">
+        CSYS_DEPARTMENT_ID = #{record.csysDepartmentId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.csysDepartmentName != null">
+        CSYS_DEPARTMENT_NAME = #{record.csysDepartmentName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.csysMenuAuthCreateTime != null">
+        CSYS_MENU_AUTH_CREATE_TIME = #{record.csysMenuAuthCreateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.csysMenuAuthCreateUser != null">
+        CSYS_MENU_AUTH_CREATE_USER = #{record.csysMenuAuthCreateUser,jdbcType=VARCHAR},
+      </if>
+      <if test="record.csysMenuAuthModifyTime != null">
+        CSYS_MENU_AUTH_MODIFY_TIME = #{record.csysMenuAuthModifyTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.csysMenuAuthModifyUser != null">
+        CSYS_MENU_AUTH_MODIFY_USER = #{record.csysMenuAuthModifyUser,jdbcType=VARCHAR},
+      </if>
+      <if test="record.csysMenuAuthIsDelete != null">
+        CSYS_MENU_AUTH_IS_DELETE = #{record.csysMenuAuthIsDelete,jdbcType=CHAR},
+      </if>
+      <if test="record.csysMenuAuthTime != null">
+        CSYS_MENU_AUTH_TIME = #{record.csysMenuAuthTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.csysMenuAuthDate != null">
+        CSYS_MENU_AUTH_DATE = #{record.csysMenuAuthDate,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map">
+    <!--
+      WARNING - @mbg.generated
+    -->
+    update CSYS_MENU_AUTH
+    set CSYS_MENU_AUTH_ID = #{record.csysMenuAuthId,jdbcType=VARCHAR},
+      CSYS_MENU_ID = #{record.csysMenuId,jdbcType=VARCHAR},
+      CSYS_MENU_NAME = #{record.csysMenuName,jdbcType=VARCHAR},
+      CSYS_ROLE_ID = #{record.csysRoleId,jdbcType=VARCHAR},
+      CSYS_ROLE_NAME = #{record.csysRoleName,jdbcType=VARCHAR},
+      CSYS_DEPARTMENT_ID = #{record.csysDepartmentId,jdbcType=VARCHAR},
+      CSYS_DEPARTMENT_NAME = #{record.csysDepartmentName,jdbcType=VARCHAR},
+      CSYS_MENU_AUTH_CREATE_TIME = #{record.csysMenuAuthCreateTime,jdbcType=TIMESTAMP},
+      CSYS_MENU_AUTH_CREATE_USER = #{record.csysMenuAuthCreateUser,jdbcType=VARCHAR},
+      CSYS_MENU_AUTH_MODIFY_TIME = #{record.csysMenuAuthModifyTime,jdbcType=TIMESTAMP},
+      CSYS_MENU_AUTH_MODIFY_USER = #{record.csysMenuAuthModifyUser,jdbcType=VARCHAR},
+      CSYS_MENU_AUTH_IS_DELETE = #{record.csysMenuAuthIsDelete,jdbcType=CHAR},
+      CSYS_MENU_AUTH_TIME = #{record.csysMenuAuthTime,jdbcType=TIMESTAMP},
+      CSYS_MENU_AUTH_DATE = #{record.csysMenuAuthDate,jdbcType=TIMESTAMP}
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+</mapper>

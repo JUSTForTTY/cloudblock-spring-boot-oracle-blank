@@ -1,0 +1,340 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.company.project.outer.dao.CsysNoticeMapper">
+  <resultMap id="BaseResultMap" type="com.company.project.outer.model.CsysNotice">
+    <!--
+      WARNING - @mbg.generated
+    -->
+    <id column="CSYS_NOTICE_ID" jdbcType="VARCHAR" property="csysNoticeId" />
+    <result column="CSYS_NOTICE_TEMPLATE_ID" jdbcType="VARCHAR" property="csysNoticeTemplateId" />
+    <result column="CSYS_NOTICE_TABLE_NAME" jdbcType="VARCHAR" property="csysNoticeTableName" />
+    <result column="CSYS_NOTICE_TABLE_VALUE" jdbcType="VARCHAR" property="csysNoticeTableValue" />
+    <result column="CSYS_NOTICE_USER_ID" jdbcType="VARCHAR" property="csysNoticeUserId" />
+    <result column="CSYS_NOTICE_USER_NAME" jdbcType="VARCHAR" property="csysNoticeUserName" />
+    <result column="CSYS_NOTICE_HANDLE_USER_ID" jdbcType="VARCHAR" property="csysNoticeHandleUserId" />
+    <result column="CSYS_NOTICE_HANDLE_USER_NAME" jdbcType="VARCHAR" property="csysNoticeHandleUserName" />
+    <result column="CSYS_NOTICE_HANDLE_MOBILE" jdbcType="VARCHAR" property="csysNoticeHandleMobile" />
+    <result column="CSYS_NOTICE_HANDLE_EMAIL" jdbcType="VARCHAR" property="csysNoticeHandleEmail" />
+    <result column="CSYS_NOTICE_TYPE" jdbcType="CHAR" property="csysNoticeType" />
+    <result column="CSYS_POINT_TRS_RECORD_ID" jdbcType="VARCHAR" property="csysPointTrsRecordId" />
+    <result column="CSYS_NOTICE_URL" jdbcType="VARCHAR" property="csysNoticeUrl" />
+    <result column="CSYS_NOTICE_LEVEL" jdbcType="CHAR" property="csysNoticeLevel" />
+    <result column="CSYS_NOTICE_OPERTATE_TYPE" jdbcType="CHAR" property="csysNoticeOpertateType" />
+    <result column="CSYS_NOTICE_MODE" jdbcType="CHAR" property="csysNoticeMode" />
+    <result column="CSYS_NOTICE_IS_SUCCESS" jdbcType="CHAR" property="csysNoticeIsSuccess" />
+    <result column="CSYS_NOTICE_FAIL_REASON" jdbcType="VARCHAR" property="csysNoticeFailReason" />
+    <result column="CSYS_NOTICE_DESC" jdbcType="VARCHAR" property="csysNoticeDesc" />
+    <result column="CSYS_NOTICE_CREATE_TIME" jdbcType="TIMESTAMP" property="csysNoticeCreateTime" />
+    <result column="CSYS_NOTICE_CREATE_USER" jdbcType="VARCHAR" property="csysNoticeCreateUser" />
+    <result column="CSYS_NOTICE_MODIFY_TIME" jdbcType="TIMESTAMP" property="csysNoticeModifyTime" />
+    <result column="CSYS_NOTICE_MODIFY_USER" jdbcType="VARCHAR" property="csysNoticeModifyUser" />
+    <result column="CSYS_NOTICE_IS_DELETE" jdbcType="CHAR" property="csysNoticeIsDelete" />
+    <result column="CSYS_NOTICE_TIME" jdbcType="TIMESTAMP" property="csysNoticeTime" />
+    <result column="CSYS_NOTICE_DATE" jdbcType="TIMESTAMP" property="csysNoticeDate" />
+  </resultMap>
+  <resultMap extends="BaseResultMap" id="ResultMapWithBLOBs" type="com.company.project.outer.model.CsysNotice">
+    <!--
+      WARNING - @mbg.generated
+    -->
+    <result column="CSYS_NOTICE_CONTENT" jdbcType="CLOB" property="csysNoticeContent" />
+  </resultMap>
+  <sql id="Example_Where_Clause">
+    <!--
+      WARNING - @mbg.generated
+    -->
+    <where>
+      <foreach collection="oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause">
+    <!--
+      WARNING - @mbg.generated
+    -->
+    <where>
+      <foreach collection="example.oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List">
+    <!--
+      WARNING - @mbg.generated
+    -->
+    CSYS_NOTICE_ID, CSYS_NOTICE_TEMPLATE_ID, CSYS_NOTICE_TABLE_NAME, CSYS_NOTICE_TABLE_VALUE, 
+    CSYS_NOTICE_USER_ID, CSYS_NOTICE_USER_NAME, CSYS_NOTICE_HANDLE_USER_ID, CSYS_NOTICE_HANDLE_USER_NAME, 
+    CSYS_NOTICE_HANDLE_MOBILE, CSYS_NOTICE_HANDLE_EMAIL, CSYS_NOTICE_TYPE, CSYS_POINT_TRS_RECORD_ID, 
+    CSYS_NOTICE_URL, CSYS_NOTICE_LEVEL, CSYS_NOTICE_OPERTATE_TYPE, CSYS_NOTICE_MODE, 
+    CSYS_NOTICE_IS_SUCCESS, CSYS_NOTICE_FAIL_REASON, CSYS_NOTICE_DESC, CSYS_NOTICE_CREATE_TIME, 
+    CSYS_NOTICE_CREATE_USER, CSYS_NOTICE_MODIFY_TIME, CSYS_NOTICE_MODIFY_USER, CSYS_NOTICE_IS_DELETE, 
+    CSYS_NOTICE_TIME, CSYS_NOTICE_DATE
+  </sql>
+  <sql id="Blob_Column_List">
+    <!--
+      WARNING - @mbg.generated
+    -->
+    CSYS_NOTICE_CONTENT
+  </sql>
+  <select id="selectByExampleWithBLOBs" parameterType="com.company.project.outer.model.CsysNoticeExample" resultMap="ResultMapWithBLOBs">
+    <!--
+      WARNING - @mbg.generated
+    -->
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from CSYS_NOTICE
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByExample" parameterType="com.company.project.outer.model.CsysNoticeExample" resultMap="BaseResultMap">
+    <!--
+      WARNING - @mbg.generated
+    -->
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from CSYS_NOTICE
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+  </select>
+  <delete id="deleteByExample" parameterType="com.company.project.outer.model.CsysNoticeExample">
+    <!--
+      WARNING - @mbg.generated
+    -->
+    delete from CSYS_NOTICE
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <select id="countByExample" parameterType="com.company.project.outer.model.CsysNoticeExample" resultType="java.lang.Long">
+    <!--
+      WARNING - @mbg.generated
+    -->
+    select count(*) from CSYS_NOTICE
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map">
+    <!--
+      WARNING - @mbg.generated
+    -->
+    update CSYS_NOTICE
+    <set>
+      <if test="record.csysNoticeId != null">
+        CSYS_NOTICE_ID = #{record.csysNoticeId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.csysNoticeTemplateId != null">
+        CSYS_NOTICE_TEMPLATE_ID = #{record.csysNoticeTemplateId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.csysNoticeTableName != null">
+        CSYS_NOTICE_TABLE_NAME = #{record.csysNoticeTableName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.csysNoticeTableValue != null">
+        CSYS_NOTICE_TABLE_VALUE = #{record.csysNoticeTableValue,jdbcType=VARCHAR},
+      </if>
+      <if test="record.csysNoticeUserId != null">
+        CSYS_NOTICE_USER_ID = #{record.csysNoticeUserId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.csysNoticeUserName != null">
+        CSYS_NOTICE_USER_NAME = #{record.csysNoticeUserName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.csysNoticeHandleUserId != null">
+        CSYS_NOTICE_HANDLE_USER_ID = #{record.csysNoticeHandleUserId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.csysNoticeHandleUserName != null">
+        CSYS_NOTICE_HANDLE_USER_NAME = #{record.csysNoticeHandleUserName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.csysNoticeHandleMobile != null">
+        CSYS_NOTICE_HANDLE_MOBILE = #{record.csysNoticeHandleMobile,jdbcType=VARCHAR},
+      </if>
+      <if test="record.csysNoticeHandleEmail != null">
+        CSYS_NOTICE_HANDLE_EMAIL = #{record.csysNoticeHandleEmail,jdbcType=VARCHAR},
+      </if>
+      <if test="record.csysNoticeType != null">
+        CSYS_NOTICE_TYPE = #{record.csysNoticeType,jdbcType=CHAR},
+      </if>
+      <if test="record.csysPointTrsRecordId != null">
+        CSYS_POINT_TRS_RECORD_ID = #{record.csysPointTrsRecordId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.csysNoticeUrl != null">
+        CSYS_NOTICE_URL = #{record.csysNoticeUrl,jdbcType=VARCHAR},
+      </if>
+      <if test="record.csysNoticeLevel != null">
+        CSYS_NOTICE_LEVEL = #{record.csysNoticeLevel,jdbcType=CHAR},
+      </if>
+      <if test="record.csysNoticeOpertateType != null">
+        CSYS_NOTICE_OPERTATE_TYPE = #{record.csysNoticeOpertateType,jdbcType=CHAR},
+      </if>
+      <if test="record.csysNoticeMode != null">
+        CSYS_NOTICE_MODE = #{record.csysNoticeMode,jdbcType=CHAR},
+      </if>
+      <if test="record.csysNoticeIsSuccess != null">
+        CSYS_NOTICE_IS_SUCCESS = #{record.csysNoticeIsSuccess,jdbcType=CHAR},
+      </if>
+      <if test="record.csysNoticeFailReason != null">
+        CSYS_NOTICE_FAIL_REASON = #{record.csysNoticeFailReason,jdbcType=VARCHAR},
+      </if>
+      <if test="record.csysNoticeDesc != null">
+        CSYS_NOTICE_DESC = #{record.csysNoticeDesc,jdbcType=VARCHAR},
+      </if>
+      <if test="record.csysNoticeCreateTime != null">
+        CSYS_NOTICE_CREATE_TIME = #{record.csysNoticeCreateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.csysNoticeCreateUser != null">
+        CSYS_NOTICE_CREATE_USER = #{record.csysNoticeCreateUser,jdbcType=VARCHAR},
+      </if>
+      <if test="record.csysNoticeModifyTime != null">
+        CSYS_NOTICE_MODIFY_TIME = #{record.csysNoticeModifyTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.csysNoticeModifyUser != null">
+        CSYS_NOTICE_MODIFY_USER = #{record.csysNoticeModifyUser,jdbcType=VARCHAR},
+      </if>
+      <if test="record.csysNoticeIsDelete != null">
+        CSYS_NOTICE_IS_DELETE = #{record.csysNoticeIsDelete,jdbcType=CHAR},
+      </if>
+      <if test="record.csysNoticeTime != null">
+        CSYS_NOTICE_TIME = #{record.csysNoticeTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.csysNoticeDate != null">
+        CSYS_NOTICE_DATE = #{record.csysNoticeDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.csysNoticeContent != null">
+        CSYS_NOTICE_CONTENT = #{record.csysNoticeContent,jdbcType=CLOB},
+      </if>
+    </set>
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExampleWithBLOBs" parameterType="map">
+    <!--
+      WARNING - @mbg.generated
+    -->
+    update CSYS_NOTICE
+    set CSYS_NOTICE_ID = #{record.csysNoticeId,jdbcType=VARCHAR},
+      CSYS_NOTICE_TEMPLATE_ID = #{record.csysNoticeTemplateId,jdbcType=VARCHAR},
+      CSYS_NOTICE_TABLE_NAME = #{record.csysNoticeTableName,jdbcType=VARCHAR},
+      CSYS_NOTICE_TABLE_VALUE = #{record.csysNoticeTableValue,jdbcType=VARCHAR},
+      CSYS_NOTICE_USER_ID = #{record.csysNoticeUserId,jdbcType=VARCHAR},
+      CSYS_NOTICE_USER_NAME = #{record.csysNoticeUserName,jdbcType=VARCHAR},
+      CSYS_NOTICE_HANDLE_USER_ID = #{record.csysNoticeHandleUserId,jdbcType=VARCHAR},
+      CSYS_NOTICE_HANDLE_USER_NAME = #{record.csysNoticeHandleUserName,jdbcType=VARCHAR},
+      CSYS_NOTICE_HANDLE_MOBILE = #{record.csysNoticeHandleMobile,jdbcType=VARCHAR},
+      CSYS_NOTICE_HANDLE_EMAIL = #{record.csysNoticeHandleEmail,jdbcType=VARCHAR},
+      CSYS_NOTICE_TYPE = #{record.csysNoticeType,jdbcType=CHAR},
+      CSYS_POINT_TRS_RECORD_ID = #{record.csysPointTrsRecordId,jdbcType=VARCHAR},
+      CSYS_NOTICE_URL = #{record.csysNoticeUrl,jdbcType=VARCHAR},
+      CSYS_NOTICE_LEVEL = #{record.csysNoticeLevel,jdbcType=CHAR},
+      CSYS_NOTICE_OPERTATE_TYPE = #{record.csysNoticeOpertateType,jdbcType=CHAR},
+      CSYS_NOTICE_MODE = #{record.csysNoticeMode,jdbcType=CHAR},
+      CSYS_NOTICE_IS_SUCCESS = #{record.csysNoticeIsSuccess,jdbcType=CHAR},
+      CSYS_NOTICE_FAIL_REASON = #{record.csysNoticeFailReason,jdbcType=VARCHAR},
+      CSYS_NOTICE_DESC = #{record.csysNoticeDesc,jdbcType=VARCHAR},
+      CSYS_NOTICE_CREATE_TIME = #{record.csysNoticeCreateTime,jdbcType=TIMESTAMP},
+      CSYS_NOTICE_CREATE_USER = #{record.csysNoticeCreateUser,jdbcType=VARCHAR},
+      CSYS_NOTICE_MODIFY_TIME = #{record.csysNoticeModifyTime,jdbcType=TIMESTAMP},
+      CSYS_NOTICE_MODIFY_USER = #{record.csysNoticeModifyUser,jdbcType=VARCHAR},
+      CSYS_NOTICE_IS_DELETE = #{record.csysNoticeIsDelete,jdbcType=CHAR},
+      CSYS_NOTICE_TIME = #{record.csysNoticeTime,jdbcType=TIMESTAMP},
+      CSYS_NOTICE_DATE = #{record.csysNoticeDate,jdbcType=TIMESTAMP},
+      CSYS_NOTICE_CONTENT = #{record.csysNoticeContent,jdbcType=CLOB}
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map">
+    <!--
+      WARNING - @mbg.generated
+    -->
+    update CSYS_NOTICE
+    set CSYS_NOTICE_ID = #{record.csysNoticeId,jdbcType=VARCHAR},
+      CSYS_NOTICE_TEMPLATE_ID = #{record.csysNoticeTemplateId,jdbcType=VARCHAR},
+      CSYS_NOTICE_TABLE_NAME = #{record.csysNoticeTableName,jdbcType=VARCHAR},
+      CSYS_NOTICE_TABLE_VALUE = #{record.csysNoticeTableValue,jdbcType=VARCHAR},
+      CSYS_NOTICE_USER_ID = #{record.csysNoticeUserId,jdbcType=VARCHAR},
+      CSYS_NOTICE_USER_NAME = #{record.csysNoticeUserName,jdbcType=VARCHAR},
+      CSYS_NOTICE_HANDLE_USER_ID = #{record.csysNoticeHandleUserId,jdbcType=VARCHAR},
+      CSYS_NOTICE_HANDLE_USER_NAME = #{record.csysNoticeHandleUserName,jdbcType=VARCHAR},
+      CSYS_NOTICE_HANDLE_MOBILE = #{record.csysNoticeHandleMobile,jdbcType=VARCHAR},
+      CSYS_NOTICE_HANDLE_EMAIL = #{record.csysNoticeHandleEmail,jdbcType=VARCHAR},
+      CSYS_NOTICE_TYPE = #{record.csysNoticeType,jdbcType=CHAR},
+      CSYS_POINT_TRS_RECORD_ID = #{record.csysPointTrsRecordId,jdbcType=VARCHAR},
+      CSYS_NOTICE_URL = #{record.csysNoticeUrl,jdbcType=VARCHAR},
+      CSYS_NOTICE_LEVEL = #{record.csysNoticeLevel,jdbcType=CHAR},
+      CSYS_NOTICE_OPERTATE_TYPE = #{record.csysNoticeOpertateType,jdbcType=CHAR},
+      CSYS_NOTICE_MODE = #{record.csysNoticeMode,jdbcType=CHAR},
+      CSYS_NOTICE_IS_SUCCESS = #{record.csysNoticeIsSuccess,jdbcType=CHAR},
+      CSYS_NOTICE_FAIL_REASON = #{record.csysNoticeFailReason,jdbcType=VARCHAR},
+      CSYS_NOTICE_DESC = #{record.csysNoticeDesc,jdbcType=VARCHAR},
+      CSYS_NOTICE_CREATE_TIME = #{record.csysNoticeCreateTime,jdbcType=TIMESTAMP},
+      CSYS_NOTICE_CREATE_USER = #{record.csysNoticeCreateUser,jdbcType=VARCHAR},
+      CSYS_NOTICE_MODIFY_TIME = #{record.csysNoticeModifyTime,jdbcType=TIMESTAMP},
+      CSYS_NOTICE_MODIFY_USER = #{record.csysNoticeModifyUser,jdbcType=VARCHAR},
+      CSYS_NOTICE_IS_DELETE = #{record.csysNoticeIsDelete,jdbcType=CHAR},
+      CSYS_NOTICE_TIME = #{record.csysNoticeTime,jdbcType=TIMESTAMP},
+      CSYS_NOTICE_DATE = #{record.csysNoticeDate,jdbcType=TIMESTAMP}
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+</mapper>

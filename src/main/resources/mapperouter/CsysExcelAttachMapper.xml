@@ -1,0 +1,208 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.company.project.outer.dao.CsysExcelAttachMapper">
+  <resultMap id="BaseResultMap" type="com.company.project.outer.model.CsysExcelAttach">
+    <!--
+      WARNING - @mbg.generated
+    -->
+    <id column="CSYS_EXCEL_ATTACH_ID" jdbcType="VARCHAR" property="csysExcelAttachId" />
+    <result column="CSYS_EXCEL_IMPORT_ID" jdbcType="VARCHAR" property="csysExcelImportId" />
+    <result column="CSYS_FIELD_INFO_ID" jdbcType="VARCHAR" property="csysFieldInfoId" />
+    <result column="CSYS_EXCEL_ATTACH_FIELD_ROW" jdbcType="DECIMAL" property="csysExcelAttachFieldRow" />
+    <result column="CSYS_EXCEL_ATTACH_FIELD_COLUMN" jdbcType="DECIMAL" property="csysExcelAttachFieldColumn" />
+    <result column="CSYS_EXCEL_ATTACH_FIELD_NAME" jdbcType="VARCHAR" property="csysExcelAttachFieldName" />
+    <result column="CSYS_EXCEL_ATTACH_FIELD_DESC" jdbcType="VARCHAR" property="csysExcelAttachFieldDesc" />
+    <result column="CSYS_EXCEL_ATTACH_CREATE_TIME" jdbcType="TIMESTAMP" property="csysExcelAttachCreateTime" />
+    <result column="CSYS_EXCEL_ATTACH_MODIFY_TIME" jdbcType="TIMESTAMP" property="csysExcelAttachModifyTime" />
+    <result column="CSYS_EXCEL_ATTACH_CREATE_USER" jdbcType="VARCHAR" property="csysExcelAttachCreateUser" />
+    <result column="CSYS_EXCEL_ATTACH_MODIFY_USER" jdbcType="VARCHAR" property="csysExcelAttachModifyUser" />
+    <result column="CSYS_EXCEL_ATTACH_IS_DELETE" jdbcType="CHAR" property="csysExcelAttachIsDelete" />
+    <result column="CSYS_EXCEL_ATTACH_TIME" jdbcType="TIMESTAMP" property="csysExcelAttachTime" />
+    <result column="CSYS_EXCEL_ATTACH_DATE" jdbcType="TIMESTAMP" property="csysExcelAttachDate" />
+  </resultMap>
+  <sql id="Example_Where_Clause">
+    <!--
+      WARNING - @mbg.generated
+    -->
+    <where>
+      <foreach collection="oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause">
+    <!--
+      WARNING - @mbg.generated
+    -->
+    <where>
+      <foreach collection="example.oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List">
+    <!--
+      WARNING - @mbg.generated
+    -->
+    CSYS_EXCEL_ATTACH_ID, CSYS_EXCEL_IMPORT_ID, CSYS_FIELD_INFO_ID, CSYS_EXCEL_ATTACH_FIELD_ROW, 
+    CSYS_EXCEL_ATTACH_FIELD_COLUMN, CSYS_EXCEL_ATTACH_FIELD_NAME, CSYS_EXCEL_ATTACH_FIELD_DESC, 
+    CSYS_EXCEL_ATTACH_CREATE_TIME, CSYS_EXCEL_ATTACH_MODIFY_TIME, CSYS_EXCEL_ATTACH_CREATE_USER, 
+    CSYS_EXCEL_ATTACH_MODIFY_USER, CSYS_EXCEL_ATTACH_IS_DELETE, CSYS_EXCEL_ATTACH_TIME, 
+    CSYS_EXCEL_ATTACH_DATE
+  </sql>
+  <select id="selectByExample" parameterType="com.company.project.outer.model.CsysExcelAttachExample" resultMap="BaseResultMap">
+    <!--
+      WARNING - @mbg.generated
+    -->
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from CSYS_EXCEL_ATTACH
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+  </select>
+  <delete id="deleteByExample" parameterType="com.company.project.outer.model.CsysExcelAttachExample">
+    <!--
+      WARNING - @mbg.generated
+    -->
+    delete from CSYS_EXCEL_ATTACH
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <select id="countByExample" parameterType="com.company.project.outer.model.CsysExcelAttachExample" resultType="java.lang.Long">
+    <!--
+      WARNING - @mbg.generated
+    -->
+    select count(*) from CSYS_EXCEL_ATTACH
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map">
+    <!--
+      WARNING - @mbg.generated
+    -->
+    update CSYS_EXCEL_ATTACH
+    <set>
+      <if test="record.csysExcelAttachId != null">
+        CSYS_EXCEL_ATTACH_ID = #{record.csysExcelAttachId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.csysExcelImportId != null">
+        CSYS_EXCEL_IMPORT_ID = #{record.csysExcelImportId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.csysFieldInfoId != null">
+        CSYS_FIELD_INFO_ID = #{record.csysFieldInfoId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.csysExcelAttachFieldRow != null">
+        CSYS_EXCEL_ATTACH_FIELD_ROW = #{record.csysExcelAttachFieldRow,jdbcType=DECIMAL},
+      </if>
+      <if test="record.csysExcelAttachFieldColumn != null">
+        CSYS_EXCEL_ATTACH_FIELD_COLUMN = #{record.csysExcelAttachFieldColumn,jdbcType=DECIMAL},
+      </if>
+      <if test="record.csysExcelAttachFieldName != null">
+        CSYS_EXCEL_ATTACH_FIELD_NAME = #{record.csysExcelAttachFieldName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.csysExcelAttachFieldDesc != null">
+        CSYS_EXCEL_ATTACH_FIELD_DESC = #{record.csysExcelAttachFieldDesc,jdbcType=VARCHAR},
+      </if>
+      <if test="record.csysExcelAttachCreateTime != null">
+        CSYS_EXCEL_ATTACH_CREATE_TIME = #{record.csysExcelAttachCreateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.csysExcelAttachModifyTime != null">
+        CSYS_EXCEL_ATTACH_MODIFY_TIME = #{record.csysExcelAttachModifyTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.csysExcelAttachCreateUser != null">
+        CSYS_EXCEL_ATTACH_CREATE_USER = #{record.csysExcelAttachCreateUser,jdbcType=VARCHAR},
+      </if>
+      <if test="record.csysExcelAttachModifyUser != null">
+        CSYS_EXCEL_ATTACH_MODIFY_USER = #{record.csysExcelAttachModifyUser,jdbcType=VARCHAR},
+      </if>
+      <if test="record.csysExcelAttachIsDelete != null">
+        CSYS_EXCEL_ATTACH_IS_DELETE = #{record.csysExcelAttachIsDelete,jdbcType=CHAR},
+      </if>
+      <if test="record.csysExcelAttachTime != null">
+        CSYS_EXCEL_ATTACH_TIME = #{record.csysExcelAttachTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.csysExcelAttachDate != null">
+        CSYS_EXCEL_ATTACH_DATE = #{record.csysExcelAttachDate,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map">
+    <!--
+      WARNING - @mbg.generated
+    -->
+    update CSYS_EXCEL_ATTACH
+    set CSYS_EXCEL_ATTACH_ID = #{record.csysExcelAttachId,jdbcType=VARCHAR},
+      CSYS_EXCEL_IMPORT_ID = #{record.csysExcelImportId,jdbcType=VARCHAR},
+      CSYS_FIELD_INFO_ID = #{record.csysFieldInfoId,jdbcType=VARCHAR},
+      CSYS_EXCEL_ATTACH_FIELD_ROW = #{record.csysExcelAttachFieldRow,jdbcType=DECIMAL},
+      CSYS_EXCEL_ATTACH_FIELD_COLUMN = #{record.csysExcelAttachFieldColumn,jdbcType=DECIMAL},
+      CSYS_EXCEL_ATTACH_FIELD_NAME = #{record.csysExcelAttachFieldName,jdbcType=VARCHAR},
+      CSYS_EXCEL_ATTACH_FIELD_DESC = #{record.csysExcelAttachFieldDesc,jdbcType=VARCHAR},
+      CSYS_EXCEL_ATTACH_CREATE_TIME = #{record.csysExcelAttachCreateTime,jdbcType=TIMESTAMP},
+      CSYS_EXCEL_ATTACH_MODIFY_TIME = #{record.csysExcelAttachModifyTime,jdbcType=TIMESTAMP},
+      CSYS_EXCEL_ATTACH_CREATE_USER = #{record.csysExcelAttachCreateUser,jdbcType=VARCHAR},
+      CSYS_EXCEL_ATTACH_MODIFY_USER = #{record.csysExcelAttachModifyUser,jdbcType=VARCHAR},
+      CSYS_EXCEL_ATTACH_IS_DELETE = #{record.csysExcelAttachIsDelete,jdbcType=CHAR},
+      CSYS_EXCEL_ATTACH_TIME = #{record.csysExcelAttachTime,jdbcType=TIMESTAMP},
+      CSYS_EXCEL_ATTACH_DATE = #{record.csysExcelAttachDate,jdbcType=TIMESTAMP}
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+</mapper>

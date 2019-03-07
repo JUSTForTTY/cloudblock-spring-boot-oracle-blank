@@ -1,0 +1,191 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.company.project.outer.dao.CsysUserRoleMapper">
+  <resultMap id="BaseResultMap" type="com.company.project.outer.model.CsysUserRole">
+    <!--
+      WARNING - @mbg.generated
+    -->
+    <id column="CSYS_USER_ROLE_ID" jdbcType="VARCHAR" property="csysUserRoleId" />
+    <result column="CSYS_USER_ID" jdbcType="VARCHAR" property="csysUserId" />
+    <result column="CSYS_ROLE_ID" jdbcType="VARCHAR" property="csysRoleId" />
+    <result column="CSYS_DEPARTMENT_ID" jdbcType="VARCHAR" property="csysDepartmentId" />
+    <result column="CSYS_USER_ROLE_CREATE_TIME" jdbcType="TIMESTAMP" property="csysUserRoleCreateTime" />
+    <result column="CSYS_USER_ROLE_MODIFY_TIME" jdbcType="TIMESTAMP" property="csysUserRoleModifyTime" />
+    <result column="CSYS_USER_ROLE_CREATE_USER" jdbcType="VARCHAR" property="csysUserRoleCreateUser" />
+    <result column="CSYS_USER_ROLE_MODIFY_USER" jdbcType="VARCHAR" property="csysUserRoleModifyUser" />
+    <result column="CSYS_USER_ROLE_IS_DELETE" jdbcType="CHAR" property="csysUserRoleIsDelete" />
+    <result column="CSYS_USER_ROLE_TIME" jdbcType="TIMESTAMP" property="csysUserRoleTime" />
+    <result column="CSYS_USER_ROLE_DATE" jdbcType="TIMESTAMP" property="csysUserRoleDate" />
+  </resultMap>
+  <sql id="Example_Where_Clause">
+    <!--
+      WARNING - @mbg.generated
+    -->
+    <where>
+      <foreach collection="oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause">
+    <!--
+      WARNING - @mbg.generated
+    -->
+    <where>
+      <foreach collection="example.oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List">
+    <!--
+      WARNING - @mbg.generated
+    -->
+    CSYS_USER_ROLE_ID, CSYS_USER_ID, CSYS_ROLE_ID, CSYS_DEPARTMENT_ID, CSYS_USER_ROLE_CREATE_TIME, 
+    CSYS_USER_ROLE_MODIFY_TIME, CSYS_USER_ROLE_CREATE_USER, CSYS_USER_ROLE_MODIFY_USER, 
+    CSYS_USER_ROLE_IS_DELETE, CSYS_USER_ROLE_TIME, CSYS_USER_ROLE_DATE
+  </sql>
+  <select id="selectByExample" parameterType="com.company.project.outer.model.CsysUserRoleExample" resultMap="BaseResultMap">
+    <!--
+      WARNING - @mbg.generated
+    -->
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from CSYS_USER_ROLE
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+  </select>
+  <delete id="deleteByExample" parameterType="com.company.project.outer.model.CsysUserRoleExample">
+    <!--
+      WARNING - @mbg.generated
+    -->
+    delete from CSYS_USER_ROLE
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <select id="countByExample" parameterType="com.company.project.outer.model.CsysUserRoleExample" resultType="java.lang.Long">
+    <!--
+      WARNING - @mbg.generated
+    -->
+    select count(*) from CSYS_USER_ROLE
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map">
+    <!--
+      WARNING - @mbg.generated
+    -->
+    update CSYS_USER_ROLE
+    <set>
+      <if test="record.csysUserRoleId != null">
+        CSYS_USER_ROLE_ID = #{record.csysUserRoleId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.csysUserId != null">
+        CSYS_USER_ID = #{record.csysUserId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.csysRoleId != null">
+        CSYS_ROLE_ID = #{record.csysRoleId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.csysDepartmentId != null">
+        CSYS_DEPARTMENT_ID = #{record.csysDepartmentId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.csysUserRoleCreateTime != null">
+        CSYS_USER_ROLE_CREATE_TIME = #{record.csysUserRoleCreateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.csysUserRoleModifyTime != null">
+        CSYS_USER_ROLE_MODIFY_TIME = #{record.csysUserRoleModifyTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.csysUserRoleCreateUser != null">
+        CSYS_USER_ROLE_CREATE_USER = #{record.csysUserRoleCreateUser,jdbcType=VARCHAR},
+      </if>
+      <if test="record.csysUserRoleModifyUser != null">
+        CSYS_USER_ROLE_MODIFY_USER = #{record.csysUserRoleModifyUser,jdbcType=VARCHAR},
+      </if>
+      <if test="record.csysUserRoleIsDelete != null">
+        CSYS_USER_ROLE_IS_DELETE = #{record.csysUserRoleIsDelete,jdbcType=CHAR},
+      </if>
+      <if test="record.csysUserRoleTime != null">
+        CSYS_USER_ROLE_TIME = #{record.csysUserRoleTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.csysUserRoleDate != null">
+        CSYS_USER_ROLE_DATE = #{record.csysUserRoleDate,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map">
+    <!--
+      WARNING - @mbg.generated
+    -->
+    update CSYS_USER_ROLE
+    set CSYS_USER_ROLE_ID = #{record.csysUserRoleId,jdbcType=VARCHAR},
+      CSYS_USER_ID = #{record.csysUserId,jdbcType=VARCHAR},
+      CSYS_ROLE_ID = #{record.csysRoleId,jdbcType=VARCHAR},
+      CSYS_DEPARTMENT_ID = #{record.csysDepartmentId,jdbcType=VARCHAR},
+      CSYS_USER_ROLE_CREATE_TIME = #{record.csysUserRoleCreateTime,jdbcType=TIMESTAMP},
+      CSYS_USER_ROLE_MODIFY_TIME = #{record.csysUserRoleModifyTime,jdbcType=TIMESTAMP},
+      CSYS_USER_ROLE_CREATE_USER = #{record.csysUserRoleCreateUser,jdbcType=VARCHAR},
+      CSYS_USER_ROLE_MODIFY_USER = #{record.csysUserRoleModifyUser,jdbcType=VARCHAR},
+      CSYS_USER_ROLE_IS_DELETE = #{record.csysUserRoleIsDelete,jdbcType=CHAR},
+      CSYS_USER_ROLE_TIME = #{record.csysUserRoleTime,jdbcType=TIMESTAMP},
+      CSYS_USER_ROLE_DATE = #{record.csysUserRoleDate,jdbcType=TIMESTAMP}
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+</mapper>

@@ -1,0 +1,212 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.company.project.outer.dao.CsysTrsLogPamMapper">
+  <resultMap id="BaseResultMap" type="com.company.project.outer.model.CsysTrsLogPam">
+    <!--
+      WARNING - @mbg.generated
+    -->
+    <id column="CSYS_TRS_LOG_PAM_ID" jdbcType="VARCHAR" property="csysTrsLogPamId" />
+    <result column="CSYS_TRS_LOG_ID" jdbcType="VARCHAR" property="csysTrsLogId" />
+    <result column="CSYS_TRS_LOG_PAM_NAME" jdbcType="VARCHAR" property="csysTrsLogPamName" />
+    <result column="CY_SYS_BLOCK_ID" jdbcType="VARCHAR" property="cySysBlockId" />
+    <result column="CY_SYS_BLOCK_RUNTIME_ID" jdbcType="VARCHAR" property="cySysBlockRuntimeId" />
+    <result column="CSYS_TRS_LOG_PAM_TABLE" jdbcType="VARCHAR" property="csysTrsLogPamTable" />
+    <result column="CSYS_TRS_LOG_PAM_VALUE" jdbcType="VARCHAR" property="csysTrsLogPamValue" />
+    <result column="CSYS_TRS_LOG_PAM_CREATE_TIME" jdbcType="TIMESTAMP" property="csysTrsLogPamCreateTime" />
+    <result column="CSYS_TRS_LOG_PAM_MODIFY_TIME" jdbcType="TIMESTAMP" property="csysTrsLogPamModifyTime" />
+    <result column="CSYS_TRS_LOG_PAM_CREATE_USER" jdbcType="VARCHAR" property="csysTrsLogPamCreateUser" />
+    <result column="CSYS_TRS_LOG_PAM_MODIFY_USER" jdbcType="VARCHAR" property="csysTrsLogPamModifyUser" />
+    <result column="CSYS_TRS_LOG_PAM_IS_DELETE" jdbcType="CHAR" property="csysTrsLogPamIsDelete" />
+    <result column="CSYS_TRS_LOG_PAM_DATE" jdbcType="TIMESTAMP" property="csysTrsLogPamDate" />
+    <result column="CSYS_TRS_LOG_PAM_TIME" jdbcType="TIMESTAMP" property="csysTrsLogPamTime" />
+    <result column="CSYS_TRS_LOG_PAM_COLUMN" jdbcType="VARCHAR" property="csysTrsLogPamColumn" />
+  </resultMap>
+  <sql id="Example_Where_Clause">
+    <!--
+      WARNING - @mbg.generated
+    -->
+    <where>
+      <foreach collection="oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause">
+    <!--
+      WARNING - @mbg.generated
+    -->
+    <where>
+      <foreach collection="example.oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List">
+    <!--
+      WARNING - @mbg.generated
+    -->
+    CSYS_TRS_LOG_PAM_ID, CSYS_TRS_LOG_ID, CSYS_TRS_LOG_PAM_NAME, CY_SYS_BLOCK_ID, CY_SYS_BLOCK_RUNTIME_ID, 
+    CSYS_TRS_LOG_PAM_TABLE, CSYS_TRS_LOG_PAM_VALUE, CSYS_TRS_LOG_PAM_CREATE_TIME, CSYS_TRS_LOG_PAM_MODIFY_TIME, 
+    CSYS_TRS_LOG_PAM_CREATE_USER, CSYS_TRS_LOG_PAM_MODIFY_USER, CSYS_TRS_LOG_PAM_IS_DELETE, 
+    CSYS_TRS_LOG_PAM_DATE, CSYS_TRS_LOG_PAM_TIME, CSYS_TRS_LOG_PAM_COLUMN
+  </sql>
+  <select id="selectByExample" parameterType="com.company.project.outer.model.CsysTrsLogPamExample" resultMap="BaseResultMap">
+    <!--
+      WARNING - @mbg.generated
+    -->
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from CSYS_TRS_LOG_PAM
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+  </select>
+  <delete id="deleteByExample" parameterType="com.company.project.outer.model.CsysTrsLogPamExample">
+    <!--
+      WARNING - @mbg.generated
+    -->
+    delete from CSYS_TRS_LOG_PAM
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <select id="countByExample" parameterType="com.company.project.outer.model.CsysTrsLogPamExample" resultType="java.lang.Long">
+    <!--
+      WARNING - @mbg.generated
+    -->
+    select count(*) from CSYS_TRS_LOG_PAM
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map">
+    <!--
+      WARNING - @mbg.generated
+    -->
+    update CSYS_TRS_LOG_PAM
+    <set>
+      <if test="record.csysTrsLogPamId != null">
+        CSYS_TRS_LOG_PAM_ID = #{record.csysTrsLogPamId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.csysTrsLogId != null">
+        CSYS_TRS_LOG_ID = #{record.csysTrsLogId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.csysTrsLogPamName != null">
+        CSYS_TRS_LOG_PAM_NAME = #{record.csysTrsLogPamName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.cySysBlockId != null">
+        CY_SYS_BLOCK_ID = #{record.cySysBlockId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.cySysBlockRuntimeId != null">
+        CY_SYS_BLOCK_RUNTIME_ID = #{record.cySysBlockRuntimeId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.csysTrsLogPamTable != null">
+        CSYS_TRS_LOG_PAM_TABLE = #{record.csysTrsLogPamTable,jdbcType=VARCHAR},
+      </if>
+      <if test="record.csysTrsLogPamValue != null">
+        CSYS_TRS_LOG_PAM_VALUE = #{record.csysTrsLogPamValue,jdbcType=VARCHAR},
+      </if>
+      <if test="record.csysTrsLogPamCreateTime != null">
+        CSYS_TRS_LOG_PAM_CREATE_TIME = #{record.csysTrsLogPamCreateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.csysTrsLogPamModifyTime != null">
+        CSYS_TRS_LOG_PAM_MODIFY_TIME = #{record.csysTrsLogPamModifyTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.csysTrsLogPamCreateUser != null">
+        CSYS_TRS_LOG_PAM_CREATE_USER = #{record.csysTrsLogPamCreateUser,jdbcType=VARCHAR},
+      </if>
+      <if test="record.csysTrsLogPamModifyUser != null">
+        CSYS_TRS_LOG_PAM_MODIFY_USER = #{record.csysTrsLogPamModifyUser,jdbcType=VARCHAR},
+      </if>
+      <if test="record.csysTrsLogPamIsDelete != null">
+        CSYS_TRS_LOG_PAM_IS_DELETE = #{record.csysTrsLogPamIsDelete,jdbcType=CHAR},
+      </if>
+      <if test="record.csysTrsLogPamDate != null">
+        CSYS_TRS_LOG_PAM_DATE = #{record.csysTrsLogPamDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.csysTrsLogPamTime != null">
+        CSYS_TRS_LOG_PAM_TIME = #{record.csysTrsLogPamTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.csysTrsLogPamColumn != null">
+        CSYS_TRS_LOG_PAM_COLUMN = #{record.csysTrsLogPamColumn,jdbcType=VARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map">
+    <!--
+      WARNING - @mbg.generated
+    -->
+    update CSYS_TRS_LOG_PAM
+    set CSYS_TRS_LOG_PAM_ID = #{record.csysTrsLogPamId,jdbcType=VARCHAR},
+      CSYS_TRS_LOG_ID = #{record.csysTrsLogId,jdbcType=VARCHAR},
+      CSYS_TRS_LOG_PAM_NAME = #{record.csysTrsLogPamName,jdbcType=VARCHAR},
+      CY_SYS_BLOCK_ID = #{record.cySysBlockId,jdbcType=VARCHAR},
+      CY_SYS_BLOCK_RUNTIME_ID = #{record.cySysBlockRuntimeId,jdbcType=VARCHAR},
+      CSYS_TRS_LOG_PAM_TABLE = #{record.csysTrsLogPamTable,jdbcType=VARCHAR},
+      CSYS_TRS_LOG_PAM_VALUE = #{record.csysTrsLogPamValue,jdbcType=VARCHAR},
+      CSYS_TRS_LOG_PAM_CREATE_TIME = #{record.csysTrsLogPamCreateTime,jdbcType=TIMESTAMP},
+      CSYS_TRS_LOG_PAM_MODIFY_TIME = #{record.csysTrsLogPamModifyTime,jdbcType=TIMESTAMP},
+      CSYS_TRS_LOG_PAM_CREATE_USER = #{record.csysTrsLogPamCreateUser,jdbcType=VARCHAR},
+      CSYS_TRS_LOG_PAM_MODIFY_USER = #{record.csysTrsLogPamModifyUser,jdbcType=VARCHAR},
+      CSYS_TRS_LOG_PAM_IS_DELETE = #{record.csysTrsLogPamIsDelete,jdbcType=CHAR},
+      CSYS_TRS_LOG_PAM_DATE = #{record.csysTrsLogPamDate,jdbcType=TIMESTAMP},
+      CSYS_TRS_LOG_PAM_TIME = #{record.csysTrsLogPamTime,jdbcType=TIMESTAMP},
+      CSYS_TRS_LOG_PAM_COLUMN = #{record.csysTrsLogPamColumn,jdbcType=VARCHAR}
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+</mapper>

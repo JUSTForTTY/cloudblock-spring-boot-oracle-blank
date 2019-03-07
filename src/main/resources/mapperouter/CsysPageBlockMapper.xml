@@ -1,0 +1,346 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.company.project.outer.dao.CsysPageBlockMapper">
+  <resultMap id="BaseResultMap" type="com.company.project.outer.model.CsysPageBlock">
+    <!--
+      WARNING - @mbg.generated
+    -->
+    <id column="CSYS_PAGE_BLOCK_ID" jdbcType="VARCHAR" property="csysPageBlockId" />
+    <result column="CSYS_PAGE_ID" jdbcType="VARCHAR" property="csysPageId" />
+    <result column="CSYS_PAGE_NAME" jdbcType="VARCHAR" property="csysPageName" />
+    <result column="CSYS_PAGE_DESC" jdbcType="VARCHAR" property="csysPageDesc" />
+    <result column="CSYS_BLOCK_RUNTIME_ID" jdbcType="VARCHAR" property="csysBlockRuntimeId" />
+    <result column="CSYS_WORKFLOW_ID" jdbcType="VARCHAR" property="csysWorkflowId" />
+    <result column="CSYS_WORKFLOW_NAME" jdbcType="VARCHAR" property="csysWorkflowName" />
+    <result column="CSYS_WORKFLOW_TYPE" jdbcType="CHAR" property="csysWorkflowType" />
+    <result column="CY_SYS_BLOCK_ID" jdbcType="VARCHAR" property="cySysBlockId" />
+    <result column="CY_SYS_BLOCK_NAME" jdbcType="VARCHAR" property="cySysBlockName" />
+    <result column="CY_SYS_BLOCK_CODE" jdbcType="VARCHAR" property="cySysBlockCode" />
+    <result column="CY_SYS_BLOCK_PARENT_ID" jdbcType="VARCHAR" property="cySysBlockParentId" />
+    <result column="CY_SYS_BLOCK_LEVEL" jdbcType="VARCHAR" property="cySysBlockLevel" />
+    <result column="CY_SYS_BLOCK_CATEGORY_ID" jdbcType="VARCHAR" property="cySysBlockCategoryId" />
+    <result column="CY_SYS_BLOCK_CATEGORY_NAME" jdbcType="VARCHAR" property="cySysBlockCategoryName" />
+    <result column="CSYS_PAGE_BLOCK_IS_AUTHORITY" jdbcType="CHAR" property="csysPageBlockIsAuthority" />
+    <result column="CSYS_PAGE_BLOCK_AUTHORITY" jdbcType="VARCHAR" property="csysPageBlockAuthority" />
+    <result column="CSYS_PAGE_BLOCK_IS_MAIN" jdbcType="CHAR" property="csysPageBlockIsMain" />
+    <result column="CSYS_PAGE_BLOCK_SORT" jdbcType="DECIMAL" property="csysPageBlockSort" />
+    <result column="CSYS_PAGE_BLOCK_API" jdbcType="VARCHAR" property="csysPageBlockApi" />
+    <result column="CSYS_PAGE_BLOCK_CREATE_USER" jdbcType="VARCHAR" property="csysPageBlockCreateUser" />
+    <result column="CSYS_PAGE_BLOCK_MODIFY_USER" jdbcType="VARCHAR" property="csysPageBlockModifyUser" />
+    <result column="CSYS_PAGE_BLOCK_CREATE_TIME" jdbcType="TIMESTAMP" property="csysPageBlockCreateTime" />
+    <result column="CSYS_PAGE_BLOCK_MODIFY_TIME" jdbcType="TIMESTAMP" property="csysPageBlockModifyTime" />
+    <result column="CSYS_PAGE_BLOCK_IS_DELETE" jdbcType="CHAR" property="csysPageBlockIsDelete" />
+    <result column="CSYS_PAGE_BLOCK_DATE" jdbcType="TIMESTAMP" property="csysPageBlockDate" />
+    <result column="CSYS_PAGE_BLOCK_TIME" jdbcType="TIMESTAMP" property="csysPageBlockTime" />
+  </resultMap>
+  <resultMap extends="BaseResultMap" id="ResultMapWithBLOBs" type="com.company.project.outer.model.CsysPageBlock">
+    <!--
+      WARNING - @mbg.generated
+    -->
+    <result column="CSYS_PAGE_BLOCK_HTML_CODE" jdbcType="CLOB" property="csysPageBlockHtmlCode" />
+  </resultMap>
+  <sql id="Example_Where_Clause">
+    <!--
+      WARNING - @mbg.generated
+    -->
+    <where>
+      <foreach collection="oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause">
+    <!--
+      WARNING - @mbg.generated
+    -->
+    <where>
+      <foreach collection="example.oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List">
+    <!--
+      WARNING - @mbg.generated
+    -->
+    CSYS_PAGE_BLOCK_ID, CSYS_PAGE_ID, CSYS_PAGE_NAME, CSYS_PAGE_DESC, CSYS_BLOCK_RUNTIME_ID, 
+    CSYS_WORKFLOW_ID, CSYS_WORKFLOW_NAME, CSYS_WORKFLOW_TYPE, CY_SYS_BLOCK_ID, CY_SYS_BLOCK_NAME, 
+    CY_SYS_BLOCK_CODE, CY_SYS_BLOCK_PARENT_ID, CY_SYS_BLOCK_LEVEL, CY_SYS_BLOCK_CATEGORY_ID, 
+    CY_SYS_BLOCK_CATEGORY_NAME, CSYS_PAGE_BLOCK_IS_AUTHORITY, CSYS_PAGE_BLOCK_AUTHORITY, 
+    CSYS_PAGE_BLOCK_IS_MAIN, CSYS_PAGE_BLOCK_SORT, CSYS_PAGE_BLOCK_API, CSYS_PAGE_BLOCK_CREATE_USER, 
+    CSYS_PAGE_BLOCK_MODIFY_USER, CSYS_PAGE_BLOCK_CREATE_TIME, CSYS_PAGE_BLOCK_MODIFY_TIME, 
+    CSYS_PAGE_BLOCK_IS_DELETE, CSYS_PAGE_BLOCK_DATE, CSYS_PAGE_BLOCK_TIME
+  </sql>
+  <sql id="Blob_Column_List">
+    <!--
+      WARNING - @mbg.generated
+    -->
+    CSYS_PAGE_BLOCK_HTML_CODE
+  </sql>
+  <select id="selectByExampleWithBLOBs" parameterType="com.company.project.outer.model.CsysPageBlockExample" resultMap="ResultMapWithBLOBs">
+    <!--
+      WARNING - @mbg.generated
+    -->
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from CSYS_PAGE_BLOCK
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByExample" parameterType="com.company.project.outer.model.CsysPageBlockExample" resultMap="BaseResultMap">
+    <!--
+      WARNING - @mbg.generated
+    -->
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from CSYS_PAGE_BLOCK
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+  </select>
+  <delete id="deleteByExample" parameterType="com.company.project.outer.model.CsysPageBlockExample">
+    <!--
+      WARNING - @mbg.generated
+    -->
+    delete from CSYS_PAGE_BLOCK
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <select id="countByExample" parameterType="com.company.project.outer.model.CsysPageBlockExample" resultType="java.lang.Long">
+    <!--
+      WARNING - @mbg.generated
+    -->
+    select count(*) from CSYS_PAGE_BLOCK
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map">
+    <!--
+      WARNING - @mbg.generated
+    -->
+    update CSYS_PAGE_BLOCK
+    <set>
+      <if test="record.csysPageBlockId != null">
+        CSYS_PAGE_BLOCK_ID = #{record.csysPageBlockId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.csysPageId != null">
+        CSYS_PAGE_ID = #{record.csysPageId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.csysPageName != null">
+        CSYS_PAGE_NAME = #{record.csysPageName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.csysPageDesc != null">
+        CSYS_PAGE_DESC = #{record.csysPageDesc,jdbcType=VARCHAR},
+      </if>
+      <if test="record.csysBlockRuntimeId != null">
+        CSYS_BLOCK_RUNTIME_ID = #{record.csysBlockRuntimeId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.csysWorkflowId != null">
+        CSYS_WORKFLOW_ID = #{record.csysWorkflowId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.csysWorkflowName != null">
+        CSYS_WORKFLOW_NAME = #{record.csysWorkflowName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.csysWorkflowType != null">
+        CSYS_WORKFLOW_TYPE = #{record.csysWorkflowType,jdbcType=CHAR},
+      </if>
+      <if test="record.cySysBlockId != null">
+        CY_SYS_BLOCK_ID = #{record.cySysBlockId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.cySysBlockName != null">
+        CY_SYS_BLOCK_NAME = #{record.cySysBlockName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.cySysBlockCode != null">
+        CY_SYS_BLOCK_CODE = #{record.cySysBlockCode,jdbcType=VARCHAR},
+      </if>
+      <if test="record.cySysBlockParentId != null">
+        CY_SYS_BLOCK_PARENT_ID = #{record.cySysBlockParentId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.cySysBlockLevel != null">
+        CY_SYS_BLOCK_LEVEL = #{record.cySysBlockLevel,jdbcType=VARCHAR},
+      </if>
+      <if test="record.cySysBlockCategoryId != null">
+        CY_SYS_BLOCK_CATEGORY_ID = #{record.cySysBlockCategoryId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.cySysBlockCategoryName != null">
+        CY_SYS_BLOCK_CATEGORY_NAME = #{record.cySysBlockCategoryName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.csysPageBlockIsAuthority != null">
+        CSYS_PAGE_BLOCK_IS_AUTHORITY = #{record.csysPageBlockIsAuthority,jdbcType=CHAR},
+      </if>
+      <if test="record.csysPageBlockAuthority != null">
+        CSYS_PAGE_BLOCK_AUTHORITY = #{record.csysPageBlockAuthority,jdbcType=VARCHAR},
+      </if>
+      <if test="record.csysPageBlockIsMain != null">
+        CSYS_PAGE_BLOCK_IS_MAIN = #{record.csysPageBlockIsMain,jdbcType=CHAR},
+      </if>
+      <if test="record.csysPageBlockSort != null">
+        CSYS_PAGE_BLOCK_SORT = #{record.csysPageBlockSort,jdbcType=DECIMAL},
+      </if>
+      <if test="record.csysPageBlockApi != null">
+        CSYS_PAGE_BLOCK_API = #{record.csysPageBlockApi,jdbcType=VARCHAR},
+      </if>
+      <if test="record.csysPageBlockCreateUser != null">
+        CSYS_PAGE_BLOCK_CREATE_USER = #{record.csysPageBlockCreateUser,jdbcType=VARCHAR},
+      </if>
+      <if test="record.csysPageBlockModifyUser != null">
+        CSYS_PAGE_BLOCK_MODIFY_USER = #{record.csysPageBlockModifyUser,jdbcType=VARCHAR},
+      </if>
+      <if test="record.csysPageBlockCreateTime != null">
+        CSYS_PAGE_BLOCK_CREATE_TIME = #{record.csysPageBlockCreateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.csysPageBlockModifyTime != null">
+        CSYS_PAGE_BLOCK_MODIFY_TIME = #{record.csysPageBlockModifyTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.csysPageBlockIsDelete != null">
+        CSYS_PAGE_BLOCK_IS_DELETE = #{record.csysPageBlockIsDelete,jdbcType=CHAR},
+      </if>
+      <if test="record.csysPageBlockDate != null">
+        CSYS_PAGE_BLOCK_DATE = #{record.csysPageBlockDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.csysPageBlockTime != null">
+        CSYS_PAGE_BLOCK_TIME = #{record.csysPageBlockTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.csysPageBlockHtmlCode != null">
+        CSYS_PAGE_BLOCK_HTML_CODE = #{record.csysPageBlockHtmlCode,jdbcType=CLOB},
+      </if>
+    </set>
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExampleWithBLOBs" parameterType="map">
+    <!--
+      WARNING - @mbg.generated
+    -->
+    update CSYS_PAGE_BLOCK
+    set CSYS_PAGE_BLOCK_ID = #{record.csysPageBlockId,jdbcType=VARCHAR},
+      CSYS_PAGE_ID = #{record.csysPageId,jdbcType=VARCHAR},
+      CSYS_PAGE_NAME = #{record.csysPageName,jdbcType=VARCHAR},
+      CSYS_PAGE_DESC = #{record.csysPageDesc,jdbcType=VARCHAR},
+      CSYS_BLOCK_RUNTIME_ID = #{record.csysBlockRuntimeId,jdbcType=VARCHAR},
+      CSYS_WORKFLOW_ID = #{record.csysWorkflowId,jdbcType=VARCHAR},
+      CSYS_WORKFLOW_NAME = #{record.csysWorkflowName,jdbcType=VARCHAR},
+      CSYS_WORKFLOW_TYPE = #{record.csysWorkflowType,jdbcType=CHAR},
+      CY_SYS_BLOCK_ID = #{record.cySysBlockId,jdbcType=VARCHAR},
+      CY_SYS_BLOCK_NAME = #{record.cySysBlockName,jdbcType=VARCHAR},
+      CY_SYS_BLOCK_CODE = #{record.cySysBlockCode,jdbcType=VARCHAR},
+      CY_SYS_BLOCK_PARENT_ID = #{record.cySysBlockParentId,jdbcType=VARCHAR},
+      CY_SYS_BLOCK_LEVEL = #{record.cySysBlockLevel,jdbcType=VARCHAR},
+      CY_SYS_BLOCK_CATEGORY_ID = #{record.cySysBlockCategoryId,jdbcType=VARCHAR},
+      CY_SYS_BLOCK_CATEGORY_NAME = #{record.cySysBlockCategoryName,jdbcType=VARCHAR},
+      CSYS_PAGE_BLOCK_IS_AUTHORITY = #{record.csysPageBlockIsAuthority,jdbcType=CHAR},
+      CSYS_PAGE_BLOCK_AUTHORITY = #{record.csysPageBlockAuthority,jdbcType=VARCHAR},
+      CSYS_PAGE_BLOCK_IS_MAIN = #{record.csysPageBlockIsMain,jdbcType=CHAR},
+      CSYS_PAGE_BLOCK_SORT = #{record.csysPageBlockSort,jdbcType=DECIMAL},
+      CSYS_PAGE_BLOCK_API = #{record.csysPageBlockApi,jdbcType=VARCHAR},
+      CSYS_PAGE_BLOCK_CREATE_USER = #{record.csysPageBlockCreateUser,jdbcType=VARCHAR},
+      CSYS_PAGE_BLOCK_MODIFY_USER = #{record.csysPageBlockModifyUser,jdbcType=VARCHAR},
+      CSYS_PAGE_BLOCK_CREATE_TIME = #{record.csysPageBlockCreateTime,jdbcType=TIMESTAMP},
+      CSYS_PAGE_BLOCK_MODIFY_TIME = #{record.csysPageBlockModifyTime,jdbcType=TIMESTAMP},
+      CSYS_PAGE_BLOCK_IS_DELETE = #{record.csysPageBlockIsDelete,jdbcType=CHAR},
+      CSYS_PAGE_BLOCK_DATE = #{record.csysPageBlockDate,jdbcType=TIMESTAMP},
+      CSYS_PAGE_BLOCK_TIME = #{record.csysPageBlockTime,jdbcType=TIMESTAMP},
+      CSYS_PAGE_BLOCK_HTML_CODE = #{record.csysPageBlockHtmlCode,jdbcType=CLOB}
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map">
+    <!--
+      WARNING - @mbg.generated
+    -->
+    update CSYS_PAGE_BLOCK
+    set CSYS_PAGE_BLOCK_ID = #{record.csysPageBlockId,jdbcType=VARCHAR},
+      CSYS_PAGE_ID = #{record.csysPageId,jdbcType=VARCHAR},
+      CSYS_PAGE_NAME = #{record.csysPageName,jdbcType=VARCHAR},
+      CSYS_PAGE_DESC = #{record.csysPageDesc,jdbcType=VARCHAR},
+      CSYS_BLOCK_RUNTIME_ID = #{record.csysBlockRuntimeId,jdbcType=VARCHAR},
+      CSYS_WORKFLOW_ID = #{record.csysWorkflowId,jdbcType=VARCHAR},
+      CSYS_WORKFLOW_NAME = #{record.csysWorkflowName,jdbcType=VARCHAR},
+      CSYS_WORKFLOW_TYPE = #{record.csysWorkflowType,jdbcType=CHAR},
+      CY_SYS_BLOCK_ID = #{record.cySysBlockId,jdbcType=VARCHAR},
+      CY_SYS_BLOCK_NAME = #{record.cySysBlockName,jdbcType=VARCHAR},
+      CY_SYS_BLOCK_CODE = #{record.cySysBlockCode,jdbcType=VARCHAR},
+      CY_SYS_BLOCK_PARENT_ID = #{record.cySysBlockParentId,jdbcType=VARCHAR},
+      CY_SYS_BLOCK_LEVEL = #{record.cySysBlockLevel,jdbcType=VARCHAR},
+      CY_SYS_BLOCK_CATEGORY_ID = #{record.cySysBlockCategoryId,jdbcType=VARCHAR},
+      CY_SYS_BLOCK_CATEGORY_NAME = #{record.cySysBlockCategoryName,jdbcType=VARCHAR},
+      CSYS_PAGE_BLOCK_IS_AUTHORITY = #{record.csysPageBlockIsAuthority,jdbcType=CHAR},
+      CSYS_PAGE_BLOCK_AUTHORITY = #{record.csysPageBlockAuthority,jdbcType=VARCHAR},
+      CSYS_PAGE_BLOCK_IS_MAIN = #{record.csysPageBlockIsMain,jdbcType=CHAR},
+      CSYS_PAGE_BLOCK_SORT = #{record.csysPageBlockSort,jdbcType=DECIMAL},
+      CSYS_PAGE_BLOCK_API = #{record.csysPageBlockApi,jdbcType=VARCHAR},
+      CSYS_PAGE_BLOCK_CREATE_USER = #{record.csysPageBlockCreateUser,jdbcType=VARCHAR},
+      CSYS_PAGE_BLOCK_MODIFY_USER = #{record.csysPageBlockModifyUser,jdbcType=VARCHAR},
+      CSYS_PAGE_BLOCK_CREATE_TIME = #{record.csysPageBlockCreateTime,jdbcType=TIMESTAMP},
+      CSYS_PAGE_BLOCK_MODIFY_TIME = #{record.csysPageBlockModifyTime,jdbcType=TIMESTAMP},
+      CSYS_PAGE_BLOCK_IS_DELETE = #{record.csysPageBlockIsDelete,jdbcType=CHAR},
+      CSYS_PAGE_BLOCK_DATE = #{record.csysPageBlockDate,jdbcType=TIMESTAMP},
+      CSYS_PAGE_BLOCK_TIME = #{record.csysPageBlockTime,jdbcType=TIMESTAMP}
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+</mapper>

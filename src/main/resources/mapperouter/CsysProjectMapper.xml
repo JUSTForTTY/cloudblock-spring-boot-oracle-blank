@@ -1,0 +1,244 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.company.project.outer.dao.CsysProjectMapper">
+  <resultMap id="BaseResultMap" type="com.company.project.outer.model.CsysProject">
+    <!--
+      WARNING - @mbg.generated
+    -->
+    <id column="CSYS_PROJECT_ID" jdbcType="VARCHAR" property="csysProjectId" />
+    <result column="CSYS_PROJECT_NAME" jdbcType="VARCHAR" property="csysProjectName" />
+    <result column="CSYS_PROJECT_COMPANY" jdbcType="VARCHAR" property="csysProjectCompany" />
+    <result column="CSYS_PROJECT_LOGIN_LOGO" jdbcType="VARCHAR" property="csysProjectLoginLogo" />
+    <result column="CSYS_PROJECT_BG" jdbcType="VARCHAR" property="csysProjectBg" />
+    <result column="CSYS_PROJECT_LOADING_LOGO" jdbcType="VARCHAR" property="csysProjectLoadingLogo" />
+    <result column="CSYS_PROJECT_LOGO_BG" jdbcType="VARCHAR" property="csysProjectLogoBg" />
+    <result column="CSYS_PROJECT_TOP_BG" jdbcType="VARCHAR" property="csysProjectTopBg" />
+    <result column="CSYS_PROJECT_NAVIGATION_BG" jdbcType="VARCHAR" property="csysProjectNavigationBg" />
+    <result column="CSYS_PROJECT_SUSP_COLOR" jdbcType="VARCHAR" property="csysProjectSuspColor" />
+    <result column="CSYS_PROJECT_MAIN_MENU_BG" jdbcType="VARCHAR" property="csysProjectMainMenuBg" />
+    <result column="CSYS_PROJECT_SUB_MENU_BG" jdbcType="VARCHAR" property="csysProjectSubMenuBg" />
+    <result column="CSYS_PROJECT_RECORD_INFO" jdbcType="VARCHAR" property="csysProjectRecordInfo" />
+    <result column="CSYS_PROJECT_STYLE" jdbcType="VARCHAR" property="csysProjectStyle" />
+    <result column="CSYS_PROJECT_CREATE_TIME" jdbcType="TIMESTAMP" property="csysProjectCreateTime" />
+    <result column="CSYS_PROJECT_CREATE_USER" jdbcType="VARCHAR" property="csysProjectCreateUser" />
+    <result column="CSYS_PROJECT_MODIFY_TIME" jdbcType="TIMESTAMP" property="csysProjectModifyTime" />
+    <result column="CSYS_PROJECT_MODIFY_USER" jdbcType="VARCHAR" property="csysProjectModifyUser" />
+    <result column="CSYS_PROJECT_IS_DELETE" jdbcType="CHAR" property="csysProjectIsDelete" />
+    <result column="CSYS_PROJECT_TIME" jdbcType="TIMESTAMP" property="csysProjectTime" />
+    <result column="CSYS_PROJECT_DATE" jdbcType="TIMESTAMP" property="csysProjectDate" />
+  </resultMap>
+  <sql id="Example_Where_Clause">
+    <!--
+      WARNING - @mbg.generated
+    -->
+    <where>
+      <foreach collection="oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause">
+    <!--
+      WARNING - @mbg.generated
+    -->
+    <where>
+      <foreach collection="example.oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List">
+    <!--
+      WARNING - @mbg.generated
+    -->
+    CSYS_PROJECT_ID, CSYS_PROJECT_NAME, CSYS_PROJECT_COMPANY, CSYS_PROJECT_LOGIN_LOGO, 
+    CSYS_PROJECT_BG, CSYS_PROJECT_LOADING_LOGO, CSYS_PROJECT_LOGO_BG, CSYS_PROJECT_TOP_BG, 
+    CSYS_PROJECT_NAVIGATION_BG, CSYS_PROJECT_SUSP_COLOR, CSYS_PROJECT_MAIN_MENU_BG, CSYS_PROJECT_SUB_MENU_BG, 
+    CSYS_PROJECT_RECORD_INFO, CSYS_PROJECT_STYLE, CSYS_PROJECT_CREATE_TIME, CSYS_PROJECT_CREATE_USER, 
+    CSYS_PROJECT_MODIFY_TIME, CSYS_PROJECT_MODIFY_USER, CSYS_PROJECT_IS_DELETE, CSYS_PROJECT_TIME, 
+    CSYS_PROJECT_DATE
+  </sql>
+  <select id="selectByExample" parameterType="com.company.project.outer.model.CsysProjectExample" resultMap="BaseResultMap">
+    <!--
+      WARNING - @mbg.generated
+    -->
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from CSYS_PROJECT
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+  </select>
+  <delete id="deleteByExample" parameterType="com.company.project.outer.model.CsysProjectExample">
+    <!--
+      WARNING - @mbg.generated
+    -->
+    delete from CSYS_PROJECT
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <select id="countByExample" parameterType="com.company.project.outer.model.CsysProjectExample" resultType="java.lang.Long">
+    <!--
+      WARNING - @mbg.generated
+    -->
+    select count(*) from CSYS_PROJECT
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map">
+    <!--
+      WARNING - @mbg.generated
+    -->
+    update CSYS_PROJECT
+    <set>
+      <if test="record.csysProjectId != null">
+        CSYS_PROJECT_ID = #{record.csysProjectId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.csysProjectName != null">
+        CSYS_PROJECT_NAME = #{record.csysProjectName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.csysProjectCompany != null">
+        CSYS_PROJECT_COMPANY = #{record.csysProjectCompany,jdbcType=VARCHAR},
+      </if>
+      <if test="record.csysProjectLoginLogo != null">
+        CSYS_PROJECT_LOGIN_LOGO = #{record.csysProjectLoginLogo,jdbcType=VARCHAR},
+      </if>
+      <if test="record.csysProjectBg != null">
+        CSYS_PROJECT_BG = #{record.csysProjectBg,jdbcType=VARCHAR},
+      </if>
+      <if test="record.csysProjectLoadingLogo != null">
+        CSYS_PROJECT_LOADING_LOGO = #{record.csysProjectLoadingLogo,jdbcType=VARCHAR},
+      </if>
+      <if test="record.csysProjectLogoBg != null">
+        CSYS_PROJECT_LOGO_BG = #{record.csysProjectLogoBg,jdbcType=VARCHAR},
+      </if>
+      <if test="record.csysProjectTopBg != null">
+        CSYS_PROJECT_TOP_BG = #{record.csysProjectTopBg,jdbcType=VARCHAR},
+      </if>
+      <if test="record.csysProjectNavigationBg != null">
+        CSYS_PROJECT_NAVIGATION_BG = #{record.csysProjectNavigationBg,jdbcType=VARCHAR},
+      </if>
+      <if test="record.csysProjectSuspColor != null">
+        CSYS_PROJECT_SUSP_COLOR = #{record.csysProjectSuspColor,jdbcType=VARCHAR},
+      </if>
+      <if test="record.csysProjectMainMenuBg != null">
+        CSYS_PROJECT_MAIN_MENU_BG = #{record.csysProjectMainMenuBg,jdbcType=VARCHAR},
+      </if>
+      <if test="record.csysProjectSubMenuBg != null">
+        CSYS_PROJECT_SUB_MENU_BG = #{record.csysProjectSubMenuBg,jdbcType=VARCHAR},
+      </if>
+      <if test="record.csysProjectRecordInfo != null">
+        CSYS_PROJECT_RECORD_INFO = #{record.csysProjectRecordInfo,jdbcType=VARCHAR},
+      </if>
+      <if test="record.csysProjectStyle != null">
+        CSYS_PROJECT_STYLE = #{record.csysProjectStyle,jdbcType=VARCHAR},
+      </if>
+      <if test="record.csysProjectCreateTime != null">
+        CSYS_PROJECT_CREATE_TIME = #{record.csysProjectCreateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.csysProjectCreateUser != null">
+        CSYS_PROJECT_CREATE_USER = #{record.csysProjectCreateUser,jdbcType=VARCHAR},
+      </if>
+      <if test="record.csysProjectModifyTime != null">
+        CSYS_PROJECT_MODIFY_TIME = #{record.csysProjectModifyTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.csysProjectModifyUser != null">
+        CSYS_PROJECT_MODIFY_USER = #{record.csysProjectModifyUser,jdbcType=VARCHAR},
+      </if>
+      <if test="record.csysProjectIsDelete != null">
+        CSYS_PROJECT_IS_DELETE = #{record.csysProjectIsDelete,jdbcType=CHAR},
+      </if>
+      <if test="record.csysProjectTime != null">
+        CSYS_PROJECT_TIME = #{record.csysProjectTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.csysProjectDate != null">
+        CSYS_PROJECT_DATE = #{record.csysProjectDate,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map">
+    <!--
+      WARNING - @mbg.generated
+    -->
+    update CSYS_PROJECT
+    set CSYS_PROJECT_ID = #{record.csysProjectId,jdbcType=VARCHAR},
+      CSYS_PROJECT_NAME = #{record.csysProjectName,jdbcType=VARCHAR},
+      CSYS_PROJECT_COMPANY = #{record.csysProjectCompany,jdbcType=VARCHAR},
+      CSYS_PROJECT_LOGIN_LOGO = #{record.csysProjectLoginLogo,jdbcType=VARCHAR},
+      CSYS_PROJECT_BG = #{record.csysProjectBg,jdbcType=VARCHAR},
+      CSYS_PROJECT_LOADING_LOGO = #{record.csysProjectLoadingLogo,jdbcType=VARCHAR},
+      CSYS_PROJECT_LOGO_BG = #{record.csysProjectLogoBg,jdbcType=VARCHAR},
+      CSYS_PROJECT_TOP_BG = #{record.csysProjectTopBg,jdbcType=VARCHAR},
+      CSYS_PROJECT_NAVIGATION_BG = #{record.csysProjectNavigationBg,jdbcType=VARCHAR},
+      CSYS_PROJECT_SUSP_COLOR = #{record.csysProjectSuspColor,jdbcType=VARCHAR},
+      CSYS_PROJECT_MAIN_MENU_BG = #{record.csysProjectMainMenuBg,jdbcType=VARCHAR},
+      CSYS_PROJECT_SUB_MENU_BG = #{record.csysProjectSubMenuBg,jdbcType=VARCHAR},
+      CSYS_PROJECT_RECORD_INFO = #{record.csysProjectRecordInfo,jdbcType=VARCHAR},
+      CSYS_PROJECT_STYLE = #{record.csysProjectStyle,jdbcType=VARCHAR},
+      CSYS_PROJECT_CREATE_TIME = #{record.csysProjectCreateTime,jdbcType=TIMESTAMP},
+      CSYS_PROJECT_CREATE_USER = #{record.csysProjectCreateUser,jdbcType=VARCHAR},
+      CSYS_PROJECT_MODIFY_TIME = #{record.csysProjectModifyTime,jdbcType=TIMESTAMP},
+      CSYS_PROJECT_MODIFY_USER = #{record.csysProjectModifyUser,jdbcType=VARCHAR},
+      CSYS_PROJECT_IS_DELETE = #{record.csysProjectIsDelete,jdbcType=CHAR},
+      CSYS_PROJECT_TIME = #{record.csysProjectTime,jdbcType=TIMESTAMP},
+      CSYS_PROJECT_DATE = #{record.csysProjectDate,jdbcType=TIMESTAMP}
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+</mapper>

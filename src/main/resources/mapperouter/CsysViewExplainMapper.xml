@@ -1,0 +1,192 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.company.project.outer.dao.CsysViewExplainMapper">
+  <resultMap id="BaseResultMap" type="com.company.project.outer.model.CsysViewExplain">
+    <!--
+      WARNING - @mbg.generated
+    -->
+    <id column="CSYS_VIEW_EXPLAIN_ID" jdbcType="VARCHAR" property="csysViewExplainId" />
+    <result column="CSYS_VIEW_EXPLAIN_NAME" jdbcType="VARCHAR" property="csysViewExplainName" />
+    <result column="CSYS_VIEW_EXPLAIN_TYPE" jdbcType="CHAR" property="csysViewExplainType" />
+    <result column="CSYS_VIEW_EXPLAIN_DESC" jdbcType="VARCHAR" property="csysViewExplainDesc" />
+    <result column="CSYS_VIEW_EXPLAIN_CREATE_TIME" jdbcType="TIMESTAMP" property="csysViewExplainCreateTime" />
+    <result column="CSYS_VIEW_EXPLAIN_MODIFY_TIME" jdbcType="TIMESTAMP" property="csysViewExplainModifyTime" />
+    <result column="CSYS_VIEW_EXPLAIN_CREATE_USER" jdbcType="VARCHAR" property="csysViewExplainCreateUser" />
+    <result column="CSYS_VIEW_EXPLAIN_MODIFY_USER" jdbcType="VARCHAR" property="csysViewExplainModifyUser" />
+    <result column="CSYS_VIEW_EXPLAIN_IS_DELETE" jdbcType="CHAR" property="csysViewExplainIsDelete" />
+    <result column="CSYS_VIEW_EXPLAIN_TIME" jdbcType="TIMESTAMP" property="csysViewExplainTime" />
+    <result column="CSYS_VIEW_EXPLAIN_DATE" jdbcType="TIMESTAMP" property="csysViewExplainDate" />
+  </resultMap>
+  <sql id="Example_Where_Clause">
+    <!--
+      WARNING - @mbg.generated
+    -->
+    <where>
+      <foreach collection="oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause">
+    <!--
+      WARNING - @mbg.generated
+    -->
+    <where>
+      <foreach collection="example.oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List">
+    <!--
+      WARNING - @mbg.generated
+    -->
+    CSYS_VIEW_EXPLAIN_ID, CSYS_VIEW_EXPLAIN_NAME, CSYS_VIEW_EXPLAIN_TYPE, CSYS_VIEW_EXPLAIN_DESC, 
+    CSYS_VIEW_EXPLAIN_CREATE_TIME, CSYS_VIEW_EXPLAIN_MODIFY_TIME, CSYS_VIEW_EXPLAIN_CREATE_USER, 
+    CSYS_VIEW_EXPLAIN_MODIFY_USER, CSYS_VIEW_EXPLAIN_IS_DELETE, CSYS_VIEW_EXPLAIN_TIME, 
+    CSYS_VIEW_EXPLAIN_DATE
+  </sql>
+  <select id="selectByExample" parameterType="com.company.project.outer.model.CsysViewExplainExample" resultMap="BaseResultMap">
+    <!--
+      WARNING - @mbg.generated
+    -->
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from CSYS_VIEW_EXPLAIN
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+  </select>
+  <delete id="deleteByExample" parameterType="com.company.project.outer.model.CsysViewExplainExample">
+    <!--
+      WARNING - @mbg.generated
+    -->
+    delete from CSYS_VIEW_EXPLAIN
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <select id="countByExample" parameterType="com.company.project.outer.model.CsysViewExplainExample" resultType="java.lang.Long">
+    <!--
+      WARNING - @mbg.generated
+    -->
+    select count(*) from CSYS_VIEW_EXPLAIN
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map">
+    <!--
+      WARNING - @mbg.generated
+    -->
+    update CSYS_VIEW_EXPLAIN
+    <set>
+      <if test="record.csysViewExplainId != null">
+        CSYS_VIEW_EXPLAIN_ID = #{record.csysViewExplainId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.csysViewExplainName != null">
+        CSYS_VIEW_EXPLAIN_NAME = #{record.csysViewExplainName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.csysViewExplainType != null">
+        CSYS_VIEW_EXPLAIN_TYPE = #{record.csysViewExplainType,jdbcType=CHAR},
+      </if>
+      <if test="record.csysViewExplainDesc != null">
+        CSYS_VIEW_EXPLAIN_DESC = #{record.csysViewExplainDesc,jdbcType=VARCHAR},
+      </if>
+      <if test="record.csysViewExplainCreateTime != null">
+        CSYS_VIEW_EXPLAIN_CREATE_TIME = #{record.csysViewExplainCreateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.csysViewExplainModifyTime != null">
+        CSYS_VIEW_EXPLAIN_MODIFY_TIME = #{record.csysViewExplainModifyTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.csysViewExplainCreateUser != null">
+        CSYS_VIEW_EXPLAIN_CREATE_USER = #{record.csysViewExplainCreateUser,jdbcType=VARCHAR},
+      </if>
+      <if test="record.csysViewExplainModifyUser != null">
+        CSYS_VIEW_EXPLAIN_MODIFY_USER = #{record.csysViewExplainModifyUser,jdbcType=VARCHAR},
+      </if>
+      <if test="record.csysViewExplainIsDelete != null">
+        CSYS_VIEW_EXPLAIN_IS_DELETE = #{record.csysViewExplainIsDelete,jdbcType=CHAR},
+      </if>
+      <if test="record.csysViewExplainTime != null">
+        CSYS_VIEW_EXPLAIN_TIME = #{record.csysViewExplainTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.csysViewExplainDate != null">
+        CSYS_VIEW_EXPLAIN_DATE = #{record.csysViewExplainDate,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map">
+    <!--
+      WARNING - @mbg.generated
+    -->
+    update CSYS_VIEW_EXPLAIN
+    set CSYS_VIEW_EXPLAIN_ID = #{record.csysViewExplainId,jdbcType=VARCHAR},
+      CSYS_VIEW_EXPLAIN_NAME = #{record.csysViewExplainName,jdbcType=VARCHAR},
+      CSYS_VIEW_EXPLAIN_TYPE = #{record.csysViewExplainType,jdbcType=CHAR},
+      CSYS_VIEW_EXPLAIN_DESC = #{record.csysViewExplainDesc,jdbcType=VARCHAR},
+      CSYS_VIEW_EXPLAIN_CREATE_TIME = #{record.csysViewExplainCreateTime,jdbcType=TIMESTAMP},
+      CSYS_VIEW_EXPLAIN_MODIFY_TIME = #{record.csysViewExplainModifyTime,jdbcType=TIMESTAMP},
+      CSYS_VIEW_EXPLAIN_CREATE_USER = #{record.csysViewExplainCreateUser,jdbcType=VARCHAR},
+      CSYS_VIEW_EXPLAIN_MODIFY_USER = #{record.csysViewExplainModifyUser,jdbcType=VARCHAR},
+      CSYS_VIEW_EXPLAIN_IS_DELETE = #{record.csysViewExplainIsDelete,jdbcType=CHAR},
+      CSYS_VIEW_EXPLAIN_TIME = #{record.csysViewExplainTime,jdbcType=TIMESTAMP},
+      CSYS_VIEW_EXPLAIN_DATE = #{record.csysViewExplainDate,jdbcType=TIMESTAMP}
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+</mapper>

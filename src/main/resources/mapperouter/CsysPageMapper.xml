@@ -1,0 +1,310 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.company.project.outer.dao.CsysPageMapper">
+  <resultMap id="BaseResultMap" type="com.company.project.outer.model.CsysPage">
+    <!--
+      WARNING - @mbg.generated
+    -->
+    <result column="CSYS_PAGE_ID" jdbcType="VARCHAR" property="csysPageId" />
+    <result column="CSYS_PAGE_NAME" jdbcType="VARCHAR" property="csysPageName" />
+    <result column="CSYS_PAGE_LAYOUT_ID" jdbcType="VARCHAR" property="csysPageLayoutId" />
+    <result column="CSYS_PAGE_SORT" jdbcType="DECIMAL" property="csysPageSort" />
+    <result column="CSYS_PAGE_ROUTH_PATH" jdbcType="VARCHAR" property="csysPageRouthPath" />
+    <result column="CSYS_PAGE_SELECTOR" jdbcType="VARCHAR" property="csysPageSelector" />
+    <result column="CSYS_PAGE_STATUS" jdbcType="CHAR" property="csysPageStatus" />
+    <result column="CSYS_PAGE_GITSTATUS" jdbcType="CHAR" property="csysPageGitstatus" />
+    <result column="CSYS_PAGE_TYPE" jdbcType="CHAR" property="csysPageType" />
+    <result column="CSYS_PAGE_CREATE_TIME" jdbcType="TIMESTAMP" property="csysPageCreateTime" />
+    <result column="CSYS_PAGE_MODIFY_TIME" jdbcType="TIMESTAMP" property="csysPageModifyTime" />
+    <result column="CSYS_PAGE_CREATE_USER" jdbcType="VARCHAR" property="csysPageCreateUser" />
+    <result column="CSYS_PAGE_MODIFY_USER" jdbcType="VARCHAR" property="csysPageModifyUser" />
+    <result column="CSYS_PAGE_IS_DELETE" jdbcType="CHAR" property="csysPageIsDelete" />
+    <result column="CSYS_PAGE_CODE_NAME" jdbcType="VARCHAR" property="csysPageCodeName" />
+    <result column="CY_SYS_PAGE_TEMP_ID" jdbcType="VARCHAR" property="cySysPageTempId" />
+    <result column="CSYS_PAGE_TIME" jdbcType="TIMESTAMP" property="csysPageTime" />
+    <result column="CSYS_PAGE_DATE" jdbcType="TIMESTAMP" property="csysPageDate" />
+  </resultMap>
+  <resultMap extends="BaseResultMap" id="ResultMapWithBLOBs" type="com.company.project.outer.model.CsysPage">
+    <!--
+      WARNING - @mbg.generated
+    -->
+    <result column="CSYS_PAGE_HTML_CODE" jdbcType="CLOB" property="csysPageHtmlCode" />
+    <result column="CSYS_PAGE_SETTINGS_JSON" jdbcType="CLOB" property="csysPageSettingsJson" />
+    <result column="CSYS_PAGE_INFO_JSON" jdbcType="CLOB" property="csysPageInfoJson" />
+    <result column="CSYS_PAGE_HTML_DROP_CODE" jdbcType="CLOB" property="csysPageHtmlDropCode" />
+    <result column="CSYS_PAGE_HTML_TS_CODE" jdbcType="CLOB" property="csysPageHtmlTsCode" />
+  </resultMap>
+  <sql id="Example_Where_Clause">
+    <!--
+      WARNING - @mbg.generated
+    -->
+    <where>
+      <foreach collection="oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause">
+    <!--
+      WARNING - @mbg.generated
+    -->
+    <where>
+      <foreach collection="example.oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List">
+    <!--
+      WARNING - @mbg.generated
+    -->
+    CSYS_PAGE_ID, CSYS_PAGE_NAME, CSYS_PAGE_LAYOUT_ID, CSYS_PAGE_SORT, CSYS_PAGE_ROUTH_PATH, 
+    CSYS_PAGE_SELECTOR, CSYS_PAGE_STATUS, CSYS_PAGE_GITSTATUS, CSYS_PAGE_TYPE, CSYS_PAGE_CREATE_TIME, 
+    CSYS_PAGE_MODIFY_TIME, CSYS_PAGE_CREATE_USER, CSYS_PAGE_MODIFY_USER, CSYS_PAGE_IS_DELETE, 
+    CSYS_PAGE_CODE_NAME, CY_SYS_PAGE_TEMP_ID, CSYS_PAGE_TIME, CSYS_PAGE_DATE
+  </sql>
+  <sql id="Blob_Column_List">
+    <!--
+      WARNING - @mbg.generated
+    -->
+    CSYS_PAGE_HTML_CODE, CSYS_PAGE_SETTINGS_JSON, CSYS_PAGE_INFO_JSON, CSYS_PAGE_HTML_DROP_CODE, 
+    CSYS_PAGE_HTML_TS_CODE
+  </sql>
+  <select id="selectByExampleWithBLOBs" parameterType="com.company.project.outer.model.CsysPageExample" resultMap="ResultMapWithBLOBs">
+    <!--
+      WARNING - @mbg.generated
+    -->
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from CSYS_PAGE
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByExample" parameterType="com.company.project.outer.model.CsysPageExample" resultMap="BaseResultMap">
+    <!--
+      WARNING - @mbg.generated
+    -->
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from CSYS_PAGE
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+  </select>
+  <delete id="deleteByExample" parameterType="com.company.project.outer.model.CsysPageExample">
+    <!--
+      WARNING - @mbg.generated
+    -->
+    delete from CSYS_PAGE
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <select id="countByExample" parameterType="com.company.project.outer.model.CsysPageExample" resultType="java.lang.Long">
+    <!--
+      WARNING - @mbg.generated
+    -->
+    select count(*) from CSYS_PAGE
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map">
+    <!--
+      WARNING - @mbg.generated
+    -->
+    update CSYS_PAGE
+    <set>
+      <if test="record.csysPageId != null">
+        CSYS_PAGE_ID = #{record.csysPageId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.csysPageName != null">
+        CSYS_PAGE_NAME = #{record.csysPageName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.csysPageLayoutId != null">
+        CSYS_PAGE_LAYOUT_ID = #{record.csysPageLayoutId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.csysPageSort != null">
+        CSYS_PAGE_SORT = #{record.csysPageSort,jdbcType=DECIMAL},
+      </if>
+      <if test="record.csysPageRouthPath != null">
+        CSYS_PAGE_ROUTH_PATH = #{record.csysPageRouthPath,jdbcType=VARCHAR},
+      </if>
+      <if test="record.csysPageSelector != null">
+        CSYS_PAGE_SELECTOR = #{record.csysPageSelector,jdbcType=VARCHAR},
+      </if>
+      <if test="record.csysPageStatus != null">
+        CSYS_PAGE_STATUS = #{record.csysPageStatus,jdbcType=CHAR},
+      </if>
+      <if test="record.csysPageGitstatus != null">
+        CSYS_PAGE_GITSTATUS = #{record.csysPageGitstatus,jdbcType=CHAR},
+      </if>
+      <if test="record.csysPageType != null">
+        CSYS_PAGE_TYPE = #{record.csysPageType,jdbcType=CHAR},
+      </if>
+      <if test="record.csysPageCreateTime != null">
+        CSYS_PAGE_CREATE_TIME = #{record.csysPageCreateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.csysPageModifyTime != null">
+        CSYS_PAGE_MODIFY_TIME = #{record.csysPageModifyTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.csysPageCreateUser != null">
+        CSYS_PAGE_CREATE_USER = #{record.csysPageCreateUser,jdbcType=VARCHAR},
+      </if>
+      <if test="record.csysPageModifyUser != null">
+        CSYS_PAGE_MODIFY_USER = #{record.csysPageModifyUser,jdbcType=VARCHAR},
+      </if>
+      <if test="record.csysPageIsDelete != null">
+        CSYS_PAGE_IS_DELETE = #{record.csysPageIsDelete,jdbcType=CHAR},
+      </if>
+      <if test="record.csysPageCodeName != null">
+        CSYS_PAGE_CODE_NAME = #{record.csysPageCodeName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.cySysPageTempId != null">
+        CY_SYS_PAGE_TEMP_ID = #{record.cySysPageTempId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.csysPageTime != null">
+        CSYS_PAGE_TIME = #{record.csysPageTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.csysPageDate != null">
+        CSYS_PAGE_DATE = #{record.csysPageDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.csysPageHtmlCode != null">
+        CSYS_PAGE_HTML_CODE = #{record.csysPageHtmlCode,jdbcType=CLOB},
+      </if>
+      <if test="record.csysPageSettingsJson != null">
+        CSYS_PAGE_SETTINGS_JSON = #{record.csysPageSettingsJson,jdbcType=CLOB},
+      </if>
+      <if test="record.csysPageInfoJson != null">
+        CSYS_PAGE_INFO_JSON = #{record.csysPageInfoJson,jdbcType=CLOB},
+      </if>
+      <if test="record.csysPageHtmlDropCode != null">
+        CSYS_PAGE_HTML_DROP_CODE = #{record.csysPageHtmlDropCode,jdbcType=CLOB},
+      </if>
+      <if test="record.csysPageHtmlTsCode != null">
+        CSYS_PAGE_HTML_TS_CODE = #{record.csysPageHtmlTsCode,jdbcType=CLOB},
+      </if>
+    </set>
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExampleWithBLOBs" parameterType="map">
+    <!--
+      WARNING - @mbg.generated
+    -->
+    update CSYS_PAGE
+    set CSYS_PAGE_ID = #{record.csysPageId,jdbcType=VARCHAR},
+      CSYS_PAGE_NAME = #{record.csysPageName,jdbcType=VARCHAR},
+      CSYS_PAGE_LAYOUT_ID = #{record.csysPageLayoutId,jdbcType=VARCHAR},
+      CSYS_PAGE_SORT = #{record.csysPageSort,jdbcType=DECIMAL},
+      CSYS_PAGE_ROUTH_PATH = #{record.csysPageRouthPath,jdbcType=VARCHAR},
+      CSYS_PAGE_SELECTOR = #{record.csysPageSelector,jdbcType=VARCHAR},
+      CSYS_PAGE_STATUS = #{record.csysPageStatus,jdbcType=CHAR},
+      CSYS_PAGE_GITSTATUS = #{record.csysPageGitstatus,jdbcType=CHAR},
+      CSYS_PAGE_TYPE = #{record.csysPageType,jdbcType=CHAR},
+      CSYS_PAGE_CREATE_TIME = #{record.csysPageCreateTime,jdbcType=TIMESTAMP},
+      CSYS_PAGE_MODIFY_TIME = #{record.csysPageModifyTime,jdbcType=TIMESTAMP},
+      CSYS_PAGE_CREATE_USER = #{record.csysPageCreateUser,jdbcType=VARCHAR},
+      CSYS_PAGE_MODIFY_USER = #{record.csysPageModifyUser,jdbcType=VARCHAR},
+      CSYS_PAGE_IS_DELETE = #{record.csysPageIsDelete,jdbcType=CHAR},
+      CSYS_PAGE_CODE_NAME = #{record.csysPageCodeName,jdbcType=VARCHAR},
+      CY_SYS_PAGE_TEMP_ID = #{record.cySysPageTempId,jdbcType=VARCHAR},
+      CSYS_PAGE_TIME = #{record.csysPageTime,jdbcType=TIMESTAMP},
+      CSYS_PAGE_DATE = #{record.csysPageDate,jdbcType=TIMESTAMP},
+      CSYS_PAGE_HTML_CODE = #{record.csysPageHtmlCode,jdbcType=CLOB},
+      CSYS_PAGE_SETTINGS_JSON = #{record.csysPageSettingsJson,jdbcType=CLOB},
+      CSYS_PAGE_INFO_JSON = #{record.csysPageInfoJson,jdbcType=CLOB},
+      CSYS_PAGE_HTML_DROP_CODE = #{record.csysPageHtmlDropCode,jdbcType=CLOB},
+      CSYS_PAGE_HTML_TS_CODE = #{record.csysPageHtmlTsCode,jdbcType=CLOB}
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map">
+    <!--
+      WARNING - @mbg.generated
+    -->
+    update CSYS_PAGE
+    set CSYS_PAGE_ID = #{record.csysPageId,jdbcType=VARCHAR},
+      CSYS_PAGE_NAME = #{record.csysPageName,jdbcType=VARCHAR},
+      CSYS_PAGE_LAYOUT_ID = #{record.csysPageLayoutId,jdbcType=VARCHAR},
+      CSYS_PAGE_SORT = #{record.csysPageSort,jdbcType=DECIMAL},
+      CSYS_PAGE_ROUTH_PATH = #{record.csysPageRouthPath,jdbcType=VARCHAR},
+      CSYS_PAGE_SELECTOR = #{record.csysPageSelector,jdbcType=VARCHAR},
+      CSYS_PAGE_STATUS = #{record.csysPageStatus,jdbcType=CHAR},
+      CSYS_PAGE_GITSTATUS = #{record.csysPageGitstatus,jdbcType=CHAR},
+      CSYS_PAGE_TYPE = #{record.csysPageType,jdbcType=CHAR},
+      CSYS_PAGE_CREATE_TIME = #{record.csysPageCreateTime,jdbcType=TIMESTAMP},
+      CSYS_PAGE_MODIFY_TIME = #{record.csysPageModifyTime,jdbcType=TIMESTAMP},
+      CSYS_PAGE_CREATE_USER = #{record.csysPageCreateUser,jdbcType=VARCHAR},
+      CSYS_PAGE_MODIFY_USER = #{record.csysPageModifyUser,jdbcType=VARCHAR},
+      CSYS_PAGE_IS_DELETE = #{record.csysPageIsDelete,jdbcType=CHAR},
+      CSYS_PAGE_CODE_NAME = #{record.csysPageCodeName,jdbcType=VARCHAR},
+      CY_SYS_PAGE_TEMP_ID = #{record.cySysPageTempId,jdbcType=VARCHAR},
+      CSYS_PAGE_TIME = #{record.csysPageTime,jdbcType=TIMESTAMP},
+      CSYS_PAGE_DATE = #{record.csysPageDate,jdbcType=TIMESTAMP}
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+</mapper>

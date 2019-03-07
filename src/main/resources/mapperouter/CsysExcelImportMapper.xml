@@ -1,0 +1,228 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.company.project.outer.dao.CsysExcelImportMapper">
+  <resultMap id="BaseResultMap" type="com.company.project.outer.model.CsysExcelImport">
+    <!--
+      WARNING - @mbg.generated
+    -->
+    <id column="CSYS_EXCEL_IMPORT_ID" jdbcType="VARCHAR" property="csysExcelImportId" />
+    <result column="CSYS_EXCEL_IMPORT_NAME" jdbcType="VARCHAR" property="csysExcelImportName" />
+    <result column="CSYS_VIEW_EXPLAIN_ID" jdbcType="VARCHAR" property="csysViewExplainId" />
+    <result column="CSYS_EXCEL_IMPORT_TYPE" jdbcType="CHAR" property="csysExcelImportType" />
+    <result column="CSYS_EXCEL_IMPORT_DL_NAME" jdbcType="VARCHAR" property="csysExcelImportDlName" />
+    <result column="CSYS_EXCEL_IMPORT_FILE" jdbcType="VARCHAR" property="csysExcelImportFile" />
+    <result column="CSYS_EXCEL_IMPORT_READ_ROW" jdbcType="DECIMAL" property="csysExcelImportReadRow" />
+    <result column="CSYS_EXCEL_IMPORT_BF_PRC" jdbcType="VARCHAR" property="csysExcelImportBfPrc" />
+    <result column="CSYS_EXCEL_IMPORT_CR_PRC" jdbcType="VARCHAR" property="csysExcelImportCrPrc" />
+    <result column="CSYS_EXCEL_IMPORT_AF_PRC" jdbcType="VARCHAR" property="csysExcelImportAfPrc" />
+    <result column="CSYS_EXCEL_IMPORT_DESC" jdbcType="VARCHAR" property="csysExcelImportDesc" />
+    <result column="CSYS_EXCEL_IMPORT_CREATE_TIME" jdbcType="TIMESTAMP" property="csysExcelImportCreateTime" />
+    <result column="CSYS_EXCEL_IMPORT_MODIFY_TIME" jdbcType="TIMESTAMP" property="csysExcelImportModifyTime" />
+    <result column="CSYS_EXCEL_IMPORT_CREATE_USER" jdbcType="VARCHAR" property="csysExcelImportCreateUser" />
+    <result column="CSYS_EXCEL_IMPORT_MODIFY_USER" jdbcType="VARCHAR" property="csysExcelImportModifyUser" />
+    <result column="CSYS_EXCEL_IMPORT_IS_DELETE" jdbcType="CHAR" property="csysExcelImportIsDelete" />
+    <result column="CSYS_EXCEL_IMPORT_TIME" jdbcType="TIMESTAMP" property="csysExcelImportTime" />
+    <result column="CSYS_EXCEL_IMPORT_DATE" jdbcType="TIMESTAMP" property="csysExcelImportDate" />
+  </resultMap>
+  <sql id="Example_Where_Clause">
+    <!--
+      WARNING - @mbg.generated
+    -->
+    <where>
+      <foreach collection="oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause">
+    <!--
+      WARNING - @mbg.generated
+    -->
+    <where>
+      <foreach collection="example.oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List">
+    <!--
+      WARNING - @mbg.generated
+    -->
+    CSYS_EXCEL_IMPORT_ID, CSYS_EXCEL_IMPORT_NAME, CSYS_VIEW_EXPLAIN_ID, CSYS_EXCEL_IMPORT_TYPE, 
+    CSYS_EXCEL_IMPORT_DL_NAME, CSYS_EXCEL_IMPORT_FILE, CSYS_EXCEL_IMPORT_READ_ROW, CSYS_EXCEL_IMPORT_BF_PRC, 
+    CSYS_EXCEL_IMPORT_CR_PRC, CSYS_EXCEL_IMPORT_AF_PRC, CSYS_EXCEL_IMPORT_DESC, CSYS_EXCEL_IMPORT_CREATE_TIME, 
+    CSYS_EXCEL_IMPORT_MODIFY_TIME, CSYS_EXCEL_IMPORT_CREATE_USER, CSYS_EXCEL_IMPORT_MODIFY_USER, 
+    CSYS_EXCEL_IMPORT_IS_DELETE, CSYS_EXCEL_IMPORT_TIME, CSYS_EXCEL_IMPORT_DATE
+  </sql>
+  <select id="selectByExample" parameterType="com.company.project.outer.model.CsysExcelImportExample" resultMap="BaseResultMap">
+    <!--
+      WARNING - @mbg.generated
+    -->
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from CSYS_EXCEL_IMPORT
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+  </select>
+  <delete id="deleteByExample" parameterType="com.company.project.outer.model.CsysExcelImportExample">
+    <!--
+      WARNING - @mbg.generated
+    -->
+    delete from CSYS_EXCEL_IMPORT
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <select id="countByExample" parameterType="com.company.project.outer.model.CsysExcelImportExample" resultType="java.lang.Long">
+    <!--
+      WARNING - @mbg.generated
+    -->
+    select count(*) from CSYS_EXCEL_IMPORT
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map">
+    <!--
+      WARNING - @mbg.generated
+    -->
+    update CSYS_EXCEL_IMPORT
+    <set>
+      <if test="record.csysExcelImportId != null">
+        CSYS_EXCEL_IMPORT_ID = #{record.csysExcelImportId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.csysExcelImportName != null">
+        CSYS_EXCEL_IMPORT_NAME = #{record.csysExcelImportName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.csysViewExplainId != null">
+        CSYS_VIEW_EXPLAIN_ID = #{record.csysViewExplainId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.csysExcelImportType != null">
+        CSYS_EXCEL_IMPORT_TYPE = #{record.csysExcelImportType,jdbcType=CHAR},
+      </if>
+      <if test="record.csysExcelImportDlName != null">
+        CSYS_EXCEL_IMPORT_DL_NAME = #{record.csysExcelImportDlName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.csysExcelImportFile != null">
+        CSYS_EXCEL_IMPORT_FILE = #{record.csysExcelImportFile,jdbcType=VARCHAR},
+      </if>
+      <if test="record.csysExcelImportReadRow != null">
+        CSYS_EXCEL_IMPORT_READ_ROW = #{record.csysExcelImportReadRow,jdbcType=DECIMAL},
+      </if>
+      <if test="record.csysExcelImportBfPrc != null">
+        CSYS_EXCEL_IMPORT_BF_PRC = #{record.csysExcelImportBfPrc,jdbcType=VARCHAR},
+      </if>
+      <if test="record.csysExcelImportCrPrc != null">
+        CSYS_EXCEL_IMPORT_CR_PRC = #{record.csysExcelImportCrPrc,jdbcType=VARCHAR},
+      </if>
+      <if test="record.csysExcelImportAfPrc != null">
+        CSYS_EXCEL_IMPORT_AF_PRC = #{record.csysExcelImportAfPrc,jdbcType=VARCHAR},
+      </if>
+      <if test="record.csysExcelImportDesc != null">
+        CSYS_EXCEL_IMPORT_DESC = #{record.csysExcelImportDesc,jdbcType=VARCHAR},
+      </if>
+      <if test="record.csysExcelImportCreateTime != null">
+        CSYS_EXCEL_IMPORT_CREATE_TIME = #{record.csysExcelImportCreateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.csysExcelImportModifyTime != null">
+        CSYS_EXCEL_IMPORT_MODIFY_TIME = #{record.csysExcelImportModifyTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.csysExcelImportCreateUser != null">
+        CSYS_EXCEL_IMPORT_CREATE_USER = #{record.csysExcelImportCreateUser,jdbcType=VARCHAR},
+      </if>
+      <if test="record.csysExcelImportModifyUser != null">
+        CSYS_EXCEL_IMPORT_MODIFY_USER = #{record.csysExcelImportModifyUser,jdbcType=VARCHAR},
+      </if>
+      <if test="record.csysExcelImportIsDelete != null">
+        CSYS_EXCEL_IMPORT_IS_DELETE = #{record.csysExcelImportIsDelete,jdbcType=CHAR},
+      </if>
+      <if test="record.csysExcelImportTime != null">
+        CSYS_EXCEL_IMPORT_TIME = #{record.csysExcelImportTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.csysExcelImportDate != null">
+        CSYS_EXCEL_IMPORT_DATE = #{record.csysExcelImportDate,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map">
+    <!--
+      WARNING - @mbg.generated
+    -->
+    update CSYS_EXCEL_IMPORT
+    set CSYS_EXCEL_IMPORT_ID = #{record.csysExcelImportId,jdbcType=VARCHAR},
+      CSYS_EXCEL_IMPORT_NAME = #{record.csysExcelImportName,jdbcType=VARCHAR},
+      CSYS_VIEW_EXPLAIN_ID = #{record.csysViewExplainId,jdbcType=VARCHAR},
+      CSYS_EXCEL_IMPORT_TYPE = #{record.csysExcelImportType,jdbcType=CHAR},
+      CSYS_EXCEL_IMPORT_DL_NAME = #{record.csysExcelImportDlName,jdbcType=VARCHAR},
+      CSYS_EXCEL_IMPORT_FILE = #{record.csysExcelImportFile,jdbcType=VARCHAR},
+      CSYS_EXCEL_IMPORT_READ_ROW = #{record.csysExcelImportReadRow,jdbcType=DECIMAL},
+      CSYS_EXCEL_IMPORT_BF_PRC = #{record.csysExcelImportBfPrc,jdbcType=VARCHAR},
+      CSYS_EXCEL_IMPORT_CR_PRC = #{record.csysExcelImportCrPrc,jdbcType=VARCHAR},
+      CSYS_EXCEL_IMPORT_AF_PRC = #{record.csysExcelImportAfPrc,jdbcType=VARCHAR},
+      CSYS_EXCEL_IMPORT_DESC = #{record.csysExcelImportDesc,jdbcType=VARCHAR},
+      CSYS_EXCEL_IMPORT_CREATE_TIME = #{record.csysExcelImportCreateTime,jdbcType=TIMESTAMP},
+      CSYS_EXCEL_IMPORT_MODIFY_TIME = #{record.csysExcelImportModifyTime,jdbcType=TIMESTAMP},
+      CSYS_EXCEL_IMPORT_CREATE_USER = #{record.csysExcelImportCreateUser,jdbcType=VARCHAR},
+      CSYS_EXCEL_IMPORT_MODIFY_USER = #{record.csysExcelImportModifyUser,jdbcType=VARCHAR},
+      CSYS_EXCEL_IMPORT_IS_DELETE = #{record.csysExcelImportIsDelete,jdbcType=CHAR},
+      CSYS_EXCEL_IMPORT_TIME = #{record.csysExcelImportTime,jdbcType=TIMESTAMP},
+      CSYS_EXCEL_IMPORT_DATE = #{record.csysExcelImportDate,jdbcType=TIMESTAMP}
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+</mapper>
