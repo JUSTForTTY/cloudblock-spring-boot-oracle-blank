@@ -1,2 +1,0 @@
-	@Resource
-	private OrganizeInterfaces organizeInterfaces;
