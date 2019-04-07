@@ -1,6 +1,6 @@
 package com.company.project.service;
-import com.company.project.outer.model.CsysOrgStruce;
 import com.company.project.core.service.Service;
+import com.company.project.model.CsysOrgStruce;
 
 
 /**

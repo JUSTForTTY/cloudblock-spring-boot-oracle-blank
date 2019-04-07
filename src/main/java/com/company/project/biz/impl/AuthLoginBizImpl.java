@@ -2,20 +2,14 @@ package com.company.project.biz.impl;
 
 import com.company.project.service.CommonService;
 import com.company.project.service.CsysUserViewService;
-import com.company.project.service.CySysBaseUserRoleService;
-import com.company.project.service.CySysBaseUserService;
-import com.company.project.service.CsysUserViewService;
 import com.company.project.biz.AuthLoginBiz;
-import com.company.project.model.CySysBaseUser;
-import com.company.project.model.CySysBaseUserRole;
-import com.company.project.outer.model.CsysUserView;
-import com.company.project.outer.model.CsysUserView;
 
 import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
 import tk.mybatis.mapper.entity.Condition;
 import com.company.project.core.utils.DateUtils;
 import com.company.project.core.utils.Md5Encrypt;
+import com.company.project.model.CsysUserView;
 
 import java.util.List;
 import com.github.pagehelper.PageHelper;
@@ -32,10 +26,6 @@ import javax.annotation.Resource;
 public class AuthLoginBizImpl  implements AuthLoginBiz {
     @Resource
     private CsysUserViewService CsysUserViewService;
-    @Resource
-    private CySysBaseUserService cySysBaseUserService;
-    @Resource
-    private CySysBaseUserRoleService cySysBaseUserRoleService;
     @Resource
     private CommonService commonService;
 	public CsysUserView getDataSettings(String id){

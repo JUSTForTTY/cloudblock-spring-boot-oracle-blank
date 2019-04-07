@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.company.project.outer.dao.CsysNoticeMapper">
-  <resultMap id="BaseResultMap" type="com.company.project.outer.model.CsysNotice">
+<mapper namespace="com.company.project.dao.CsysNoticeMapper">
+  <resultMap id="BaseResultMap" type="com.company.project.model.CsysNotice">
     <!--
       WARNING - @mbg.generated
     -->
@@ -32,7 +32,7 @@
     <result column="CSYS_NOTICE_TIME" jdbcType="TIMESTAMP" property="csysNoticeTime" />
     <result column="CSYS_NOTICE_DATE" jdbcType="TIMESTAMP" property="csysNoticeDate" />
   </resultMap>
-  <resultMap extends="BaseResultMap" id="ResultMapWithBLOBs" type="com.company.project.outer.model.CsysNotice">
+  <resultMap extends="BaseResultMap" id="ResultMapWithBLOBs" type="com.company.project.model.CsysNotice">
     <!--
       WARNING - @mbg.generated
     -->
@@ -120,7 +120,7 @@
     -->
     CSYS_NOTICE_CONTENT
   </sql>
-  <select id="selectByExampleWithBLOBs" parameterType="com.company.project.outer.model.CsysNoticeExample" resultMap="ResultMapWithBLOBs">
+  <select id="selectByExampleWithBLOBs" parameterType="com.company.project.model.CsysNoticeExample" resultMap="ResultMapWithBLOBs">
     <!--
       WARNING - @mbg.generated
     -->
@@ -139,7 +139,7 @@
       order by ${orderByClause}
     </if>
   </select>
-  <select id="selectByExample" parameterType="com.company.project.outer.model.CsysNoticeExample" resultMap="BaseResultMap">
+  <select id="selectByExample" parameterType="com.company.project.model.CsysNoticeExample" resultMap="BaseResultMap">
     <!--
       WARNING - @mbg.generated
     -->
@@ -156,7 +156,7 @@
       order by ${orderByClause}
     </if>
   </select>
-  <delete id="deleteByExample" parameterType="com.company.project.outer.model.CsysNoticeExample">
+  <delete id="deleteByExample" parameterType="com.company.project.model.CsysNoticeExample">
     <!--
       WARNING - @mbg.generated
     -->
@@ -165,7 +165,7 @@
       <include refid="Example_Where_Clause" />
     </if>
   </delete>
-  <select id="countByExample" parameterType="com.company.project.outer.model.CsysNoticeExample" resultType="java.lang.Long">
+  <select id="countByExample" parameterType="com.company.project.model.CsysNoticeExample" resultType="java.lang.Long">
     <!--
       WARNING - @mbg.generated
     -->

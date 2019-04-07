@@ -1,9 +1,10 @@
 package com.company.project.service.impl;
 
-import com.company.project.outer.dao.CsysUserMapper;
-import com.company.project.outer.model.CsysUser;
 import com.company.project.service.CsysUserService;
 import com.company.project.core.service.AbstractService;
+import com.company.project.dao.CsysUserMapper;
+import com.company.project.model.CsysUser;
+
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 

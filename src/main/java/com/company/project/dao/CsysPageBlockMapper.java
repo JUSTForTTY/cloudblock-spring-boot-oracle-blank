@@ -1,8 +1,9 @@
-package com.company.project.outer.dao;
+package com.company.project.dao;
 
 import com.company.project.core.mapper.CommonMapper;
-import com.company.project.outer.model.CsysPageBlock;
-import com.company.project.outer.model.CsysPageBlockExample;
+import com.company.project.model.CsysPageBlock;
+import com.company.project.model.CsysPageBlockExample;
+
 import java.util.List;
 import org.apache.ibatis.annotations.Param;
 

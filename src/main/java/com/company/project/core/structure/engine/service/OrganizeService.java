@@ -11,10 +11,10 @@ import org.springframework.stereotype.Service;
 import com.company.project.biz.CsysOrgPotAuthBiz;
 import com.company.project.biz.CsysOrgPotBiz;
 import com.company.project.core.structure.engine.interfaces.OrganizeInterfaces;
-import com.company.project.outer.model.CsysUserView;
-import com.company.project.outer.dao.SystemMapper;
-import com.company.project.outer.model.CsysOrgPot;
-import com.company.project.outer.model.CsysOrgPotAuth;
+import com.company.project.dao.SystemMapper;
+import com.company.project.model.CsysOrgPot;
+import com.company.project.model.CsysOrgPotAuth;
+import com.company.project.model.CsysUserView;
 
 @Service
 public class OrganizeService implements OrganizeInterfaces {

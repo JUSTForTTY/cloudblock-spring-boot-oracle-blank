@@ -12,7 +12,7 @@ import com.company.project.core.bean.DataBaseBean;
 import com.company.project.core.bean.DataTableBean;
 import com.company.project.core.bean.TableFiled;
 import com.company.project.core.bean.updateTableBean;
-import com.company.project.outer.dao.OperateDataBaseMapper;
+import com.company.project.dao.OperateDataBaseMapper;
 import com.company.project.service.OperateDataBaseSerice;
 
 @Service

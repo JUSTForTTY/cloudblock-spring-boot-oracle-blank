@@ -29,17 +29,17 @@ import com.company.project.core.cyflow.engine.enums.WorkflowPotTrsConEnum;
 import com.company.project.core.cyflow.engine.enums.WorkflowRunEnum;
 import com.company.project.core.cyflow.engine.interfaces.WorkflowInterface;
 import com.company.project.core.result.ResultCode;
-import com.company.project.outer.dao.CsysTrsAuthViewMapper;
-import com.company.project.outer.dao.SystemMapper;
-import com.company.project.outer.model.CsysPot;
-import com.company.project.outer.model.CsysPotTrs;
-import com.company.project.outer.model.CsysPotTrsCon;
-import com.company.project.outer.model.CsysTrsAuthView;
-import com.company.project.outer.model.CsysTrsAuthViewExample;
-import com.company.project.outer.model.CsysTrsLog;
-import com.company.project.outer.model.CsysUserView;
-import com.company.project.outer.model.CsysWorkflow;
-import com.company.project.outer.model.CsysWorkflowRun;
+import com.company.project.dao.CsysTrsAuthViewMapper;
+import com.company.project.dao.SystemMapper;
+import com.company.project.model.CsysPot;
+import com.company.project.model.CsysPotTrs;
+import com.company.project.model.CsysPotTrsCon;
+import com.company.project.model.CsysTrsAuthView;
+import com.company.project.model.CsysTrsAuthViewExample;
+import com.company.project.model.CsysTrsLog;
+import com.company.project.model.CsysUserView;
+import com.company.project.model.CsysWorkflow;
+import com.company.project.model.CsysWorkflowRun;
 import com.company.project.service.CommonService;
 
 @Service

@@ -4,17 +4,17 @@ import com.company.project.service.CommonService;
 import com.company.project.service.CsysMenuAuthViewService;
 import com.company.project.service.CsysUserRoleService;
 import com.company.project.biz.CsysMenuAuthViewBiz;
-import com.company.project.outer.dao.CsysMenuAuthViewMapper;
-import com.company.project.outer.model.CsysMenuAuthView;
-import com.company.project.outer.model.CsysMenuAuthViewExample;
-import com.company.project.outer.model.CsysUser;
-import com.company.project.outer.model.CsysUserRole;
-import com.company.project.outer.model.CsysUserView;
 
 import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
 import tk.mybatis.mapper.entity.Condition;
 import com.company.project.core.utils.DateUtils;
+import com.company.project.dao.CsysMenuAuthViewMapper;
+import com.company.project.model.CsysMenuAuthView;
+import com.company.project.model.CsysMenuAuthViewExample;
+import com.company.project.model.CsysUser;
+import com.company.project.model.CsysUserRole;
+import com.company.project.model.CsysUserView;
 
 import java.util.ArrayList;
 import java.util.LinkedHashSet;

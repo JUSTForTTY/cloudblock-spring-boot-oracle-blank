@@ -18,11 +18,11 @@ import com.company.project.core.bean.DataBaseBean;
 import com.company.project.core.bean.DataTableBean;
 import com.company.project.core.bean.TableFiled;
 import com.company.project.core.bean.updateTableBean;
-import com.company.project.outer.model.CsysUserView;
-import com.company.project.outer.dao.CommonOuterUtilsMapper;
-import com.company.project.outer.model.CsysFieldInfo;
-import com.company.project.outer.model.CsysSequence;
-import com.company.project.outer.model.CsysViewExplain;
+import com.company.project.dao.CommonOuterUtilsMapper;
+import com.company.project.model.CsysFieldInfo;
+import com.company.project.model.CsysSequence;
+import com.company.project.model.CsysUserView;
+import com.company.project.model.CsysViewExplain;
 import com.company.project.service.OperateDataBaseSerice;
 import com.google.common.base.CaseFormat;
 

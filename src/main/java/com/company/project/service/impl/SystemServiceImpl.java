@@ -22,9 +22,9 @@ import com.company.project.core.structure.engine.interfaces.OrganizeInterfaces;
 //import com.company.project.core.structure.engine.interfaces.OrganizeInterfaces;
 import com.company.project.core.utils.DateUtils;
 import com.company.project.core.utils.Md5Encrypt;
-import com.company.project.outer.model.CsysUserView;
-import com.company.project.outer.dao.CommonOuterUtilsMapper;
-import com.company.project.outer.dao.SystemMapper;
+import com.company.project.dao.CommonOuterUtilsMapper;
+import com.company.project.dao.SystemMapper;
+import com.company.project.model.CsysUserView;
 import com.company.project.service.SystemService;
 import com.github.pagehelper.PageInfo;
 

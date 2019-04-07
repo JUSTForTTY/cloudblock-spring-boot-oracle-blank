@@ -1,9 +1,10 @@
 package com.company.project.service.impl;
 
-import com.company.project.outer.dao.CsysMenuAuthMapper;
-import com.company.project.outer.model.CsysMenuAuth;
 import com.company.project.service.CsysMenuAuthService;
 import com.company.project.core.service.AbstractService;
+import com.company.project.dao.CsysMenuAuthMapper;
+import com.company.project.model.CsysMenuAuth;
+
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 

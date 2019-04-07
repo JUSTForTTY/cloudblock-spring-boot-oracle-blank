@@ -1,6 +1,6 @@
 package com.company.project.biz;
-import com.company.project.outer.model.CsysSequence;
-import com.company.project.outer.model.CsysUserView;
+import com.company.project.model.CsysSequence;
+import com.company.project.model.CsysUserView;
 import com.github.pagehelper.PageInfo;
 import java.util.List;
 

@@ -1,8 +1,9 @@
-package com.company.project.outer.dao;
+package com.company.project.dao;
 
 import com.company.project.core.mapper.CommonMapper;
-import com.company.project.outer.model.CsysNotice;
-import com.company.project.outer.model.CsysNoticeExample;
+import com.company.project.model.CsysNotice;
+import com.company.project.model.CsysNoticeExample;
+
 import java.util.List;
 import org.apache.ibatis.annotations.Param;
 

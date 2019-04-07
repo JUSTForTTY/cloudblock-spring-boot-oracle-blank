@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.company.project.outer.dao.CommonOuterUtilsMapper">
+<mapper namespace="com.company.project.dao.CommonOuterUtilsMapper">
 
 	<select id="selectBySequence" parameterType="com.company.project.model.CommonBean"
 		resultType="string">

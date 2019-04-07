@@ -1,8 +1,9 @@
-package com.company.project.outer.dao;
+package com.company.project.dao;
 
 import com.company.project.core.mapper.CommonMapper;
-import com.company.project.outer.model.CsysOrgPotAuth;
-import com.company.project.outer.model.CsysOrgPotAuthExample;
+import com.company.project.model.CsysOrgPotAuth;
+import com.company.project.model.CsysOrgPotAuthExample;
+
 import java.util.List;
 import org.apache.ibatis.annotations.Param;
 

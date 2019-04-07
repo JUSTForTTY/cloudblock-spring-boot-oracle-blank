@@ -1,4 +1,4 @@
-package com.company.project.outer.model;
+package com.company.project.model;
 
 import java.util.ArrayList;
 import java.util.List;

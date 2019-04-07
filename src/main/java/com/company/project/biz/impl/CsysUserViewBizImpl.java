@@ -3,12 +3,13 @@ package com.company.project.biz.impl;
 import com.company.project.service.CommonService;
 import com.company.project.service.CsysUserViewService;
 import com.company.project.biz.CsysUserViewBiz;
-import com.company.project.outer.model.CsysUserView;
-import com.company.project.outer.model.CsysUserView;
+
 import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
 import tk.mybatis.mapper.entity.Condition;
 import com.company.project.core.utils.DateUtils;
+import com.company.project.model.CsysUserView;
+
 import java.util.List;
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;

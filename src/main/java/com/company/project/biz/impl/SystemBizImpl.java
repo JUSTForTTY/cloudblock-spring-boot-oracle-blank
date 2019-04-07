@@ -19,7 +19,7 @@ import com.company.project.core.bean.JsonCompareBean;
 import com.company.project.core.bean.TableDataBean;
 import com.company.project.core.bean.TableSaveBean;
 import com.company.project.core.bean.ValidationBean;
-import com.company.project.outer.model.CsysUserView;
+import com.company.project.model.CsysUserView;
 import com.company.project.service.SystemService;
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;

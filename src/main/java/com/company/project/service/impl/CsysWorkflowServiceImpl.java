@@ -1,9 +1,10 @@
 package com.company.project.service.impl;
 
-import com.company.project.outer.dao.CsysWorkflowMapper;
-import com.company.project.outer.model.CsysWorkflow;
 import com.company.project.service.CsysWorkflowService;
 import com.company.project.core.service.AbstractService;
+import com.company.project.dao.CsysWorkflowMapper;
+import com.company.project.model.CsysWorkflow;
+
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 

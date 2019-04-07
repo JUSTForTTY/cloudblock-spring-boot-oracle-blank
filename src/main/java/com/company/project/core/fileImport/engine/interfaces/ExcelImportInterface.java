@@ -2,7 +2,7 @@ package com.company.project.core.fileImport.engine.interfaces;
 
 import org.springframework.web.multipart.MultipartFile;
 
-import com.company.project.outer.model.CsysUserView;
+import com.company.project.model.CsysUserView;
 
 public interface ExcelImportInterface {
 

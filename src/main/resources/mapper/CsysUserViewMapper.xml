@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.company.project.outer.dao.CsysUserViewMapper">
-  <resultMap id="BaseResultMap" type="com.company.project.outer.model.CsysUserView">
+<mapper namespace="com.company.project.dao.CsysUserViewMapper">
+  <resultMap id="BaseResultMap" type="com.company.project.model.CsysUserView">
     <!--
       WARNING - @mbg.generated
     -->
@@ -129,7 +129,7 @@
     CSYS_USER_ROLE_MODIFY_TIME, CSYS_USER_ROLE_CREATE_USER, CSYS_USER_ROLE_MODIFY_USER, 
     CSYS_USER_ROLE_IS_DELETE, CSYS_USER_ROLE_TIME, CSYS_USER_ROLE_DATE
   </sql>
-  <select id="selectByExample" parameterType="com.company.project.outer.model.CsysUserViewExample" resultMap="BaseResultMap">
+  <select id="selectByExample" parameterType="com.company.project.model.CsysUserViewExample" resultMap="BaseResultMap">
     <!--
       WARNING - @mbg.generated
     -->
@@ -146,7 +146,7 @@
       order by ${orderByClause}
     </if>
   </select>
-  <delete id="deleteByExample" parameterType="com.company.project.outer.model.CsysUserViewExample">
+  <delete id="deleteByExample" parameterType="com.company.project.model.CsysUserViewExample">
     <!--
       WARNING - @mbg.generated
     -->
@@ -155,7 +155,7 @@
       <include refid="Example_Where_Clause" />
     </if>
   </delete>
-  <select id="countByExample" parameterType="com.company.project.outer.model.CsysUserViewExample" resultType="java.lang.Long">
+  <select id="countByExample" parameterType="com.company.project.model.CsysUserViewExample" resultType="java.lang.Long">
     <!--
       WARNING - @mbg.generated
     -->

@@ -6,13 +6,6 @@ package com.company.project.biz;
  */
 public interface CommonBiz {
 
-	/**
-	 * 获取sequence
-	 * 
-	 * @param tableName
-	 * @return
-	 */
-	public String getSequence(String tableName);
 
 	/**
 	 * 获取sequence

@@ -1,4 +1,4 @@
-package com.company.project.outer.dao;
+package com.company.project.dao;
 
 import java.util.Map;
 

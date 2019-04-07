@@ -1,9 +1,10 @@
 package com.company.project.service.impl;
 
-import com.company.project.outer.dao.CsysUserNoticeMapper;
-import com.company.project.outer.model.CsysUserNotice;
 import com.company.project.service.CsysUserNoticeService;
 import com.company.project.core.service.AbstractService;
+import com.company.project.dao.CsysUserNoticeMapper;
+import com.company.project.model.CsysUserNotice;
+
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 

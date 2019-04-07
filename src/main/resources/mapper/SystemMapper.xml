@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.company.project.outer.dao.SystemMapper">
+<mapper namespace="com.company.project.dao.SystemMapper">
  
   
  <select id="selectPublicItemList" parameterType="String"    timeout="8"  resultType="java.util.Map">

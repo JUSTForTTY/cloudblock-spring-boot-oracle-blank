@@ -1,8 +1,9 @@
-package com.company.project.outer.dao;
+package com.company.project.dao;
 
 import com.company.project.core.mapper.CommonMapper;
-import com.company.project.outer.model.CsysFieldInfo;
-import com.company.project.outer.model.CsysFieldInfoExample;
+import com.company.project.model.CsysFieldInfo;
+import com.company.project.model.CsysFieldInfoExample;
+
 import java.util.List;
 import org.apache.ibatis.annotations.Param;
 

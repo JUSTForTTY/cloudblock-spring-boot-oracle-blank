@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.company.project.outer.dao.CsysOrgStruceMapper">
-  <resultMap id="BaseResultMap" type="com.company.project.outer.model.CsysOrgStruce">
+<mapper namespace="com.company.project.dao.CsysOrgStruceMapper">
+  <resultMap id="BaseResultMap" type="com.company.project.model.CsysOrgStruce">
     <!--
       WARNING - @mbg.generated
     -->
@@ -20,7 +20,7 @@
     <result column="CSYS_ORG_STRUCE_TIME" jdbcType="TIMESTAMP" property="csysOrgStruceTime" />
     <result column="CSYS_ORG_STRUCE_DATE" jdbcType="TIMESTAMP" property="csysOrgStruceDate" />
   </resultMap>
-  <resultMap extends="BaseResultMap" id="ResultMapWithBLOBs" type="com.company.project.outer.model.CsysOrgStruce">
+  <resultMap extends="BaseResultMap" id="ResultMapWithBLOBs" type="com.company.project.model.CsysOrgStruce">
     <!--
       WARNING - @mbg.generated
     -->
@@ -106,7 +106,7 @@
     -->
     CSYS_ORG_STRUCE_NODES, CSYS_ORG_STRUCE_LINKS
   </sql>
-  <select id="selectByExampleWithBLOBs" parameterType="com.company.project.outer.model.CsysOrgStruceExample" resultMap="ResultMapWithBLOBs">
+  <select id="selectByExampleWithBLOBs" parameterType="com.company.project.model.CsysOrgStruceExample" resultMap="ResultMapWithBLOBs">
     <!--
       WARNING - @mbg.generated
     -->
@@ -125,7 +125,7 @@
       order by ${orderByClause}
     </if>
   </select>
-  <select id="selectByExample" parameterType="com.company.project.outer.model.CsysOrgStruceExample" resultMap="BaseResultMap">
+  <select id="selectByExample" parameterType="com.company.project.model.CsysOrgStruceExample" resultMap="BaseResultMap">
     <!--
       WARNING - @mbg.generated
     -->
@@ -142,7 +142,7 @@
       order by ${orderByClause}
     </if>
   </select>
-  <delete id="deleteByExample" parameterType="com.company.project.outer.model.CsysOrgStruceExample">
+  <delete id="deleteByExample" parameterType="com.company.project.model.CsysOrgStruceExample">
     <!--
       WARNING - @mbg.generated
     -->
@@ -151,7 +151,7 @@
       <include refid="Example_Where_Clause" />
     </if>
   </delete>
-  <select id="countByExample" parameterType="com.company.project.outer.model.CsysOrgStruceExample" resultType="java.lang.Long">
+  <select id="countByExample" parameterType="com.company.project.model.CsysOrgStruceExample" resultType="java.lang.Long">
     <!--
       WARNING - @mbg.generated
     -->

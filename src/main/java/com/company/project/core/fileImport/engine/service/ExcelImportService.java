@@ -25,10 +25,10 @@ import com.company.project.biz.CsysExcelImportViewBiz;
 import com.company.project.core.bean.DynamicSql;
 import com.company.project.core.fileImport.engine.interfaces.ExcelImportInterface;
 import com.company.project.core.utils.DateUtils;
-import com.company.project.outer.dao.DynamicSqlMapper;
-import com.company.project.outer.dao.SystemMapper;
-import com.company.project.outer.model.CsysExcelImportView;
-import com.company.project.outer.model.CsysUserView;
+import com.company.project.dao.DynamicSqlMapper;
+import com.company.project.dao.SystemMapper;
+import com.company.project.model.CsysExcelImportView;
+import com.company.project.model.CsysUserView;
 
 @Service
 public class ExcelImportService implements ExcelImportInterface {

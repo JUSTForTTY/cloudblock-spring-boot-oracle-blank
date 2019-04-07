@@ -3,7 +3,7 @@ package com.company.project.service;
 import java.util.List;
 import java.util.Map;
 
-import com.company.project.outer.model.CsysUserView;
+import com.company.project.model.CsysUserView;
 
 public interface CommonService {
 

@@ -19,7 +19,7 @@ import com.company.project.core.result.Result;
 import com.company.project.core.result.ResultGenerator;
 import com.company.project.core.structure.engine.interfaces.OrganizeInterfaces;
 import com.company.project.core.utils.AuthUtils;
-import com.company.project.outer.model.CsysUserView;
+import com.company.project.model.CsysUserView;
 
 /**
  * 

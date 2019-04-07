@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.company.project.outer.dao.CsysTrsConditionMapper">
-  <resultMap id="BaseResultMap" type="com.company.project.outer.model.CsysTrsCondition">
+<mapper namespace="com.company.project.dao.CsysTrsConditionMapper">
+  <resultMap id="BaseResultMap" type="com.company.project.model.CsysTrsCondition">
     <!--
       WARNING - @mbg.generated
     -->
@@ -96,7 +96,7 @@
     CSYS_TRS_CONDITION_CREATE_USER, CSYS_TRS_CONDITION_MODIFY_USER, CSYS_TRS_CONDITION_IS_DELETE, 
     CSYS_TRS_CONDITION_TIME, CSYS_TRS_CONDITION_DATE
   </sql>
-  <select id="selectByExample" parameterType="com.company.project.outer.model.CsysTrsConditionExample" resultMap="BaseResultMap">
+  <select id="selectByExample" parameterType="com.company.project.model.CsysTrsConditionExample" resultMap="BaseResultMap">
     <!--
       WARNING - @mbg.generated
     -->
@@ -113,7 +113,7 @@
       order by ${orderByClause}
     </if>
   </select>
-  <delete id="deleteByExample" parameterType="com.company.project.outer.model.CsysTrsConditionExample">
+  <delete id="deleteByExample" parameterType="com.company.project.model.CsysTrsConditionExample">
     <!--
       WARNING - @mbg.generated
     -->
@@ -122,7 +122,7 @@
       <include refid="Example_Where_Clause" />
     </if>
   </delete>
-  <select id="countByExample" parameterType="com.company.project.outer.model.CsysTrsConditionExample" resultType="java.lang.Long">
+  <select id="countByExample" parameterType="com.company.project.model.CsysTrsConditionExample" resultType="java.lang.Long">
     <!--
       WARNING - @mbg.generated
     -->

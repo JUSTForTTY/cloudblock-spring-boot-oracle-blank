@@ -1,9 +1,10 @@
 package com.company.project.service.impl;
 
-import com.company.project.outer.dao.CsysOrgAuthMapper;
-import com.company.project.outer.model.CsysOrgAuth;
 import com.company.project.service.CsysOrgAuthService;
 import com.company.project.core.service.AbstractService;
+import com.company.project.dao.CsysOrgAuthMapper;
+import com.company.project.model.CsysOrgAuth;
+
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 

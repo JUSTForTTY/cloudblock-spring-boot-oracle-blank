@@ -1,9 +1,10 @@
 package com.company.project.service.impl;
 
-import com.company.project.outer.dao.CsysTrsLogMapper;
-import com.company.project.outer.model.CsysTrsLog;
 import com.company.project.service.CsysTrsLogService;
 import com.company.project.core.service.AbstractService;
+import com.company.project.dao.CsysTrsLogMapper;
+import com.company.project.model.CsysTrsLog;
+
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 

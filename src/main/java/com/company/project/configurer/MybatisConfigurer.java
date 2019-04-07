@@ -4,6 +4,7 @@ import com.alibaba.druid.pool.DruidDataSource;
 import com.alibaba.druid.support.http.StatViewServlet;
 import com.alibaba.druid.support.http.WebStatFilter;
 import com.github.pagehelper.PageHelper;
+import com.zaxxer.hikari.HikariDataSource;
 
 import tk.mybatis.spring.annotation.MapperScan;
 
@@ -40,32 +41,16 @@ import static com.company.project.core.constant.ProjectConstant.*;
 public class MybatisConfigurer {
 
   @Bean(name = "dataSourceOne")
-  @ConfigurationProperties(prefix = "spring.datasource.source1")
-  @Primary //设置主数据源
-  public DataSource DataSourceOne(){
-      DruidDataSource dataSource = new DruidDataSource();
-      return dataSource;
+  @ConfigurationProperties(prefix = "spring.datasource.source")
+  public HikariDataSource  DataSourceOne(){
+//    DruidDataSource dataSource = new DruidDataSource();
+//    System.out.println("初始化數量--------------"+dataSource.getInitialSize());
+//    System.out.println("活躍連接數--------------"+dataSource.getActiveConnections());
+	  
+	  return DataSourceBuilder.create().type(HikariDataSource.class).build();
 
-  }
+}
 
-  @Bean
-  public ServletRegistrationBean druidStatViewServlet() {
-      ServletRegistrationBean registrationBean = new ServletRegistrationBean(new StatViewServlet(), "/druid/*");
-      registrationBean.addInitParameter("allow", ""); // IP白名单 (没有配置或者为空，则允许所有访问)
-      registrationBean.addInitParameter("deny", ""); // IP黑名单 (存在共同时，deny优先于allow)
-      registrationBean.addInitParameter("loginUsername", "tty");
-      registrationBean.addInitParameter("loginPassword", "18020285665");
-      registrationBean.addInitParameter("resetEnable", "false");
-      return registrationBean;
-  }
-
-  @Bean
-  public FilterRegistrationBean druidWebStatViewFilter() {
-      FilterRegistrationBean registrationBean = new FilterRegistrationBean(new WebStatFilter());
-      registrationBean.addInitParameter("urlPatterns", "/*");
-      registrationBean.addInitParameter("exclusions", "*.js,*.gif,*.jpg,*.bmp,*.png,*.css,*.ico,/druid/*");
-      return registrationBean;
-  }
 
 
   @Bean(name = "sqlSessionFactoryOne")

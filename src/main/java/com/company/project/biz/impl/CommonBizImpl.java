@@ -17,12 +17,6 @@ public class CommonBizImpl implements CommonBiz {
 	 @Resource
 	 private CommonService commonService;
 	 
-	@Override
-	public String getSequence(String tableName) {
-		
-		
-		return commonService.getSequence(tableName);
-	}
 
 	@Override
 	public String getOracleSequence(String tableName) {

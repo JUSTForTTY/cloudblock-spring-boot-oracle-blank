@@ -1,9 +1,10 @@
 package com.company.project.service.impl;
 
-import com.company.project.outer.dao.CsysTrsConditionMapper;
-import com.company.project.outer.model.CsysTrsCondition;
 import com.company.project.service.CsysTrsConditionService;
 import com.company.project.core.service.AbstractService;
+import com.company.project.dao.CsysTrsConditionMapper;
+import com.company.project.model.CsysTrsCondition;
+
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 

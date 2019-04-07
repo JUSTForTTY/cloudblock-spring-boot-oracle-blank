@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.company.project.outer.dao.CsysTrsPageMapper">
-  <resultMap id="BaseResultMap" type="com.company.project.outer.model.CsysTrsPage">
+<mapper namespace="com.company.project.dao.CsysTrsPageMapper">
+  <resultMap id="BaseResultMap" type="com.company.project.model.CsysTrsPage">
     <!--
       WARNING - @mbg.generated
     -->
@@ -89,7 +89,7 @@
     CSYS_TRS_PAGE_MODIFY_TIME, CSYS_TRS_PAGE_CREATE_USER, CSYS_TRS_PAGE_MODIFY_USER, 
     CSYS_TRS_PAGE_IS_DELETE, CSYS_TRS_PAGE_TIME, CSYS_TRS_PAGE_DATE
   </sql>
-  <select id="selectByExample" parameterType="com.company.project.outer.model.CsysTrsPageExample" resultMap="BaseResultMap">
+  <select id="selectByExample" parameterType="com.company.project.model.CsysTrsPageExample" resultMap="BaseResultMap">
     <!--
       WARNING - @mbg.generated
     -->
@@ -106,7 +106,7 @@
       order by ${orderByClause}
     </if>
   </select>
-  <delete id="deleteByExample" parameterType="com.company.project.outer.model.CsysTrsPageExample">
+  <delete id="deleteByExample" parameterType="com.company.project.model.CsysTrsPageExample">
     <!--
       WARNING - @mbg.generated
     -->
@@ -115,7 +115,7 @@
       <include refid="Example_Where_Clause" />
     </if>
   </delete>
-  <select id="countByExample" parameterType="com.company.project.outer.model.CsysTrsPageExample" resultType="java.lang.Long">
+  <select id="countByExample" parameterType="com.company.project.model.CsysTrsPageExample" resultType="java.lang.Long">
     <!--
       WARNING - @mbg.generated
     -->

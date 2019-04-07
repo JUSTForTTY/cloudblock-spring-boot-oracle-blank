@@ -1,9 +1,10 @@
 package com.company.project.service.impl;
 
-import com.company.project.outer.dao.CsysUserRoleMapper;
-import com.company.project.outer.model.CsysUserRole;
 import com.company.project.service.CsysUserRoleService;
 import com.company.project.core.service.AbstractService;
+import com.company.project.dao.CsysUserRoleMapper;
+import com.company.project.model.CsysUserRole;
+
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 

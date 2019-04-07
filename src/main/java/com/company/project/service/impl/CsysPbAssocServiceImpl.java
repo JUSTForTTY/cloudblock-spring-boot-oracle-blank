@@ -1,9 +1,10 @@
 package com.company.project.service.impl;
 
-import com.company.project.outer.dao.CsysPbAssocMapper;
-import com.company.project.outer.model.CsysPbAssoc;
 import com.company.project.service.CsysPbAssocService;
 import com.company.project.core.service.AbstractService;
+import com.company.project.dao.CsysPbAssocMapper;
+import com.company.project.model.CsysPbAssoc;
+
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 

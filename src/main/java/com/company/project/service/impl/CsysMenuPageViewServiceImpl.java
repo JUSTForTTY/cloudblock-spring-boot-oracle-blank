@@ -1,9 +1,10 @@
 package com.company.project.service.impl;
 
-import com.company.project.outer.dao.CsysMenuPageViewMapper;
-import com.company.project.outer.model.CsysMenuPageView;
 import com.company.project.service.CsysMenuPageViewService;
 import com.company.project.core.service.AbstractService;
+import com.company.project.dao.CsysMenuPageViewMapper;
+import com.company.project.model.CsysMenuPageView;
+
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 

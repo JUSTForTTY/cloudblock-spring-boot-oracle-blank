@@ -3,12 +3,12 @@ package com.company.project.core.cyflow.engine.interfaces;
 import java.util.List;
 
 import com.alibaba.fastjson.JSONObject;
-import com.company.project.outer.model.CsysPot;
-import com.company.project.outer.model.CsysPotTrs;
-import com.company.project.outer.model.CsysTrsAuthView;
-import com.company.project.outer.model.CsysUserView;
-import com.company.project.outer.model.CsysWorkflow;
-import com.company.project.outer.model.CsysWorkflowRun;
+import com.company.project.model.CsysPot;
+import com.company.project.model.CsysPotTrs;
+import com.company.project.model.CsysTrsAuthView;
+import com.company.project.model.CsysUserView;
+import com.company.project.model.CsysWorkflow;
+import com.company.project.model.CsysWorkflowRun;
 
 public interface WorkflowInterface {
 

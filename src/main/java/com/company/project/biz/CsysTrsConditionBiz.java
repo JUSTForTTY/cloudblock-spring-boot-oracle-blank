@@ -1,6 +1,6 @@
 package com.company.project.biz;
-import com.company.project.outer.model.CsysTrsCondition;
-import com.company.project.outer.model.CsysUserView;
+import com.company.project.model.CsysTrsCondition;
+import com.company.project.model.CsysUserView;
 import com.github.pagehelper.PageInfo;
 import java.util.List;
 

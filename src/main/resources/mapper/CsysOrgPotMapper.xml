@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.company.project.outer.dao.CsysOrgPotMapper">
-  <resultMap id="BaseResultMap" type="com.company.project.outer.model.CsysOrgPot">
+<mapper namespace="com.company.project.dao.CsysOrgPotMapper">
+  <resultMap id="BaseResultMap" type="com.company.project.model.CsysOrgPot">
     <!--
       WARNING - @mbg.generated
     -->
@@ -94,7 +94,7 @@
     CSYS_ORG_POT_CREATE_USER, CSYS_ORG_POT_MODIFY_TIME, CSYS_ORG_POT_MODIFY_USER, CSYS_ORG_POT_IS_DELETE, 
     CSYS_ORG_POT_TIME, CSYS_ORG_POT_DATE
   </sql>
-  <select id="selectByExample" parameterType="com.company.project.outer.model.CsysOrgPotExample" resultMap="BaseResultMap">
+  <select id="selectByExample" parameterType="com.company.project.model.CsysOrgPotExample" resultMap="BaseResultMap">
     <!--
       WARNING - @mbg.generated
     -->
@@ -111,7 +111,7 @@
       order by ${orderByClause}
     </if>
   </select>
-  <delete id="deleteByExample" parameterType="com.company.project.outer.model.CsysOrgPotExample">
+  <delete id="deleteByExample" parameterType="com.company.project.model.CsysOrgPotExample">
     <!--
       WARNING - @mbg.generated
     -->
@@ -120,7 +120,7 @@
       <include refid="Example_Where_Clause" />
     </if>
   </delete>
-  <select id="countByExample" parameterType="com.company.project.outer.model.CsysOrgPotExample" resultType="java.lang.Long">
+  <select id="countByExample" parameterType="com.company.project.model.CsysOrgPotExample" resultType="java.lang.Long">
     <!--
       WARNING - @mbg.generated
     -->

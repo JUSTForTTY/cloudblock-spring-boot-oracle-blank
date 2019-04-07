@@ -3,24 +3,15 @@ package com.company.project.core.utils;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-
 import javax.annotation.Resource;
-import javax.crypto.SecretKey;
-import javax.crypto.spec.SecretKeySpec;
-
-import org.apache.commons.codec.binary.Base64;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import com.company.project.biz.AuthLoginBiz;
 import com.company.project.biz.CsysUserBiz;
-import com.company.project.biz.CySysBaseUserBiz;
-import com.company.project.model.CySysBaseUser;
-import com.company.project.outer.model.CsysUserView;
-import com.company.project.outer.model.CsysUser;
-import com.company.project.outer.model.CsysUserView;
+import com.company.project.model.CsysUser;
+import com.company.project.model.CsysUserView;
 
 import io.jsonwebtoken.Claims;
 

@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.company.project.outer.dao.CsysUserMapper">
-  <resultMap id="BaseResultMap" type="com.company.project.outer.model.CsysUser">
+<mapper namespace="com.company.project.dao.CsysUserMapper">
+  <resultMap id="BaseResultMap" type="com.company.project.model.CsysUser">
     <!--
       WARNING - @mbg.generated
     -->
@@ -117,7 +117,7 @@
     CSYS_USER_CREATE_USER, CSYS_USER_MODIFY_TIME, CSYS_USER_MODIFY_USER, CSYS_USER_IS_DELETE, 
     CSYS_USER_TIME, CSYS_USER_DATE
   </sql>
-  <select id="selectByExample" parameterType="com.company.project.outer.model.CsysUserExample" resultMap="BaseResultMap">
+  <select id="selectByExample" parameterType="com.company.project.model.CsysUserExample" resultMap="BaseResultMap">
     <!--
       WARNING - @mbg.generated
     -->
@@ -134,7 +134,7 @@
       order by ${orderByClause}
     </if>
   </select>
-  <delete id="deleteByExample" parameterType="com.company.project.outer.model.CsysUserExample">
+  <delete id="deleteByExample" parameterType="com.company.project.model.CsysUserExample">
     <!--
       WARNING - @mbg.generated
     -->
@@ -143,7 +143,7 @@
       <include refid="Example_Where_Clause" />
     </if>
   </delete>
-  <select id="countByExample" parameterType="com.company.project.outer.model.CsysUserExample" resultType="java.lang.Long">
+  <select id="countByExample" parameterType="com.company.project.model.CsysUserExample" resultType="java.lang.Long">
     <!--
       WARNING - @mbg.generated
     -->

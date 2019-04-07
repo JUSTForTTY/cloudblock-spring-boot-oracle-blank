@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.company.project.outer.dao.CsysTrsAuthViewMapper">
-  <resultMap id="BaseResultMap" type="com.company.project.outer.model.CsysTrsAuthView">
+<mapper namespace="com.company.project.dao.CsysTrsAuthViewMapper">
+  <resultMap id="BaseResultMap" type="com.company.project.model.CsysTrsAuthView">
     <!--
       WARNING - @mbg.generated
     -->
@@ -101,7 +101,7 @@
     CSYS_POT_TRS_AUTO_EXE, CSYS_POT_TRS_REMAIND, CSYS_POT_TRS_DESC, CSYS_POT_TRS_TIME, 
     CSYS_POT_TRS_DATE, CSYS_TRS_AUTH_ID, CSYS_ROLE_ID, CSYS_TRS_AUTH_DESC
   </sql>
-  <select id="selectByExample" parameterType="com.company.project.outer.model.CsysTrsAuthViewExample" resultMap="BaseResultMap">
+  <select id="selectByExample" parameterType="com.company.project.model.CsysTrsAuthViewExample" resultMap="BaseResultMap">
     <!--
       WARNING - @mbg.generated
     -->
@@ -118,7 +118,7 @@
       order by ${orderByClause}
     </if>
   </select>
-  <delete id="deleteByExample" parameterType="com.company.project.outer.model.CsysTrsAuthViewExample">
+  <delete id="deleteByExample" parameterType="com.company.project.model.CsysTrsAuthViewExample">
     <!--
       WARNING - @mbg.generated
     -->
@@ -127,7 +127,7 @@
       <include refid="Example_Where_Clause" />
     </if>
   </delete>
-  <select id="countByExample" parameterType="com.company.project.outer.model.CsysTrsAuthViewExample" resultType="java.lang.Long">
+  <select id="countByExample" parameterType="com.company.project.model.CsysTrsAuthViewExample" resultType="java.lang.Long">
     <!--
       WARNING - @mbg.generated
     -->

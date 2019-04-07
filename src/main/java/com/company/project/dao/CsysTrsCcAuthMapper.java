@@ -1,8 +1,9 @@
-package com.company.project.outer.dao;
+package com.company.project.dao;
 
 import com.company.project.core.mapper.CommonMapper;
-import com.company.project.outer.model.CsysTrsCcAuth;
-import com.company.project.outer.model.CsysTrsCcAuthExample;
+import com.company.project.model.CsysTrsCcAuth;
+import com.company.project.model.CsysTrsCcAuthExample;
+
 import java.util.List;
 import org.apache.ibatis.annotations.Param;
 

@@ -26,7 +26,7 @@ import com.company.project.core.fileExport.engine.bean.AutoExportExcel;
 import com.company.project.core.fileExport.engine.interfaces.ExcelExportInterface;
 import com.company.project.core.utils.BuildUrlUtils;
 import com.company.project.core.utils.DateUtils;
-import com.company.project.outer.model.CsysUserView;
+import com.company.project.model.CsysUserView;
 
 @Service
 public class ExcelExportService implements ExcelExportInterface {

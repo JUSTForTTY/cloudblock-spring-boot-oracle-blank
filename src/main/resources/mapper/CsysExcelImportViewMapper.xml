@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.company.project.outer.dao.CsysExcelImportViewMapper">
-  <resultMap id="BaseResultMap" type="com.company.project.outer.model.CsysExcelImportView">
+<mapper namespace="com.company.project.dao.CsysExcelImportViewMapper">
+  <resultMap id="BaseResultMap" type="com.company.project.model.CsysExcelImportView">
     <!--
       WARNING - @mbg.generated
     -->
@@ -112,7 +112,7 @@
     CSYS_FIELD_INFO_TYPE, CSYS_FIELD_INFO_DEFAULT, CSYS_FIELD_INFO_DATE, CSYS_VIEW_EXPLAIN_ID, 
     CSYS_VIEW_EXPLAIN_NAME, CSYS_VIEW_EXPLAIN_TYPE, CSYS_VIEW_EXPLAIN_DESC
   </sql>
-  <select id="selectByExample" parameterType="com.company.project.outer.model.CsysExcelImportViewExample" resultMap="BaseResultMap">
+  <select id="selectByExample" parameterType="com.company.project.model.CsysExcelImportViewExample" resultMap="BaseResultMap">
     <!--
       WARNING - @mbg.generated
     -->
@@ -129,7 +129,7 @@
       order by ${orderByClause}
     </if>
   </select>
-  <delete id="deleteByExample" parameterType="com.company.project.outer.model.CsysExcelImportViewExample">
+  <delete id="deleteByExample" parameterType="com.company.project.model.CsysExcelImportViewExample">
     <!--
       WARNING - @mbg.generated
     -->
@@ -138,7 +138,7 @@
       <include refid="Example_Where_Clause" />
     </if>
   </delete>
-  <select id="countByExample" parameterType="com.company.project.outer.model.CsysExcelImportViewExample" resultType="java.lang.Long">
+  <select id="countByExample" parameterType="com.company.project.model.CsysExcelImportViewExample" resultType="java.lang.Long">
     <!--
       WARNING - @mbg.generated
     -->

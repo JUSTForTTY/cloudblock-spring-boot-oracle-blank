@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.company.project.outer.dao.CsysPageBlockMapper">
-  <resultMap id="BaseResultMap" type="com.company.project.outer.model.CsysPageBlock">
+<mapper namespace="com.company.project.dao.CsysPageBlockMapper">
+  <resultMap id="BaseResultMap" type="com.company.project.model.CsysPageBlock">
     <!--
       WARNING - @mbg.generated
     -->
@@ -33,7 +33,7 @@
     <result column="CSYS_PAGE_BLOCK_DATE" jdbcType="TIMESTAMP" property="csysPageBlockDate" />
     <result column="CSYS_PAGE_BLOCK_TIME" jdbcType="TIMESTAMP" property="csysPageBlockTime" />
   </resultMap>
-  <resultMap extends="BaseResultMap" id="ResultMapWithBLOBs" type="com.company.project.outer.model.CsysPageBlock">
+  <resultMap extends="BaseResultMap" id="ResultMapWithBLOBs" type="com.company.project.model.CsysPageBlock">
     <!--
       WARNING - @mbg.generated
     -->
@@ -121,7 +121,7 @@
     -->
     CSYS_PAGE_BLOCK_HTML_CODE
   </sql>
-  <select id="selectByExampleWithBLOBs" parameterType="com.company.project.outer.model.CsysPageBlockExample" resultMap="ResultMapWithBLOBs">
+  <select id="selectByExampleWithBLOBs" parameterType="com.company.project.model.CsysPageBlockExample" resultMap="ResultMapWithBLOBs">
     <!--
       WARNING - @mbg.generated
     -->
@@ -140,7 +140,7 @@
       order by ${orderByClause}
     </if>
   </select>
-  <select id="selectByExample" parameterType="com.company.project.outer.model.CsysPageBlockExample" resultMap="BaseResultMap">
+  <select id="selectByExample" parameterType="com.company.project.model.CsysPageBlockExample" resultMap="BaseResultMap">
     <!--
       WARNING - @mbg.generated
     -->
@@ -157,7 +157,7 @@
       order by ${orderByClause}
     </if>
   </select>
-  <delete id="deleteByExample" parameterType="com.company.project.outer.model.CsysPageBlockExample">
+  <delete id="deleteByExample" parameterType="com.company.project.model.CsysPageBlockExample">
     <!--
       WARNING - @mbg.generated
     -->
@@ -166,7 +166,7 @@
       <include refid="Example_Where_Clause" />
     </if>
   </delete>
-  <select id="countByExample" parameterType="com.company.project.outer.model.CsysPageBlockExample" resultType="java.lang.Long">
+  <select id="countByExample" parameterType="com.company.project.model.CsysPageBlockExample" resultType="java.lang.Long">
     <!--
       WARNING - @mbg.generated
     -->

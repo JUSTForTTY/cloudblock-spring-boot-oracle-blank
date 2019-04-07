@@ -14,7 +14,7 @@ import com.company.project.core.bean.JsonCompareBean;
 import com.company.project.core.bean.SearchSubJsonBean;
 import com.company.project.core.bean.TableDataBean;
 import com.company.project.core.bean.TableSaveBean;
-import com.company.project.outer.model.CsysUserView;
+import com.company.project.model.CsysUserView;
 import com.github.pagehelper.PageInfo;
 
 public interface SystemService {

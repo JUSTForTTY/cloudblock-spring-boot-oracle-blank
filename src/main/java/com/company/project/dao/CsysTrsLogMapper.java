@@ -1,8 +1,9 @@
-package com.company.project.outer.dao;
+package com.company.project.dao;
 
 import com.company.project.core.mapper.CommonMapper;
-import com.company.project.outer.model.CsysTrsLog;
-import com.company.project.outer.model.CsysTrsLogExample;
+import com.company.project.model.CsysTrsLog;
+import com.company.project.model.CsysTrsLogExample;
+
 import java.util.List;
 
 import org.apache.ibatis.annotations.Mapper;

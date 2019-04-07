@@ -1,7 +1,7 @@
 package com.company.project.biz;
-import com.company.project.outer.model.CsysMenuAuthView;
-import com.company.project.outer.model.CsysUser;
-import com.company.project.outer.model.CsysUserView;
+import com.company.project.model.CsysMenuAuthView;
+import com.company.project.model.CsysUser;
+import com.company.project.model.CsysUserView;
 import com.github.pagehelper.PageInfo;
 import java.util.List;
 

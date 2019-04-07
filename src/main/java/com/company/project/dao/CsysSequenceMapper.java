@@ -1,8 +1,9 @@
-package com.company.project.outer.dao;
+package com.company.project.dao;
 
 import com.company.project.core.mapper.CommonMapper;
-import com.company.project.outer.model.CsysSequence;
-import com.company.project.outer.model.CsysSequenceExample;
+import com.company.project.model.CsysSequence;
+import com.company.project.model.CsysSequenceExample;
+
 import java.util.List;
 import org.apache.ibatis.annotations.Param;
 

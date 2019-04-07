@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.company.project.outer.dao.CsysPotTrsMapper">
-  <resultMap id="BaseResultMap" type="com.company.project.outer.model.CsysPotTrs">
+<mapper namespace="com.company.project.dao.CsysPotTrsMapper">
+  <resultMap id="BaseResultMap" type="com.company.project.model.CsysPotTrs">
     <!--
       WARNING - @mbg.generated
     -->
@@ -104,7 +104,7 @@
     CSYS_POT_TRS_CREATE_USER, CSYS_POT_TRS_MODIFY_TIME, CSYS_POT_TRS_MODIFY_USER, CSYS_POT_TRS_IS_DELETE, 
     CSYS_POT_TRS_LEAST_TIME
   </sql>
-  <select id="selectByExample" parameterType="com.company.project.outer.model.CsysPotTrsExample" resultMap="BaseResultMap">
+  <select id="selectByExample" parameterType="com.company.project.model.CsysPotTrsExample" resultMap="BaseResultMap">
     <!--
       WARNING - @mbg.generated
     -->
@@ -121,7 +121,7 @@
       order by ${orderByClause}
     </if>
   </select>
-  <delete id="deleteByExample" parameterType="com.company.project.outer.model.CsysPotTrsExample">
+  <delete id="deleteByExample" parameterType="com.company.project.model.CsysPotTrsExample">
     <!--
       WARNING - @mbg.generated
     -->
@@ -130,7 +130,7 @@
       <include refid="Example_Where_Clause" />
     </if>
   </delete>
-  <select id="countByExample" parameterType="com.company.project.outer.model.CsysPotTrsExample" resultType="java.lang.Long">
+  <select id="countByExample" parameterType="com.company.project.model.CsysPotTrsExample" resultType="java.lang.Long">
     <!--
       WARNING - @mbg.generated
     -->

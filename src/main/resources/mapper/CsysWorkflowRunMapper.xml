@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.company.project.outer.dao.CsysWorkflowRunMapper">
-  <resultMap id="BaseResultMap" type="com.company.project.outer.model.CsysWorkflowRun">
+<mapper namespace="com.company.project.dao.CsysWorkflowRunMapper">
+  <resultMap id="BaseResultMap" type="com.company.project.model.CsysWorkflowRun">
     <!--
       WARNING - @mbg.generated
     -->
@@ -114,7 +114,7 @@
     CSYS_WORKFLOW_RUN_DATE, CSYS_WORKFLOW_RUN_PSTART_TIME, CSYS_WORKFLOW_RUN_PCLOSE_TIME, 
     CSYS_WORKFLOW_RUN_PEND_TIME, CSYS_WORKFLOW_RUN_PFREEZE_TIME, CSYS_WORKFLOW_RUN_PLEAST_TIME
   </sql>
-  <select id="selectByExample" parameterType="com.company.project.outer.model.CsysWorkflowRunExample" resultMap="BaseResultMap">
+  <select id="selectByExample" parameterType="com.company.project.model.CsysWorkflowRunExample" resultMap="BaseResultMap">
     <!--
       WARNING - @mbg.generated
     -->
@@ -131,7 +131,7 @@
       order by ${orderByClause}
     </if>
   </select>
-  <delete id="deleteByExample" parameterType="com.company.project.outer.model.CsysWorkflowRunExample">
+  <delete id="deleteByExample" parameterType="com.company.project.model.CsysWorkflowRunExample">
     <!--
       WARNING - @mbg.generated
     -->
@@ -140,7 +140,7 @@
       <include refid="Example_Where_Clause" />
     </if>
   </delete>
-  <select id="countByExample" parameterType="com.company.project.outer.model.CsysWorkflowRunExample" resultType="java.lang.Long">
+  <select id="countByExample" parameterType="com.company.project.model.CsysWorkflowRunExample" resultType="java.lang.Long">
     <!--
       WARNING - @mbg.generated
     -->

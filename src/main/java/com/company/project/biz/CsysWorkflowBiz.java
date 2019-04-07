@@ -1,6 +1,6 @@
 package com.company.project.biz;
-import com.company.project.outer.model.CsysWorkflow;
-import com.company.project.outer.model.CsysUserView;
+import com.company.project.model.CsysUserView;
+import com.company.project.model.CsysWorkflow;
 import com.github.pagehelper.PageInfo;
 import java.util.List;
 

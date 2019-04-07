@@ -1,9 +1,10 @@
 package com.company.project.service.impl;
 
-import com.company.project.outer.dao.CsysPageMapper;
-import com.company.project.outer.model.CsysPage;
 import com.company.project.service.CsysPageService;
 import com.company.project.core.service.AbstractService;
+import com.company.project.dao.CsysPageMapper;
+import com.company.project.model.CsysPage;
+
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 

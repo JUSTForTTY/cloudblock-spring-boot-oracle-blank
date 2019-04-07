@@ -1,9 +1,10 @@
 package com.company.project.service.impl;
 
-import com.company.project.outer.dao.CsysOrgPotMapper;
-import com.company.project.outer.model.CsysOrgPot;
 import com.company.project.service.CsysOrgPotService;
 import com.company.project.core.service.AbstractService;
+import com.company.project.dao.CsysOrgPotMapper;
+import com.company.project.model.CsysOrgPot;
+
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
