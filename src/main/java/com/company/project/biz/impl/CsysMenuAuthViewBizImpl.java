@@ -162,7 +162,7 @@ public class CsysMenuAuthViewBizImpl  implements CsysMenuAuthViewBiz {
 		int count = 0;
 		for (CsysMenuAuthView menu : parentDistinctMenuList) {
 			System.out.println("菜单编号"+menu.getCsysMenuId());
-			CsysMenuAuthView child = recursiveTree(menu, count);
+			CsysMenuAuthView child = recursiveTree(menu,role,count);
 			menuList.add(child);
 			count++;
 		}
@@ -170,7 +170,7 @@ public class CsysMenuAuthViewBizImpl  implements CsysMenuAuthViewBiz {
 		return menuList;
 	}
 	
-	private CsysMenuAuthView recursiveTree(CsysMenuAuthView menu, int count) {
+	private CsysMenuAuthView recursiveTree(CsysMenuAuthView menu,List <String> role,int count) {
 
 		 
 		CsysMenuAuthViewExample example=new CsysMenuAuthViewExample();
@@ -178,6 +178,7 @@ public class CsysMenuAuthViewBizImpl  implements CsysMenuAuthViewBiz {
 		example.setOrderByClause("CSYS_MENU_SORT");
 		example.setDistinct(true);
 		CsysMenuAuthViewExample.Criteria criteria =example.createCriteria();
+		criteria.andCsysRoleIdIn(role);
 		criteria.andCsysMenuParentIdEqualTo(menu.getCsysMenuId());
 		criteria.andCsysMenuIsDeleteEqualTo("0");
 		
@@ -191,7 +192,7 @@ public class CsysMenuAuthViewBizImpl  implements CsysMenuAuthViewBiz {
 		// 遍历子节点
 		if (childTreeNodes.size() > 0) {
 			for (CsysMenuAuthView child : childDistinctTreeNodes) {
-				CsysMenuAuthView n = recursiveTree(child, -1); // 递归
+				CsysMenuAuthView n = recursiveTree(child,role,-1); // 递归
 				menu.getChildren().add(n);
 			}
 		}
