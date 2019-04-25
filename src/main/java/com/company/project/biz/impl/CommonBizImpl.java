@@ -27,6 +27,15 @@ public class CommonBizImpl implements CommonBiz {
 		return commonService.getOracleSequence(tableName);
 	}
 	
+	@Override
+	public String getOracleSimpleSequence(String tableName) {
+		
+		//转换表名格式
+		tableName=tableNameConvertUpperCamel(tableName);
+		
+		return commonService.getOracleSimpleSequence(tableName);
+	}
+	
 	private String tableNameConvertUpperCamel(String tableName) {
 		  
 		  return CaseFormat.LOWER_UNDERSCORE.to(CaseFormat.UPPER_CAMEL, tableName.toLowerCase());

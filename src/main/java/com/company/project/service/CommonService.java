@@ -32,6 +32,13 @@ public interface CommonService {
 	String getSequenceNumber(String tableName);
 
 	/**
+	 * 获取oracle simple sequence
+	 * 
+	 * @param tableName
+	 * @return
+	 */
+	public String getOracleSimpleSequence(String tableName);
+	/**
 	 * 获取oracle sequence
 	 * 
 	 * @param tableName

@@ -1,5 +1,7 @@
 package com.company.project.core.bean;
 
+import java.util.List;
+
 public class JsonBean {
 
 	
@@ -7,6 +9,9 @@ public class JsonBean {
 	
 	
 	private String value;
+	
+	
+	private List<JsonBean> compositeValue;
 
 
 	public String getName() {
@@ -27,5 +32,18 @@ public class JsonBean {
 	public void setValue(String value) {
 		this.value = value;
 	}
+
+
+	public List<JsonBean> getCompositeValue() {
+		return compositeValue;
+	}
+
+
+	public void setCompositeValue(List<JsonBean> compositeValue) {
+		this.compositeValue = compositeValue;
+	}
+
+
+	 
 	
 }

@@ -2,20 +2,14 @@ package com.company.project.service;
 
 import java.util.List;
 import java.util.Map;
-
-import org.apache.poi.ss.formula.functions.T;
-
 import com.company.project.core.bean.CascaderBean;
 import com.company.project.core.bean.ChartColumnBean;
-import com.company.project.core.bean.ChartDataBean;
 import com.company.project.core.bean.JsonBean;
 import com.company.project.core.bean.JsonColumnBean;
 import com.company.project.core.bean.JsonCompareBean;
 import com.company.project.core.bean.SearchSubJsonBean;
-import com.company.project.core.bean.TableDataBean;
-import com.company.project.core.bean.TableSaveBean;
 import com.company.project.model.CsysUserView;
-import com.github.pagehelper.PageInfo;
+
 
 public interface SystemService {
 	/**
@@ -40,7 +34,7 @@ public interface SystemService {
 	 * @param primaryMap
 	 * @return
 	 */
-	public void updateTableData(String tableName, List<JsonBean> updateMap, List<JsonBean> primaryMap);
+	public String updateTableData(String tableName, List<JsonBean> updateMap, List<JsonBean> primaryMap);
 
 	/**
 	 * 删除数据
@@ -73,8 +67,7 @@ public interface SystemService {
 	 * @param dynamicProcedure
 	 * @return
 	 */
-	public List<Map<String, Object>> dynamicProcedure(String dynamicSql, List<JsonBean> tableSort,
-			Map<String, List<SearchSubJsonBean>> searchMap);
+	public List<Map<String, Object>> dynamicProcedure(String dynamicSql,List<JsonBean> params);
 
 	/**
 	 * 获取图表数据信息
@@ -145,4 +138,5 @@ public interface SystemService {
 	 * @return
 	 */
 	public List<Map<String, Object>> validationData(String tableName,String mode,JsonBean currentValue, List<JsonCompareBean> compareValue);
+	
 }

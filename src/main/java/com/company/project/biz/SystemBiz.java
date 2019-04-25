@@ -3,12 +3,12 @@ package com.company.project.biz;
 import java.util.List;
 import java.util.Map;
 
-import org.apache.poi.ss.formula.functions.T;
 
 import com.company.project.core.bean.CascaderBean;
 import com.company.project.core.bean.ChartDataBean;
+import com.company.project.core.bean.DeleteDataBean;
 import com.company.project.core.bean.DynamicJsonBean;
-import com.company.project.core.bean.JsonBean;
+import com.company.project.core.bean.ResultBean;
 import com.company.project.core.bean.TableDataBean;
 import com.company.project.core.bean.TableSaveBean;
 import com.company.project.core.bean.ValidationBean;
@@ -23,7 +23,7 @@ public interface SystemBiz {
 	 * @param TableDataBean
 	 * @return
 	 */
-	public PageInfo getTableData(CsysUserView baseUserView, TableDataBean tableDataBean);
+	public ResultBean getTableData(CsysUserView baseUserView, TableDataBean tableDataBean);
 
 	/**
 	 * 更新数据
@@ -31,7 +31,7 @@ public interface SystemBiz {
 	 * @param TableDataBean
 	 * @return
 	 */
-	public void updateTableData(TableDataBean tableDataBean);
+	public ResultBean updateTableData(TableDataBean tableDataBean,List<CsysUserView> baseUserList);
 
 	/**
 	 * 删除数据
@@ -41,7 +41,7 @@ public interface SystemBiz {
 	 * @param primaryMap
 	 * @return
 	 */
-	public void logicalDeleteData(String tableName, String deleteFlag, List<JsonBean> primaryMap);
+	public ResultBean logicalDeleteData(DeleteDataBean deleteDataBean,CsysUserView CsysUserView);
 
 	/**
 	 * 物理删除
@@ -49,7 +49,7 @@ public interface SystemBiz {
 	 * @param tableName
 	 * @param primaryMap
 	 */
-	public void physicalDeleteData(String tableName, List<JsonBean> primaryMap);
+	public ResultBean physicalDeleteData(DeleteDataBean deleteDataBean,CsysUserView CsysUserView);
 
 	/**
 	 * 动态sql查询
@@ -99,7 +99,7 @@ public interface SystemBiz {
 	 * @param CsysUserView
 	 * @return
 	 */
-	public String saveTableData(TableSaveBean tableSaveBean, CsysUserView CsysUserView);
+	public ResultBean saveTableData(TableSaveBean tableSaveBean, CsysUserView CsysUserView);
 
 	/**
 	 * 更新数据
@@ -108,7 +108,7 @@ public interface SystemBiz {
 	 * @param CsysUserView
 	 * @return
 	 */
-	public String updateTableData(TableSaveBean tableSaveBean, CsysUserView CsysUserView);
+	public ResultBean updateTableData(TableSaveBean tableSaveBean, CsysUserView CsysUserView);
 
 	/**
 	 * 预查询数据
@@ -117,7 +117,7 @@ public interface SystemBiz {
 	 * @return
 	 */
 	public Map<String, List<Map<String, Object>>> preSearchTableData(List<TableDataBean> tableDataList);
-	
+
 	/**
 	 * 表单校验
 	 * 
@@ -125,5 +125,4 @@ public interface SystemBiz {
 	 * @return
 	 */
 	public boolean validationData(ValidationBean validationBean,CsysUserView CsysUserView);
-
 }

@@ -89,7 +89,7 @@ public class ExcelExportService implements ExcelExportInterface {
 		String[] columnNameArray = autoExportExcel.getColumnNameArray();
 		// 获取数据
 		List<Map<String, Object>> dataList = systemBiz
-				.getTableData(new CsysUserView(), autoExportExcel.getTableDataBean()).getList();
+				.getTableData(new CsysUserView(), autoExportExcel.getTableDataBean()).getData().getList();
 		logger.info("导出数据长度为：" + dataList.size());
 		// 开始写入数据
 		int count = 1;

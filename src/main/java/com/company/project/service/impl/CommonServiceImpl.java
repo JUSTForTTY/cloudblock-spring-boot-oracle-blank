@@ -61,6 +61,16 @@ public class CommonServiceImpl implements CommonService {
 		 
 		return cursorList.get(0).get("CSYS_SEQUENCE_SEQNO").toString();
 	}
+	@Override
+	public String getOracleSimpleSequence(String tableName) {
+		Map<String, Object> map = new HashMap<String, Object>();
+		map.put("tableName", tableName);
+		map.put("cursor", oracle.jdbc.OracleTypes.CURSOR);
+		commonOuterUtilsMapper.getOracleSequence(map);
+		ArrayList<Map<String, Object>> cursorList = (ArrayList<Map<String, Object>>) map.get("cursor");
+		String str =  cursorList.get(0).get("CSYS_SEQUENCE_SEQNO").toString();
+		return str;
+	}
 
 	@Override
 	public String getOracleSequence(String tableName) {

@@ -4,6 +4,7 @@ import com.company.project.core.bean.CascaderBean;
 import com.company.project.core.bean.ChartDataBean;
 import com.company.project.core.bean.DeleteDataBean;
 import com.company.project.core.bean.DynamicJsonBean;
+import com.company.project.core.bean.ResultBean;
 import com.company.project.core.bean.SmsBean;
 import com.company.project.core.bean.TableDataBean;
 import com.company.project.core.bean.TableSaveBean;
@@ -33,7 +34,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 /**
- * Created by tty1 on 2018/08/28.
+ * Created by tty on 2018/08/27.
  */
 @RestController
 @RequestMapping("/system")
@@ -86,14 +87,14 @@ public class SystemController {
 
 			/*--------------end 此段代码可优化成redis-----------------------*/
 
-			PageInfo pageInfo = systemBiz.getTableData(baseUserList.get(0), tableDataBean);
+			ResultBean resultBean = systemBiz.getTableData(baseUserList.get(0), tableDataBean);
 
 			if (tokenRefreshFlag) {
 				param.put("access_token", token);
 				param.put("refresh_token", refreshtoken);
 
 			}
-			return ResultGenerator.genSuccessResult(pageInfo, param);
+			return ResultGenerator.genSuccessResult(resultBean.getData(), resultBean.getExtraData(), param);
 
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -127,31 +128,24 @@ public class SystemController {
 		}
 		/*---------------------------end 授权验证------------------------*/
 
-		try {
-			// 获取用户信息
-			/*--------------start 此段代码可优化成redis-----------------------*/
-			CsysUserView baseUserView = new CsysUserView();
+		// 获取用户信息
+		/*--------------start 此段代码可优化成redis-----------------------*/
+		CsysUserView baseUserView = new CsysUserView();
 
-			baseUserView.setCsysUserRefreshToken(refreshtoken);
+		baseUserView.setCsysUserRefreshToken(refreshtoken);
 
-			List<CsysUserView> baseUserList = authloginBiz.getDataSettingsByCondition(baseUserView);
+		List<CsysUserView> baseUserList = authloginBiz.getDataSettingsByCondition(baseUserView);
 
-			/*--------------end 此段代码可优化成redis-----------------------*/
+		/*--------------end 此段代码可优化成redis-----------------------*/
 
-			systemBiz.updateTableData(tableDataBean);
+		ResultBean resultBean = systemBiz.updateTableData(tableDataBean, baseUserList);
 
-			if (tokenRefreshFlag) {
-				param.put("access_token", token);
-				param.put("refresh_token", refreshtoken);
-
-			}
-			return ResultGenerator.genSuccessResult(param);
-
-		} catch (Exception e) {
-
-			return ResultGenerator.genServerErrorResult(param);
+		if (tokenRefreshFlag) {
+			param.put("access_token", token);
+			param.put("refresh_token", refreshtoken);
 
 		}
+		return ResultGenerator.genSuccessResult(resultBean.getStringData(), resultBean.getExtraData(), param);
 
 	}
 
@@ -192,7 +186,7 @@ public class SystemController {
 
 			for (DeleteDataBean deleteBean : deleteBeanList) {
 
-				systemBiz.physicalDeleteData(deleteBean.getTableName(), deleteBean.getPrimaryMap());
+				systemBiz.physicalDeleteData(deleteBean, baseUserList.get(0));
 			}
 			if (tokenRefreshFlag) {
 				param.put("access_token", token);
@@ -233,34 +227,26 @@ public class SystemController {
 		}
 		/*---------------------------end 授权验证------------------------*/
 
-		try {
-			// 获取用户信息
-			/*--------------start 此段代码可优化成redis-----------------------*/
-			CsysUserView baseUserView = new CsysUserView();
+		// 获取用户信息
+		/*--------------start 此段代码可优化成redis-----------------------*/
+		CsysUserView baseUserView = new CsysUserView();
 
-			baseUserView.setCsysUserRefreshToken(refreshtoken);
+		baseUserView.setCsysUserRefreshToken(refreshtoken);
 
-			List<CsysUserView> baseUserList = authloginBiz.getDataSettingsByCondition(baseUserView);
+		List<CsysUserView> baseUserList = authloginBiz.getDataSettingsByCondition(baseUserView);
 
-			/*--------------end 此段代码可优化成redis-----------------------*/
+		/*--------------end 此段代码可优化成redis-----------------------*/
 
-			for (DeleteDataBean deleteBean : deleteBeanList) {
+		for (DeleteDataBean deleteBean : deleteBeanList) {
 
-				systemBiz.logicalDeleteData(deleteBean.getTableName(), deleteBean.getDeleteFlag(),
-						deleteBean.getPrimaryMap());
-			}
-			if (tokenRefreshFlag) {
-				param.put("access_token", token);
-				param.put("refresh_token", refreshtoken);
-
-			}
-			return ResultGenerator.genSuccessResult(param);
-
-		} catch (Exception e) {
-
-			return ResultGenerator.genServerErrorResult(param);
+			systemBiz.logicalDeleteData(deleteBean, baseUserList.get(0));
+		}
+		if (tokenRefreshFlag) {
+			param.put("access_token", token);
+			param.put("refresh_token", refreshtoken);
 
 		}
+		return ResultGenerator.genSuccessResult(param);
 
 	}
 
@@ -509,14 +495,14 @@ public class SystemController {
 
 		/*--------------end 此段代码可优化成redis-----------------------*/
 
-		String returnsequence = systemBiz.saveTableData(tableSaveBean, baseUserList.get(0));
+		ResultBean resultBean = systemBiz.saveTableData(tableSaveBean, baseUserList.get(0));
 
 		if (tokenRefreshFlag) {
 			param.put("access_token", token);
 			param.put("refresh_token", refreshtoken);
 
 		}
-		return ResultGenerator.genSuccessResult(returnsequence, param);
+		return ResultGenerator.genSuccessResult(resultBean.getStringData(), resultBean.getExtraData(), param);
 
 	}
 
@@ -563,7 +549,7 @@ public class SystemController {
 
 			for (TableSaveBean tsBean : tableSaveListBean) {
 
-				String returnsequence = systemBiz.saveTableData(tsBean, baseUserList.get(0));
+				systemBiz.saveTableData(tsBean, baseUserList.get(0));
 
 			}
 
@@ -619,14 +605,14 @@ public class SystemController {
 
 		/*--------------end 此段代码可优化成redis-----------------------*/
 
-		String returnsequence = systemBiz.updateTableData(tableSaveBean, baseUserList.get(0));
+		ResultBean resultBean = systemBiz.updateTableData(tableSaveBean, baseUserList.get(0));
 
 		if (tokenRefreshFlag) {
 			param.put("access_token", token);
 			param.put("refresh_token", refreshtoken);
 
 		}
-		return ResultGenerator.genSuccessResult(returnsequence, param);
+		return ResultGenerator.genSuccessResult(resultBean.getStringData(), resultBean.getExtraData(), param);
 
 	}
 
@@ -672,7 +658,7 @@ public class SystemController {
 		try {
 
 			for (TableSaveBean tsBean : tableSaveListBean) {
-				String returnsequence = systemBiz.updateTableData(tsBean, baseUserList.get(0));
+				systemBiz.updateTableData(tsBean, baseUserList.get(0));
 			}
 
 			if (tokenRefreshFlag) {
