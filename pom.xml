@@ -1,14 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+		 xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
 	<modelVersion>4.0.0</modelVersion>
 
 	<groupId>com.example</groupId>
-	<artifactId>cloudblock-spring-boot-oracle-blank</artifactId>
+	<artifactId>cloudblock-spring-boot-oracle</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
 	<packaging>war</packaging>
 
-	<name>cloudblock-spring-boot-oracle-blank</name>
+	<name>cloudblock-spring-boot-oracle</name>
 	<description>Demo project for Spring Boot</description>
 
 	<properties>
@@ -60,6 +60,12 @@
 			<artifactId>mysql-connector-java</artifactId>
 			<scope>runtime</scope>
 		</dependency>
+		<dependency>
+			<groupId>com.microsoft.sqlserver</groupId>
+			<artifactId>mssql-jdbc</artifactId>
+			<version>6.4.0.jre8</version>
+			<scope>runtime</scope>
+		</dependency>
 		<!--MyBatis 及 插件依赖 -->
 		<dependency>
 			<groupId>org.mybatis</groupId>
@@ -94,12 +100,9 @@
 			<version>1.1.10</version>
 		</dependency>
 		<!--代码生成器依赖 -->
-		<dependency>
-			<groupId>org.freemarker</groupId>
-			<artifactId>freemarker</artifactId>
-			<version>2.3.23</version>
-			<scope>test</scope>
-		</dependency>
+		<!-- <dependency> <groupId>org.freemarker</groupId> <artifactId>freemarker</artifactId>
+			<version>2.3.23</version> <scope>test</scope> </dependency> -->
+		<!-- 引入freemarker包 -->
 		<dependency>
 			<groupId>org.mybatis.generator</groupId>
 			<artifactId>mybatis-generator-core</artifactId>
@@ -191,8 +194,10 @@
 		</dependency>
 
 		<!--FreeMaker 代替 JSP 作为页面渲染 -->
-		<!-- <dependency> <groupId>org.springframework.boot</groupId> <artifactId>spring-boot-starter-freemarker</artifactId> 
-			</dependency> -->
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-freemarker</artifactId>
+		</dependency>
 
 		<!--mail配置,发送邮件 -->
 		<dependency>
@@ -233,12 +238,18 @@
 			<artifactId>spring-boot-starter-tomcat</artifactId>
 		</dependency>
 
-		<dependency>
-			<groupId>com.oracle</groupId>
+		<dependency> 
+			<groupId>com.oracle</groupId> 
 			<artifactId>ojdbc7</artifactId>
 			<version>7</version>
 		</dependency>
 
+
+		<dependency>
+			<groupId>org.apache.commons</groupId>
+			<artifactId>commons-jexl</artifactId>
+			<version>2.0</version>
+		</dependency>
 		<!-- https://mvnrepository.com/artifact/com.offbytwo.jenkins/jenkins-client -->
 		<dependency>
 			<groupId>com.offbytwo.jenkins</groupId>
@@ -252,6 +263,19 @@
 			<artifactId>org.eclipse.jgit</artifactId>
 			<version>5.1.3.201810200350-r</version>
 		</dependency>
+
+		<!-- https://mvnrepository.com/artifact/org.quartz-scheduler/quartz -->
+		<dependency>
+			<groupId>org.quartz-scheduler</groupId>
+			<artifactId>quartz</artifactId>
+			<version>2.3.0</version>
+		</dependency>
+		<!-- 该依赖必加，里面有sping对schedule的支持 -->
+		<dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-context-support</artifactId>
+		</dependency>
+
 
 
 
@@ -274,8 +298,8 @@
 				</plugin>
 
 				<!--docker插件 -->
-				<!--Spotify 的 docker-maven-plugin 插件是用于构建 Maven 的 Docker Image imageName指定了镜像的名字，本例为 
-					jimersylee/spring-boot-api-project-seed dockerDirectory指定 Dockerfile 的位置 
+				<!--Spotify 的 docker-maven-plugin 插件是用于构建 Maven 的 Docker Image imageName指定了镜像的名字，本例为
+					jimersylee/spring-boot-api-project-seed dockerDirectory指定 Dockerfile 的位置
 					resources是指那些需要和 Dockerfile 放在一起，在构建镜像时使用的文件，一般应用 jar 包需要纳入。本例，只需一个 jar 文件。 -->
 				<plugin>
 					<groupId>com.spotify</groupId>
@@ -299,7 +323,6 @@
 					<version>1.3.2</version>
 					<configuration>
 						<configurationFile>src/test/resources/generatorConfigOdbc.xml</configurationFile>
-						<verbose>true</verbose>
 						<overwrite>true</overwrite>
 					</configuration>
 					<executions>
@@ -310,13 +333,6 @@
 							</goals>
 						</execution>
 					</executions>
-					<dependencies>
-						<dependency>
-							<groupId>org.mybatis.generator</groupId>
-							<artifactId>mybatis-generator-core</artifactId>
-							<version>1.3.2</version>
-						</dependency>
-					</dependencies>
 				</plugin>
 
 				<plugin>
@@ -336,16 +352,7 @@
 							</goals>
 						</execution>
 					</executions>
-					<dependencies>
-						<dependency>
-							<groupId>org.mybatis.generator</groupId>
-							<artifactId>mybatis-generator-core</artifactId>
-							<version>1.3.2</version>
-						</dependency>
-					</dependencies>
 				</plugin>
-
-
 			</plugins>
 
 

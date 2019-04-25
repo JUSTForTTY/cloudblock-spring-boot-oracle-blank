@@ -32,4 +32,12 @@ public class CommonBizImpl implements CommonBiz {
 		  return CaseFormat.LOWER_UNDERSCORE.to(CaseFormat.UPPER_CAMEL, tableName.toLowerCase());
 	}
 
+	@Override
+	public String getOracleSimpleSequence(String tableName) {
+
+		//转换表名格式
+		tableName=tableNameConvertUpperCamel(tableName);
+
+		return commonService.getOracleSimpleSequence(tableName);
+	}
 }

@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.company.project.dao.WorkflowmanagerMapper">
+	<select id="getTableData000859" parameterType="com.company.project.core.bean.SearchTableBean"
+		timeout="8" resultType="java.util.Map">
+		select T_TEST001_CREATE_TIME,T_TEST001_NAME,T_TEST001_FLAG,T_TEST001_ID,T_TEST001_MODIFY_USER,T_TEST001_MODIFY_TIME,T_TEST001_CREATE_USER
+		from T_TEST001 where 1=1
+		    and T_TEST001_FLAG = '0'
+		<if test="searchMap.size()>0">
+			<foreach collection="searchMap.keys" index="index" item="key">
+				and 
+				<foreach collection="searchMap[key]" item="map" index="index" open="(" separator="or" close=")">
+					<choose>
+        				<when test="map.name=='between' or map.name=='not between'">
+        					<choose>
+           				 		<when test="map.type=='dateformat'">
+									${key} ${map.name} to_date(#{map.value1},'${map.instruction}') and to_date(#{map.value2},'${map.instruction}')
+      							</when>
+      							<when test="map.type=='stringformat'">
+									${key} ${map.name} to_char(#{map.value1},'${map.instruction}') and to_date(#{map.value2},'${map.instruction}')
+      							</when>
+      							<when test="map.type=='numberformat'">
+									${key} ${map.name} to_number(#{map.value1},'${map.instruction}') and to_date(#{map.value2},'${map.instruction}')
+      							</when>
+      							<otherwise>
+									${key} ${map.name} #{map.value1} and #{map.value2}
+      							</otherwise>
+      						</choose>	
+      					</when>	
+      					<when test="map.name=='like'">
+      						<choose>
+           				 		<when test="map.type=='dateformat'">
+									${key} like to_date(#{map.value1},'${map.instruction}') and to_date(#{map.value2},'${map.instruction}')
+      							</when>
+      							<when test="map.type=='stringformat'">
+									${key} like to_char(#{map.value1},'${map.instruction}') and to_date(#{map.value2},'${map.instruction}')
+      							</when>
+      							<when test="map.type=='numberformat'">
+									${key} like to_number(#{map.value1},'${map.instruction}') and to_date(#{map.value2},'${map.instruction}')
+      							</when>
+      							<otherwise>
+									${key} like #{map.value1} and #{map.value2}
+      							</otherwise>	
+      						</choose>
+      					 </when>		
+      					 <otherwise>
+      						<choose>
+								<when test="map.type=='dateformat'">
+									${key} ${map.name} to_date(#{map.value1},'${map.instruction}')
+      							</when>
+      							<when test="map.type=='stringformat'">
+									${key} ${map.name} to_char(#{map.value1},'${map.instruction}')
+      							</when>
+      							<when test="map.type=='numberformat'">
+									${key} ${map.name} to_number(#{map.value1},'${map.instruction}')
+      							</when>
+      							<otherwise>
+									${key} ${map.name} #{map.value1}
+      							</otherwise>
+      						</choose>	
+      					 </otherwise>
+      				</choose>	
+				</foreach>	
+			</foreach>
+		</if>
+					and T_TEST001_CREATE_USER in (${organizePoints})
+		<if test="tableSort.size() > 0">
+		    order by
+			<foreach item="item" index="index" collection="tableSort" separator="," >
+				${item.name} ${item.value}     
+			</foreach>
+		</if>
+	</select> 
+
+    <delete id="logicalDeleteTableData000859" parameterType="map">
+    	update T_TEST001 
+    	set T_TEST001_MODIFY_TIME = to_date(#{T_TEST001_MODIFY_TIME},'yyyy-MM-dd hh24:mi:ss'),T_TEST001_MODIFY_USER = #{T_TEST001_MODIFY_USER},T_TEST001_FLAG = '1'
+    	where 
+    		  	T_T_TEST001_ID = #{T_T_TEST001_ID}
+    </delete>
+    
+    <delete id="physicalDeleteTableData000859" parameterType="map">
+    	delete from T_TEST001 
+    	where 
+    		  T_T_TEST001_ID = #{T_T_TEST001_ID}
+    </delete>
+</mapper>
