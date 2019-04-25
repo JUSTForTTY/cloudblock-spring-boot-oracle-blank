@@ -7,7 +7,7 @@ import java.util.Map;
 
 public class ResultBean {
 
-	
+
 	private PageInfo data;
 	
 	private  String StringData;
