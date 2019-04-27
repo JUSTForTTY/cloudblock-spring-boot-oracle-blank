@@ -13,7 +13,7 @@ public class Result {
     private String message;
     private Map<String,String> param;
     private Object data;
-    
+    private Object extraData;    
 
     public Result(){
     }
@@ -30,7 +30,13 @@ public class Result {
         this.data=data;
         this.param=param;
     }
-
+    public Result(ResultCode resultCode,Object data,Object extraData,Map<String,String> param) {
+        this.code = resultCode.getCode();
+        this.message=resultCode.getMessage();
+        this.data=data;
+        this.extraData=extraData;
+        this.param=param;
+    }
 
 
 
@@ -73,6 +79,15 @@ public class Result {
 
 	public Result setParam(Map<String,String> param) {
 		this.param = param;
+		return this;
+	}
+
+	public Object getExtraData() {
+		return extraData;
+	}
+
+	public Result setExtraData(Object extraData) {
+		this.extraData = extraData;
 		return this;
 	}
 

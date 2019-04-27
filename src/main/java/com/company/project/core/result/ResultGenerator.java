@@ -24,6 +24,15 @@ public class ResultGenerator {
                 .setData(data);
         		 
     }
+    public static Result genSuccessResult(Object data,Object extraData,Map<String,String> param) {
+        return new Result()
+                .setCode(ResultCode.SUCCESS)
+                .setMessage(DEFAULT_SUCCESS_MESSAGE)
+                .setParam(param)
+                .setData(data)
+                .setExtraData(extraData);
+        		 
+    }
 
     public static Result genFailResult(String message,Map<String,String> param) {
         return new Result()
