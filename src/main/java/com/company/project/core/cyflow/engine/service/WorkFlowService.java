@@ -130,7 +130,8 @@ public class WorkFlowService implements WorkflowInterface {
                              * 第六步：判断自动执行节点
                              */
                             autoExeCsysPot(csysWorkflowRun, csysPot.getCsysPotId());
-                            object.put("status", ResultCode.SUCCESS.getCode());
+                            object.put("status", ResultCode.SUCCESS.getMessage());
+                            object.put("code", ResultCode.SUCCESS.getCode());
                         } else {
                             // 无实例化权限
                             object.put("status", ResultCode.FAIL.getCode());
@@ -355,7 +356,7 @@ public class WorkFlowService implements WorkflowInterface {
                         }
                     }
                     if (conditionFlag) {
-                        obj.put("status", ResultCode.FAIL);
+                        obj.put("status", ResultCode.FAIL.getMessage());
                         obj.put("code", WorkflowPotTrsConEnum.TrsConDissatisfy.getCode());
                         obj.put("msg", conditionMsg != null ? conditionMsg
                                 : WorkflowPotTrsConEnum.TrsConDissatisfy.getDescribtion());
@@ -363,7 +364,7 @@ public class WorkFlowService implements WorkflowInterface {
                     }
                 } catch (Exception e) {
                     e.printStackTrace();
-                    obj.put("status", ResultCode.FAIL);
+                    obj.put("status", ResultCode.FAIL.getMessage());
                     obj.put("code", WorkflowPotTrsConEnum.TrsConException.getCode());
                     obj.put("msg", WorkflowPotTrsConEnum.TrsConException.getDescribtion());
                     return obj;
@@ -381,16 +382,17 @@ public class WorkFlowService implements WorkflowInterface {
                  * 第六步：判断自动执行节点
                  */
                 autoExeCsysPot(workflowRun, csysPotTrs.getCsysPotTrsPointId());
-                obj.put("status", ResultCode.SUCCESS);
+                obj.put("status", ResultCode.SUCCESS.getMessage());
+                obj.put("code", ResultCode.SUCCESS.getCode());
             } else {
                 // 当前用户无迁移权限
-                obj.put("status", ResultCode.FAIL);
+                obj.put("status", ResultCode.FAIL.getMessage());
                 obj.put("code", WorkflowPotTrsAuthEnum.PotTrsIsNotAuth.getCode());
                 obj.put("msg", WorkflowPotTrsAuthEnum.PotTrsIsNotAuth.getDescribtion());
             }
         } else {
             // 工作流实例状态错误编码
-            obj.put("status", ResultCode.FAIL);
+            obj.put("status", ResultCode.FAIL.getMessage());
             obj.put("code", status.getCode());
             obj.put("msg", status.getDescribtion());
         }
@@ -604,7 +606,8 @@ public class WorkFlowService implements WorkflowInterface {
             if (!"-1".equals(workflowId)) {
                 // 重新获取工作流编号
                 cySysWorkflowId = workflowId;
-                object.put("status", ResultCode.SUCCESS.getCode());
+                object.put("status", ResultCode.SUCCESS.getMessage());
+                object.put("code", ResultCode.SUCCESS.getCode());
             } else {
                 // 克隆工作流失败
                 object.put("status", ResultCode.FAIL.getCode());
@@ -708,7 +711,7 @@ public class WorkFlowService implements WorkflowInterface {
                         }
                     }
                     if (conditionFlag) {
-                        obj.put("status", ResultCode.FAIL);
+                        obj.put("status", ResultCode.FAIL.getMessage());
                         obj.put("code", WorkflowPotTrsConEnum.TrsConDissatisfy.getCode());
                         obj.put("msg", conditionMsg != null ? conditionMsg
                                 : WorkflowPotTrsConEnum.TrsConDissatisfy.getDescribtion());
@@ -716,21 +719,22 @@ public class WorkFlowService implements WorkflowInterface {
                     }
                 } catch (Exception e) {
                     e.printStackTrace();
-                    obj.put("status", ResultCode.FAIL);
+                    obj.put("status", ResultCode.FAIL.getMessage());
                     obj.put("code", WorkflowPotTrsConEnum.TrsConException.getCode());
                     obj.put("msg", WorkflowPotTrsConEnum.TrsConException.getDescribtion());
                     return obj;
                 }
-                obj.put("status", ResultCode.SUCCESS);
+                obj.put("code", ResultCode.SUCCESS.getCode());
+                obj.put("status", ResultCode.SUCCESS.getMessage());
             } else {
                 // 当前用户无迁移权限
-                obj.put("status", ResultCode.FAIL);
+                obj.put("status", ResultCode.FAIL.getMessage());
                 obj.put("code", WorkflowPotTrsAuthEnum.PotTrsIsNotAuth.getCode());
                 obj.put("msg", WorkflowPotTrsAuthEnum.PotTrsIsNotAuth.getDescribtion());
             }
         } else {
             // 工作流实例状态错误编码
-            obj.put("status", ResultCode.FAIL);
+            obj.put("status", ResultCode.FAIL.getMessage());
             obj.put("code", status.getCode());
             obj.put("msg", status.getDescribtion());
         }
