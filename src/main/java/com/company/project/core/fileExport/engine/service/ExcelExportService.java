@@ -3,6 +3,7 @@ package com.company.project.core.fileExport.engine.service;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import java.util.Map;
@@ -89,7 +90,7 @@ public class ExcelExportService implements ExcelExportInterface {
 		String[] columnNameArray = autoExportExcel.getColumnNameArray();
 		// 获取数据
 		List<Map<String, Object>> dataList = systemBiz
-				.getTableData(new CsysUserView(), autoExportExcel.getTableDataBean()).getData().getList();
+				.getTableData(new ArrayList<CsysUserView>(), autoExportExcel.getTableDataBean()).getData().getList();
 		logger.info("导出数据长度为：" + dataList.size());
 		// 开始写入数据
 		int count = 1;

@@ -79,7 +79,7 @@ public class SystemController {
         try {
             // 获取用户信息
             /*--------------start 此段代码可优化成redis-----------------------*/
-        	CsysUserView baseUserView = new CsysUserView();
+            CsysUserView baseUserView = new CsysUserView();
 
             baseUserView.setCsysUserRefreshToken(refreshtoken);
 
@@ -87,7 +87,7 @@ public class SystemController {
 
             /*--------------end 此段代码可优化成redis-----------------------*/
 
-            ResultBean resultBean = systemBiz.getTableData(baseUserList.get(0), tableDataBean);
+            ResultBean resultBean = systemBiz.getTableData(baseUserList, tableDataBean);
 
             if (tokenRefreshFlag) {
                 param.put("access_token", token);
@@ -188,7 +188,7 @@ public class SystemController {
 
             for (DeleteDataBean deleteBean : deleteBeanList) {
 
-                systemBiz.physicalDeleteData(deleteBean, baseUserList.get(0));
+                systemBiz.physicalDeleteData(deleteBean, baseUserList);
             }
             if (tokenRefreshFlag) {
                 param.put("access_token", token);
@@ -241,7 +241,7 @@ public class SystemController {
 
         for (DeleteDataBean deleteBean : deleteBeanList) {
 
-            systemBiz.logicalDeleteData(deleteBean, baseUserList.get(0));
+            systemBiz.logicalDeleteData(deleteBean, baseUserList);
         }
         if (tokenRefreshFlag) {
             param.put("access_token", token);
@@ -290,7 +290,7 @@ public class SystemController {
 
         /*--------------end 此段代码可优化成redis-----------------------*/
 
-        PageInfo pagedata = systemBiz.getDynamicSql(dynamicJson, baseUserList.get(0));
+        PageInfo pagedata = systemBiz.getDynamicSql(dynamicJson, baseUserList);
 
         if (tokenRefreshFlag) {
             param.put("access_token", token);
@@ -340,7 +340,7 @@ public class SystemController {
 
             /*--------------end 此段代码可优化成redis-----------------------*/
 
-            List<Map<String, Object>> dataList = systemBiz.dynamicProcedure(dynamicJson, baseUserList.get(0));
+            List<Map<String, Object>> dataList = systemBiz.dynamicProcedure(dynamicJson, baseUserList);
 
             if (tokenRefreshFlag) {
                 param.put("access_token", token);
@@ -497,7 +497,7 @@ public class SystemController {
 
         /*--------------end 此段代码可优化成redis-----------------------*/
 
-        ResultBean resultBean = systemBiz.saveTableData(tableSaveBean, baseUserList.get(0));
+        ResultBean resultBean = systemBiz.saveTableData(tableSaveBean, baseUserList);
 
         if (tokenRefreshFlag) {
             param.put("access_token", token);
@@ -551,7 +551,7 @@ public class SystemController {
 
             for (TableSaveBean tsBean : tableSaveListBean) {
 
-                systemBiz.saveTableData(tsBean, baseUserList.get(0));
+                systemBiz.saveTableData(tsBean, baseUserList);
 
             }
 
@@ -607,7 +607,7 @@ public class SystemController {
 
         /*--------------end 此段代码可优化成redis-----------------------*/
 
-        ResultBean resultBean = systemBiz.updateTableData(tableSaveBean, baseUserList.get(0));
+        ResultBean resultBean = systemBiz.updateTableData(tableSaveBean, baseUserList);
 
         if (tokenRefreshFlag) {
             param.put("access_token", token);
@@ -660,7 +660,7 @@ public class SystemController {
         try {
 
             for (TableSaveBean tsBean : tableSaveListBean) {
-                systemBiz.updateTableData(tsBean, baseUserList.get(0));
+                systemBiz.updateTableData(tsBean, baseUserList);
             }
 
             if (tokenRefreshFlag) {
