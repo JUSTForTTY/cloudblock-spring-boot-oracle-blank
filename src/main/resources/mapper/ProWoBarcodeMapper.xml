@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.company.project.dao.ProWoBarcodeMapper">
+  <resultMap id="BaseResultMap" type="com.company.project.model.ProWoBarcode">
+    <!--
+      WARNING - @mbg.generated
+    -->
+    <id column="PRO_WO_BARCODE_ID" jdbcType="VARCHAR" property="proWoBarcodeId" />
+    <result column="PRO_BAR_CODE" jdbcType="VARCHAR" property="proBarCode" />
+    <result column="PRODUCT_CODE" jdbcType="VARCHAR" property="productCode" />
+    <result column="WO_CODE" jdbcType="VARCHAR" property="woCode" />
+    <result column="PRO_WO_BARCODE_CREATE_USER" jdbcType="VARCHAR" property="proWoBarcodeCreateUser" />
+    <result column="PRO_WO_BARCODE_CREATE_TIME" jdbcType="TIMESTAMP" property="proWoBarcodeCreateTime" />
+    <result column="PRO_WO_BARCODE_MODIFY_USER" jdbcType="VARCHAR" property="proWoBarcodeModifyUser" />
+    <result column="PRO_WO_BARCODE_MODIFY_TIME" jdbcType="TIMESTAMP" property="proWoBarcodeModifyTime" />
+    <result column="PRO_WO_BARCODE_IS_DELETE" jdbcType="CHAR" property="proWoBarcodeIsDelete" />
+    <result column="MARK_TIME" jdbcType="TIMESTAMP" property="markTime" />
+    <result column="MARK_DATE" jdbcType="TIMESTAMP" property="markDate" />
+    <result column="REMARK" jdbcType="VARCHAR" property="remark" />
+    <result column="BARCODE_GOOD_BADE" jdbcType="VARCHAR" property="barcodeGoodBade" />
+    <result column="PRODUCT_STATUS" jdbcType="VARCHAR" property="productStatus" />
+    <result column="CSYS_WORKFLOW_NAME" jdbcType="VARCHAR" property="csysWorkflowName" />
+    <result column="CSYS_WORKFLOW_STATUS" jdbcType="VARCHAR" property="csysWorkflowStatus" />
+    <result column="CSYS_POT_NAME" jdbcType="VARCHAR" property="csysPotName" />
+    <result column="OP_DESC" jdbcType="VARCHAR" property="opDesc" />
+    <result column="FACTORY_CODE" jdbcType="VARCHAR" property="factoryCode" />
+    <result column="WORK_SHOP_CODE" jdbcType="VARCHAR" property="workShopCode" />
+    <result column="SECTION_CODE" jdbcType="VARCHAR" property="sectionCode" />
+    <result column="PRO_LINE_CODE" jdbcType="VARCHAR" property="proLineCode" />
+    <result column="RESOURCE_CODE" jdbcType="VARCHAR" property="resourceCode" />
+    <result column="SHIFT_TYPE_CODE" jdbcType="VARCHAR" property="shiftTypeCode" />
+    <result column="SHIFT_CODE" jdbcType="VARCHAR" property="shiftCode" />
+    <result column="TIME_SLOT_CODE" jdbcType="VARCHAR" property="timeSlotCode" />
+    <result column="WORKER_CODE" jdbcType="VARCHAR" property="workerCode" />
+    <result column="BARCODE_START" jdbcType="VARCHAR" property="barcodeStart" />
+    <result column="BARCODE_END" jdbcType="VARCHAR" property="barcodeEnd" />
+    <result column="BINDING_WAY" jdbcType="VARCHAR" property="bindingWay" />
+    <result column="FLAG1" jdbcType="VARCHAR" property="flag1" />
+    <result column="FLAG2" jdbcType="VARCHAR" property="flag2" />
+    <result column="FLAG3" jdbcType="VARCHAR" property="flag3" />
+    <result column="FLAG4" jdbcType="VARCHAR" property="flag4" />
+    <result column="FLAG5" jdbcType="VARCHAR" property="flag5" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    <!--
+      WARNING - @mbg.generated
+    -->
+    PRO_WO_BARCODE_ID, PRO_BAR_CODE, PRODUCT_CODE, WO_CODE, PRO_WO_BARCODE_CREATE_USER, 
+    PRO_WO_BARCODE_CREATE_TIME, PRO_WO_BARCODE_MODIFY_USER, PRO_WO_BARCODE_MODIFY_TIME, 
+    PRO_WO_BARCODE_IS_DELETE, MARK_TIME, MARK_DATE, REMARK, BARCODE_GOOD_BADE, PRODUCT_STATUS, 
+    CSYS_WORKFLOW_NAME, CSYS_WORKFLOW_STATUS, CSYS_POT_NAME, OP_DESC, FACTORY_CODE, WORK_SHOP_CODE, 
+    SECTION_CODE, PRO_LINE_CODE, RESOURCE_CODE, SHIFT_TYPE_CODE, SHIFT_CODE, TIME_SLOT_CODE, 
+    WORKER_CODE, BARCODE_START, BARCODE_END, BINDING_WAY, FLAG1, FLAG2, FLAG3, FLAG4, 
+    FLAG5
+  </sql>
+</mapper>

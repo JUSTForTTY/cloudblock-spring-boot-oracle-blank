@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.company.project.dao.BarcodeGroupMapper">
+  <resultMap id="BaseResultMap" type="com.company.project.model.BarcodeGroup">
+    <!--
+      WARNING - @mbg.generated
+    -->
+    <id column="BARCODE_GROUP_ID" jdbcType="VARCHAR" property="barcodeGroupId" />
+    <result column="PRO_BAR_CODE" jdbcType="VARCHAR" property="proBarCode" />
+    <result column="BARCODE_GROUP_CODE" jdbcType="VARCHAR" property="barcodeGroupCode" />
+    <result column="GROUP_TYPE" jdbcType="VARCHAR" property="groupType" />
+    <result column="BARCODE_GROUP_CREATE_USER" jdbcType="VARCHAR" property="barcodeGroupCreateUser" />
+    <result column="BARCODE_GROUP_CREATE_TIME" jdbcType="TIMESTAMP" property="barcodeGroupCreateTime" />
+    <result column="BARCODE_GROUP_MODIFY_USER" jdbcType="VARCHAR" property="barcodeGroupModifyUser" />
+    <result column="BARCODE_GROUP_MODIFY_TIME" jdbcType="TIMESTAMP" property="barcodeGroupModifyTime" />
+    <result column="BARCODE_GROUP_IS_DELETE" jdbcType="CHAR" property="barcodeGroupIsDelete" />
+    <result column="MARK_TIME" jdbcType="TIMESTAMP" property="markTime" />
+    <result column="MARK_DATE" jdbcType="TIMESTAMP" property="markDate" />
+    <result column="REMARK" jdbcType="VARCHAR" property="remark" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    <!--
+      WARNING - @mbg.generated
+    -->
+    BARCODE_GROUP_ID, PRO_BAR_CODE, BARCODE_GROUP_CODE, GROUP_TYPE, BARCODE_GROUP_CREATE_USER, 
+    BARCODE_GROUP_CREATE_TIME, BARCODE_GROUP_MODIFY_USER, BARCODE_GROUP_MODIFY_TIME, 
+    BARCODE_GROUP_IS_DELETE, MARK_TIME, MARK_DATE, REMARK
+  </sql>
+</mapper>
