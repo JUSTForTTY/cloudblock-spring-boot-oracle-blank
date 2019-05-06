@@ -67,8 +67,6 @@ public class ${modelNameUpperCamel}BizImpl  implements ${modelNameUpperCamel}Biz
 	public String insertDataSettings(CsysUserView csysUserView,${modelNameUpperCamel} ${modelNameLowerCamel}){
 		
 		//获取sequence
-		String sequence=commonService.getSequence("${modelNameUpperCamel}");
-		${modelNameLowerCamel}.set${modelNameUpperCamel}Id(sequence);
 		${modelNameLowerCamel}.set${modelNameUpperCamel}CreateTime(DateUtils.newTimestamp());
 		${modelNameLowerCamel}.set${modelNameUpperCamel}CreateUser(csysUserView.getCsysUserId());
 		${modelNameLowerCamel}.set${modelNameUpperCamel}ModifyTime(DateUtils.newTimestamp());
@@ -76,7 +74,7 @@ public class ${modelNameUpperCamel}BizImpl  implements ${modelNameUpperCamel}Biz
 		${modelNameLowerCamel}.set${modelNameUpperCamel}IsDelete("0");
 		${modelNameLowerCamel}Service.save(${modelNameLowerCamel});
 		
-		return sequence;
+		return ${modelNameLowerCamel}.get${modelNameUpperCamel}Id();
 	}
 	
  
