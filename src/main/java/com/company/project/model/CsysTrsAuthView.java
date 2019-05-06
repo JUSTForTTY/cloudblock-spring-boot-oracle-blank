@@ -70,6 +70,9 @@ public class CsysTrsAuthView {
     @Column(name = "CSYS_TRS_AUTH_DESC")
     private String csysTrsAuthDesc;
 
+    @Column(name = "CSYS_CODEMASTER_DESC")
+    private String csysCodemasterDesc;
+
     /**
      * @return CSYS_POT_TRS_ID
      */
@@ -362,5 +365,19 @@ public class CsysTrsAuthView {
      */
     public void setCsysTrsAuthDesc(String csysTrsAuthDesc) {
         this.csysTrsAuthDesc = csysTrsAuthDesc;
+    }
+
+    /**
+     * @return CSYS_CODEMASTER_DESC
+     */
+    public String getCsysCodemasterDesc() {
+        return csysCodemasterDesc;
+    }
+
+    /**
+     * @param csysCodemasterDesc
+     */
+    public void setCsysCodemasterDesc(String csysCodemasterDesc) {
+        this.csysCodemasterDesc = csysCodemasterDesc;
     }
 }
