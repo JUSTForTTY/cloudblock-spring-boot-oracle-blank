@@ -26,6 +26,7 @@
     <result column="CSYS_TRS_AUTH_ID" jdbcType="VARCHAR" property="csysTrsAuthId" />
     <result column="CSYS_ROLE_ID" jdbcType="VARCHAR" property="csysRoleId" />
     <result column="CSYS_TRS_AUTH_DESC" jdbcType="VARCHAR" property="csysTrsAuthDesc" />
+    <result column="CSYS_CODEMASTER_DESC" jdbcType="VARCHAR" property="csysCodemasterDesc" />
   </resultMap>
   <sql id="Example_Where_Clause">
     <!--
@@ -99,7 +100,7 @@
     CSYS_POT_CURRENT_TABLE, CSYS_POT_TRS_POINT_ID, CSYS_POT_TRS_POINT_NAME, CSYS_POT_TRS_TABLE, 
     CSYS_POT_TRS_LONGEST_TIME, CSYS_POT_TRS_LEAST_TIME, CSYS_POT_TRS_CONFIRM, CSYS_POT_TRS_ALL_EXE, 
     CSYS_POT_TRS_AUTO_EXE, CSYS_POT_TRS_REMAIND, CSYS_POT_TRS_DESC, CSYS_POT_TRS_TIME, 
-    CSYS_POT_TRS_DATE, CSYS_TRS_AUTH_ID, CSYS_ROLE_ID, CSYS_TRS_AUTH_DESC
+    CSYS_POT_TRS_DATE, CSYS_TRS_AUTH_ID, CSYS_ROLE_ID, CSYS_TRS_AUTH_DESC,CSYS_CODEMASTER_DESC
   </sql>
   <select id="selectByExample" parameterType="com.company.project.model.CsysTrsAuthViewExample" resultMap="BaseResultMap">
     <!--
