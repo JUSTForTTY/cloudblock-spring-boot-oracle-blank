@@ -66,13 +66,13 @@ public class AuthLoginController {
 
 			String token, refresh_token;
 			try {
-				token = JWTUtil.createJWT(currentBaseUserView.getCsysUserOpenId(),
+				token = JWTUtil.createJWT(currentBaseUserView.getCsysUserId(),
 						currentBaseUserView.getCsysUserUsername(), 1000 * 60 * 2);
 
 				logger.info("获取成功，有效时间10分钟，token:" + token);
 
 				// 生成refresh token，单位:分钟
-				refresh_token = JWTUtil.createJWT(currentBaseUserView.getCsysUserOpenId(),
+				refresh_token = JWTUtil.createJWT(currentBaseUserView.getCsysUserId(),
 						currentBaseUserView.getCsysUserUsername(), 1000 * 60 * refresh_time);
 
 				// 存储token,refresh_token
