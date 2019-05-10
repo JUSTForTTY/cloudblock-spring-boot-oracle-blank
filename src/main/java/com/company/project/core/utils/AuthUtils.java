@@ -74,7 +74,7 @@ public class AuthUtils {
 							//如果已经过期，则生成新token
 							// refresh_token没有过期，重新生成新token
 							try {
-								token = JWTUtil.createJWT(currentCsysUserView.getCsysUserId(),
+								token = JWTUtil.createJWT(currentCsysUserView.getCsysUserOpenId(),
 										currentCsysUserView.getCsysUserUsername(), 1000 * 60 * 2);
 							} catch (Exception e) {
 								 
