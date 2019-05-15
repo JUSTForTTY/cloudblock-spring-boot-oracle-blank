@@ -2,6 +2,7 @@ package com.company.project.core.bean;
 
 import java.io.Serializable;
 import java.util.List;
+import java.util.Map;
 
 
 public class DeleteDataBean implements Serializable {
@@ -17,6 +18,8 @@ public class DeleteDataBean implements Serializable {
 	public String deleteFlag;
 	
 	public List<JsonBean> primaryMap;
+	
+	private Map<String, List<JsonBean>> engineMap;// 引擎
 
 	public String getTableName() {
 		return tableName;
@@ -40,6 +43,14 @@ public class DeleteDataBean implements Serializable {
 
 	public void setDeleteFlag(String deleteFlag) {
 		this.deleteFlag = deleteFlag;
+	}
+
+	public Map<String, List<JsonBean>> getEngineMap() {
+		return engineMap;
+	}
+
+	public void setEngineMap(Map<String, List<JsonBean>> engineMap) {
+		this.engineMap = engineMap;
 	}
 	
 

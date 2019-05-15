@@ -1,12 +1,15 @@
 package com.company.project.service.impl;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
 import javax.annotation.Resource;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.transaction.interceptor.TransactionAspectSupport;
 
 import com.company.project.biz.CommonBiz;
 import com.company.project.core.bean.CascaderBean;
@@ -22,14 +25,12 @@ import com.company.project.core.structure.engine.interfaces.OrganizeInterfaces;
 //import com.company.project.core.structure.engine.interfaces.OrganizeInterfaces;
 import com.company.project.core.utils.DateUtils;
 import com.company.project.core.utils.Md5Encrypt;
-import com.company.project.dao.CommonOuterUtilsMapper;
 import com.company.project.dao.SystemMapper;
 import com.company.project.model.CsysUserView;
 import com.company.project.service.SystemService;
 import com.github.pagehelper.PageInfo;
 
 @Service
-@Transactional
 public class SystemServiceImpl implements SystemService {
 	@Resource
 	private SystemMapper systemMapper;
@@ -49,12 +50,27 @@ public class SystemServiceImpl implements SystemService {
 		if (!column.isEmpty()) {
 			for (JsonColumnBean entry : column) {
 				if (null != entry.getName() && !"".equals(entry.getName())) {
-					if(entry.getType().indexOf("TIMESTAMP")>-1) {
+
+					if (entry.getType().indexOf("TIMESTAMP") > -1) {
 						columndata += "to_char(" + entry.getName() + ",'yyyy-mm-dd hh24:mi:ss:ff6') as "
 								+ entry.getName() + ",";
-					}else {
+					} else {
 						columndata += entry.getName() + ",";
 					}
+
+					// switch (entry.getType()) {
+					//
+					// // timestamp类型需要提前转换格式
+					// case "TIMESTAMP":
+					//
+					// columndata += "to_char(" + entry.getName() + ",'yyyy-mm-dd hh24:mi:ss:ff6')
+					// as "
+					// + entry.getName() + ",";
+					// break;
+					// default:
+					// columndata += entry.getName() + ",";
+					// break;
+					// }
 
 				} else {
 
@@ -168,12 +184,15 @@ public class SystemServiceImpl implements SystemService {
 		// 引擎
 		if (!engineMap.isEmpty()) {
 			for (Map.Entry<String, List<JsonBean>> entry : engineMap.entrySet()) {
-				for (JsonBean jsonBean : entry.getValue()) {
-					// 是否需要组织架构
-					if ("organizeField".equals(jsonBean.getName()))
-						sql += " and " + jsonBean.getValue() + " in("
-								+ organizeInterfaces.getOrgUserSql(baseUserView, null) + ") ";
+				if ("organize".equals(entry.getKey())) {
+					for (JsonBean jsonBean : entry.getValue()) {
+						// 是否需要组织架构
+						if ("organizeField".equals(jsonBean.getName()))
+							sql += " and " + jsonBean.getValue() + " in("
+									+ organizeInterfaces.getOrgUserSql(baseUserView, null) + ") ";
+					}
 				}
+
 			}
 		}
 
@@ -193,9 +212,12 @@ public class SystemServiceImpl implements SystemService {
 		return systemMapper.selectPublicItemList(sql);
 	}
 
-	public void updateTableData(String tableName, List<JsonBean> updateMap, List<JsonBean> primaryMap) {
+	@Transactional
+	public String updateTableData(String tableName, List<JsonBean> updateMap, List<JsonBean> primaryMap) {
+
 		String sql = "update " + tableName + " ";
 
+		String returnsequence = "";
 		if (!updateMap.isEmpty()) {
 			sql += " set ";
 
@@ -214,6 +236,9 @@ public class SystemServiceImpl implements SystemService {
 			for (JsonBean entry : primaryMap) {
 
 				sql += "" + entry.getName() + " = '" + entry.getValue() + "' and";
+
+				returnsequence = entry.getValue();
+
 			}
 
 			sql = sql.substring(0, sql.length() - 3);
@@ -223,6 +248,8 @@ public class SystemServiceImpl implements SystemService {
 		}
 
 		systemMapper.updatePublicItem(sql);
+
+		return returnsequence;
 	}
 
 	@Override
@@ -368,11 +395,24 @@ public class SystemServiceImpl implements SystemService {
 	}
 
 	@Override
-	public List<Map<String, Object>> dynamicProcedure(String dynamicSql, List<JsonBean> tableSort,
-			Map<String, List<SearchSubJsonBean>> searchMap) {
+	public List<Map<String, Object>> dynamicProcedure(String dynamicSql, List<JsonBean> params) {
 
-		System.out.println(dynamicSql);
-		return systemMapper.doProcedure(dynamicSql);
+		Map<String, Object> map = new HashMap<String, Object>();
+		map.put("procedureName", dynamicSql);
+		map.put("cursor", oracle.jdbc.OracleTypes.CURSOR);
+
+		systemMapper.doProcedure(map, params);
+
+		ArrayList<Map<String, Object>> cursorList = null;
+
+		try {
+			cursorList = (ArrayList<Map<String, Object>>) map.get("cursor");
+		} catch (Exception e) {
+
+		}
+
+		System.out.println("存储过程检测" + cursorList.size());
+		return cursorList;
 	}
 
 	@Override
@@ -680,11 +720,11 @@ public class SystemServiceImpl implements SystemService {
 			List<JsonColumnBean> SystemData, List<JsonColumnBean> deleteFlag, CsysUserView CsysUserView) {
 
 		String sql = "insert into " + tableName + " ";
-		
-		String columnSql="(";
-		
-		String valueSql="(";
-		
+
+		String columnSql = "(";
+
+		String valueSql = "(";
+
 		String returnsequence = "";
 		String insertmode = "";
 
@@ -700,33 +740,53 @@ public class SystemServiceImpl implements SystemService {
 
 					break;
 				/**
+				 * 通用sequence,不加时间戳
+				 */
+				case "autosequence":
+					// 取sequence
+					String autosequence = commonBiz.getOracleSimpleSequence(tableName);
+					returnsequence = autosequence;
+					// sql += jcpk.getName() + "='" + commonsequence + "' ,";
+
+					columnSql += jcpk.getName() + ",";
+
+					valueSql += "'" + autosequence + "'" + ",";
+
+					break;
+				/**
 				 * 通用sequence
 				 */
 				case "commonsequence":
 					// 取sequence
 					String commonsequence = commonBiz.getOracleSequence(tableName);
 					returnsequence = commonsequence;
-					//sql += jcpk.getName() + "='" + commonsequence + "' ,";
-					
-					columnSql+=jcpk.getName()+",";
-					
-					valueSql+="'"+commonsequence+"'"+",";
-					
+					// sql += jcpk.getName() + "='" + commonsequence + "' ,";
+
+					columnSql += jcpk.getName() + ",";
+
+					valueSql += "'" + commonsequence + "'" + ",";
+
 					break;
 				/**
 				 * 自定义sequence
 				 */
 				case "customsequence":
 					// 调用存储过程，获取sequence
-					String proceduresql = "call " + jcpk.getProcudure() + "('" + tableName + "')";
-					List<Map<String, Object>> customsequence = systemMapper.doProcedure(proceduresql);
-					returnsequence = customsequence.get(0).get("seqno").toString();
-					//sql += jcpk.getName() + "='" + returnsequence + "' ,";
-					
-					columnSql+=jcpk.getName()+",";
-					
-					valueSql+="'"+returnsequence+"'"+",";
-					
+
+					Map<String, Object> map = new HashMap<String, Object>();
+					map.put("procedureName", jcpk.getProcudure());
+					map.put("cursor", oracle.jdbc.OracleTypes.CURSOR);
+
+					systemMapper.doProcedure(map, jcpk.getProcudureParam());
+					ArrayList<Map<String, Object>> cursorList = (ArrayList<Map<String, Object>>) map.get("cursor");
+
+					returnsequence = cursorList.get(0).get("CSYS_SEQUENCE_SEQNO").toString();
+					// sql += jcpk.getName() + "='" + returnsequence + "' ,";
+
+					columnSql += jcpk.getName() + ",";
+
+					valueSql += "'" + returnsequence + "'" + ",";
+
 					break;
 				// 默认自增长
 				default:
@@ -741,28 +801,37 @@ public class SystemServiceImpl implements SystemService {
 
 					String md5str = Md5Encrypt.md5(jcdata.getValue());
 
-					//sql += jcdata.getName() + "='" + md5str + "' ,";
-					
-					columnSql+=jcdata.getName()+",";
-					
-					valueSql+="'"+md5str+"'"+",";
+					// sql += jcdata.getName() + "='" + md5str + "' ,";
+
+					columnSql += jcdata.getName() + ",";
+
+					valueSql += "'" + md5str + "'" + ",";
 
 					break;
 				default:
-					//sql+= jcdata.getName() + "='" + jcdata.getValue() + "' ,";
-					
+
+					// sql += jcdata.getName() + "='" + jcdata.getValue() + "' ,";
+
 					if ("date".equals(jcdata.getType())) {
 
-						columnSql += jcdata.getName() + ",";
+						// 值为空不做类型转换
+						if (null != jcdata.getValue() && !"".equals(jcdata.getValue())) {
+							columnSql += jcdata.getName() + ",";
 
-						valueSql += "to_date('" + jcdata.getValue() + "','"+jcdata.getRule()+"')" + ",";
+							valueSql += "to_date('" + jcdata.getValue() + "','" + jcdata.getRule() + "')" + ",";
+						} else {
+							columnSql += jcdata.getName() + ",";
+
+							valueSql += "to_date('" + jcdata.getValue() + "','" + jcdata.getRule() + "')" + ",";
+						}
+
 					} else {
 						
 						columnSql += jcdata.getName() + ",";
 
 						valueSql += "'" + jcdata.getValue().replaceAll("'", "''") + "'" + ",";
 					}
-					
+
 					break;
 
 				}
@@ -772,36 +841,38 @@ public class SystemServiceImpl implements SystemService {
 				for (JsonColumnBean jcsys : SystemData) {
 					switch (jcsys.getType()) {
 					case "createTime":
-						//sql += jcsys.getName() + "='" + DateUtils.newTimestamp() + "' ,";
-						
-						columnSql+=jcsys.getName()+",";
-						
+						// sql += jcsys.getName() + "='" + DateUtils.newTimestamp() + "' ,";
+
+						columnSql += jcsys.getName() + ",";
+
 						valueSql += "to_date('" + DateUtils.newTimestampStr() + "','yyyy-mm-dd hh24:mi:ss')" + ",";
-						
+
 						break;
 					case "createUser":
-						//sql += jcsys.getName() + "='" + CsysUserView.getCsysUserId() + "' ,";
-						
-						columnSql+=jcsys.getName()+",";
-						
-						valueSql+="'"+CsysUserView.getCsysUserId()+"'"+",";
-						
+						// sql += jcsys.getName() + "='" + CsysUserView.getCsysUserId() + "'
+						// ,";
+
+						columnSql += jcsys.getName() + ",";
+
+						valueSql += "'" + CsysUserView.getCsysUserId() + "'" + ",";
+
 						break;
 					case "modifyUser":
-						//sql += jcsys.getName() + "='" + CsysUserView.getCsysUserId() + "' ,";
-						
-						columnSql+=jcsys.getName()+",";
-						
-						valueSql+="'"+CsysUserView.getCsysUserId()+"'"+",";
-						
+						// sql += jcsys.getName() + "='" + CsysUserView.getCsysUserId() + "'
+						// ,";
+
+						columnSql += jcsys.getName() + ",";
+
+						valueSql += "'" + CsysUserView.getCsysUserId() + "'" + ",";
+
 						break;
 					case "modifyTime":
-						//sql += jcsys.getName() + "='" + DateUtils.newTimestamp() + "' ,";
-						
-						columnSql+=jcsys.getName()+",";
-						
+						// sql += jcsys.getName() + "='" + DateUtils.newTimestamp() + "' ,";
+
+						columnSql += jcsys.getName() + ",";
+
 						valueSql += "to_date('" + DateUtils.newTimestampStr() + "','yyyy-mm-dd hh24:mi:ss')" + ",";
-						
+
 						break;
 
 					}
@@ -813,20 +884,20 @@ public class SystemServiceImpl implements SystemService {
 			if (deleteFlag.size() > 0) {
 				for (JsonColumnBean jcdf : deleteFlag) {
 
-					//sql += jcdf.getName() + "='" + jcdf.getValue() + "' ,";
-					
-					columnSql+=jcdf.getName()+",";
-					
-					valueSql+="'"+jcdf.getValue()+"'"+",";
+					// sql += jcdf.getName() + "='" + jcdf.getValue() + "' ,";
+
+					columnSql += jcdf.getName() + ",";
+
+					valueSql += "'" + jcdf.getValue() + "'" + ",";
 				}
 
 			}
 
-			columnSql=columnSql.substring(0, columnSql.length() - 1)+" )";
-			
-			valueSql=valueSql.substring(0, valueSql.length() - 1)+" )";
-			
-			sql = sql+columnSql+"values"+valueSql;
+			columnSql = columnSql.substring(0, columnSql.length() - 1) + " )";
+
+			valueSql = valueSql.substring(0, valueSql.length() - 1) + " )";
+
+			sql = sql + columnSql + "values" + valueSql;
 
 			System.out.println(sql);
 			if ("autoincrement".equals(insertmode)) {
@@ -836,10 +907,12 @@ public class SystemServiceImpl implements SystemService {
 				 */
 				systemMapper.insertReturnKey(sql).toString();
 
-				//returnsequence = systemMapper.selectLastId("SELECT LAST_INSERT_ID()");
-				
-				returnsequence = systemMapper.selectLastId("select "+tableName+"_SEQ.currval  from "+tableName+" where rownum <=1");
-				 
+				// mysql语法
+
+				// returnsequence = systemMapper.selectLastId("SELECT LAST_INSERT_ID()");
+
+				returnsequence = systemMapper
+						.selectLastId("select " + tableName + "_SEQ.currval  from " + tableName + " where rownum <=1");
 
 			} else {
 				systemMapper.insertPublicItem(sql);
@@ -852,8 +925,8 @@ public class SystemServiceImpl implements SystemService {
 
 	@Override
 	public List<Map<String, Object>> preSearchTableData(String sourceid, List<JsonColumnBean> column, String tableName,
-			List<JsonBean> tableSort, Map<String, List<SearchSubJsonBean>> searchMap,List<JsonBean> primaryMap, List<JsonBean> deleteFlag,
-			Map<String, List<Map<String, Object>>> sourceData) {
+			List<JsonBean> tableSort, Map<String, List<SearchSubJsonBean>> searchMap, List<JsonBean> primaryMap,
+			List<JsonBean> deleteFlag, Map<String, List<Map<String, Object>>> sourceData) {
 
 		String columndata = "";
 
@@ -878,17 +951,17 @@ public class SystemServiceImpl implements SystemService {
 				}
 			}
 			if (!primaryMap.isEmpty()) {
-				for(JsonBean jb:primaryMap) {
+				for (JsonBean jb : primaryMap) {
 					if (null != jb.getName() && !"".equals(jb.getName())) {
-						if(columndata.indexOf(jb.getName())>-1) {
-							
-						}else {
+						if (columndata.indexOf(jb.getName()) > -1) {
+
+						} else {
 							columndata += jb.getName() + ",";
 						}
-						
+
 					}
-					
-				} 
+
+				}
 			}
 
 		} else {
@@ -1097,15 +1170,19 @@ public class SystemServiceImpl implements SystemService {
 
 					break;
 				default:
-					 
 					if ("date".equals(jcdata.getType())) {
-		
-						sql += jcdata.getName() + "=to_date('" + jcdata.getValue() + "','"+jcdata.getRule()+"') ,";
-						
+
+						// 值为空不做类型转换
+						if (null != jcdata.getValue() && !"".equals(jcdata.getValue())) {
+							sql += jcdata.getName() + "=to_date('" + jcdata.getValue() + "','" + jcdata.getRule()
+									+ "') ,";
+						} else {
+							sql += jcdata.getName() + "='" + jcdata.getValue() + "' ,";
+						}
+
 					} else {
 						sql += jcdata.getName() + "='" + jcdata.getValue() + "' ,";
 					}
-					
 					break;
 
 				}
@@ -1114,17 +1191,21 @@ public class SystemServiceImpl implements SystemService {
 			if (SystemData.size() > 0) {
 				for (JsonColumnBean jcsys : SystemData) {
 					switch (jcsys.getType()) {
-					case "createTime":
-						sql += jcsys.getName() + "=to_date('" + DateUtils.newTimestampStr() + "','yyyy-mm-dd hh24:mi:ss') ,";
-						break;
-					case "createUser":
-						sql += jcsys.getName() + "='" + CsysUserView.getCsysUserId() + "' ,";
-						break;
+					// case "createTime":
+					// sql += jcsys.getName() + "=to_date('" + DateUtils.newTimestampStr()
+					// + "','yyyy-mm-dd hh24:mi:ss') ,";
+					//
+					// break;
+					// case "createUser":
+					// sql += jcsys.getName() + "='" + CsysUserView.getCsysUserId() + "'
+					// ,";
+					// break;
 					case "modifyUser":
 						sql += jcsys.getName() + "='" + CsysUserView.getCsysUserId() + "' ,";
 						break;
 					case "modifyTime":
-						sql += jcsys.getName() + "=to_date('" + DateUtils.newTimestampStr() + "','yyyy-mm-dd hh24:mi:ss') ,";
+						sql += jcsys.getName() + "=to_date('" + DateUtils.newTimestampStr()
+								+ "','yyyy-mm-dd hh24:mi:ss') ,";
 						break;
 
 					}
@@ -1148,10 +1229,13 @@ public class SystemServiceImpl implements SystemService {
 
 				sql += " and " + jcpk.getName() + "='" + jcpk.getValue() + "' ,";
 
+				returnsequence = jcpk.getValue();
+
 			}
 
 			sql = sql.substring(0, sql.length() - 1);
 
+			System.out.println(sql);
 			systemMapper.updatePublicItem(sql);
 
 		}
@@ -1197,4 +1281,5 @@ public class SystemServiceImpl implements SystemService {
 		return systemMapper.selectPublicItemList(sql);
 
 	}
+
 }

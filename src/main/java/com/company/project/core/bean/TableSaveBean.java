@@ -1,6 +1,7 @@
 package com.company.project.core.bean;
 
 import java.util.List;
+import java.util.Map;
 
 public class TableSaveBean {
 
@@ -13,6 +14,8 @@ public class TableSaveBean {
 	private List<JsonColumnBean> systemData;
 
 	private List<JsonColumnBean> deleteFlag;
+	
+	private Map<String, List<JsonBean>> engineMap;// 引擎
 
 	public String getTableName() {
 		return tableName;
@@ -54,6 +57,14 @@ public class TableSaveBean {
 
 	public void setDeleteFlag(List<JsonColumnBean> deleteFlag) {
 		this.deleteFlag = deleteFlag;
+	}
+
+	public Map<String, List<JsonBean>> getEngineMap() {
+		return engineMap;
+	}
+
+	public void setEngineMap(Map<String, List<JsonBean>> engineMap) {
+		this.engineMap = engineMap;
 	}
 	
 }

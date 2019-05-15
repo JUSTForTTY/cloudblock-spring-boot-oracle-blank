@@ -40,7 +40,7 @@ public interface SystemService {
 	 * @param primaryMap
 	 * @return
 	 */
-	public void updateTableData(String tableName, List<JsonBean> updateMap, List<JsonBean> primaryMap);
+	public String updateTableData(String tableName, List<JsonBean> updateMap, List<JsonBean> primaryMap);
 
 	/**
 	 * 删除数据
@@ -73,8 +73,7 @@ public interface SystemService {
 	 * @param dynamicProcedure
 	 * @return
 	 */
-	public List<Map<String, Object>> dynamicProcedure(String dynamicSql, List<JsonBean> tableSort,
-			Map<String, List<SearchSubJsonBean>> searchMap);
+	public List<Map<String, Object>> dynamicProcedure(String dynamicSql,List<JsonBean> params);
 
 	/**
 	 * 获取图表数据信息
@@ -145,4 +144,5 @@ public interface SystemService {
 	 * @return
 	 */
 	public List<Map<String, Object>> validationData(String tableName,String mode,JsonBean currentValue, List<JsonCompareBean> compareValue);
+	
 }

@@ -15,5 +15,12 @@ public interface CommonBiz {
 	 */
 	public String getOracleSequence(String tableName);
 
+	/**
+	 * 获取sequence,不加时间戳
+	 *
+	 * @param tableName
+	 * @return
+	 */
+	public String getOracleSimpleSequence(String tableName);
 
 }

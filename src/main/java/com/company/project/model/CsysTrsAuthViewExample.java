@@ -1525,6 +1525,76 @@ public class CsysTrsAuthViewExample {
             addCriterion("CSYS_TRS_AUTH_DESC not between", value1, value2, "csysTrsAuthDesc");
             return (Criteria) this;
         }
+
+        public Criteria andCsysCodemasterDescIsNull() {
+            addCriterion("CSYS_CODEMASTER_DESC is null");
+            return (Criteria) this;
+        }
+
+        public Criteria andCsysCodemasterDescIsNotNull() {
+            addCriterion("CSYS_CODEMASTER_DESC is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andCsysCodemasterDescEqualTo(String value) {
+            addCriterion("CSYS_CODEMASTER_DESC =", value, "csysCodemasterDesc");
+            return (Criteria) this;
+        }
+
+        public Criteria andCsysCodemasterDescNotEqualTo(String value) {
+            addCriterion("CSYS_CODEMASTER_DESC <>", value, "csysCodemasterDesc");
+            return (Criteria) this;
+        }
+
+        public Criteria andCsysCodemasterDescGreaterThan(String value) {
+            addCriterion("CSYS_CODEMASTER_DESC >", value, "csysCodemasterDesc");
+            return (Criteria) this;
+        }
+
+        public Criteria andCsysCodemasterDescGreaterThanOrEqualTo(String value) {
+            addCriterion("CSYS_CODEMASTER_DESC >=", value, "csysCodemasterDesc");
+            return (Criteria) this;
+        }
+
+        public Criteria andCsysCodemasterDescLessThan(String value) {
+            addCriterion("CSYS_CODEMASTER_DESC <", value, "csysCodemasterDesc");
+            return (Criteria) this;
+        }
+
+        public Criteria andCsysCodemasterDescLessThanOrEqualTo(String value) {
+            addCriterion("CSYS_CODEMASTER_DESC <=", value, "csysCodemasterDesc");
+            return (Criteria) this;
+        }
+
+        public Criteria andCsysCodemasterDescLike(String value) {
+            addCriterion("CSYS_CODEMASTER_DESC like", value, "csysCodemasterDesc");
+            return (Criteria) this;
+        }
+
+        public Criteria andCsysCodemasterDescNotLike(String value) {
+            addCriterion("CSYS_CODEMASTER_DESC not like", value, "csysCodemasterDesc");
+            return (Criteria) this;
+        }
+
+        public Criteria andCsysCodemasterDescIn(List<String> values) {
+            addCriterion("CSYS_CODEMASTER_DESC in", values, "csysCodemasterDesc");
+            return (Criteria) this;
+        }
+
+        public Criteria andCsysCodemasterDescNotIn(List<String> values) {
+            addCriterion("CSYS_CODEMASTER_DESC not in", values, "csysCodemasterDesc");
+            return (Criteria) this;
+        }
+
+        public Criteria andCsysCodemasterDescBetween(String value1, String value2) {
+            addCriterion("CSYS_CODEMASTER_DESC between", value1, value2, "csysCodemasterDesc");
+            return (Criteria) this;
+        }
+
+        public Criteria andCsysCodemasterDescNotBetween(String value1, String value2) {
+            addCriterion("CSYS_CODEMASTER_DESC not between", value1, value2, "csysCodemasterDesc");
+            return (Criteria) this;
+        }
     }
 
     public static class Criteria extends GeneratedCriteria {

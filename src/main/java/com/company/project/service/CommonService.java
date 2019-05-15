@@ -40,4 +40,12 @@ public interface CommonService {
 	public String getOracleSequence(String tableName);
 
 	public List<Map<String, Object>> cloneWorkFlow(String tableName, CsysUserView baseUserView);
+
+	/**
+	 * 获取oracle simple sequence
+	 *
+	 * @param tableName
+	 * @return
+	 */
+	String getOracleSimpleSequence(String tableName);
 }

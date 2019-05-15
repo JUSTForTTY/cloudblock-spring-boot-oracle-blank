@@ -4,6 +4,7 @@ import com.company.project.core.bean.CascaderBean;
 import com.company.project.core.bean.ChartDataBean;
 import com.company.project.core.bean.DeleteDataBean;
 import com.company.project.core.bean.DynamicJsonBean;
+import com.company.project.core.bean.ResultBean;
 import com.company.project.core.bean.SmsBean;
 import com.company.project.core.bean.TableDataBean;
 import com.company.project.core.bean.TableSaveBean;
@@ -33,787 +34,774 @@ import java.util.HashMap;
 import java.util.Map;
 
 /**
- * Created by tty1 on 2018/08/28.
+ * Created by tty on 2018/08/27.
  */
 @RestController
 @RequestMapping("/system")
 public class SystemController {
-	private final Log logger = LogFactory.getLog(getClass());
+    private final Log logger = LogFactory.getLog(getClass());
 
-	@Resource
-	private SystemBiz systemBiz;
+    @Resource
+    private SystemBiz systemBiz;
 
-	@Resource
-	private AuthLoginBiz authloginBiz;
+    @Resource
+    private AuthLoginBiz authloginBiz;
 
-	@Resource
-	private AuthUtils authUtils;
+    @Resource
+    private AuthUtils authUtils;
 
-	@Resource
-	private Sms sms;
+    @Resource
+    private Sms sms;
 
-	// 查询表格数据-通用方法,此方法仅限测试工具时使用，正式生产环境不使用通用接口
-	@PostMapping(value = "/tableData")
-	public Result getTableData(@RequestHeader(value = "access_token") String access_token,
-			@RequestHeader(value = "refresh_token") String refresh_token, @RequestBody TableDataBean tableDataBean) {
+    // 查询表格数据-通用方法,此方法仅限测试工具时使用，正式生产环境不使用通用接口
+    @PostMapping(value = "/tableData")
+    public Result getTableData(@RequestHeader(value = "access_token") String access_token,
+                               @RequestHeader(value = "refresh_token") String refresh_token, @RequestBody TableDataBean tableDataBean) {
 
-		Map<String, String> param = new HashMap<>();
+        Map<String, String> param = new HashMap<>();
 
-		/*---------------------------start 授权验证------------------------*/
-		Map<String, Object> authMap = authUtils.doAuth(access_token, refresh_token);
-		boolean tokenRefreshFlag = (boolean) authMap.get("tokenRefreshFlag");
-		boolean tokenFlag = (boolean) authMap.get("tokenFlag");
-		String token = authMap.get("token").toString();
-		String refreshtoken = authMap.get("refreshtoken").toString();
+        /*---------------------------start 授权验证------------------------*/
+        Map<String, Object> authMap = authUtils.doAuth(access_token, refresh_token);
+        boolean tokenRefreshFlag = (boolean) authMap.get("tokenRefreshFlag");
+        boolean tokenFlag = (boolean) authMap.get("tokenFlag");
+        String token = authMap.get("token").toString();
+        String refreshtoken = authMap.get("refreshtoken").toString();
 
-		if (!tokenFlag) {
-			/*
-			 * return code: 401 access_token无效或已过期
-			 */
-			return ResultGenerator.genUnauthorizedResult(param);
+        if (!tokenFlag) {
+            /*
+             * return code: 401 access_token无效或已过期
+             */
+            return ResultGenerator.genUnauthorizedResult(param);
 
-		}
-		/*---------------------------end 授权验证------------------------*/
+        }
+        /*---------------------------end 授权验证------------------------*/
 
-		try {
-			// 获取用户信息
-			/*--------------start 此段代码可优化成redis-----------------------*/
-			CsysUserView baseUserView = new CsysUserView();
+        try {
+            // 获取用户信息
+            /*--------------start 此段代码可优化成redis-----------------------*/
+            CsysUserView baseUserView = new CsysUserView();
 
-			baseUserView.setCsysUserRefreshToken(refreshtoken);
+            baseUserView.setCsysUserRefreshToken(refreshtoken);
 
-			List<CsysUserView> baseUserList = authloginBiz.getDataSettingsByCondition(baseUserView);
+            List<CsysUserView> baseUserList = authloginBiz.getDataSettingsByCondition(baseUserView);
 
-			/*--------------end 此段代码可优化成redis-----------------------*/
+            /*--------------end 此段代码可优化成redis-----------------------*/
 
-			PageInfo pageInfo = systemBiz.getTableData(baseUserList.get(0), tableDataBean);
+            ResultBean resultBean = systemBiz.getTableData(baseUserList, tableDataBean);
 
-			if (tokenRefreshFlag) {
-				param.put("access_token", token);
-				param.put("refresh_token", refreshtoken);
+            if (tokenRefreshFlag) {
+                param.put("access_token", token);
+                param.put("refresh_token", refreshtoken);
 
-			}
-			return ResultGenerator.genSuccessResult(pageInfo, param);
+            }
+            return ResultGenerator.genSuccessResult(resultBean.getData(), resultBean.getExtraData(), param);
 
-		} catch (Exception e) {
-			e.printStackTrace();
+        } catch (Exception e) {
+            e.printStackTrace();
 
-			return ResultGenerator.genServerErrorResult(param);
+            return ResultGenerator.genServerErrorResult(param);
 
-		}
+        }
 
-	}
+    }
 
-	// 更新表格数据-通用方法,此方法仅限测试工具时使用，正式生产环境不使用通用接口
-	@PutMapping(value = "/tableData")
-	public Result putTableData(@RequestHeader(value = "access_token") String access_token,
-			@RequestHeader(value = "refresh_token") String refresh_token, @RequestBody TableDataBean tableDataBean) {
+    // 更新表格数据-通用方法,此方法仅限测试工具时使用，正式生产环境不使用通用接口
+    @PutMapping(value = "/tableData")
+    public Result putTableData(@RequestHeader(value = "access_token") String access_token,
+                               @RequestHeader(value = "refresh_token") String refresh_token, @RequestBody TableDataBean tableDataBean) {
 
-		Map<String, String> param = new HashMap<>();
+        Map<String, String> param = new HashMap<>();
 
-		/*---------------------------start 授权验证------------------------*/
-		Map<String, Object> authMap = authUtils.doAuth(access_token, refresh_token);
-		boolean tokenRefreshFlag = (boolean) authMap.get("tokenRefreshFlag");
-		boolean tokenFlag = (boolean) authMap.get("tokenFlag");
-		String token = authMap.get("token").toString();
-		String refreshtoken = authMap.get("refreshtoken").toString();
+        /*---------------------------start 授权验证------------------------*/
+        Map<String, Object> authMap = authUtils.doAuth(access_token, refresh_token);
+        boolean tokenRefreshFlag = (boolean) authMap.get("tokenRefreshFlag");
+        boolean tokenFlag = (boolean) authMap.get("tokenFlag");
+        String token = authMap.get("token").toString();
+        String refreshtoken = authMap.get("refreshtoken").toString();
 
-		if (!tokenFlag) {
-			/*
-			 * return code: 401 access_token无效或已过期
-			 */
-			return ResultGenerator.genUnauthorizedResult(param);
+        if (!tokenFlag) {
+            /*
+             * return code: 401 access_token无效或已过期
+             */
+            return ResultGenerator.genUnauthorizedResult(param);
 
-		}
-		/*---------------------------end 授权验证------------------------*/
+        }
+        /*---------------------------end 授权验证------------------------*/
+        try {
+            // 获取用户信息
+            /*--------------start 此段代码可优化成redis-----------------------*/
+            CsysUserView baseUserView = new CsysUserView();
 
-		try {
-			// 获取用户信息
-			/*--------------start 此段代码可优化成redis-----------------------*/
-			CsysUserView baseUserView = new CsysUserView();
+            baseUserView.setCsysUserRefreshToken(refreshtoken);
 
-			baseUserView.setCsysUserRefreshToken(refreshtoken);
+            List<CsysUserView> baseUserList = authloginBiz.getDataSettingsByCondition(baseUserView);
 
-			List<CsysUserView> baseUserList = authloginBiz.getDataSettingsByCondition(baseUserView);
+            /*--------------end 此段代码可优化成redis-----------------------*/
 
-			/*--------------end 此段代码可优化成redis-----------------------*/
+            ResultBean resultBean = systemBiz.updateTableData(tableDataBean, baseUserList);
 
-			systemBiz.updateTableData(tableDataBean);
+            if (tokenRefreshFlag) {
+                param.put("access_token", token);
+                param.put("refresh_token", refreshtoken);
+            }
+            return ResultGenerator.genSuccessResult(resultBean.getStringData(), resultBean.getExtraData(), param);
+        } catch (Exception e) {
+            return ResultGenerator.genServerErrorResult(param);
 
-			if (tokenRefreshFlag) {
-				param.put("access_token", token);
-				param.put("refresh_token", refreshtoken);
+        }
+    }
 
-			}
-			return ResultGenerator.genSuccessResult(param);
+    // 物理删除表格数据-通用方法,此方法仅限测试工具时使用，正式生产环境不使用通用接口
+    @DeleteMapping(value = "/physicalDeleteData")
+    public Result physicalDeleteData(@RequestHeader(value = "access_token") String access_token,
+                                     @RequestHeader(value = "refresh_token") String refresh_token,
+                                     @RequestBody List<DeleteDataBean> deleteBeanList) {
 
-		} catch (Exception e) {
+        Map<String, String> param = new HashMap<>();
 
-			return ResultGenerator.genServerErrorResult(param);
+        /*---------------------------start 授权验证------------------------*/
+        Map<String, Object> authMap = authUtils.doAuth(access_token, refresh_token);
+        boolean tokenRefreshFlag = (boolean) authMap.get("tokenRefreshFlag");
+        boolean tokenFlag = (boolean) authMap.get("tokenFlag");
+        String token = authMap.get("token").toString();
+        String refreshtoken = authMap.get("refreshtoken").toString();
 
-		}
+        if (!tokenFlag) {
+            /*
+             * return code: 401 access_token无效或已过期
+             */
+            return ResultGenerator.genUnauthorizedResult(param);
 
-	}
+        }
+        /*---------------------------end 授权验证------------------------*/
 
-	// 物理删除表格数据-通用方法,此方法仅限测试工具时使用，正式生产环境不使用通用接口
-	@DeleteMapping(value = "/physicalDeleteData")
-	public Result physicalDeleteData(@RequestHeader(value = "access_token") String access_token,
-			@RequestHeader(value = "refresh_token") String refresh_token,
-			@RequestBody List<DeleteDataBean> deleteBeanList) {
+        try {
+            // 获取用户信息
+            /*--------------start 此段代码可优化成redis-----------------------*/
+            CsysUserView baseUserView = new CsysUserView();
 
-		Map<String, String> param = new HashMap<>();
+            baseUserView.setCsysUserRefreshToken(refreshtoken);
 
-		/*---------------------------start 授权验证------------------------*/
-		Map<String, Object> authMap = authUtils.doAuth(access_token, refresh_token);
-		boolean tokenRefreshFlag = (boolean) authMap.get("tokenRefreshFlag");
-		boolean tokenFlag = (boolean) authMap.get("tokenFlag");
-		String token = authMap.get("token").toString();
-		String refreshtoken = authMap.get("refreshtoken").toString();
+            List<CsysUserView> baseUserList = authloginBiz.getDataSettingsByCondition(baseUserView);
 
-		if (!tokenFlag) {
-			/*
-			 * return code: 401 access_token无效或已过期
-			 */
-			return ResultGenerator.genUnauthorizedResult(param);
+            /*--------------end 此段代码可优化成redis-----------------------*/
 
-		}
-		/*---------------------------end 授权验证------------------------*/
+            for (DeleteDataBean deleteBean : deleteBeanList) {
 
-		try {
-			// 获取用户信息
-			/*--------------start 此段代码可优化成redis-----------------------*/
-			CsysUserView baseUserView = new CsysUserView();
+                systemBiz.physicalDeleteData(deleteBean, baseUserList);
+            }
+            if (tokenRefreshFlag) {
+                param.put("access_token", token);
+                param.put("refresh_token", refreshtoken);
 
-			baseUserView.setCsysUserRefreshToken(refreshtoken);
+            }
+            return ResultGenerator.genSuccessResult(param);
 
-			List<CsysUserView> baseUserList = authloginBiz.getDataSettingsByCondition(baseUserView);
+        } catch (Exception e) {
 
-			/*--------------end 此段代码可优化成redis-----------------------*/
+            return ResultGenerator.genServerErrorResult(param);
 
-			for (DeleteDataBean deleteBean : deleteBeanList) {
+        }
 
-				systemBiz.physicalDeleteData(deleteBean.getTableName(), deleteBean.getPrimaryMap());
-			}
-			if (tokenRefreshFlag) {
-				param.put("access_token", token);
-				param.put("refresh_token", refreshtoken);
+    }
 
-			}
-			return ResultGenerator.genSuccessResult(param);
+    // 逻辑查询表格数据-通用方法,此方法仅限测试工具时使用，正式生产环境不使用通用接口
+    @PostMapping(value = "/logicalDeleteData")
+    public Result logicalDeleteData(@RequestHeader(value = "access_token") String access_token,
+                                    @RequestHeader(value = "refresh_token") String refresh_token,
+                                    @RequestBody List<DeleteDataBean> deleteBeanList) {
 
-		} catch (Exception e) {
+        Map<String, String> param = new HashMap<>();
 
-			return ResultGenerator.genServerErrorResult(param);
+        /*---------------------------start 授权验证------------------------*/
+        Map<String, Object> authMap = authUtils.doAuth(access_token, refresh_token);
+        boolean tokenRefreshFlag = (boolean) authMap.get("tokenRefreshFlag");
+        boolean tokenFlag = (boolean) authMap.get("tokenFlag");
+        String token = authMap.get("token").toString();
+        String refreshtoken = authMap.get("refreshtoken").toString();
 
-		}
+        if (!tokenFlag) {
+            /*
+             * return code: 401 access_token无效或已过期
+             */
+            return ResultGenerator.genUnauthorizedResult(param);
 
-	}
+        }
+        /*---------------------------end 授权验证------------------------*/
 
-	// 逻辑查询表格数据-通用方法,此方法仅限测试工具时使用，正式生产环境不使用通用接口
-	@PostMapping(value = "/logicalDeleteData")
-	public Result logicalDeleteData(@RequestHeader(value = "access_token") String access_token,
-			@RequestHeader(value = "refresh_token") String refresh_token,
-			@RequestBody List<DeleteDataBean> deleteBeanList) {
+        // 获取用户信息
+        /*--------------start 此段代码可优化成redis-----------------------*/
+        CsysUserView baseUserView = new CsysUserView();
 
-		Map<String, String> param = new HashMap<>();
+        baseUserView.setCsysUserRefreshToken(refreshtoken);
 
-		/*---------------------------start 授权验证------------------------*/
-		Map<String, Object> authMap = authUtils.doAuth(access_token, refresh_token);
-		boolean tokenRefreshFlag = (boolean) authMap.get("tokenRefreshFlag");
-		boolean tokenFlag = (boolean) authMap.get("tokenFlag");
-		String token = authMap.get("token").toString();
-		String refreshtoken = authMap.get("refreshtoken").toString();
+        List<CsysUserView> baseUserList = authloginBiz.getDataSettingsByCondition(baseUserView);
 
-		if (!tokenFlag) {
-			/*
-			 * return code: 401 access_token无效或已过期
-			 */
-			return ResultGenerator.genUnauthorizedResult(param);
+        /*--------------end 此段代码可优化成redis-----------------------*/
 
-		}
-		/*---------------------------end 授权验证------------------------*/
+        for (DeleteDataBean deleteBean : deleteBeanList) {
 
-		try {
-			// 获取用户信息
-			/*--------------start 此段代码可优化成redis-----------------------*/
-			CsysUserView baseUserView = new CsysUserView();
+            systemBiz.logicalDeleteData(deleteBean, baseUserList);
+        }
+        if (tokenRefreshFlag) {
+            param.put("access_token", token);
+            param.put("refresh_token", refreshtoken);
 
-			baseUserView.setCsysUserRefreshToken(refreshtoken);
+        }
+        return ResultGenerator.genSuccessResult(param);
 
-			List<CsysUserView> baseUserList = authloginBiz.getDataSettingsByCondition(baseUserView);
+    }
 
-			/*--------------end 此段代码可优化成redis-----------------------*/
+    /***
+     *
+     * rest风格查询数据接口 post请求 说明: url:http://localhost:8080/v1/system/CommonData 参数:
+     *
+     */
 
-			for (DeleteDataBean deleteBean : deleteBeanList) {
+    @PostMapping(value = "/dynamicSql")
+    public Result getDynamicSql(@RequestHeader(value = "access_token") String access_token,
+                                @RequestHeader(value = "refresh_token") String refresh_token, @RequestBody DynamicJsonBean dynamicJson) {
 
-				systemBiz.logicalDeleteData(deleteBean.getTableName(), deleteBean.getDeleteFlag(),
-						deleteBean.getPrimaryMap());
-			}
-			if (tokenRefreshFlag) {
-				param.put("access_token", token);
-				param.put("refresh_token", refreshtoken);
+        logger.info("查询动态sql信息");
+        Map<String, String> param = new HashMap<>();
 
-			}
-			return ResultGenerator.genSuccessResult(param);
+        /*---------------------------start 授权验证------------------------*/
+        Map<String, Object> authMap = authUtils.doAuth(access_token, refresh_token);
+        boolean tokenRefreshFlag = (boolean) authMap.get("tokenRefreshFlag");
+        boolean tokenFlag = (boolean) authMap.get("tokenFlag");
+        String token = authMap.get("token").toString();
+        String refreshtoken = authMap.get("refreshtoken").toString();
 
-		} catch (Exception e) {
+        if (!tokenFlag) {
+            /*
+             * return code: 401 access_token无效或已过期
+             */
+            return ResultGenerator.genUnauthorizedResult(param);
 
-			return ResultGenerator.genServerErrorResult(param);
+        }
+        /*---------------------------end 授权验证------------------------*/
 
-		}
+        /*--------------start 此段代码可优化成redis-----------------------*/
+        CsysUserView baseUserView = new CsysUserView();
 
-	}
+        baseUserView.setCsysUserRefreshToken(refreshtoken);
 
-	/***
-	 * 
-	 * rest风格查询数据接口 post请求 说明: url:http://localhost:8080/v1/system/CommonData 参数:
-	 * 
-	 */
+        List<CsysUserView> baseUserList = authloginBiz.getDataSettingsByCondition(baseUserView);
 
-	@PostMapping(value = "/dynamicSql")
-	public Result getDynamicSql(@RequestHeader(value = "access_token") String access_token,
-			@RequestHeader(value = "refresh_token") String refresh_token, @RequestBody DynamicJsonBean dynamicJson) {
+        /*--------------end 此段代码可优化成redis-----------------------*/
 
-		logger.info("查询动态sql信息");
-		Map<String, String> param = new HashMap<>();
+        PageInfo pagedata = systemBiz.getDynamicSql(dynamicJson, baseUserList);
 
-		/*---------------------------start 授权验证------------------------*/
-		Map<String, Object> authMap = authUtils.doAuth(access_token, refresh_token);
-		boolean tokenRefreshFlag = (boolean) authMap.get("tokenRefreshFlag");
-		boolean tokenFlag = (boolean) authMap.get("tokenFlag");
-		String token = authMap.get("token").toString();
-		String refreshtoken = authMap.get("refreshtoken").toString();
+        if (tokenRefreshFlag) {
+            param.put("access_token", token);
+            param.put("refresh_token", refreshtoken);
 
-		if (!tokenFlag) {
-			/*
-			 * return code: 401 access_token无效或已过期
-			 */
-			return ResultGenerator.genUnauthorizedResult(param);
+        }
+        return ResultGenerator.genSuccessResult(pagedata, param);
 
-		}
-		/*---------------------------end 授权验证------------------------*/
+    }
 
-		/*--------------start 此段代码可优化成redis-----------------------*/
-		CsysUserView baseUserView = new CsysUserView();
+    /***
+     * 自定义存储过程 rest风格查询数据接口 post请求 说明:
+     * url:http://localhost:8080/v1/system/CommonData 参数:
+     *
+     */
 
-		baseUserView.setCsysUserRefreshToken(refreshtoken);
+    @PostMapping(value = "/dynamicProcedure")
+    public Result dynamicProcedure(@RequestHeader(value = "access_token") String access_token,
+                                   @RequestHeader(value = "refresh_token") String refresh_token, @RequestBody DynamicJsonBean dynamicJson) {
 
-		List<CsysUserView> baseUserList = authloginBiz.getDataSettingsByCondition(baseUserView);
+        logger.info("执行动态存储过程");
+        Map<String, String> param = new HashMap<>();
 
-		/*--------------end 此段代码可优化成redis-----------------------*/
+        /*---------------------------start 授权验证------------------------*/
+        Map<String, Object> authMap = authUtils.doAuth(access_token, refresh_token);
+        boolean tokenRefreshFlag = (boolean) authMap.get("tokenRefreshFlag");
+        boolean tokenFlag = (boolean) authMap.get("tokenFlag");
+        String token = authMap.get("token").toString();
+        String refreshtoken = authMap.get("refreshtoken").toString();
 
-		PageInfo pagedata = systemBiz.getDynamicSql(dynamicJson, baseUserList.get(0));
+        if (!tokenFlag) {
+            /*
+             * return code: 401 access_token无效或已过期
+             */
+            return ResultGenerator.genUnauthorizedResult(param);
 
-		if (tokenRefreshFlag) {
-			param.put("access_token", token);
-			param.put("refresh_token", refreshtoken);
+        }
+        /*---------------------------end 授权验证------------------------*/
 
-		}
-		return ResultGenerator.genSuccessResult(pagedata, param);
+        try {
+            /*--------------start 此段代码可优化成redis-----------------------*/
+            CsysUserView baseUserView = new CsysUserView();
 
-	}
+            baseUserView.setCsysUserRefreshToken(refreshtoken);
 
-	/***
-	 * 自定义存储过程 rest风格查询数据接口 post请求 说明:
-	 * url:http://localhost:8080/v1/system/CommonData 参数:
-	 * 
-	 */
+            List<CsysUserView> baseUserList = authloginBiz.getDataSettingsByCondition(baseUserView);
 
-	@PostMapping(value = "/dynamicProcedure")
-	public Result dynamicProcedure(@RequestHeader(value = "access_token") String access_token,
-			@RequestHeader(value = "refresh_token") String refresh_token, @RequestBody DynamicJsonBean dynamicJson) {
+            /*--------------end 此段代码可优化成redis-----------------------*/
 
-		logger.info("执行动态存储过程");
-		Map<String, String> param = new HashMap<>();
+            List<Map<String, Object>> dataList = systemBiz.dynamicProcedure(dynamicJson, baseUserList);
 
-		/*---------------------------start 授权验证------------------------*/
-		Map<String, Object> authMap = authUtils.doAuth(access_token, refresh_token);
-		boolean tokenRefreshFlag = (boolean) authMap.get("tokenRefreshFlag");
-		boolean tokenFlag = (boolean) authMap.get("tokenFlag");
-		String token = authMap.get("token").toString();
-		String refreshtoken = authMap.get("refreshtoken").toString();
+            if (tokenRefreshFlag) {
+                param.put("access_token", token);
+                param.put("refresh_token", refreshtoken);
 
-		if (!tokenFlag) {
-			/*
-			 * return code: 401 access_token无效或已过期
-			 */
-			return ResultGenerator.genUnauthorizedResult(param);
+            }
+            return ResultGenerator.genSuccessResult(dataList, param);
 
-		}
-		/*---------------------------end 授权验证------------------------*/
+        } catch (Exception e) {
 
-		try {
-			/*--------------start 此段代码可优化成redis-----------------------*/
-			CsysUserView baseUserView = new CsysUserView();
+            return ResultGenerator.genServerErrorResult(param);
 
-			baseUserView.setCsysUserRefreshToken(refreshtoken);
+        }
+    }
 
-			List<CsysUserView> baseUserList = authloginBiz.getDataSettingsByCondition(baseUserView);
+    /***
+     * 查询图表数据-通用方法,此方法仅限测试工具时使用，正式生产环境不使用通用接口 rest风格查询数据接口 post请求 说明:
+     * url:http://localhost:8080/v1/system/chartData 参数:
+     *
+     */
 
-			/*--------------end 此段代码可优化成redis-----------------------*/
+    @PostMapping(value = "/chartData")
+    public Result getChartsData(@RequestHeader(value = "access_token") String access_token,
+                                @RequestHeader(value = "refresh_token") String refresh_token, @RequestBody ChartDataBean chartDataBean) {
 
-			List<Map<String, Object>> dataList = systemBiz.dynamicProcedure(dynamicJson, baseUserList.get(0));
+        Map<String, String> param = new HashMap<>();
 
-			if (tokenRefreshFlag) {
-				param.put("access_token", token);
-				param.put("refresh_token", refreshtoken);
+        /*---------------------------start 授权验证------------------------*/
+        Map<String, Object> authMap = authUtils.doAuth(access_token, refresh_token);
+        boolean tokenRefreshFlag = (boolean) authMap.get("tokenRefreshFlag");
+        boolean tokenFlag = (boolean) authMap.get("tokenFlag");
+        String token = authMap.get("token").toString();
+        String refreshtoken = authMap.get("refreshtoken").toString();
 
-			}
-			return ResultGenerator.genSuccessResult(dataList, param);
+        if (!tokenFlag) {
+            /*
+             * return code: 401 access_token无效或已过期
+             */
+            return ResultGenerator.genUnauthorizedResult(param);
 
-		} catch (Exception e) {
+        }
+        /*---------------------------end 授权验证------------------------*/
+        try {
+            // 获取用户信息
+            /*--------------start 此段代码可优化成redis-----------------------*/
+            CsysUserView baseUserView = new CsysUserView();
 
-			return ResultGenerator.genServerErrorResult(param);
+            baseUserView.setCsysUserRefreshToken(refreshtoken);
 
-		}
-	}
+            List<CsysUserView> baseUserList = authloginBiz.getDataSettingsByCondition(baseUserView);
 
-	/***
-	 * 查询图表数据-通用方法,此方法仅限测试工具时使用，正式生产环境不使用通用接口 rest风格查询数据接口 post请求 说明:
-	 * url:http://localhost:8080/v1/system/chartData 参数:
-	 * 
-	 */
+            /*--------------end 此段代码可优化成redis-----------------------*/
 
-	@PostMapping(value = "/chartData")
-	public Result getChartsData(@RequestHeader(value = "access_token") String access_token,
-			@RequestHeader(value = "refresh_token") String refresh_token, @RequestBody ChartDataBean chartDataBean) {
+            PageInfo pageInfo = systemBiz.getChartData(chartDataBean);
 
-		Map<String, String> param = new HashMap<>();
+            if (tokenRefreshFlag) {
+                param.put("access_token", token);
+                param.put("refresh_token", refreshtoken);
 
-		/*---------------------------start 授权验证------------------------*/
-		Map<String, Object> authMap = authUtils.doAuth(access_token, refresh_token);
-		boolean tokenRefreshFlag = (boolean) authMap.get("tokenRefreshFlag");
-		boolean tokenFlag = (boolean) authMap.get("tokenFlag");
-		String token = authMap.get("token").toString();
-		String refreshtoken = authMap.get("refreshtoken").toString();
+            }
+            return ResultGenerator.genSuccessResult(pageInfo, param);
+        } catch (Exception e) {
 
-		if (!tokenFlag) {
-			/*
-			 * return code: 401 access_token无效或已过期
-			 */
-			return ResultGenerator.genUnauthorizedResult(param);
+            return ResultGenerator.genServerErrorResult(param);
 
-		}
-		/*---------------------------end 授权验证------------------------*/
-		try {
-			// 获取用户信息
-			/*--------------start 此段代码可优化成redis-----------------------*/
-			CsysUserView baseUserView = new CsysUserView();
+        }
+    }
 
-			baseUserView.setCsysUserRefreshToken(refreshtoken);
+    /***
+     * 预查询数据-通用方法,此方法仅限测试工具时使用，正式生产环境不使用通用接口 rest风格查询数据接口 post请求 说明:
+     * url:http://localhost:8080/v1/system/chartData 参数:
+     *
+     */
 
-			List<CsysUserView> baseUserList = authloginBiz.getDataSettingsByCondition(baseUserView);
+    @PostMapping(value = "/preSearchData")
+    public Result preSearchtableData(@RequestHeader(value = "access_token") String access_token,
+                                     @RequestHeader(value = "refresh_token") String refresh_token,
+                                     @RequestBody List<TableDataBean> tableDataList) {
 
-			/*--------------end 此段代码可优化成redis-----------------------*/
+        Map<String, String> param = new HashMap<>();
 
-			PageInfo pageInfo = systemBiz.getChartData(chartDataBean);
+        /*---------------------------start 授权验证------------------------*/
+        Map<String, Object> authMap = authUtils.doAuth(access_token, refresh_token);
+        boolean tokenRefreshFlag = (boolean) authMap.get("tokenRefreshFlag");
+        boolean tokenFlag = (boolean) authMap.get("tokenFlag");
+        String token = authMap.get("token").toString();
+        String refreshtoken = authMap.get("refreshtoken").toString();
 
-			if (tokenRefreshFlag) {
-				param.put("access_token", token);
-				param.put("refresh_token", refreshtoken);
+        if (!tokenFlag) {
+            /*
+             * return code: 401 access_token无效或已过期
+             */
+            return ResultGenerator.genUnauthorizedResult(param);
 
-			}
-			return ResultGenerator.genSuccessResult(pageInfo, param);
-		} catch (Exception e) {
+        }
+        /*---------------------------end 授权验证------------------------*/
 
-			return ResultGenerator.genServerErrorResult(param);
+        // 获取用户信息
+        /*--------------start 此段代码可优化成redis-----------------------*/
+        CsysUserView baseUserView = new CsysUserView();
 
-		}
-	}
+        baseUserView.setCsysUserRefreshToken(refreshtoken);
 
-	/***
-	 * 预查询数据-通用方法,此方法仅限测试工具时使用，正式生产环境不使用通用接口 rest风格查询数据接口 post请求 说明:
-	 * url:http://localhost:8080/v1/system/chartData 参数:
-	 * 
-	 */
+        List<CsysUserView> baseUserList = authloginBiz.getDataSettingsByCondition(baseUserView);
 
-	@PostMapping(value = "/preSearchData")
-	public Result preSearchtableData(@RequestHeader(value = "access_token") String access_token,
-			@RequestHeader(value = "refresh_token") String refresh_token,
-			@RequestBody List<TableDataBean> tableDataList) {
+        /*--------------end 此段代码可优化成redis-----------------------*/
 
-		Map<String, String> param = new HashMap<>();
+        Map<String, List<Map<String, Object>>> mapData = systemBiz.preSearchTableData(tableDataList);
 
-		/*---------------------------start 授权验证------------------------*/
-		Map<String, Object> authMap = authUtils.doAuth(access_token, refresh_token);
-		boolean tokenRefreshFlag = (boolean) authMap.get("tokenRefreshFlag");
-		boolean tokenFlag = (boolean) authMap.get("tokenFlag");
-		String token = authMap.get("token").toString();
-		String refreshtoken = authMap.get("refreshtoken").toString();
+        if (tokenRefreshFlag) {
+            param.put("access_token", token);
+            param.put("refresh_token", refreshtoken);
 
-		if (!tokenFlag) {
-			/*
-			 * return code: 401 access_token无效或已过期
-			 */
-			return ResultGenerator.genUnauthorizedResult(param);
+        }
+        return ResultGenerator.genSuccessResult(mapData, param);
 
-		}
-		/*---------------------------end 授权验证------------------------*/
+    }
 
-		// 获取用户信息
-		/*--------------start 此段代码可优化成redis-----------------------*/
-		CsysUserView baseUserView = new CsysUserView();
+    /***
+     * 存储数据-通用方法,此方法仅限测试工具时使用，正式生产环境不使用通用接口 rest风格查询数据接口 post请求 说明:
+     * url:http://localhost:8080/v1/system/chartData 参数:
+     *
+     */
 
-		baseUserView.setCsysUserRefreshToken(refreshtoken);
+    @PostMapping(value = "/tableSaveData")
+    public Result saveTableData(@RequestHeader(value = "access_token") String access_token,
+                                @RequestHeader(value = "refresh_token") String refresh_token, @RequestBody TableSaveBean tableSaveBean) {
 
-		List<CsysUserView> baseUserList = authloginBiz.getDataSettingsByCondition(baseUserView);
+        Map<String, String> param = new HashMap<>();
 
-		/*--------------end 此段代码可优化成redis-----------------------*/
+        /*---------------------------start 授权验证------------------------*/
+        Map<String, Object> authMap = authUtils.doAuth(access_token, refresh_token);
+        boolean tokenRefreshFlag = (boolean) authMap.get("tokenRefreshFlag");
+        boolean tokenFlag = (boolean) authMap.get("tokenFlag");
+        String token = authMap.get("token").toString();
+        String refreshtoken = authMap.get("refreshtoken").toString();
 
-		Map<String, List<Map<String, Object>>> mapData = systemBiz.preSearchTableData(tableDataList);
+        if (!tokenFlag) {
+            /*
+             * return code: 401 access_token无效或已过期
+             */
+            return ResultGenerator.genUnauthorizedResult(param);
 
-		if (tokenRefreshFlag) {
-			param.put("access_token", token);
-			param.put("refresh_token", refreshtoken);
+        }
+        /*---------------------------end 授权验证------------------------*/
 
-		}
-		return ResultGenerator.genSuccessResult(mapData, param);
+        // 获取用户信息
+        /*--------------start 此段代码可优化成redis-----------------------*/
+        CsysUserView baseUserView = new CsysUserView();
 
-	}
+        baseUserView.setCsysUserRefreshToken(refreshtoken);
 
-	/***
-	 * 存储数据-通用方法,此方法仅限测试工具时使用，正式生产环境不使用通用接口 rest风格查询数据接口 post请求 说明:
-	 * url:http://localhost:8080/v1/system/chartData 参数:
-	 * 
-	 */
+        List<CsysUserView> baseUserList = authloginBiz.getDataSettingsByCondition(baseUserView);
 
-	@PostMapping(value = "/tableSaveData")
-	public Result saveTableData(@RequestHeader(value = "access_token") String access_token,
-			@RequestHeader(value = "refresh_token") String refresh_token, @RequestBody TableSaveBean tableSaveBean) {
+        /*--------------end 此段代码可优化成redis-----------------------*/
 
-		Map<String, String> param = new HashMap<>();
+        ResultBean resultBean = systemBiz.saveTableData(tableSaveBean, baseUserList);
 
-		/*---------------------------start 授权验证------------------------*/
-		Map<String, Object> authMap = authUtils.doAuth(access_token, refresh_token);
-		boolean tokenRefreshFlag = (boolean) authMap.get("tokenRefreshFlag");
-		boolean tokenFlag = (boolean) authMap.get("tokenFlag");
-		String token = authMap.get("token").toString();
-		String refreshtoken = authMap.get("refreshtoken").toString();
+        if (tokenRefreshFlag) {
+            param.put("access_token", token);
+            param.put("refresh_token", refreshtoken);
 
-		if (!tokenFlag) {
-			/*
-			 * return code: 401 access_token无效或已过期
-			 */
-			return ResultGenerator.genUnauthorizedResult(param);
+        }
+        return ResultGenerator.genSuccessResult(resultBean.getStringData(), resultBean.getExtraData(), param);
 
-		}
-		/*---------------------------end 授权验证------------------------*/
+    }
 
-		// 获取用户信息
-		/*--------------start 此段代码可优化成redis-----------------------*/
-		CsysUserView baseUserView = new CsysUserView();
+    /***
+     * 批量存储数据-通用方法,此方法仅限测试工具时使用，正式生产环境不使用通用接口 rest风格查询数据接口 post请求 说明:
+     * url:http://localhost:8080/v1/system/chartData 参数:
+     *
+     */
 
-		baseUserView.setCsysUserRefreshToken(refreshtoken);
+    @PostMapping(value = "/tableBatchSaveData")
+    public Result saveBatchTableData(@RequestHeader(value = "access_token") String access_token,
+                                     @RequestHeader(value = "refresh_token") String refresh_token,
+                                     @RequestBody List<TableSaveBean> tableSaveListBean) {
 
-		List<CsysUserView> baseUserList = authloginBiz.getDataSettingsByCondition(baseUserView);
+        Map<String, String> param = new HashMap<>();
 
-		/*--------------end 此段代码可优化成redis-----------------------*/
+        /*---------------------------start 授权验证------------------------*/
+        Map<String, Object> authMap = authUtils.doAuth(access_token, refresh_token);
+        boolean tokenRefreshFlag = (boolean) authMap.get("tokenRefreshFlag");
+        boolean tokenFlag = (boolean) authMap.get("tokenFlag");
+        String token = authMap.get("token").toString();
+        String refreshtoken = authMap.get("refreshtoken").toString();
 
-		String returnsequence = systemBiz.saveTableData(tableSaveBean, baseUserList.get(0));
+        if (!tokenFlag) {
+            /*
+             * return code: 401 access_token无效或已过期
+             */
+            return ResultGenerator.genUnauthorizedResult(param);
 
-		if (tokenRefreshFlag) {
-			param.put("access_token", token);
-			param.put("refresh_token", refreshtoken);
+        }
+        /*---------------------------end 授权验证------------------------*/
 
-		}
-		return ResultGenerator.genSuccessResult(returnsequence, param);
+        // 获取用户信息
+        /*--------------start 此段代码可优化成redis-----------------------*/
+        CsysUserView baseUserView = new CsysUserView();
 
-	}
+        baseUserView.setCsysUserRefreshToken(refreshtoken);
 
-	/***
-	 * 批量存储数据-通用方法,此方法仅限测试工具时使用，正式生产环境不使用通用接口 rest风格查询数据接口 post请求 说明:
-	 * url:http://localhost:8080/v1/system/chartData 参数:
-	 * 
-	 */
+        List<CsysUserView> baseUserList = authloginBiz.getDataSettingsByCondition(baseUserView);
 
-	@PostMapping(value = "/tableBatchSaveData")
-	public Result saveBatchTableData(@RequestHeader(value = "access_token") String access_token,
-			@RequestHeader(value = "refresh_token") String refresh_token,
-			@RequestBody List<TableSaveBean> tableSaveListBean) {
+        /*--------------end 此段代码可优化成redis-----------------------*/
 
-		Map<String, String> param = new HashMap<>();
+        try {
 
-		/*---------------------------start 授权验证------------------------*/
-		Map<String, Object> authMap = authUtils.doAuth(access_token, refresh_token);
-		boolean tokenRefreshFlag = (boolean) authMap.get("tokenRefreshFlag");
-		boolean tokenFlag = (boolean) authMap.get("tokenFlag");
-		String token = authMap.get("token").toString();
-		String refreshtoken = authMap.get("refreshtoken").toString();
+            for (TableSaveBean tsBean : tableSaveListBean) {
 
-		if (!tokenFlag) {
-			/*
-			 * return code: 401 access_token无效或已过期
-			 */
-			return ResultGenerator.genUnauthorizedResult(param);
+                systemBiz.saveTableData(tsBean, baseUserList);
 
-		}
-		/*---------------------------end 授权验证------------------------*/
+            }
 
-		// 获取用户信息
-		/*--------------start 此段代码可优化成redis-----------------------*/
-		CsysUserView baseUserView = new CsysUserView();
+            if (tokenRefreshFlag) {
+                param.put("access_token", token);
+                param.put("refresh_token", refreshtoken);
 
-		baseUserView.setCsysUserRefreshToken(refreshtoken);
+            }
+            return ResultGenerator.genSuccessResult(param);
+        } catch (Exception e) {
 
-		List<CsysUserView> baseUserList = authloginBiz.getDataSettingsByCondition(baseUserView);
+            return ResultGenerator.genServerErrorResult(param);
 
-		/*--------------end 此段代码可优化成redis-----------------------*/
+        }
 
-		try {
+    }
 
-			for (TableSaveBean tsBean : tableSaveListBean) {
+    /***
+     * 存储数据-通用方法,此方法仅限测试工具时使用，正式生产环境不使用通用接口 rest风格查询数据接口 post请求 说明:
+     * url:http://localhost:8080/v1/system/chartData 参数:
+     *
+     */
 
-				String returnsequence = systemBiz.saveTableData(tsBean, baseUserList.get(0));
+    @PostMapping(value = "/tableUpdateData")
+    public Result updateTableData(@RequestHeader(value = "access_token") String access_token,
+                                  @RequestHeader(value = "refresh_token") String refresh_token, @RequestBody TableSaveBean tableSaveBean) {
 
-			}
+        Map<String, String> param = new HashMap<>();
 
-			if (tokenRefreshFlag) {
-				param.put("access_token", token);
-				param.put("refresh_token", refreshtoken);
+        /*---------------------------start 授权验证------------------------*/
+        Map<String, Object> authMap = authUtils.doAuth(access_token, refresh_token);
+        boolean tokenRefreshFlag = (boolean) authMap.get("tokenRefreshFlag");
+        boolean tokenFlag = (boolean) authMap.get("tokenFlag");
+        String token = authMap.get("token").toString();
+        String refreshtoken = authMap.get("refreshtoken").toString();
 
-			}
-			return ResultGenerator.genSuccessResult(param);
-		} catch (Exception e) {
+        if (!tokenFlag) {
+            /*
+             * return code: 401 access_token无效或已过期
+             */
+            return ResultGenerator.genUnauthorizedResult(param);
 
-			return ResultGenerator.genServerErrorResult(param);
+        }
+        /*---------------------------end 授权验证------------------------*/
 
-		}
+        // 获取用户信息
+        /*--------------start 此段代码可优化成redis-----------------------*/
+        CsysUserView baseUserView = new CsysUserView();
 
-	}
+        baseUserView.setCsysUserRefreshToken(refreshtoken);
 
-	/***
-	 * 存储数据-通用方法,此方法仅限测试工具时使用，正式生产环境不使用通用接口 rest风格查询数据接口 post请求 说明:
-	 * url:http://localhost:8080/v1/system/chartData 参数:
-	 * 
-	 */
+        List<CsysUserView> baseUserList = authloginBiz.getDataSettingsByCondition(baseUserView);
 
-	@PostMapping(value = "/tableUpdateData")
-	public Result updateTableData(@RequestHeader(value = "access_token") String access_token,
-			@RequestHeader(value = "refresh_token") String refresh_token, @RequestBody TableSaveBean tableSaveBean) {
+        /*--------------end 此段代码可优化成redis-----------------------*/
 
-		Map<String, String> param = new HashMap<>();
+        ResultBean resultBean = systemBiz.updateTableData(tableSaveBean, baseUserList);
 
-		/*---------------------------start 授权验证------------------------*/
-		Map<String, Object> authMap = authUtils.doAuth(access_token, refresh_token);
-		boolean tokenRefreshFlag = (boolean) authMap.get("tokenRefreshFlag");
-		boolean tokenFlag = (boolean) authMap.get("tokenFlag");
-		String token = authMap.get("token").toString();
-		String refreshtoken = authMap.get("refreshtoken").toString();
+        if (tokenRefreshFlag) {
+            param.put("access_token", token);
+            param.put("refresh_token", refreshtoken);
 
-		if (!tokenFlag) {
-			/*
-			 * return code: 401 access_token无效或已过期
-			 */
-			return ResultGenerator.genUnauthorizedResult(param);
+        }
+        return ResultGenerator.genSuccessResult(resultBean.getStringData(), resultBean.getExtraData(), param);
 
-		}
-		/*---------------------------end 授权验证------------------------*/
+    }
 
-		// 获取用户信息
-		/*--------------start 此段代码可优化成redis-----------------------*/
-		CsysUserView baseUserView = new CsysUserView();
+    /***
+     * 存储数据-通用方法,此方法仅限测试工具时使用，正式生产环境不使用通用接口 rest风格查询数据接口 post请求 说明:
+     * url:http://localhost:8080/v1/system/chartData 参数:
+     *
+     */
 
-		baseUserView.setCsysUserRefreshToken(refreshtoken);
+    @PostMapping(value = "/tableBatchUpdateData")
+    public Result updateBatchTableData(@RequestHeader(value = "access_token") String access_token,
+                                       @RequestHeader(value = "refresh_token") String refresh_token,
+                                       @RequestBody List<TableSaveBean> tableSaveListBean) {
 
-		List<CsysUserView> baseUserList = authloginBiz.getDataSettingsByCondition(baseUserView);
+        Map<String, String> param = new HashMap<>();
 
-		/*--------------end 此段代码可优化成redis-----------------------*/
+        /*---------------------------start 授权验证------------------------*/
+        Map<String, Object> authMap = authUtils.doAuth(access_token, refresh_token);
+        boolean tokenRefreshFlag = (boolean) authMap.get("tokenRefreshFlag");
+        boolean tokenFlag = (boolean) authMap.get("tokenFlag");
+        String token = authMap.get("token").toString();
+        String refreshtoken = authMap.get("refreshtoken").toString();
 
-		String returnsequence = systemBiz.updateTableData(tableSaveBean, baseUserList.get(0));
+        if (!tokenFlag) {
+            /*
+             * return code: 401 access_token无效或已过期
+             */
+            return ResultGenerator.genUnauthorizedResult(param);
 
-		if (tokenRefreshFlag) {
-			param.put("access_token", token);
-			param.put("refresh_token", refreshtoken);
+        }
+        /*---------------------------end 授权验证------------------------*/
 
-		}
-		return ResultGenerator.genSuccessResult(returnsequence, param);
+        // 获取用户信息
+        /*--------------start 此段代码可优化成redis-----------------------*/
+        CsysUserView baseUserView = new CsysUserView();
 
-	}
+        baseUserView.setCsysUserRefreshToken(refreshtoken);
 
-	/***
-	 * 存储数据-通用方法,此方法仅限测试工具时使用，正式生产环境不使用通用接口 rest风格查询数据接口 post请求 说明:
-	 * url:http://localhost:8080/v1/system/chartData 参数:
-	 * 
-	 */
+        List<CsysUserView> baseUserList = authloginBiz.getDataSettingsByCondition(baseUserView);
 
-	@PostMapping(value = "/tableBatchUpdateData")
-	public Result updateBatchTableData(@RequestHeader(value = "access_token") String access_token,
-			@RequestHeader(value = "refresh_token") String refresh_token,
-			@RequestBody List<TableSaveBean> tableSaveListBean) {
+        /*--------------end 此段代码可优化成redis-----------------------*/
 
-		Map<String, String> param = new HashMap<>();
+        try {
 
-		/*---------------------------start 授权验证------------------------*/
-		Map<String, Object> authMap = authUtils.doAuth(access_token, refresh_token);
-		boolean tokenRefreshFlag = (boolean) authMap.get("tokenRefreshFlag");
-		boolean tokenFlag = (boolean) authMap.get("tokenFlag");
-		String token = authMap.get("token").toString();
-		String refreshtoken = authMap.get("refreshtoken").toString();
+            for (TableSaveBean tsBean : tableSaveListBean) {
+                systemBiz.updateTableData(tsBean, baseUserList);
+            }
 
-		if (!tokenFlag) {
-			/*
-			 * return code: 401 access_token无效或已过期
-			 */
-			return ResultGenerator.genUnauthorizedResult(param);
+            if (tokenRefreshFlag) {
+                param.put("access_token", token);
+                param.put("refresh_token", refreshtoken);
 
-		}
-		/*---------------------------end 授权验证------------------------*/
+            }
+            return ResultGenerator.genSuccessResult(param);
+        } catch (Exception e) {
 
-		// 获取用户信息
-		/*--------------start 此段代码可优化成redis-----------------------*/
-		CsysUserView baseUserView = new CsysUserView();
+            return ResultGenerator.genServerErrorResult(param);
 
-		baseUserView.setCsysUserRefreshToken(refreshtoken);
+        }
+    }
 
-		List<CsysUserView> baseUserList = authloginBiz.getDataSettingsByCondition(baseUserView);
+    /***
+     * 查询联级数据-通用方法,此方法仅限测试工具时使用，正式生产环境不使用通用接口 rest风格查询数据接口 post请求 说明:
+     * url:http://localhost:8080/v1/system/chartData 参数:
+     *
+     */
 
-		/*--------------end 此段代码可优化成redis-----------------------*/
+    @PostMapping(value = "/cascaderData")
+    public Result getCascaderData(@RequestHeader(value = "access_token") String access_token,
+                                  @RequestHeader(value = "refresh_token") String refresh_token, @RequestBody CascaderBean cascaderBean) {
 
-		try {
+        Map<String, String> param = new HashMap<>();
 
-			for (TableSaveBean tsBean : tableSaveListBean) {
-				String returnsequence = systemBiz.updateTableData(tsBean, baseUserList.get(0));
-			}
+        /*---------------------------start 授权验证------------------------*/
+        Map<String, Object> authMap = authUtils.doAuth(access_token, refresh_token);
+        boolean tokenRefreshFlag = (boolean) authMap.get("tokenRefreshFlag");
+        boolean tokenFlag = (boolean) authMap.get("tokenFlag");
+        String token = authMap.get("token").toString();
+        String refreshtoken = authMap.get("refreshtoken").toString();
 
-			if (tokenRefreshFlag) {
-				param.put("access_token", token);
-				param.put("refresh_token", refreshtoken);
+        if (!tokenFlag) {
+            /*
+             * return code: 401 access_token无效或已过期
+             */
+            return ResultGenerator.genUnauthorizedResult(param);
 
-			}
-			return ResultGenerator.genSuccessResult(param);
-		} catch (Exception e) {
+        }
+        /*---------------------------end 授权验证------------------------*/
 
-			return ResultGenerator.genServerErrorResult(param);
+        // 获取用户信息
+        /*--------------start 此段代码可优化成redis-----------------------*/
+        CsysUserView baseUserView = new CsysUserView();
 
-		}
-	}
+        baseUserView.setCsysUserRefreshToken(refreshtoken);
 
-	/***
-	 * 查询联级数据-通用方法,此方法仅限测试工具时使用，正式生产环境不使用通用接口 rest风格查询数据接口 post请求 说明:
-	 * url:http://localhost:8080/v1/system/chartData 参数:
-	 * 
-	 */
+        List<CsysUserView> baseUserList = authloginBiz.getDataSettingsByCondition(baseUserView);
 
-	@PostMapping(value = "/cascaderData")
-	public Result getCascaderData(@RequestHeader(value = "access_token") String access_token,
-			@RequestHeader(value = "refresh_token") String refresh_token, @RequestBody CascaderBean cascaderBean) {
+        /*--------------end 此段代码可优化成redis-----------------------*/
 
-		Map<String, String> param = new HashMap<>();
+        List<Map<String, Object>> list = systemBiz.getCascaderData(cascaderBean);
 
-		/*---------------------------start 授权验证------------------------*/
-		Map<String, Object> authMap = authUtils.doAuth(access_token, refresh_token);
-		boolean tokenRefreshFlag = (boolean) authMap.get("tokenRefreshFlag");
-		boolean tokenFlag = (boolean) authMap.get("tokenFlag");
-		String token = authMap.get("token").toString();
-		String refreshtoken = authMap.get("refreshtoken").toString();
+        if (tokenRefreshFlag) {
+            param.put("access_token", token);
+            param.put("refresh_token", refreshtoken);
 
-		if (!tokenFlag) {
-			/*
-			 * return code: 401 access_token无效或已过期
-			 */
-			return ResultGenerator.genUnauthorizedResult(param);
+        }
+        return ResultGenerator.genSuccessResult(list, param);
 
-		}
-		/*---------------------------end 授权验证------------------------*/
+    }
 
-		// 获取用户信息
-		/*--------------start 此段代码可优化成redis-----------------------*/
-		CsysUserView baseUserView = new CsysUserView();
+    /***
+     * 表单校验-通用方法,此方法仅限测试工具时使用，正式生产环境不使用通用接口 rest风格查询数据接口 post请求 说明:
+     * url:http://localhost:8080/v1/system/chartData 参数:
+     *
+     */
 
-		baseUserView.setCsysUserRefreshToken(refreshtoken);
+    @PostMapping(value = "/validationData")
+    public Result validationData(@RequestHeader(value = "access_token") String access_token,
+                                 @RequestHeader(value = "refresh_token") String refresh_token, @RequestBody ValidationBean validationBean) {
 
-		List<CsysUserView> baseUserList = authloginBiz.getDataSettingsByCondition(baseUserView);
+        Map<String, String> param = new HashMap<>();
 
-		/*--------------end 此段代码可优化成redis-----------------------*/
+        /*---------------------------start 授权验证------------------------*/
+        Map<String, Object> authMap = authUtils.doAuth(access_token, refresh_token);
+        boolean tokenRefreshFlag = (boolean) authMap.get("tokenRefreshFlag");
+        boolean tokenFlag = (boolean) authMap.get("tokenFlag");
+        String token = authMap.get("token").toString();
+        String refreshtoken = authMap.get("refreshtoken").toString();
 
-		List<Map<String, Object>> list = systemBiz.getCascaderData(cascaderBean);
+        if (!tokenFlag) {
+            /*
+             * return code: 401 access_token无效或已过期
+             */
+            return ResultGenerator.genUnauthorizedResult(param);
 
-		if (tokenRefreshFlag) {
-			param.put("access_token", token);
-			param.put("refresh_token", refreshtoken);
+        }
+        /*---------------------------end 授权验证------------------------*/
+        try {
+            // 获取用户信息
+            /*--------------start 此段代码可优化成redis-----------------------*/
+            CsysUserView baseUserView = new CsysUserView();
 
-		}
-		return ResultGenerator.genSuccessResult(list, param);
+            baseUserView.setCsysUserRefreshToken(refreshtoken);
 
-	}
+            List<CsysUserView> baseUserList = authloginBiz.getDataSettingsByCondition(baseUserView);
 
-	/***
-	 * 表单校验-通用方法,此方法仅限测试工具时使用，正式生产环境不使用通用接口 rest风格查询数据接口 post请求 说明:
-	 * url:http://localhost:8080/v1/system/chartData 参数:
-	 * 
-	 */
+            /*--------------end 此段代码可优化成redis-----------------------*/
 
-	@PostMapping(value = "/validationData")
-	public Result validationData(@RequestHeader(value = "access_token") String access_token,
-			@RequestHeader(value = "refresh_token") String refresh_token, @RequestBody ValidationBean validationBean) {
+            boolean flag = systemBiz.validationData(validationBean, baseUserList.get(0));
 
-		Map<String, String> param = new HashMap<>();
+            if (tokenRefreshFlag) {
+                param.put("access_token", token);
+                param.put("refresh_token", refreshtoken);
 
-		/*---------------------------start 授权验证------------------------*/
-		Map<String, Object> authMap = authUtils.doAuth(access_token, refresh_token);
-		boolean tokenRefreshFlag = (boolean) authMap.get("tokenRefreshFlag");
-		boolean tokenFlag = (boolean) authMap.get("tokenFlag");
-		String token = authMap.get("token").toString();
-		String refreshtoken = authMap.get("refreshtoken").toString();
+            }
+            return ResultGenerator.genSuccessResult(flag, param);
+        } catch (Exception e) {
 
-		if (!tokenFlag) {
-			/*
-			 * return code: 401 access_token无效或已过期
-			 */
-			return ResultGenerator.genUnauthorizedResult(param);
+            return ResultGenerator.genServerErrorResult(param);
 
-		}
-		/*---------------------------end 授权验证------------------------*/
-		try {
-			// 获取用户信息
-			/*--------------start 此段代码可优化成redis-----------------------*/
-			CsysUserView baseUserView = new CsysUserView();
+        }
+    }
 
-			baseUserView.setCsysUserRefreshToken(refreshtoken);
+    /***
+     * 自定义存储过程 rest风格发短信接口 post请求 说明: url:http://localhost:8080/v1/system/CommonData
+     * 参数:
+     *
+     */
 
-			List<CsysUserView> baseUserList = authloginBiz.getDataSettingsByCondition(baseUserView);
+    @PostMapping(value = "/postMessage", produces = "text/html;charset=utf-8")
+    public Result postMessage(@RequestBody SmsBean smsBean, Model model, HttpServletRequest request,
+                              HttpServletResponse response) {
 
-			/*--------------end 此段代码可优化成redis-----------------------*/
+        logger.info("调用短信接口");
+        Map<String, String> param = new HashMap<>();
 
-			boolean flag = systemBiz.validationData(validationBean, baseUserList.get(0));
+        try {
 
-			if (tokenRefreshFlag) {
-				param.put("access_token", token);
-				param.put("refresh_token", refreshtoken);
+            String code = sms.sendSms(smsBean.getMobile(), smsBean.getContent());
 
-			}
-			return ResultGenerator.genSuccessResult(flag, param);
-		} catch (Exception e) {
+            return ResultGenerator.genSuccessResult(code, param);
 
-			return ResultGenerator.genServerErrorResult(param);
+        } catch (Exception e) {
 
-		}
-	}
+            return ResultGenerator.genServerErrorResult(param);
 
-	/***
-	 * 自定义存储过程 rest风格发短信接口 post请求 说明: url:http://localhost:8080/v1/system/CommonData
-	 * 参数:
-	 * 
-	 */
-
-	@PostMapping(value = "/postMessage", produces = "text/html;charset=utf-8")
-	public Result postMessage(@RequestBody SmsBean smsBean, Model model, HttpServletRequest request,
-			HttpServletResponse response) {
-
-		logger.info("调用短信接口");
-		Map<String, String> param = new HashMap<>();
-
-		try {
-
-			String code = sms.sendSms(smsBean.getMobile(), smsBean.getContent());
-
-			return ResultGenerator.genSuccessResult(code, param);
-
-		} catch (Exception e) {
-
-			return ResultGenerator.genServerErrorResult(param);
-
-		}
-	}
+        }
+    }
 
 }

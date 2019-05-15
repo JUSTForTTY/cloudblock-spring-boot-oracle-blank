@@ -1,11 +1,28 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE configuration PUBLIC "-//mybatis.org//DTD Config 3.0//EN" "http://mybatis.org/dtd/mybatis-3-config.dtd">
 <configuration>
-<!-- 全局参数 -->
-<settings>
-<setting name="callSettersOnNulls" value="true" />
-</settings>
+    <!-- 全局参数 -->
+    <settings>
+        <setting name="callSettersOnNulls" value="true"/>
+        <setting name="logImpl" value="STDOUT_LOGGING"/>
+    </settings>
 
 
+    <environments default="database1">
+        <environment id="database1">
+            <transactionManager type="JDBC"></transactionManager>
+            <dataSource type="POOLED">
+                <property name="driver" value="oracle.jdbc.driver.OracleDriver"/>
+                <property name="url" value="jdbc:oracle:thin:@39.98.81.218:1521:orcl"/>
+                <property name="username" value="C##cy"/>
+                <property name="password" value="1234"/>
+            </dataSource>
+        </environment>
+    </environments>
+
+
+    <!-- <mappers>
+        <mapper resource="mapper/SystemMapper.xml"></mapper>
+    </mappers>-->
 </configuration>
  

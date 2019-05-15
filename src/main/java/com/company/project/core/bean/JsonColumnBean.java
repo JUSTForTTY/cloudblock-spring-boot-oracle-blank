@@ -1,5 +1,7 @@
 package com.company.project.core.bean;
 
+import java.util.List;
+
 public class JsonColumnBean {
 
 	private String name;// 字段名称
@@ -15,6 +17,8 @@ public class JsonColumnBean {
 	private String rule;
 
 	private String procudure;
+	
+	private List<JsonBean> procudureParam;
 
 	public String getName() {
 		return name;
@@ -56,4 +60,13 @@ public class JsonColumnBean {
 		this.procudure = procudure;
 	}
 
+	public List<JsonBean> getProcudureParam() {
+		return procudureParam;
+	}
+
+	public void setProcudureParam(List<JsonBean> procudureParam) {
+		this.procudureParam = procudureParam;
+	}
+
+	
 }

@@ -24,8 +24,13 @@
  </delete>
  
  
- <select id="doProcedure" parameterType="String"   resultType="java.util.Map"  >
-	${sqlStr}
+<select id="doProcedure" parameterType="HashMap"  statementType="CALLABLE" >
+	 call ${procudure.procedureName}(
+	 <foreach collection="params" item="item" index="index"  separator=",">
+	  #{item.value,mode=IN,jdbcType=VARCHAR}
+	 </foreach>
+	  ,#{procudure.cursor, mode=OUT, jdbcType=CURSOR, resultMap=cursorMap}
+	 )
 </select>
 
  <select id="selectLastId" parameterType="String" resultType="String">

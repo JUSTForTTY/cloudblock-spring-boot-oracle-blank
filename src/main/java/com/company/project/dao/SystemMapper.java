@@ -6,6 +6,7 @@ import java.util.Map;
 import org.apache.ibatis.annotations.Param;
 
 import com.company.project.core.bean.CascaderResultBean;
+import com.company.project.core.bean.JsonBean;
 
 public interface SystemMapper {
 
@@ -19,7 +20,7 @@ public interface SystemMapper {
 	
 	public void deletePublicItem(@Param(value = "sqlStr") String sqlStr);
 	
-	public List<Map<String, Object>> doProcedure(@Param(value = "sqlStr") String sqlStr);
+	public void doProcedure(@Param(value = "procudure") Map<String, Object> procudure,@Param(value = "params") List<JsonBean> params);
 	
 	public List<CascaderResultBean> selectCascaderItemList(@Param(value = "sqlStr") String sqlStr);
 	

@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.company.project.dao.InsertformMapper">
+	<insert id="saveFormData000515" parameterType="java.util.Map">
+        insert into T_TEST001(T_TEST001_CREATE_USER,T_TEST001_CREATE_TIME,T_TEST001_MODIFY_USER,T_TEST001_MODIFY_TIME,T_TEST001_FLAG)
+			values
+		(#{T_TEST001_CREATE_USER},to_date(#{T_TEST001_CREATE_TIME},'yyyy-MM-dd hh24:mi:ss'),#{T_TEST001_MODIFY_USER},to_date(#{T_TEST001_MODIFY_TIME},'yyyy-MM-dd hh24:mi:ss'),#{T_TEST001_FLAG})
+    </insert>
+	<update id="updateFormData000515" parameterType="map">
+		update T_TEST001
+		set T_TEST001_MODIFY_USER = #{T_TEST001_MODIFY_USER},T_TEST001_MODIFY_TIME = to_date(#{T_TEST001_MODIFY_TIME},'yyyy-MM-dd hh24:mi:ss')
+		where
+				T_TEST001_ID = #{T_TEST001_ID}
+	</update>
+
+	<insert id="saveFormData000514" parameterType="java.util.Map">
+        insert into T_TEST001(T_TEST001_ID,T_TEST001_NAME,T_TEST001_CREATE_USER,T_TEST001_CREATE_TIME,T_TEST001_MODIFY_USER,T_TEST001_MODIFY_TIME,T_TEST001_FLAG)
+			values
+		(#{T_TEST001_ID},#{T_TEST001_NAME},#{T_TEST001_CREATE_USER},to_date(#{T_TEST001_CREATE_TIME},'yyyy-MM-dd hh24:mi:ss'),#{T_TEST001_MODIFY_USER},to_date(#{T_TEST001_MODIFY_TIME},'yyyy-MM-dd hh24:mi:ss'),#{T_TEST001_FLAG})
+    </insert>
+	<update id="updateFormData000514" parameterType="map">
+		update T_TEST001
+		set T_TEST001_NAME = #{T_TEST001_NAME},T_TEST001_MODIFY_USER = #{T_TEST001_MODIFY_USER},T_TEST001_MODIFY_TIME = to_date(#{T_TEST001_MODIFY_TIME},'yyyy-MM-dd hh24:mi:ss')
+		where
+				T_TEST001_ID = #{T_TEST001_ID}
+	</update>
+</mapper>
