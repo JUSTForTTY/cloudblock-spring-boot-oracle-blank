@@ -757,9 +757,10 @@ public class SystemServiceImpl implements SystemService {
 
 						valueSql += "to_date('" + jcdata.getValue() + "','"+jcdata.getRule()+"')" + ",";
 					} else {
+						
 						columnSql += jcdata.getName() + ",";
 
-						valueSql += "'" + jcdata.getValue() + "'" + ",";
+						valueSql += "'" + jcdata.getValue().replaceAll("'", "''") + "'" + ",";
 					}
 					
 					break;
