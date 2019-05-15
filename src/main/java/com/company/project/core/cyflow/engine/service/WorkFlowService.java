@@ -1,47 +1,21 @@
 package com.company.project.core.cyflow.engine.service;
 
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-
-import javax.annotation.Resource;
-
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
-import org.springframework.stereotype.Service;
-
 import com.alibaba.fastjson.JSONObject;
-import com.company.project.biz.CsysPotBiz;
-import com.company.project.biz.CsysPotTrsBiz;
-import com.company.project.biz.CsysPotTrsConBiz;
-import com.company.project.biz.CsysTrsAuthViewBiz;
-import com.company.project.biz.CsysTrsLogBiz;
-import com.company.project.biz.CsysWorkflowBiz;
-import com.company.project.biz.CsysWorkflowRunBiz;
-import com.company.project.core.cyflow.engine.enums.WorkflowEnum;
-import com.company.project.core.cyflow.engine.enums.WorkflowPotEnum;
-import com.company.project.core.cyflow.engine.enums.WorkflowPotTrsAuthEnum;
-import com.company.project.core.cyflow.engine.enums.WorkflowPotTrsConEnum;
-import com.company.project.core.cyflow.engine.enums.WorkflowPotTrsEnum;
-import com.company.project.core.cyflow.engine.enums.WorkflowRunEnum;
+import com.company.project.biz.*;
+import com.company.project.core.cyflow.engine.enums.*;
 import com.company.project.core.cyflow.engine.interfaces.WorkflowInterface;
 import com.company.project.core.result.ResultCode;
 import com.company.project.dao.CsysTrsAuthViewMapper;
 import com.company.project.dao.SystemMapper;
-import com.company.project.model.CsysPot;
-import com.company.project.model.CsysPotTrs;
-import com.company.project.model.CsysPotTrsCon;
-import com.company.project.model.CsysTrsAuthView;
-import com.company.project.model.CsysTrsAuthViewExample;
-import com.company.project.model.CsysTrsLog;
-import com.company.project.model.CsysUserView;
-import com.company.project.model.CsysWorkflow;
-import com.company.project.model.CsysWorkflowRun;
+import com.company.project.model.*;
 import com.company.project.service.CommonService;
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
+import org.springframework.stereotype.Service;
+
+import javax.annotation.Resource;
+import java.text.SimpleDateFormat;
+import java.util.*;
 
 @Service
 public class WorkFlowService implements WorkflowInterface {
@@ -79,85 +53,88 @@ public class WorkFlowService implements WorkflowInterface {
     public JSONObject onInitRun(List<CsysUserView> baseUserViewList, CsysWorkflowRun csysWorkflowRun)
             throws Exception {
         JSONObject object = new JSONObject();
-        CsysUserView CsysUserView = baseUserViewList.get(0);
-        String[] tableValueArray = csysWorkflowRun.getCsysWorkflowRunTableVal().split(",");
-        for (String tableValue : tableValueArray) {
-            logger.info("当前主键值：" + tableValue);
-            csysWorkflowRun.setCsysWorkflowRunTableVal(tableValue);
-            /*
-             * 第一步：判断该工作流实例是否已经生成
-             */
-            String csysWorkflowRunId = judgeRunIsOnInit(csysWorkflowRun);
-            if (csysWorkflowRunId == null) {
-                CsysWorkflow cySysWorkflow = cySysWorkflowBiz.getDataSettings(csysWorkflowRun.getCsysWorkflowId());
-                if (cySysWorkflow != null) {
-
+        CsysUserView csysUserView = baseUserViewList.get(0);
+        String workflowId = csysWorkflowRun.getCsysWorkflowId();
+        /*
+         * 第一步：根据工作流编号验证该工作流是否存在
+         */
+        if (workflowId != null && !"".equals(workflowId)) {
+            CsysWorkflow cySysWorkflow = cySysWorkflowBiz.getDataSettings(workflowId);
+            if (cySysWorkflow != null) {
+                /*
+                 * 第二步：根据工作流编号，获取工作流头节点信息
+                 */
+                CsysPot csysPot = getWorkFlowHeadPot(workflowId);
+                if (csysPot != null) {
                     /*
-                     * 第二步：根据工作流编号，获取工作流头节点信息
+                     * 第三步: 判断当前用户是否拥有初始化权限即初始迁移权限
                      */
-                    CsysPot csysPot = getWorkFlowHeadPot(csysWorkflowRun.getCsysWorkflowId());
-
-                    if (csysPot != null) {
-
-                        /*
-                         * 第三步: 判断当前用户是否拥有初始化权限即初始迁移权限
-                         */
-                        Map<String, Object> map = judgeIsTrsAuth(baseUserViewList, csysWorkflowRun.getCsysWorkflowId(),
-                                null, csysPot.getCsysPotId());
-
-                        CsysPotTrs csysPotTrs = (CsysPotTrs) map.get("CsysPotTrs");
-
+                    Map<String, Object> map = judgeIsTrsAuth(baseUserViewList, workflowId,
+                            null, csysPot.getCsysPotId());
+                    CsysPotTrs csysPotTrs = (CsysPotTrs) map.get("CsysPotTrs");
+                    if (csysPotTrs != null) {
+                        //判断是否自动执行
                         if ((boolean) map.get("isAutoExe") == true)
-                            CsysUserView = new CsysUserView();
-
-                        if (csysPotTrs != null) {
-
+                            csysUserView = new CsysUserView();
+                        String[] tableValueArray = csysWorkflowRun.getCsysWorkflowRunTableVal().split(",");
+                        //开始循环
+                        for (String tableValue : tableValueArray) {
+                            logger.info("当前主键值：" + tableValue);
+                            csysWorkflowRun.setCsysWorkflowRunTableVal(tableValue);
                             /*
-                             * 第四步： 生成工作流实例
+                             * 第四步：判断该工作流实例是否已经生成
                              */
-                            csysWorkflowRun.setCsysPotTrsId(csysPotTrs.getCsysPotTrsId());
-                            csysWorkflowRunId = insertCsysWorkflowRun(CsysUserView, csysWorkflowRun, cySysWorkflow,
-                                    csysPot, csysPotTrs);
+                            String csysWorkflowRunId = judgeRunIsOnInit(csysWorkflowRun);
+                            if (csysWorkflowRunId == null) {
+                                /*
+                                 * 第五步： 生成工作流实例
+                                 */
+                                csysWorkflowRun.setCsysPotTrsId(csysPotTrs.getCsysPotTrsId());
+                                csysWorkflowRunId = insertCsysWorkflowRun(csysUserView, csysWorkflowRun, cySysWorkflow,
+                                        csysPot, csysPotTrs);
 
-                            csysWorkflowRun.setCsysWorkflowRunId(csysWorkflowRunId);
-
-                            /*
-                             * 第五步：生成工作流日志（初始化工作流实例）
-                             */
-                            insertCsysTrsLog(CsysUserView, csysWorkflowRun, csysPotTrs, "0");
-
-                            /*
-                             * 第六步：判断自动执行节点
-                             */
-                            autoExeCsysPot(csysWorkflowRun, csysPot.getCsysPotId());
-                            object.put("status", ResultCode.SUCCESS.getMessage());
-                            object.put("code", ResultCode.SUCCESS.getCode());
-                        } else {
-                            // 无实例化权限
-                            object.put("status", ResultCode.FAIL.getCode());
-                            object.put("code", WorkflowRunEnum.RunOnInitIsNotAuth.getCode());
-                            object.put("msg", WorkflowRunEnum.RunOnInitIsNotAuth.getDescribtion());
+                                csysWorkflowRun.setCsysWorkflowRunId(csysWorkflowRunId);
+                                /*
+                                 * 第六步：生成工作流日志（初始化工作流实例）
+                                 */
+                                insertCsysTrsLog(csysUserView, csysWorkflowRun, csysPotTrs, "0");
+                                /*
+                                 * 第七步：判断自动执行节点
+                                 */
+                                object.put("csysWorkflowRunId", csysWorkflowRunId);
+                                object.put("status", ResultCode.SUCCESS.getMessage());
+                                object.put("code", ResultCode.SUCCESS.getCode());
+                            } else {
+                                // 该实例已存在
+                                object.put("status", ResultCode.FAIL.getCode());
+                                object.put("code", WorkflowRunEnum.RunIsExists.getCode());
+                                object.put("msg", WorkflowRunEnum.RunIsExists.getDescribtion());
+                            }
+                            object.put("csysWorkflowRunId", csysWorkflowRunId);
                         }
-
                     } else {
-                        // 无头结点
+                        // 无实例化权限
                         object.put("status", ResultCode.FAIL.getCode());
-                        object.put("code", WorkflowPotEnum.HeadPotIsNotExists.getCode());
-                        object.put("msg", WorkflowPotEnum.HeadPotIsNotExists.getDescribtion());
+                        object.put("code", WorkflowRunEnum.RunOnInitIsNotAuth.getCode());
+                        object.put("msg", WorkflowRunEnum.RunOnInitIsNotAuth.getDescribtion());
                     }
                 } else {
-                    // 工作流不存在
+                    // 无头结点
                     object.put("status", ResultCode.FAIL.getCode());
-                    object.put("code", WorkflowEnum.WorkFlowIsNotExists.getCode());
-                    object.put("msg", WorkflowEnum.WorkFlowIsNotExists.getDescribtion());
+                    object.put("code", WorkflowPotEnum.HeadPotIsNotExists.getCode());
+                    object.put("msg", WorkflowPotEnum.HeadPotIsNotExists.getDescribtion());
                 }
             } else {
-                // 该实例已存在
+                // 工作流不存在
                 object.put("status", ResultCode.FAIL.getCode());
-                object.put("code", WorkflowRunEnum.RunIsExists.getCode());
-                object.put("msg", WorkflowRunEnum.RunIsExists.getDescribtion());
+                object.put("code", WorkflowEnum.WorkFlowIsNotExists.getCode());
+                object.put("msg", WorkflowEnum.WorkFlowIsNotExists.getDescribtion());
             }
-            object.put("csysWorkflowRunId", csysWorkflowRunId);
+        } else {
+            // 工作流不存在
+            object.put("status", ResultCode.FAIL.getCode());
+            object.put("code", WorkflowEnum.WorkFlowIsNotExists.getCode());
+            object.put("msg", WorkflowEnum.WorkFlowIsNotExists.getDescribtion());
         }
         return object;
     }
