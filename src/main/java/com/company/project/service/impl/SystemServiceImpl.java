@@ -749,7 +749,7 @@ public class SystemServiceImpl implements SystemService {
 
 					break;
 				default:
-					//sql += jcdata.getName() + "='" + jcdata.getValue() + "' ,";
+					//sql+= jcdata.getName() + "='" + jcdata.getValue() + "' ,";
 					
 					if ("date".equals(jcdata.getType())) {
 
