@@ -1,21 +1,46 @@
 package com.company.project.core.cyflow.engine.service;
 
-import com.alibaba.fastjson.JSONObject;
-import com.company.project.biz.*;
-import com.company.project.core.cyflow.engine.enums.*;
-import com.company.project.core.cyflow.engine.interfaces.WorkflowInterface;
-import com.company.project.core.result.ResultCode;
-import com.company.project.dao.CsysTrsAuthViewMapper;
-import com.company.project.dao.SystemMapper;
-import com.company.project.model.*;
-import com.company.project.service.CommonService;
+import java.text.SimpleDateFormat;
+import java.util.ArrayList;
+import java.util.Date;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+
+import javax.annotation.Resource;
+
+import com.company.project.core.bean.JsonBean;
+import netscape.javascript.JSObject;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.springframework.stereotype.Service;
 
-import javax.annotation.Resource;
-import java.text.SimpleDateFormat;
-import java.util.*;
+import com.alibaba.fastjson.JSONObject;
+import com.company.project.biz.CsysPotBiz;
+import com.company.project.biz.CsysPotTrsBiz;
+import com.company.project.biz.CsysPotTrsConBiz;
+import com.company.project.biz.CsysTrsLogBiz;
+import com.company.project.biz.CsysWorkflowBiz;
+import com.company.project.biz.CsysWorkflowRunBiz;
+import com.company.project.core.cyflow.engine.enums.WorkflowEnum;
+import com.company.project.core.cyflow.engine.enums.WorkflowPotEnum;
+import com.company.project.core.cyflow.engine.enums.WorkflowPotTrsAuthEnum;
+import com.company.project.core.cyflow.engine.enums.WorkflowPotTrsConEnum;
+import com.company.project.core.cyflow.engine.enums.WorkflowRunEnum;
+import com.company.project.core.cyflow.engine.interfaces.WorkflowInterface;
+import com.company.project.core.result.ResultCode;
+import com.company.project.dao.CsysTrsAuthViewMapper;
+import com.company.project.dao.SystemMapper;
+import com.company.project.model.CsysPot;
+import com.company.project.model.CsysPotTrs;
+import com.company.project.model.CsysPotTrsCon;
+import com.company.project.model.CsysTrsAuthView;
+import com.company.project.model.CsysTrsAuthViewExample;
+import com.company.project.model.CsysTrsLog;
+import com.company.project.model.CsysUserView;
+import com.company.project.model.CsysWorkflow;
+import com.company.project.model.CsysWorkflowRun;
+import com.company.project.service.CommonService;
 
 @Service
 public class WorkFlowService implements WorkflowInterface {
@@ -54,87 +79,82 @@ public class WorkFlowService implements WorkflowInterface {
             throws Exception {
         JSONObject object = new JSONObject();
         CsysUserView csysUserView = baseUserViewList.get(0);
-        String workflowId = csysWorkflowRun.getCsysWorkflowId();
-        /*
-         * 第一步：根据工作流编号验证该工作流是否存在
-         */
-        if (workflowId != null && !"".equals(workflowId)) {
-            CsysWorkflow cySysWorkflow = cySysWorkflowBiz.getDataSettings(workflowId);
-            if (cySysWorkflow != null) {
-                /*
-                 * 第二步：根据工作流编号，获取工作流头节点信息
-                 */
-                CsysPot csysPot = getWorkFlowHeadPot(workflowId);
-                if (csysPot != null) {
+        String[] tableValueArray = csysWorkflowRun.getCsysWorkflowRunTableVal().split(",");
+        for (String tableValue : tableValueArray) {
+            logger.info("当前主键值：" + tableValue);
+            csysWorkflowRun.setCsysWorkflowRunTableVal(tableValue);
+            /*
+             * 第一步：判断该工作流实例是否已经生成
+             */
+            String csysWorkflowRunId = judgeRunIsOnInit(csysWorkflowRun);
+            if (csysWorkflowRunId == null) {
+                CsysWorkflow cySysWorkflow = cySysWorkflowBiz.getDataSettings(csysWorkflowRun.getCsysWorkflowId());
+                if (cySysWorkflow != null) {
                     /*
-                     * 第三步: 判断当前用户是否拥有初始化权限即初始迁移权限
+                     * 第二步：根据工作流编号，获取工作流头节点信息
                      */
-                    Map<String, Object> map = judgeIsTrsAuth(baseUserViewList, workflowId,
-                            null, csysPot.getCsysPotId());
-                    CsysPotTrs csysPotTrs = (CsysPotTrs) map.get("CsysPotTrs");
-                    if (csysPotTrs != null) {
-                        //判断是否自动执行
-                        if ((boolean) map.get("isAutoExe") == true)
-                            csysUserView = new CsysUserView();
-                        String[] tableValueArray = csysWorkflowRun.getCsysWorkflowRunTableVal().split(",");
-                        //开始循环
-                        for (String tableValue : tableValueArray) {
-                            logger.info("当前主键值：" + tableValue);
-                            csysWorkflowRun.setCsysWorkflowRunTableVal(tableValue);
-                            /*
-                             * 第四步：判断该工作流实例是否已经生成
-                             */
-                            String csysWorkflowRunId = judgeRunIsOnInit(csysWorkflowRun);
-                            if (csysWorkflowRunId == null) {
-                                /*
-                                 * 第五步： 生成工作流实例
-                                 */
-                                csysWorkflowRun.setCsysPotTrsId(csysPotTrs.getCsysPotTrsId());
-                                csysWorkflowRunId = insertCsysWorkflowRun(csysUserView, csysWorkflowRun, cySysWorkflow,
-                                        csysPot, csysPotTrs);
+                    CsysPot csysPot = getWorkFlowHeadPot(csysWorkflowRun.getCsysWorkflowId());
 
-                                csysWorkflowRun.setCsysWorkflowRunId(csysWorkflowRunId);
-                                /*
-                                 * 第六步：生成工作流日志（初始化工作流实例）
-                                 */
-                                insertCsysTrsLog(csysUserView, csysWorkflowRun, csysPotTrs, "0");
-                                /*
-                                 * 第七步：判断自动执行节点
-                                 */
-                                object.put("csysWorkflowRunId", csysWorkflowRunId);
-                                object.put("status", ResultCode.SUCCESS.getMessage());
-                                object.put("code", ResultCode.SUCCESS.getCode());
-                            } else {
-                                // 该实例已存在
-                                object.put("status", ResultCode.FAIL.getCode());
-                                object.put("code", WorkflowRunEnum.RunIsExists.getCode());
-                                object.put("msg", WorkflowRunEnum.RunIsExists.getDescribtion());
-                            }
-                            object.put("csysWorkflowRunId", csysWorkflowRunId);
+                    if (csysPot != null) {
+
+                        /*
+                         * 第三步: 判断当前用户是否拥有初始化权限即初始迁移权限
+                         */
+                        JSONObject jsonObject = judgeIsTrsAuth(baseUserViewList, csysWorkflowRun.getCsysWorkflowId(),
+                                null, csysPot.getCsysPotId());
+
+                        CsysPotTrs csysPotTrs = (CsysPotTrs) jsonObject.get("CsysPotTrs");
+
+                        if (jsonObject.getBoolean("isAutoExe") == true)
+                            csysUserView = new CsysUserView();
+
+                        if (csysPotTrs != null) {
+
+                            /*
+                             * 第四步： 生成工作流实例
+                             */
+                            csysWorkflowRun.setCsysPotTrsId(csysPotTrs.getCsysPotTrsId());
+                            csysWorkflowRunId = insertCsysWorkflowRun(csysUserView, csysWorkflowRun, cySysWorkflow,
+                                    csysPot, csysPotTrs);
+
+                            csysWorkflowRun.setCsysWorkflowRunId(csysWorkflowRunId);
+
+                            /*
+                             * 第五步：生成工作流日志（初始化工作流实例）
+                             */
+                            insertCsysTrsLog(csysUserView, csysWorkflowRun, csysPotTrs, "0");
+
+                            /*
+                             * 第六步：判断自动执行节点
+                             */
+                            autoExeCsysPot(csysWorkflowRun, csysPot.getCsysPotId());
+                            object.put("status", ResultCode.SUCCESS.getMessage());
+                            object.put("code", ResultCode.SUCCESS.getCode());
+                        } else {
+                            // 无实例化权限
+                            object.put("status", ResultCode.FAIL.getCode());
+                            object.put("code", WorkflowRunEnum.RunOnInitIsNotAuth.getCode());
+                            object.put("msg", WorkflowRunEnum.RunOnInitIsNotAuth.getDescribtion());
                         }
                     } else {
-                        // 无实例化权限
+                        // 无头结点
                         object.put("status", ResultCode.FAIL.getCode());
-                        object.put("code", WorkflowRunEnum.RunOnInitIsNotAuth.getCode());
-                        object.put("msg", WorkflowRunEnum.RunOnInitIsNotAuth.getDescribtion());
+                        object.put("code", WorkflowPotEnum.HeadPotIsNotExists.getCode());
+                        object.put("msg", WorkflowPotEnum.HeadPotIsNotExists.getDescribtion());
                     }
                 } else {
-                    // 无头结点
+                    // 工作流不存在
                     object.put("status", ResultCode.FAIL.getCode());
-                    object.put("code", WorkflowPotEnum.HeadPotIsNotExists.getCode());
-                    object.put("msg", WorkflowPotEnum.HeadPotIsNotExists.getDescribtion());
+                    object.put("code", WorkflowEnum.WorkFlowIsNotExists.getCode());
+                    object.put("msg", WorkflowEnum.WorkFlowIsNotExists.getDescribtion());
                 }
             } else {
-                // 工作流不存在
+                // 该实例已存在
                 object.put("status", ResultCode.FAIL.getCode());
-                object.put("code", WorkflowEnum.WorkFlowIsNotExists.getCode());
-                object.put("msg", WorkflowEnum.WorkFlowIsNotExists.getDescribtion());
+                object.put("code", WorkflowRunEnum.RunIsExists.getCode());
+                object.put("msg", WorkflowRunEnum.RunIsExists.getDescribtion());
             }
-        } else {
-            // 工作流不存在
-            object.put("status", ResultCode.FAIL.getCode());
-            object.put("code", WorkflowEnum.WorkFlowIsNotExists.getCode());
-            object.put("msg", WorkflowEnum.WorkFlowIsNotExists.getDescribtion());
+            object.put("csysWorkflowRunId", csysWorkflowRunId);
         }
         return object;
     }
@@ -259,92 +279,17 @@ public class WorkFlowService implements WorkflowInterface {
             /*
              * 第二步：判断当前用户是否有迁移权限
              */
-            Map<String, Object> map = judgeIsTrsAuth(baseUserViewList, null, workflowRun.getCsysPotTrsId(),
+            JSONObject object = judgeIsTrsAuth(baseUserViewList, null, workflowRun.getCsysPotTrsId(),
                     workflowRun.getCsysPotId());
-            CsysPotTrs csysPotTrs = (CsysPotTrs) map.get("CsysPotTrs");
+            CsysPotTrs csysPotTrs = (CsysPotTrs) object.get("CsysPotTrs");
             if (csysPotTrs != null) {
                 workflowRun = (CsysWorkflowRun) runObj.get("csysWorkflowRun");
                 /*
                  * 第三步：判断是否存在迁移条件
                  */
-                CsysPotTrsCon csysPotTrsCon = new CsysPotTrsCon();
-                csysPotTrsCon.setCsysWorkflowId(csysPotTrs.getCsysWorkflowId());
-                csysPotTrsCon.setCsysPotTrsId(csysPotTrs.getCsysPotTrsId());
-                List<CsysPotTrsCon> conList = csysPotTrsConBiz.getDataSettingsByCondition(csysPotTrsCon);
-                // 条件标记
-                Boolean conditionFlag = false;
-                String conditionMsg = null;
-                try {
-                    // 循环遍历条件
-                    for (CsysPotTrsCon trsCon : conList) {
-                        conditionFlag = false;
-                        // 源数据sql
-                        List<Map> dataList = systemMapper.selectPublicItemList(trsCon.getCsysPotTrsConRawData()
-                                .replaceAll("@id", workflowRun.getCsysWorkflowRunTableVal()));
-                        if (dataList.size() > 0) {
-                            // 源数据值
-                            String rawData = (dataList.get(0).get("RAWDATA").toString());
-                            // 对比数据
-                            String contrastData = null;
-                            if (trsCon.getCsysPotTrsConContrastData().indexOf("select") < 0) {
-                                // 对比数据为静态值
-                                contrastData = trsCon.getCsysPotTrsConContrastData();
-                            } else {
-                                // 对比数据为动态sql
-                                dataList = systemMapper.selectPublicItemList(trsCon.getCsysPotTrsConContrastData()
-                                        .replaceAll("@id", workflowRun.getCsysWorkflowRunTableVal()));
-                                if (dataList.size() > 0) {
-                                    contrastData = dataList.get(0).get("CONTRASTDATA").toString();
-                                }
-                            }
-                            if (contrastData != null) {
-                                // 源数据和对比数据进行比较
-                                String method = trsCon.getCsysPotTrsConMethod();
-                                switch (method) {
-                                    case "=":
-                                        if (!rawData.equals(contrastData))
-                                            conditionFlag = true;
-                                        break;
-                                    case ">":
-                                        if (Float.parseFloat(rawData) <= Float.parseFloat(contrastData))
-                                            conditionFlag = true;
-                                        break;
-                                    case ">=":
-                                        if (Float.parseFloat(rawData) < Float.parseFloat(contrastData))
-                                            conditionFlag = true;
-                                        break;
-                                    case "<":
-                                        if (Float.parseFloat(rawData) >= Float.parseFloat(contrastData))
-                                            conditionFlag = true;
-                                        break;
-                                    case "<=":
-                                        if (Float.parseFloat(rawData) > Float.parseFloat(contrastData))
-                                            conditionFlag = true;
-                                        break;
-                                    default:
-                                        break;
-                                }
-                            }
-                        }
-                        if (conditionFlag) {
-                            // 提示信息
-                            conditionMsg = trsCon.getCsysPotTrsConInfo();
-                            break;
-                        }
-                    }
-                    if (conditionFlag) {
-                        obj.put("status", ResultCode.FAIL.getMessage());
-                        obj.put("code", WorkflowPotTrsConEnum.TrsConDissatisfy.getCode());
-                        obj.put("msg", conditionMsg != null ? conditionMsg
-                                : WorkflowPotTrsConEnum.TrsConDissatisfy.getDescribtion());
-                        return obj;
-                    }
-                } catch (Exception e) {
-                    e.printStackTrace();
-                    obj.put("status", ResultCode.FAIL.getMessage());
-                    obj.put("code", WorkflowPotTrsConEnum.TrsConException.getCode());
-                    obj.put("msg", WorkflowPotTrsConEnum.TrsConException.getDescribtion());
-                    return obj;
+                JSONObject cobject = judgePotTrsCon(csysPotTrs, workflowRun.getCsysWorkflowRunTableVal());
+                if (!cobject.isEmpty()) {
+                    return cobject;
                 }
                 /*
                  * 第四步：修改工作流实例状态
@@ -376,12 +321,60 @@ public class WorkFlowService implements WorkflowInterface {
         return obj;
     }
 
-    private Map<String, Object> judgeIsTrsAuth(List<CsysUserView> baseUserViewList, String cySysWorkflowId,
-                                               String csysPotTrsId, String csysPotId) {
-        List<String> roleList = new ArrayList();
-        for (CsysUserView baseUserView : baseUserViewList) {
-            roleList.add(baseUserView.getCsysRoleId());
+
+    //根据节点条件自动迁移
+    public JSONObject potAutoTrsByCon(List<CsysUserView> baseUserViewList, CsysWorkflowRun csysWorkflowRun) {
+        JSONObject obj = new JSONObject();
+        return obj;
+    }
+
+    /**
+     * 根据节点获取下一个迁移对象以及条件
+     */
+    public JSONObject getNextTrsConByPot(List<CsysUserView> baseUserViewList, CsysWorkflowRun csysWorkflowRun) {
+        //根据迁移条件判断当前实例执行哪一条迁移节点，即判断哪一条节点满足条件
+        JSONObject object = new JSONObject();
+        //获取当前用户所有角色
+        List<String> roleList = getUserAllRoles(baseUserViewList);
+        //获取当前节点
+        String csysPotId = csysWorkflowRun.getCsysPotId();
+        //定义迁移条件
+        List<CsysPotTrsCon> csysPotTrsConList = new ArrayList<>();
+        //定义节点迁移对象：key为迁移节点
+        Map<String, CsysPotTrs> trsMap = new HashMap<>();
+        /*
+         * 第一步：根据工作流节点和权限获取迁移节点
+         */
+        CsysTrsAuthViewExample example = new CsysTrsAuthViewExample();
+        // 第一种情况：拥有角色权限
+        // 当前节点即为当前实例节点，所有角色
+        example.or().andCsysPotCurrentIdEqualTo(csysPotId).andCsysRoleIdIn(roleList);
+        // 第二种情况：节点自动执行，当前节点即为当前实例节点
+        example.or().andCsysPotCurrentIdEqualTo(csysPotId).andCsysPotTrsAutoExeEqualTo("1");
+        List<CsysTrsAuthView> list = csysTrsAuthViewMapper.selectByExample(example);
+        /*
+         * 第二步：循环所有迁移节点获取所有迁移条件，以及迁移对象
+         */
+        for (CsysTrsAuthView csysTrsAuthView : list) {
+            String potTrsId = csysTrsAuthView.getCsysPotTrsId();
+            // 迁移条件
+            CsysPotTrsCon csysPotTrsCon = new CsysPotTrsCon();
+            csysPotTrsCon.setCsysWorkflowId(csysTrsAuthView.getCsysWorkflowId());
+            csysPotTrsCon.setCsysPotTrsId(potTrsId);
+            csysPotTrsConList.addAll(csysPotTrsConBiz.getDataSettingsByCondition(csysPotTrsCon));
+            // 获取迁移对象
+            CsysPotTrs csysPotTrs = csysPotTrsBiz.getDataSettings(potTrsId);
+            trsMap.put(potTrsId, csysPotTrs);
         }
+        object.put("csysPotTrsConList", csysPotTrsConList);
+        object.put("trsMap", trsMap);
+        return object;
+    }
+
+    private JSONObject judgeIsTrsAuth(List<CsysUserView> baseUserViewList, String cySysWorkflowId,
+                                      String csysPotTrsId, String csysPotId) {
+        JSONObject jsonObject = new JSONObject();
+        List<String> roleList = getUserAllRoles(baseUserViewList);
         Boolean isAutoExe = false;
         CsysTrsAuthViewExample example = new CsysTrsAuthViewExample();
         if (csysPotTrsId != null) {
@@ -409,11 +402,18 @@ public class WorkFlowService implements WorkflowInterface {
         } else {
             csysPotTrsId = null;
         }
+        jsonObject.put("CsysPotTrs", csysPotTrsId != null ? csysPotTrsBiz.getDataSettings(csysPotTrsId) : null);
+        jsonObject.put("isAutoExe", isAutoExe);
+        return jsonObject;
+    }
 
-        Map<String, Object> map = new HashMap<>();
-        map.put("CsysPotTrs", csysPotTrsId != null ? csysPotTrsBiz.getDataSettings(csysPotTrsId) : null);
-        map.put("isAutoExe", isAutoExe);
-        return map;
+    //获取所有角色
+    public List<String> getUserAllRoles(List<CsysUserView> baseUserViewList) {
+        List<String> roleList = new ArrayList<>();
+        for (CsysUserView baseUserView : baseUserViewList) {
+            roleList.add(baseUserView.getCsysRoleId());
+        }
+        return roleList;
     }
 
     private void insertCsysTrsLog(CsysUserView baseUserView, CsysWorkflowRun csysWorkflowRun,
@@ -478,11 +478,7 @@ public class WorkFlowService implements WorkflowInterface {
     @Override
     public List<CsysTrsAuthView> getTrsStatus(List<CsysUserView> baseUserViewList,
                                               CsysTrsAuthView csysTrsAuthView) {
-        // TODO Auto-generated method stub
-        List<String> roleList = new ArrayList();
-        for (CsysUserView baseUserView : baseUserViewList) {
-            roleList.add(baseUserView.getCsysRoleId());
-        }
+        List<String> roleList = getUserAllRoles(baseUserViewList);
         CsysTrsAuthViewExample example = new CsysTrsAuthViewExample();
         CsysTrsAuthViewExample.Criteria criteria = example.createCriteria();
         criteria.andCsysRoleIdIn(roleList);
@@ -601,10 +597,176 @@ public class WorkFlowService implements WorkflowInterface {
         return object;
     }
 
+    /**
+     * 判断迁移条件
+     *
+     * @param csysPotTrs
+     * @return
+     */
+
+    public JSONObject judgePotTrsCon(CsysPotTrs csysPotTrs, String tableValue) {
+        JSONObject obj = new JSONObject();
+        CsysPotTrsCon csysPotTrsCon = new CsysPotTrsCon();
+        csysPotTrsCon.setCsysWorkflowId(csysPotTrs.getCsysWorkflowId());
+        csysPotTrsCon.setCsysPotTrsId(csysPotTrs.getCsysPotTrsId());
+        List<CsysPotTrsCon> conList = csysPotTrsConBiz.getDataSettingsByCondition(csysPotTrsCon);
+        // 条件标记
+        Boolean conditionFlag = false;
+        String conditionMsg = null;
+        try {
+            // 循环遍历条件
+            for (CsysPotTrsCon trsCon : conList) {
+                conditionFlag = false;
+                // 源数据sql
+                List<Map> dataList = systemMapper.selectPublicItemList(trsCon.getCsysPotTrsConRawData()
+                        .replaceAll("@id", tableValue));
+                if (dataList.size() > 0) {
+                    // 源数据值
+                    String rawData = (dataList.get(0).get("RAWDATA").toString());
+                    // 对比数据
+                    String contrastData = null;
+                    if (trsCon.getCsysPotTrsConContrastData().indexOf("select") < 0) {
+                        // 对比数据为静态值
+                        contrastData = trsCon.getCsysPotTrsConContrastData();
+                    } else {
+                        // 对比数据为动态sql
+                        dataList = systemMapper.selectPublicItemList(trsCon.getCsysPotTrsConContrastData()
+                                .replaceAll("@id", tableValue));
+                        if (dataList.size() > 0) {
+                            contrastData = dataList.get(0).get("CONTRASTDATA").toString();
+                        }
+                    }
+                    if (contrastData != null) {
+                        // 源数据和对比数据进行比较
+                        String method = trsCon.getCsysPotTrsConMethod();
+                        switch (method) {
+                            case "=":
+                                if (!rawData.equals(contrastData))
+                                    conditionFlag = true;
+                                break;
+                            case ">":
+                                if (Float.parseFloat(rawData) <= Float.parseFloat(contrastData))
+                                    conditionFlag = true;
+                                break;
+                            case ">=":
+                                if (Float.parseFloat(rawData) < Float.parseFloat(contrastData))
+                                    conditionFlag = true;
+                                break;
+                            case "<":
+                                if (Float.parseFloat(rawData) >= Float.parseFloat(contrastData))
+                                    conditionFlag = true;
+                                break;
+                            case "<=":
+                                if (Float.parseFloat(rawData) > Float.parseFloat(contrastData))
+                                    conditionFlag = true;
+                                break;
+                            default:
+                                break;
+                        }
+                    }
+                }
+                if (conditionFlag) {
+                    // 提示信息
+                    conditionMsg = trsCon.getCsysPotTrsConInfo();
+                    break;
+                }
+            }
+            if (conditionFlag) {
+                obj.put("status", ResultCode.FAIL.getMessage());
+                obj.put("code", WorkflowPotTrsConEnum.TrsConDissatisfy.getCode());
+                obj.put("msg", conditionMsg != null ? conditionMsg
+                        : WorkflowPotTrsConEnum.TrsConDissatisfy.getDescribtion());
+                return obj;
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+            obj.put("status", ResultCode.FAIL.getMessage());
+            obj.put("code", WorkflowPotTrsConEnum.TrsConException.getCode());
+            obj.put("msg", WorkflowPotTrsConEnum.TrsConException.getDescribtion());
+            return obj;
+        }
+        return obj;
+    }
+
+
+    /**
+     * 通过实例和迁移条件获取迁移节点
+     *
+     * @param csysPotTrsConList
+     * @param tableValue
+     * @return
+     */
+    public String getPotTrsByCon(List<CsysPotTrsCon> csysPotTrsConList, String tableValue) {
+        //根据迁移条件判断当前实例执行哪一条迁移节点，即判断哪一条节点满足条件
+        String potTrsId = "";
+        JSONObject obj = new JSONObject();
+        // 条件标记
+        Boolean conditionFlag = false;
+        // 循环遍历条件
+        for (CsysPotTrsCon trsCon : csysPotTrsConList) {
+            try {
+                // 源数据sql
+                List<Map> dataList = systemMapper.selectPublicItemList(trsCon.getCsysPotTrsConRawData()
+                        .replaceAll("@id", tableValue));
+                if (dataList.size() > 0) {
+                    // 源数据值
+                    String rawData = (dataList.get(0).get("RAWDATA").toString());
+                    // 对比数据
+                    String contrastData = null;
+                    if (trsCon.getCsysPotTrsConContrastData().indexOf("select") < 0) {
+                        // 对比数据为静态值
+                        contrastData = trsCon.getCsysPotTrsConContrastData();
+                    } else {
+                        // 对比数据为动态sql
+                        dataList = systemMapper.selectPublicItemList(trsCon.getCsysPotTrsConContrastData()
+                                .replaceAll("@id", tableValue));
+                        if (dataList.size() > 0) {
+                            contrastData = dataList.get(0).get("CONTRASTDATA").toString();
+                        }
+                    }
+                    if (contrastData != null) {
+                        // 源数据和对比数据进行比较
+                        String method = trsCon.getCsysPotTrsConMethod();
+                        switch (method) {
+                            case "=":
+                                if (rawData.equals(contrastData))
+                                    conditionFlag = true;
+                                break;
+                            case ">":
+                                if (Float.parseFloat(rawData) > Float.parseFloat(contrastData))
+                                    conditionFlag = true;
+                                break;
+                            case ">=":
+                                if (Float.parseFloat(rawData) >= Float.parseFloat(contrastData))
+                                    conditionFlag = true;
+                                break;
+                            case "<":
+                                if (Float.parseFloat(rawData) < Float.parseFloat(contrastData))
+                                    conditionFlag = true;
+                                break;
+                            case "<=":
+                                if (Float.parseFloat(rawData) <= Float.parseFloat(contrastData))
+                                    conditionFlag = true;
+                                break;
+                            default:
+                                break;
+                        }
+                    }
+                }
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+            if (conditionFlag == true) {
+                potTrsId = trsCon.getCsysPotTrsId();
+                break;
+            }
+        }
+        return potTrsId;
+    }
+
     @Override
     public JSONObject potStatusTrsCheck(List<CsysUserView> baseUserViewList, CsysWorkflowRun workflowRun) {
         JSONObject obj = new JSONObject();
-        CsysUserView CsysUserView = baseUserViewList.get(0);
         /*
          * 第一步：检查工作流实例状态
          */
@@ -715,6 +877,29 @@ public class WorkFlowService implements WorkflowInterface {
             obj.put("code", status.getCode());
             obj.put("msg", status.getDescribtion());
         }
+        return obj;
+    }
+
+    @Override
+    public JSONObject potStatusTrsWithoutCheck(List<CsysUserView> baseUserViewList, CsysWorkflowRun workflowRun, CsysPotTrs csysPotTrs)
+            throws Exception {
+        JSONObject obj = new JSONObject();
+        CsysUserView csysUserView = baseUserViewList.get(0);
+        /*
+         * 第四步：修改工作流实例状态
+         */
+        CsysWorkflowRun csysWorkflowRun = updateCsysWorkflowRunStatus(csysUserView,
+                workflowRun.getCsysWorkflowRunId(), csysPotTrs);
+        /*
+         * 第五步：生成工作流日志（初始化工作流实例日志）
+         */
+        insertCsysTrsLog(csysUserView, csysWorkflowRun, csysPotTrs, "1");
+        /*
+         * 第六步：判断自动执行节点
+         */
+        autoExeCsysPot(workflowRun, csysPotTrs.getCsysPotTrsPointId());
+        obj.put("status", ResultCode.SUCCESS.getMessage());
+        obj.put("code", ResultCode.SUCCESS.getCode());
         return obj;
     }
 }
