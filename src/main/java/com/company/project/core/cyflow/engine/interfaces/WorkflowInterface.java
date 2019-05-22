@@ -17,6 +17,8 @@ public interface WorkflowInterface {
      */
     JSONObject onInitRun(List<CsysUserView> baseUserViewList, CsysWorkflowRun csysWorkflowRun) throws Exception;
 
+    CsysPot getWorkFlowHeadPot(String cySysWorkflowId);
+
     /*
      * 新增工作流实例
      */

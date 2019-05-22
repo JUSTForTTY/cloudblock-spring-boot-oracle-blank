@@ -96,17 +96,11 @@ public class WorkFlowService implements WorkflowInterface {
                     CsysPot csysPot = getWorkFlowHeadPot(csysWorkflowRun.getCsysWorkflowId());
 
                     if (csysPot != null) {
-
                         /*
                          * 第三步: 判断当前用户是否拥有初始化权限即初始迁移权限
                          */
-                        JSONObject jsonObject = judgeIsTrsAuth(baseUserViewList, csysWorkflowRun.getCsysWorkflowId(),
+                        CsysPotTrs csysPotTrs = getTrsObj(baseUserViewList,
                                 null, csysPot.getCsysPotId());
-
-                        CsysPotTrs csysPotTrs = (CsysPotTrs) jsonObject.get("CsysPotTrs");
-
-                        if (jsonObject.getBoolean("isAutoExe") == true)
-                            csysUserView = new CsysUserView();
 
                         if (csysPotTrs != null) {
 
@@ -159,6 +153,7 @@ public class WorkFlowService implements WorkflowInterface {
         return object;
     }
 
+
     private void autoExeCsysPot(CsysWorkflowRun csysWorkflowRun, String csysPotId) throws Exception {
         // TODO Auto-generated method stub
         List<CsysPotTrs> csysPotTrsList = getAutoExeCsysPot(csysWorkflowRun.getCsysWorkflowId(), csysPotId);
@@ -193,7 +188,8 @@ public class WorkFlowService implements WorkflowInterface {
         return true;
     }
 
-    private CsysPot getWorkFlowHeadPot(String cySysWorkflowId) {
+    @Override
+    public CsysPot getWorkFlowHeadPot(String cySysWorkflowId) {
         // TODO Auto-generated method stub
         CsysPot csysPot = new CsysPot();
         // 头结点标记
@@ -279,9 +275,8 @@ public class WorkFlowService implements WorkflowInterface {
             /*
              * 第二步：判断当前用户是否有迁移权限
              */
-            JSONObject object = judgeIsTrsAuth(baseUserViewList, null, workflowRun.getCsysPotTrsId(),
+            CsysPotTrs csysPotTrs = getTrsObj(baseUserViewList, workflowRun.getCsysPotTrsId(),
                     workflowRun.getCsysPotId());
-            CsysPotTrs csysPotTrs = (CsysPotTrs) object.get("CsysPotTrs");
             if (csysPotTrs != null) {
                 workflowRun = (CsysWorkflowRun) runObj.get("csysWorkflowRun");
                 /*
@@ -371,11 +366,9 @@ public class WorkFlowService implements WorkflowInterface {
         return object;
     }
 
-    private JSONObject judgeIsTrsAuth(List<CsysUserView> baseUserViewList, String cySysWorkflowId,
-                                      String csysPotTrsId, String csysPotId) {
-        JSONObject jsonObject = new JSONObject();
+    private CsysPotTrs getTrsObj(List<CsysUserView> baseUserViewList,
+                                 String csysPotTrsId, String csysPotId) {
         List<String> roleList = getUserAllRoles(baseUserViewList);
-        Boolean isAutoExe = false;
         CsysTrsAuthViewExample example = new CsysTrsAuthViewExample();
         if (csysPotTrsId != null) {
             /* 节点迁移 */
@@ -395,16 +388,10 @@ public class WorkFlowService implements WorkflowInterface {
         List<CsysTrsAuthView> list = csysTrsAuthViewMapper.selectByExample(example);
         if (list.size() > 0) {
             csysPotTrsId = list.get(0).getCsysPotTrsId();
-            // 判断是否为自动执行
-            if ("1".equals(list.get(0).getCsysPotTrsAutoExe())) {
-                isAutoExe = true;
-            }
         } else {
             csysPotTrsId = null;
         }
-        jsonObject.put("CsysPotTrs", csysPotTrsId != null ? csysPotTrsBiz.getDataSettings(csysPotTrsId) : null);
-        jsonObject.put("isAutoExe", isAutoExe);
-        return jsonObject;
+        return csysPotTrsId != null ? csysPotTrsBiz.getDataSettings(csysPotTrsId) : null;
     }
 
     //获取所有角色
@@ -776,9 +763,8 @@ public class WorkFlowService implements WorkflowInterface {
             /*
              * 第二步：判断当前用户是否有迁移权限
              */
-            Map<String, Object> map = judgeIsTrsAuth(baseUserViewList, null, workflowRun.getCsysPotTrsId(),
+            CsysPotTrs csysPotTrs = getTrsObj(baseUserViewList, workflowRun.getCsysPotTrsId(),
                     workflowRun.getCsysPotId());
-            CsysPotTrs csysPotTrs = (CsysPotTrs) map.get("CsysPotTrs");
             if (csysPotTrs != null) {
                 workflowRun = (CsysWorkflowRun) runObj.get("csysWorkflowRun");
                 /*
