@@ -67,4 +67,8 @@ public interface WorkflowInterface {
      * 节点迁移
      */
     JSONObject potStatusTrsWithoutCheck(List<CsysUserView> baseUserViewList, CsysWorkflowRun workflowRun, CsysPotTrs csysPotTrs) throws Exception;
+
+    CsysPotTrs getLastPot(String workflowId, String potId);
+
+    CsysPotTrs getNextPot(String workflowId, String potId);
 }

@@ -888,4 +888,35 @@ public class WorkFlowService implements WorkflowInterface {
         obj.put("code", ResultCode.SUCCESS.getCode());
         return obj;
     }
+
+    /**
+     * 获取上一个站点信息
+     */
+    @Override
+    public CsysPotTrs getLastPot(String workflowId, String potId) {
+        CsysPotTrs csysPotTrs = new CsysPotTrs();
+        csysPotTrs.setCsysWorkflowId(workflowId);
+        csysPotTrs.setCsysPotTrsPointId(potId);
+        List<CsysPotTrs> csysPotTrsList = csysPotTrsBiz.getDataSettingsByCondition(csysPotTrs);
+        if (csysPotTrsList.size() > 0) {
+            return csysPotTrsList.get(0);
+        }
+        return null;
+    }
+
+    /**
+     * 获取下一个站点信息
+     */
+    @Override
+    public CsysPotTrs getNextPot(String workflowId, String potId) {
+        CsysPotTrs csysPotTrs = new CsysPotTrs();
+        csysPotTrs.setCsysWorkflowId(workflowId);
+        csysPotTrs.setCsysPotCurrentId(potId);
+        List<CsysPotTrs> csysPotTrsList = csysPotTrsBiz.getDataSettingsByCondition(csysPotTrs);
+        if (csysPotTrsList.size() > 0) {
+            return csysPotTrsList.get(0);
+        }
+        return null;
+    }
+
 }
