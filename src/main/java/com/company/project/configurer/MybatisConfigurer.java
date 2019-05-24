@@ -33,7 +33,7 @@ import java.util.Properties;
 import static com.company.project.core.constant.ProjectConstant.*;
 
 /**
- * Mybatis & Mapper & PageHelper 配置
+ * Mybatis & Mapper & PageHelper  配置
  */
 @Configuration
 //扫描Mapper  basePackages要精确到source1目录便于进行不同数据源的区分
