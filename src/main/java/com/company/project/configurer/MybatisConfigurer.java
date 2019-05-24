@@ -42,14 +42,13 @@ public class MybatisConfigurer {
 
   @Bean(name = "dataSourceOne")
   @ConfigurationProperties(prefix = "spring.datasource.source")
-  public HikariDataSource  DataSourceOne(){
-//    DruidDataSource dataSource = new DruidDataSource();
-//    System.out.println("初始化數量--------------"+dataSource.getInitialSize());
-//    System.out.println("活躍連接數--------------"+dataSource.getActiveConnections());
-	  
-	  return DataSourceBuilder.create().type(HikariDataSource.class).build();
+  public DruidDataSource  DataSourceOne(){
 
-}
+	  DruidDataSource dataSource = new DruidDataSource();
+	  
+	   return dataSource;
+
+  }
 
 
 
