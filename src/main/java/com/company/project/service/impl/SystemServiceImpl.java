@@ -809,7 +809,9 @@ public class SystemServiceImpl implements SystemService {
 
 					break;
 				default:
+
 					// sql += jcdata.getName() + "='" + jcdata.getValue() + "' ,";
+
 					if ("date".equals(jcdata.getType())) {
 
 						// 值为空不做类型转换
@@ -824,9 +826,10 @@ public class SystemServiceImpl implements SystemService {
 						}
 
 					} else {
+						
 						columnSql += jcdata.getName() + ",";
 
-						valueSql += "'" + jcdata.getValue() + "'" + ",";
+						valueSql += "'" + jcdata.getValue().replaceAll("'", "''") + "'" + ",";
 					}
 
 					break;
