@@ -33,9 +33,9 @@ public enum WorkflowRunEnum {
 
     RunPotStatusIsClose("8011", "该实例节点状态已过期"),
 
-    PotTrsOverTime("3002", "流转已超时"),
+    PotTrsOverTime("3002", "该实例节点已超时"),
 
-    PotTrsIsNotEnough("3003", "流转时间不足");
+    PotTrsIsNotEnough("3003", "该实例节点时间不足");
 
     private String code;
 
