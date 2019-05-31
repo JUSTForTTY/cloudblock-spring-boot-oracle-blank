@@ -1,15 +1,21 @@
 package com.company.project.core.cyflow.engine.service;
 
+import java.text.SimpleDateFormat;
+import java.util.*;
+
+import javax.annotation.Resource;
+
+import com.company.project.dao.*;
+import com.company.project.model.*;
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
+import org.springframework.stereotype.Service;
+
 import com.alibaba.fastjson.JSONObject;
 import com.company.project.biz.*;
 import com.company.project.core.cyflow.engine.enums.*;
 import com.company.project.core.cyflow.engine.interfaces.WorkflowInterface;
 import com.company.project.core.result.ResultCode;
-import com.company.project.dao.CsysPotTrsMapper;
-import com.company.project.dao.CsysTrsAuthViewMapper;
-import com.company.project.dao.CsysTrsLogMapper;
-import com.company.project.dao.SystemMapper;
-import com.company.project.model.*;
 import com.company.project.service.CommonService;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
@@ -238,19 +244,23 @@ public class WorkFlowService implements WorkflowInterface {
     @Override
     public JSONObject getTrsStatus(List<CsysUserView> baseUserViewList,
                                    CsysWorkflowRun csysWorkflowRun) {
+        JSONObject object = new JSONObject();
         /*
          * 第一步：检查工作流实例状态
          */
         JSONObject obj = checkRunStatus(csysWorkflowRun);
-        csysWorkflowRun = (CsysWorkflowRun) obj.get("csysWorkflowRun");
         WorkflowRunEnum status = (WorkflowRunEnum) obj.get("code");
         if (status.getCode().equals("0")) {
+            csysWorkflowRun = (CsysWorkflowRun) obj.get("csysWorkflowRun");
             /*
              * 第二步：判断当前用户是否有迁移权限
              */
-            obj = getTrsObj("getTrs", baseUserViewList, csysWorkflowRun.getCsysPotTrsId(), csysWorkflowRun.getCsysPotId(), csysWorkflowRun.getCsysWorkflowRunTableVal());
+            object = getTrsObj("getTrs", baseUserViewList, csysWorkflowRun.getCsysPotTrsId(), csysWorkflowRun.getCsysPotId(), csysWorkflowRun.getCsysWorkflowRunTableVal());
+        } else {
+            object.put("code", status.getCode());
+            object.put("msg", status.getDescribtion());
         }
-        return obj;
+        return object;
     }
 
     /**
@@ -335,12 +345,10 @@ public class WorkFlowService implements WorkflowInterface {
         CsysTrsAuthViewExample.Criteria criteria = example.createCriteria();
         if (operate.equals("getTrs")) {
             /*获取迁移对象 */
-            criteria.andCsysRoleIdIn(roleList);
-            criteria.andCsysPotCurrentIdEqualTo(csysPotId);
+            criteria.andCsysRoleIdIn(roleList).andCsysPotCurrentIdEqualTo(csysPotId);
         } else if (operate.equals("potTrs")) {
             /* 节点迁移 */
-            criteria.andCsysPotTrsIdEqualTo(csysPotTrsId);
-            criteria.andCsysRoleIdIn(roleList);
+            criteria.andCsysPotTrsIdEqualTo(csysPotTrsId).andCsysRoleIdIn(roleList);
         } else if (operate.equals("onInit")) {
             /* 工作流实例化 */
             // 第一种情况：判断是否拥有角色权限
@@ -351,27 +359,25 @@ public class WorkFlowService implements WorkflowInterface {
         }
         List<CsysTrsAuthView> authViewList = csysTrsAuthViewMapper.selectByExample(example);
         if (authViewList.size() > 0) {
-            //取出不同角色下的相同迁移对象
+            //去除不同角色下的相同迁移对象
             List<CsysTrsAuthView> newList = new ArrayList();
             Set<String> set = new HashSet();
             for (CsysTrsAuthView csysTrsAuthView : authViewList) {
                 String trsId = csysTrsAuthView.getCsysPotTrsId();
-                if (!set.contains(trsId)) { //set中不包含重复的
+                if (!set.contains(trsId)) {
                     set.add(trsId);
                     newList.add(csysTrsAuthView);
                 }
             }
             //判断是否存在迁移条件
             for (CsysTrsAuthView authView : newList) {
-                JSONObject object = judgePotTrsCon(authView.getCsysPotTrsId(), value);
-                if (object.isEmpty()) {
+                JSONObject conObj = judgePotTrsCon(authView.getCsysPotTrsId(), value);
+                if (conObj.isEmpty()) {
                     //满足迁移条件
                     trsList.add(authView.getCsysPotTrsId());
-                } else {
-                    //记录不满足迁移条件
-                    if (obj.isEmpty()) {
-                        obj = object;
-                    }
+                } else if (obj.isEmpty() || conObj.getInteger("satisfyNumber") > 0) {
+                    //一：返回对象为空则赋值，二：存在一个迁移对象多个条件，若有一个条件满足，另一个条件不满足，则返回另一个不满足条件的信息
+                    obj = conObj;
                 }
             }
         } else {
@@ -381,6 +387,7 @@ public class WorkFlowService implements WorkflowInterface {
             obj.put("msg", WorkflowPotTrsAuthEnum.PotTrsIsNotAuth.getDescribtion());
         }
         if (trsList.size() > 0) {
+            obj = new JSONObject();
             obj.put("code", ResultCode.SUCCESS.getCode());
             //获取满足迁移对象
             CsysPotTrsExample trsExample = new CsysPotTrsExample();
@@ -569,6 +576,8 @@ public class WorkFlowService implements WorkflowInterface {
 
     public JSONObject judgePotTrsCon(String csysPotTrsId, String tableValue) {
         JSONObject obj = new JSONObject();
+        //记录满足条件的次数
+        Integer satisfyNumber = 0;
         List<CsysPotTrsCon> conList = getConByTrsId(csysPotTrsId);
         // 条件标记
         Boolean conditionFlag = false;
@@ -629,6 +638,9 @@ public class WorkFlowService implements WorkflowInterface {
                     // 提示信息
                     conditionMsg = trsCon.getCsysPotTrsConInfo();
                     break;
+                } else {
+                    //满足次数加1
+                    satisfyNumber++;
                 }
             }
             if (conditionFlag) {
@@ -636,6 +648,7 @@ public class WorkFlowService implements WorkflowInterface {
                 obj.put("code", WorkflowPotTrsConEnum.TrsConDissatisfy.getCode());
                 obj.put("msg", conditionMsg != null ? conditionMsg
                         : WorkflowPotTrsConEnum.TrsConDissatisfy.getDescribtion());
+                obj.put("satisfyNumber", satisfyNumber);
                 return obj;
             }
         } catch (Exception e) {
@@ -643,6 +656,7 @@ public class WorkFlowService implements WorkflowInterface {
             obj.put("status", ResultCode.FAIL.getMessage());
             obj.put("code", WorkflowPotTrsConEnum.TrsConException.getCode());
             obj.put("msg", WorkflowPotTrsConEnum.TrsConException.getDescribtion());
+            obj.put("satisfyNumber", satisfyNumber);
             return obj;
         }
         return obj;
