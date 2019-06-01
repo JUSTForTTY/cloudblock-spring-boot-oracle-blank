@@ -27,6 +27,8 @@ public interface SystemBiz {
      */
     public ResultBean getTableData(List<CsysUserView> baseUserList, TableDataBean tableDataBean);
 
+    List<Map<String, Object>> getEngineData(Map<String, List<JsonBean>> engineMap, List<CsysUserView> baseUserList, String id);
+
     /**
      * 更新数据
      *

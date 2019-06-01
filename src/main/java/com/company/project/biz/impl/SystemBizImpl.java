@@ -6,9 +6,13 @@ import java.util.Map;
 
 import javax.annotation.Resource;
 
+import com.company.project.model.CsysUserView;
+import com.company.project.model.CsysWorkflowRun;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
+import org.apache.poi.ss.formula.functions.T;
 import org.springframework.stereotype.Component;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.company.project.biz.SystemBiz;
 import com.company.project.core.bean.CascaderBean;
@@ -22,8 +26,6 @@ import com.company.project.core.bean.TableDataBean;
 import com.company.project.core.bean.TableSaveBean;
 import com.company.project.core.bean.ValidationBean;
 import com.company.project.core.cyflow.engine.interfaces.WorkflowInterface;
-import com.company.project.model.CsysUserView;
-import com.company.project.model.CsysWorkflowRun;
 import com.company.project.service.SystemService;
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
@@ -41,6 +43,7 @@ public class SystemBizImpl implements SystemBiz {
     private WorkflowInterface workflowInterface;
 
     @Override
+    @Transactional
     public ResultBean getTableData(List<CsysUserView> baseUserList, TableDataBean tableDataBean) {
         PageHelper.startPage(tableDataBean.getNowPage(), tableDataBean.getPageSize());
         CsysUserView baseUserView = baseUserList.get(0);
@@ -49,28 +52,7 @@ public class SystemBizImpl implements SystemBiz {
                 tableDataBean.getTableName(), tableDataBean.getTableSort(), tableDataBean.getSearchMap(),
                 tableDataBean.getDeleteFlag(), tableDataBean.getEngineMap());
 
-        List<Map<String, Object>> extraData = null;
-        // 引擎
-        if (!tableDataBean.getEngineMap().isEmpty()) {
-            for (Map.Entry<String, List<JsonBean>> entry : tableDataBean.getEngineMap().entrySet()) {
-                if ("procedure".equals(entry.getKey())) {
-                    if (!entry.getValue().isEmpty()) {
-                        for (JsonBean jsonBean : entry.getValue()) {
-                            // 调用存储过程
-
-                            DynamicJsonBean dynamicJsonBean = new DynamicJsonBean();
-                            dynamicJsonBean.setDynamicSql(jsonBean.getName());
-                            dynamicJsonBean.setParamMap(jsonBean.getCompositeValue());
-                            logger.info("参数尺寸" + jsonBean.getCompositeValue().size());
-                            extraData = dynamicProcedure(dynamicJsonBean, baseUserList);
-
-                        }
-                    }
-
-                }
-
-            }
-        }
+        List<Map<String, Object>> extraData = getEngineData(tableDataBean.getEngineMap(), baseUserList, null);
 
         PageInfo pageInfo = new PageInfo(list);
 
@@ -83,76 +65,42 @@ public class SystemBizImpl implements SystemBiz {
     }
 
     @Override
+    public List<Map<String, Object>> getEngineData(Map<String, List<JsonBean>> engineMap, List<CsysUserView> baseUserList, String id) {
+        for (Map.Entry<String, List<JsonBean>> entry : engineMap.entrySet()) {
+            if ("procedure".equals(entry.getKey())) {
+                if (!entry.getValue().isEmpty()) {
+                    for (JsonBean jsonBean : entry.getValue()) {
+                        // 调用存储过程
+                        DynamicJsonBean dynamicJsonBean = new DynamicJsonBean();
+                        dynamicJsonBean.setDynamicSql(jsonBean.getName());
+                        dynamicJsonBean.setParamMap(jsonBean.getCompositeValue());
+                        logger.info("参数尺寸" + jsonBean.getCompositeValue().size());
+
+                        // 替换新增或更新記錄参数值
+                        List<JsonBean> params = dynamicJsonBean.getParamMap();
+
+                        logger.info("参数尺寸" + params.size());
+                        for (JsonBean param : params) {
+                            if ("&id&".equals(param.getName())) {
+                                param.setValue(id);
+                            }
+                        }
+                        return dynamicProcedure(dynamicJsonBean, baseUserList);
+                    }
+                }
+            }
+        }
+        return null;
+    }
+
+    @Override
+    @Transactional
     public ResultBean updateTableData(TableDataBean tableDataBean, List<CsysUserView> baseUserViewList) {
 
         String returnsequence = systemService.updateTableData(tableDataBean.getTableName(),
                 tableDataBean.getUpdateMap(), tableDataBean.getPrimaryMap());
 
-        List<Map<String, Object>> extraData = null;
-        // 引擎
-        if (!tableDataBean.getEngineMap().isEmpty()) {
-            for (Map.Entry<String, List<JsonBean>> entry : tableDataBean.getEngineMap().entrySet()) {
-                if ("procedure".equals(entry.getKey())) {
-                    if (!entry.getValue().isEmpty()) {
-                        for (JsonBean jsonBean : entry.getValue()) {
-                            // 调用存储过程
-                            DynamicJsonBean dynamicJsonBean = new DynamicJsonBean();
-                            dynamicJsonBean.setDynamicSql(jsonBean.getName());
-                            dynamicJsonBean.setParamMap(jsonBean.getCompositeValue());
-                            logger.info("参数尺寸" + jsonBean.getCompositeValue().size());
-
-                            // 替换新增或更新記錄参数值
-                            List<JsonBean> params = dynamicJsonBean.getParamMap();
-
-                            logger.info("参数尺寸" + params.size());
-                            for (JsonBean param : params) {
-                                if ("&id&".equals(param.getName())) {
-                                    param.setValue(returnsequence);
-                                }
-                            }
-
-                            extraData = dynamicProcedure(dynamicJsonBean, baseUserViewList);
-                            try {
-                                // 循环存储过程返回值
-                                for (Map<String, Object> map : extraData) {
-                                    logger.info("存储过程返回");
-                                    logger.info(map.get("CSYS_RETURN"));
-                                    if (map.get("CSYS_RETURN") != null) {
-                                        String csysReturn = map.get("CSYS_RETURN").toString();
-                                        /*存储过程业务提示标识：1.success：成功；2.fail：失败；3.warning：警告；4.info：信息*/
-                                        //成功
-                                        if ("1".equals(csysReturn)) {
-                                            if (map.get("CSYS_OPERATE") != null) {
-                                                if ("onInitRun".equals(map.get("CSYS_OPERATE").toString())) {
-                                                    CsysWorkflowRun csysWorkflowRun = new CsysWorkflowRun();
-                                                    csysWorkflowRun.setCsysWorkflowId(map.get("CSYS_WORKFLOWID").toString());
-                                                    csysWorkflowRun
-                                                            .setCsysWorkflowRunTable(map.get("CSYS_TABLENAME").toString());
-                                                    csysWorkflowRun
-                                                            .setCsysWorkflowRunTableVal(map.get("CSYS_TABLEVALUE").toString());
-                                                    workflowInterface.onInitRun(baseUserViewList, csysWorkflowRun);
-                                                }
-                                            }
-                                            //失败
-                                        } else if ("2".equals(csysReturn)) {
-                                            //判断是否需要回滚
-                                            if (map.get("csys_rollback") != null) {
-                                                if ("1".equals(map.get("csys_rollback").toString())) {
-                                                    TransactionAspectSupport.currentTransactionStatus().setRollbackOnly(); //手动开启事务回滚
-                                                }
-                                            }
-                                        }
-
-                                    }
-                                }
-                            } catch (Exception e) {
-                                // TODO: handle exception
-                            }
-                        }
-                    }
-                }
-            }
-        }
+        List<Map<String, Object>> extraData = getEngineData(tableDataBean.getEngineMap(), baseUserViewList, returnsequence);
 
         ResultBean resultBean = new ResultBean();
 
@@ -165,33 +113,13 @@ public class SystemBizImpl implements SystemBiz {
     }
 
     @Override
+    @Transactional
     public ResultBean logicalDeleteData(DeleteDataBean deleteDataBean, List<CsysUserView> baseUserList) {
-        CsysUserView CsysUserView = baseUserList.get(0);
+        CsysUserView cySysBaseUserView = baseUserList.get(0);
         systemService.logicalDeleteData(deleteDataBean.getTableName(), deleteDataBean.getDeleteFlag(),
                 deleteDataBean.getPrimaryMap());
 
-        List<Map<String, Object>> extraData = null;
-        // 引擎
-        if (!deleteDataBean.getEngineMap().isEmpty()) {
-            for (Map.Entry<String, List<JsonBean>> entry : deleteDataBean.getEngineMap().entrySet()) {
-                if ("procedure".equals(entry.getKey())) {
-                    if (!entry.getValue().isEmpty()) {
-                        for (JsonBean jsonBean : entry.getValue()) {
-                            // 调用存储过程
-
-                            DynamicJsonBean dynamicJsonBean = new DynamicJsonBean();
-                            dynamicJsonBean.setDynamicSql(jsonBean.getName());
-                            dynamicJsonBean.setParamMap(jsonBean.getCompositeValue());
-                            logger.info("参数尺寸" + jsonBean.getCompositeValue().size());
-                            extraData = dynamicProcedure(dynamicJsonBean, baseUserList);
-
-                        }
-                    }
-
-                }
-
-            }
-        }
+        List<Map<String, Object>> extraData = getEngineData(deleteDataBean.getEngineMap(), baseUserList, null);
 
         ResultBean resultBean = new ResultBean();
 
@@ -201,32 +129,12 @@ public class SystemBizImpl implements SystemBiz {
     }
 
     @Override
+    @Transactional
     public ResultBean physicalDeleteData(DeleteDataBean deleteDataBean, List<CsysUserView> baseUserList) {
 
         systemService.physicalDeleteData(deleteDataBean.getTableName(), deleteDataBean.getPrimaryMap());
 
-        List<Map<String, Object>> extraData = null;
-        // 引擎
-        if (!deleteDataBean.getEngineMap().isEmpty()) {
-            for (Map.Entry<String, List<JsonBean>> entry : deleteDataBean.getEngineMap().entrySet()) {
-                if ("procedure".equals(entry.getKey())) {
-                    if (!entry.getValue().isEmpty()) {
-                        for (JsonBean jsonBean : entry.getValue()) {
-                            // 调用存储过程
-
-                            DynamicJsonBean dynamicJsonBean = new DynamicJsonBean();
-                            dynamicJsonBean.setDynamicSql(jsonBean.getName());
-                            dynamicJsonBean.setParamMap(jsonBean.getCompositeValue());
-                            logger.info("参数尺寸" + jsonBean.getCompositeValue().size());
-                            extraData = dynamicProcedure(dynamicJsonBean, baseUserList);
-
-                        }
-                    }
-
-                }
-
-            }
-        }
+        List<Map<String, Object>> extraData = getEngineData(deleteDataBean.getEngineMap(), baseUserList, null);
 
         ResultBean resultBean = new ResultBean();
 
@@ -236,7 +144,7 @@ public class SystemBizImpl implements SystemBiz {
 
     @Override
     public PageInfo getDynamicSql(DynamicJsonBean dynamicJsonBean, List<CsysUserView> baseUserList) {
-        CsysUserView CsysUserView = baseUserList.get(0);
+        CsysUserView cySysBaseUserView = baseUserList.get(0);
         PageHelper.startPage(dynamicJsonBean.getNowPage(), dynamicJsonBean.getPageSize());
 
         String dynamicSql = dynamicJsonBean.getDynamicSql();
@@ -248,8 +156,8 @@ public class SystemBizImpl implements SystemBiz {
 
         dynamicSql = dynamicSql.replaceAll("#", "'");
 
-        dynamicSql = dynamicSql.replaceAll("&userid&", CsysUserView.getCsysUserId()).replaceAll("&roleid&",
-                CsysUserView.getCsysRoleId());
+        dynamicSql = dynamicSql.replaceAll("&userid&", cySysBaseUserView.getCsysUserId()).replaceAll("&roleid&",
+                cySysBaseUserView.getCsysRoleId());
 
         List<Map<String, Object>> list = systemService.getDynamicSql(dynamicSql, dynamicJsonBean.getTableSort(),
                 dynamicJsonBean.getSearchMap());
@@ -260,9 +168,10 @@ public class SystemBizImpl implements SystemBiz {
     }
 
     @Override
+    @Transactional
     public List<Map<String, Object>> dynamicProcedure(DynamicJsonBean dynamicJsonBean,
                                                       List<CsysUserView> baseUserList) {
-        CsysUserView CsysUserView = baseUserList.get(0);
+        CsysUserView cySysBaseUserView = baseUserList.get(0);
         String dynamicSql = dynamicJsonBean.getDynamicSql();
 
         // 替换参数值
@@ -271,7 +180,7 @@ public class SystemBizImpl implements SystemBiz {
         logger.info("参数尺寸" + params.size());
         for (JsonBean jsonBean : params) {
             if ("&userid&".equals(jsonBean.getName())) {
-                jsonBean.setValue(CsysUserView.getCsysUserId());
+                jsonBean.setValue(cySysBaseUserView.getCsysUserId());
             }
         }
         List<Map<String, Object>> list = systemService.dynamicProcedure(dynamicSql, params);
@@ -288,6 +197,7 @@ public class SystemBizImpl implements SystemBiz {
                     if ("1".equals(csysReturn)) {
                         if (map.get("CSYS_OPERATE") != null) {
                             if ("onInitRun".equals(map.get("CSYS_OPERATE").toString())) {
+                                logger.info("实例化操作");
                                 CsysWorkflowRun csysWorkflowRun = new CsysWorkflowRun();
                                 csysWorkflowRun.setCsysWorkflowId(map.get("CSYS_WORKFLOWID").toString());
                                 csysWorkflowRun
@@ -300,8 +210,8 @@ public class SystemBizImpl implements SystemBiz {
                         //失败
                     } else if ("2".equals(csysReturn)) {
                         //判断是否需要回滚
-                        if (map.get("csys_rollback") != null) {
-                            if ("1".equals(map.get("csys_rollback").toString())) {
+                        if (map.get("CSYS_ROLLBACK") != null) {
+                            if ("1".equals(map.get("CSYS_ROLLBACK").toString())) {
                                 TransactionAspectSupport.currentTransactionStatus().setRollbackOnly(); //手动开启事务回滚
                             }
                         }
@@ -313,7 +223,6 @@ public class SystemBizImpl implements SystemBiz {
             // TODO: handle exception
             e.printStackTrace();
         }
-
         return list;
     }
 
@@ -338,43 +247,14 @@ public class SystemBizImpl implements SystemBiz {
     }
 
     @Override
+    @Transactional
     public ResultBean saveTableData(TableSaveBean tableSaveBean, List<CsysUserView> baseUserList) {
-        CsysUserView CsysUserView = baseUserList.get(0);
+        CsysUserView cySysBaseUserView = baseUserList.get(0);
         String returnsequence = systemService.saveTableData(tableSaveBean.getTableName(), tableSaveBean.getPrimaryKey(),
                 tableSaveBean.getData(), tableSaveBean.getSystemData(), tableSaveBean.getDeleteFlag(),
-                CsysUserView);
+                cySysBaseUserView);
 
-        List<Map<String, Object>> extraData = null;
-        // 引擎
-        if (!tableSaveBean.getEngineMap().isEmpty()) {
-            for (Map.Entry<String, List<JsonBean>> entry : tableSaveBean.getEngineMap().entrySet()) {
-                if ("procedure".equals(entry.getKey())) {
-                    if (!entry.getValue().isEmpty()) {
-                        for (JsonBean jsonBean : entry.getValue()) {
-                            // 调用存储过程
-
-                            DynamicJsonBean dynamicJsonBean = new DynamicJsonBean();
-                            dynamicJsonBean.setDynamicSql(jsonBean.getName());
-                            dynamicJsonBean.setParamMap(jsonBean.getCompositeValue());
-                            logger.info("参数尺寸" + jsonBean.getCompositeValue().size());
-                            // 替换新增或更新記錄参数值
-                            List<JsonBean> params = dynamicJsonBean.getParamMap();
-
-                            logger.info("参数尺寸" + params.size());
-                            for (JsonBean param : params) {
-                                if ("&id&".equals(param.getName())) {
-                                    param.setValue(returnsequence);
-                                }
-                            }
-                            extraData = dynamicProcedure(dynamicJsonBean, baseUserList);
-
-                        }
-                    }
-
-                }
-
-            }
-        }
+        List<Map<String, Object>> extraData = getEngineData(tableSaveBean.getEngineMap(), baseUserList, returnsequence);
         ResultBean resultBean = new ResultBean();
 
         resultBean.setStringData(returnsequence);
@@ -408,64 +288,33 @@ public class SystemBizImpl implements SystemBiz {
     }
 
     @Override
+    @Transactional
     public ResultBean updateTableData(TableSaveBean tableSaveBean, List<CsysUserView> baseUserList) {
-        CsysUserView CsysUserView = baseUserList.get(0);
+        CsysUserView cySysBaseUserView = baseUserList.get(0);
         String returnsequence = systemService.updateTableData(tableSaveBean.getTableName(),
                 tableSaveBean.getPrimaryKey(), tableSaveBean.getData(), tableSaveBean.getSystemData(),
-                tableSaveBean.getDeleteFlag(), CsysUserView);
+                tableSaveBean.getDeleteFlag(), cySysBaseUserView);
 
-        List<Map<String, Object>> extraData = null;
-        // 引擎
-        if (!tableSaveBean.getEngineMap().isEmpty()) {
-            for (Map.Entry<String, List<JsonBean>> entry : tableSaveBean.getEngineMap().entrySet()) {
-                if ("procedure".equals(entry.getKey())) {
-                    if (!entry.getValue().isEmpty()) {
-                        for (JsonBean jsonBean : entry.getValue()) {
-                            // 调用存储过程
-
-                            DynamicJsonBean dynamicJsonBean = new DynamicJsonBean();
-                            dynamicJsonBean.setDynamicSql(jsonBean.getName());
-                            dynamicJsonBean.setParamMap(jsonBean.getCompositeValue());
-                            logger.info("参数尺寸" + jsonBean.getCompositeValue().size());
-                            // 替换新增或更新記錄参数值
-                            List<JsonBean> params = dynamicJsonBean.getParamMap();
-
-                            logger.info("参数尺寸" + params.size());
-                            for (JsonBean param : params) {
-                                if ("&id&".equals(param.getName())) {
-                                    param.setValue(returnsequence);
-                                }
-                            }
-                            extraData = dynamicProcedure(dynamicJsonBean, baseUserList);
-
-                        }
-                    }
-
-                }
-
-            }
-        }
+        List<Map<String, Object>> extraData = getEngineData(tableSaveBean.getEngineMap(), baseUserList, null);
         ResultBean resultBean = new ResultBean();
-
         resultBean.setStringData(returnsequence);
         resultBean.setExtraData(extraData);
-
         return resultBean;
     }
 
     @Override
-    public boolean validationData(ValidationBean validationBean, CsysUserView CsysUserView) {
+    public boolean validationData(ValidationBean validationBean, CsysUserView cySysBaseUserView) {
 
         // 替换sql中系统参数
         for (JsonCompareBean jc : validationBean.getCompareValue()) {
             if ("senior".equals(validationBean.getMode())) {
-                jc.setCompareObject(jc.getCompareObject().replaceAll("&userid&", CsysUserView.getCsysUserId())
-                        .replaceAll("&roleid&", CsysUserView.getCsysRoleId())
+                jc.setCompareObject(jc.getCompareObject().replaceAll("&userid&", cySysBaseUserView.getCsysUserId())
+                        .replaceAll("&roleid&", cySysBaseUserView.getCsysRoleId())
                         .replaceAll("&currentvalue&", validationBean.getCurrentValue().getValue()));
             }
             if (null != jc.getAdditional() && !"".equals(jc.getAdditional())) {
-                jc.setAdditional(jc.getAdditional().replaceAll("&userid&", CsysUserView.getCsysUserId())
-                        .replaceAll("&roleid&", CsysUserView.getCsysRoleId())
+                jc.setAdditional(jc.getAdditional().replaceAll("&userid&", cySysBaseUserView.getCsysUserId())
+                        .replaceAll("&roleid&", cySysBaseUserView.getCsysRoleId())
                         .replaceAll("&currentvalue&", validationBean.getCurrentValue().getValue()));
             }
         }
