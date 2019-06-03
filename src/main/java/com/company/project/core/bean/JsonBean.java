@@ -11,6 +11,9 @@ public class JsonBean {
 	private String value;
 	
 	
+	private String columnName;
+	
+	
 	private List<JsonBean> compositeValue;
 
 
@@ -43,6 +46,17 @@ public class JsonBean {
 		this.compositeValue = compositeValue;
 	}
 
+
+	public String getColumnName() {
+		return columnName;
+	}
+
+
+	public void setColumnName(String columnName) {
+		this.columnName = columnName;
+	}
+	
+	
 
 	 
 	
