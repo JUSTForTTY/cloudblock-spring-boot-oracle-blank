@@ -1,21 +1,15 @@
 package com.company.project.core.cyflow.engine.service;
 
-import java.text.SimpleDateFormat;
-import java.util.*;
-
-import javax.annotation.Resource;
-
-import com.company.project.dao.*;
-import com.company.project.model.*;
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
-import org.springframework.stereotype.Service;
-
 import com.alibaba.fastjson.JSONObject;
 import com.company.project.biz.*;
 import com.company.project.core.cyflow.engine.enums.*;
 import com.company.project.core.cyflow.engine.interfaces.WorkflowInterface;
 import com.company.project.core.result.ResultCode;
+import com.company.project.dao.CsysPotTrsMapper;
+import com.company.project.dao.CsysTrsAuthViewMapper;
+import com.company.project.dao.CsysTrsLogMapper;
+import com.company.project.dao.SystemMapper;
+import com.company.project.model.*;
 import com.company.project.service.CommonService;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
@@ -250,7 +244,7 @@ public class WorkFlowService implements WorkflowInterface {
          */
         JSONObject obj = checkRunStatus(csysWorkflowRun);
         WorkflowRunEnum status = (WorkflowRunEnum) obj.get("code");
-        if (status.getCode().equals("0")) {
+        if ("0".equals(status.getCode())) {
             csysWorkflowRun = (CsysWorkflowRun) obj.get("csysWorkflowRun");
             /*
              * 第二步：判断当前用户是否有迁移权限
@@ -707,5 +701,6 @@ public class WorkFlowService implements WorkflowInterface {
         }
         return null;
     }
+
 
 }
