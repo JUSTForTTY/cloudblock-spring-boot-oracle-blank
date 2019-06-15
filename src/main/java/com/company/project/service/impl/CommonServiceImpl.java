@@ -59,10 +59,13 @@ public class CommonServiceImpl implements CommonService {
 		map.put("tableName", tableName);
 		map.put("cursor", oracle.jdbc.OracleTypes.CURSOR);
 		System.out.println("輸出tableName：" + tableName);
-		commonOuterUtilsMapper.getOracleSequence(map);
-		ArrayList<Map<String, Object>> cursorList = (ArrayList<Map<String, Object>>) map.get("cursor");
-		 
-		return cursorList.get(0).get("CSYS_SEQUENCE_SEQNO").toString();
+//		commonOuterUtilsMapper.getOracleSequence(map);
+//		ArrayList<Map<String, Object>> cursorList = (ArrayList<Map<String, Object>>) map.get("cursor");
+//		
+		commonOuterUtilsMapper.updateOracleSequence(map);
+		String sequence=commonOuterUtilsMapper.getOracleSequence(map);
+		
+		return sequence;
 	}
 
 	@Override
@@ -71,11 +74,13 @@ public class CommonServiceImpl implements CommonService {
 		map.put("tableName", tableName);
 		map.put("cursor", oracle.jdbc.OracleTypes.CURSOR);
 		System.out.println("輸出tableName：" + tableName);
-		commonOuterUtilsMapper.getOracleSequence(map);
-		ArrayList<Map<String, Object>> cursorList = (ArrayList<Map<String, Object>>) map.get("cursor");
-		String str = ProjectUtil.projectIdPrefix + tableName + DateUtils.newSimpleDate() + String.format("%06d",
-				new Object[] { Integer.valueOf(cursorList.get(0).get("CSYS_SEQUENCE_SEQNO").toString()) });
-		return str;
+//		commonOuterUtilsMapper.getOracleSequence(map);
+//		ArrayList<Map<String, Object>> cursorList = (ArrayList<Map<String, Object>>) map.get("cursor");
+//		String str = ProjectUtil.projectIdPrefix + tableName + DateUtils.newSimpleDate() + String.format("%06d",
+//				new Object[] { Integer.valueOf(cursorList.get(0).get("CSYS_SEQUENCE_SEQNO").toString()) });
+		commonOuterUtilsMapper.updateOracleSequence(map);
+		String sequence=commonOuterUtilsMapper.getOracleSequence(map);
+		return sequence;
 	}
 
 	@Override
@@ -95,10 +100,13 @@ public class CommonServiceImpl implements CommonService {
 		Map<String, Object> map = new HashMap<String, Object>();
 		map.put("tableName", tableName);
 		map.put("cursor", oracle.jdbc.OracleTypes.CURSOR);
-		commonOuterUtilsMapper.getOracleSequence(map);
-		ArrayList<Map<String, Object>> cursorList = (ArrayList<Map<String, Object>>) map.get("cursor");
-		String str =  cursorList.get(0).get("CSYS_SEQUENCE_SEQNO").toString();
-		return str;
+//		commonOuterUtilsMapper.getOracleSequence(map);
+//		ArrayList<Map<String, Object>> cursorList = (ArrayList<Map<String, Object>>) map.get("cursor");
+//		String str =  cursorList.get(0).get("CSYS_SEQUENCE_SEQNO").toString();
+		commonOuterUtilsMapper.updateOracleSequence(map);
+		String sequence=commonOuterUtilsMapper.getOracleSequence(map);
+		
+		return sequence;
 	}
 
 }
