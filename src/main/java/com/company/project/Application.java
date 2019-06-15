@@ -12,7 +12,7 @@ public class Application extends SpringBootServletInitializer {
 
 	@Override
 	protected SpringApplicationBuilder configure(SpringApplicationBuilder builder) {
-		//项目-启动
+		//项目-》启动
 		return builder.sources(Application.class);
 		 
 	}
