@@ -9,8 +9,8 @@ public class CsysPotPublic {
     @Column(name = "CSYS_POT_PUBLIC_ID")
     private String csysPotPublicId;
 
-    @Column(name = "CSYS_POT_NAME")
-    private String csysPotName;
+    @Column(name = "CSYS_POT_PUBLIC_NAME")
+    private String csysPotPublicName;
 
     @Column(name = "CSYS_POT_PUBLIC_DESC")
     private String csysPotPublicDesc;
@@ -36,6 +36,12 @@ public class CsysPotPublic {
     @Column(name = "CSYS_POT_PUBLIC_TIME")
     private Date csysPotPublicTime;
 
+    @Column(name = "CSYS_POT_STYLE_ID")
+    private String csysPotStyleId;
+
+    @Column(name = "CSYS_POT_GROUP_ID")
+    private String csysPotGroupId;
+
     /**
      * @return CSYS_POT_PUBLIC_ID
      */
@@ -51,17 +57,17 @@ public class CsysPotPublic {
     }
 
     /**
-     * @return CSYS_POT_NAME
+     * @return CSYS_POT_PUBLIC_NAME
      */
-    public String getCsysPotName() {
-        return csysPotName;
+    public String getCsysPotPublicName() {
+        return csysPotPublicName;
     }
 
     /**
-     * @param csysPotName
+     * @param csysPotPublicName
      */
-    public void setCsysPotName(String csysPotName) {
-        this.csysPotName = csysPotName;
+    public void setCsysPotPublicName(String csysPotPublicName) {
+        this.csysPotPublicName = csysPotPublicName;
     }
 
     /**
@@ -174,5 +180,33 @@ public class CsysPotPublic {
      */
     public void setCsysPotPublicTime(Date csysPotPublicTime) {
         this.csysPotPublicTime = csysPotPublicTime;
+    }
+
+    /**
+     * @return CSYS_POT_STYLE_ID
+     */
+    public String getCsysPotStyleId() {
+        return csysPotStyleId;
+    }
+
+    /**
+     * @param csysPotStyleId
+     */
+    public void setCsysPotStyleId(String csysPotStyleId) {
+        this.csysPotStyleId = csysPotStyleId;
+    }
+
+    /**
+     * @return CSYS_POT_GROUP_ID
+     */
+    public String getCsysPotGroupId() {
+        return csysPotGroupId;
+    }
+
+    /**
+     * @param csysPotGroupId
+     */
+    public void setCsysPotGroupId(String csysPotGroupId) {
+        this.csysPotGroupId = csysPotGroupId;
     }
 }

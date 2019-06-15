@@ -3,10 +3,10 @@ package com.company.project.web;
 import com.company.project.core.result.Result;
 import com.company.project.core.result.ResultGenerator;
 import com.company.project.core.utils.AuthUtils;
-import com.company.project.model.CsysPotPublic;
+import com.company.project.model.CsysPotGr;
 import com.company.project.model.CsysUserView;
 import com.company.project.biz.AuthLoginBiz;
-import com.company.project.biz.CsysPotPublicBiz;
+import com.company.project.biz.CsysPotGrBiz;
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
 import org.springframework.web.bind.annotation.*;
@@ -18,15 +18,15 @@ import java.util.HashMap;
 import java.util.Map;
 
 /**
-* Created by tty on 2019/06/15.
+* Created by tty on 2019/06/14.
 */
 @RestController
-@RequestMapping("/csyspotpublic")
-public class CsysPotPublicController {
+@RequestMapping("/csyspotgr")
+public class CsysPotGrController {
 	private final Log logger = LogFactory.getLog(getClass());
 	
     @Resource
-    private CsysPotPublicBiz csysPotPublicBiz;
+    private CsysPotGrBiz csysPotGrBiz;
     
     @Resource
 	private AuthLoginBiz authloginBiz;
@@ -36,7 +36,7 @@ public class CsysPotPublicController {
 
     @PostMapping
     public Result insertSettingsData(@RequestHeader(value = "access_token") String access_token,@RequestHeader(value = "refresh_token") String refresh_token,
-    @RequestBody CsysPotPublic csysPotPublic) {
+    @RequestBody CsysPotGr csysPotGr) {
     
     	Map<String,String> param = new HashMap<>();
     	
@@ -67,7 +67,7 @@ public class CsysPotPublicController {
 
 		/*--------------end 此段代码可优化成redis-----------------------*/
 		
-        String insertId=csysPotPublicBiz.insertDataSettings(baseUserList.get(0),csysPotPublic);
+        String insertId=csysPotGrBiz.insertDataSettings(baseUserList.get(0),csysPotGr);
         
         if(tokenRefreshFlag) {
         	param.put("access_token", token);
@@ -108,7 +108,7 @@ public class CsysPotPublicController {
 		
 		try{
 		
-        csysPotPublicBiz.deleteDataSettings(ids);
+        csysPotGrBiz.deleteDataSettings(ids);
         if(tokenRefreshFlag) {
         	param.put("access_token", token);
         	param.put("refresh_token", refreshtoken);
@@ -125,7 +125,7 @@ public class CsysPotPublicController {
 
     @PutMapping
     public Result update(@RequestHeader(value = "access_token") String access_token,@RequestHeader(value = "refresh_token") String refresh_token,
-    @RequestBody CsysPotPublic csysPotPublic) {
+    @RequestBody CsysPotGr csysPotGr) {
     
     	Map<String,String> param = new HashMap<>();
     	/*---------------------------start 授权验证------------------------*/
@@ -155,7 +155,7 @@ public class CsysPotPublicController {
 
 		/*--------------end 此段代码可优化成redis-----------------------*/
 		
-        csysPotPublicBiz.updateDataSettings(baseUserList.get(0),csysPotPublic);
+        csysPotGrBiz.updateDataSettings(baseUserList.get(0),csysPotGr);
         if(tokenRefreshFlag) {
         	param.put("access_token", token);
         	param.put("refresh_token", refreshtoken);
@@ -192,13 +192,13 @@ public class CsysPotPublicController {
 		/*---------------------------end 授权验证------------------------*/
  		try{
  		
-        CsysPotPublic csysPotPublic = csysPotPublicBiz.getDataSettings(id);
+        CsysPotGr csysPotGr = csysPotGrBiz.getDataSettings(id);
         if(tokenRefreshFlag) {
         	param.put("access_token", token);
         	param.put("refresh_token", refreshtoken);
         	 
 		}
-        return ResultGenerator.genSuccessResult(csysPotPublic,param);
+        return ResultGenerator.genSuccessResult(csysPotGr,param);
         
          } catch (Exception e) {
         
@@ -210,7 +210,7 @@ public class CsysPotPublicController {
 
   	@PostMapping("/condition")
     public Result detailByCondition(@RequestHeader(value = "access_token") String access_token,@RequestHeader(value = "refresh_token") String refresh_token,
-    @RequestBody CsysPotPublic csysPotPublic) {
+    @RequestBody CsysPotGr csysPotGr) {
     
     	Map<String,String> param = new HashMap<>();
 		 /*---------------------------start 授权验证------------------------*/
@@ -230,13 +230,13 @@ public class CsysPotPublicController {
 		/*---------------------------end 授权验证------------------------*/
  		try{
  		
-        List<CsysPotPublic> csysPotPubliclst = csysPotPublicBiz.getDataSettingsByCondition(csysPotPublic);
+        List<CsysPotGr> csysPotGrlst = csysPotGrBiz.getDataSettingsByCondition(csysPotGr);
         if(tokenRefreshFlag) {
         	param.put("access_token", token);
         	param.put("refresh_token", refreshtoken);
         	 
 		}
-        return ResultGenerator.genSuccessResult(csysPotPubliclst,param);
+        return ResultGenerator.genSuccessResult(csysPotGrlst,param);
         
          } catch (Exception e) {
         
@@ -268,7 +268,7 @@ public class CsysPotPublicController {
 		
         
         try{
-         PageInfo pageInfo=csysPotPublicBiz.getPageDataSettings(page,size);
+         PageInfo pageInfo=csysPotGrBiz.getPageDataSettings(page,size);
         if(tokenRefreshFlag) {
         	param.put("access_token", token);
         	param.put("refresh_token", refreshtoken);
@@ -286,7 +286,7 @@ public class CsysPotPublicController {
     
     @PostMapping("/listCondition")
     public Result listByCondition(@RequestHeader(value = "access_token") String access_token,@RequestHeader(value = "refresh_token") String refresh_token,
-    @RequestParam(defaultValue = "0") Integer page, @RequestParam(defaultValue = "0") Integer size,@RequestBody CsysPotPublic csysPotPublic) {
+    @RequestParam(defaultValue = "0") Integer page, @RequestParam(defaultValue = "0") Integer size,@RequestBody CsysPotGr csysPotGr) {
     
     	Map<String,String> param = new HashMap<>();
         /*---------------------------start 授权验证------------------------*/
@@ -315,7 +315,7 @@ public class CsysPotPublicController {
 		/*--------------end 此段代码可优化成redis-----------------------*/
         
         try{
-         PageInfo pageInfo=csysPotPublicBiz.getPageDataSettingsByCondition(page,size,baseUserList.get(0),csysPotPublic);
+         PageInfo pageInfo=csysPotGrBiz.getPageDataSettingsByCondition(page,size,baseUserList.get(0),csysPotGr);
         if(tokenRefreshFlag) {
         	param.put("access_token", token);
         	param.put("refresh_token", refreshtoken);

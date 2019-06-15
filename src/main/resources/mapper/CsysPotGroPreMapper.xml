@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.company.project.dao.CsysPotGroPreMapper">
+  <resultMap id="BaseResultMap" type="com.company.project.model.CsysPotGroPre">
+    <!--
+      WARNING - @mbg.generated
+    -->
+    <id column="CSYS_POT_GRO_PRE_ID" jdbcType="VARCHAR" property="csysPotGroPreId" />
+    <result column="CSYS_POT_GRO_PRE_NAME" jdbcType="VARCHAR" property="csysPotGroPreName" />
+    <result column="CSYS_POT_GROUP_FROM_ID" jdbcType="VARCHAR" property="csysPotGroupFromId" />
+    <result column="CSYS_POT_GROUP_TO_ID" jdbcType="VARCHAR" property="csysPotGroupToId" />
+    <result column="CSYS_POT_GRO_PRE_DESC" jdbcType="VARCHAR" property="csysPotGroPreDesc" />
+    <result column="CSYS_POT_GRO_PRE_CREATE_TIME" jdbcType="TIMESTAMP" property="csysPotGroPreCreateTime" />
+    <result column="CSYS_POT_GRO_PRE_CREATE_USER" jdbcType="VARCHAR" property="csysPotGroPreCreateUser" />
+    <result column="CSYS_POT_GRO_PRE_MODIFY_USER" jdbcType="VARCHAR" property="csysPotGroPreModifyUser" />
+    <result column="CSYS_POT_GRO_PRE_MODIFY_TIME" jdbcType="TIMESTAMP" property="csysPotGroPreModifyTime" />
+    <result column="CSYS_POT_GRO_PRE_IS_DELETE" jdbcType="CHAR" property="csysPotGroPreIsDelete" />
+    <result column="CSYS_POT_GRO_PRE_TIME" jdbcType="TIMESTAMP" property="csysPotGroPreTime" />
+    <result column="CSYS_POT_GRO_PRE_DATE" jdbcType="TIMESTAMP" property="csysPotGroPreDate" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    <!--
+      WARNING - @mbg.generated
+    -->
+    CSYS_POT_GRO_PRE_ID, CSYS_POT_GRO_PRE_NAME, CSYS_POT_GROUP_FROM_ID, CSYS_POT_GROUP_TO_ID, 
+    CSYS_POT_GRO_PRE_DESC, CSYS_POT_GRO_PRE_CREATE_TIME, CSYS_POT_GRO_PRE_CREATE_USER, 
+    CSYS_POT_GRO_PRE_MODIFY_USER, CSYS_POT_GRO_PRE_MODIFY_TIME, CSYS_POT_GRO_PRE_IS_DELETE, 
+    CSYS_POT_GRO_PRE_TIME, CSYS_POT_GRO_PRE_DATE
+  </sql>
+</mapper>

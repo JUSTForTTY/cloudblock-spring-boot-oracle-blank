@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.company.project.dao.CsysPotStyleMapper">
+  <resultMap id="BaseResultMap" type="com.company.project.model.CsysPotStyle">
+    <!--
+      WARNING - @mbg.generated
+    -->
+    <id column="CSYS_POT_STYLE_ID" jdbcType="VARCHAR" property="csysPotStyleId" />
+    <result column="CSYS_POT_STYLE_NAME" jdbcType="VARCHAR" property="csysPotStyleName" />
+    <result column="CSYS_POT_STYLE_COLOR" jdbcType="VARCHAR" property="csysPotStyleColor" />
+    <result column="CSYS_POT_STYLE_DESC" jdbcType="VARCHAR" property="csysPotStyleDesc" />
+    <result column="CSYS_POT_STYLE_CREATE_TIME" jdbcType="TIMESTAMP" property="csysPotStyleCreateTime" />
+    <result column="CSYS_POT_STYLE_CREATE_USER" jdbcType="VARCHAR" property="csysPotStyleCreateUser" />
+    <result column="CSYS_POT_STYLE_MODIFY_USER" jdbcType="VARCHAR" property="csysPotStyleModifyUser" />
+    <result column="CSYS_POT_STYLE_MODIFY_TIME" jdbcType="TIMESTAMP" property="csysPotStyleModifyTime" />
+    <result column="CSYS_POT_STYLE_IS_DELETE" jdbcType="CHAR" property="csysPotStyleIsDelete" />
+    <result column="CSYS_POT_STYLE_TIME" jdbcType="TIMESTAMP" property="csysPotStyleTime" />
+    <result column="CSYS_POT_STYLE_DATE" jdbcType="TIMESTAMP" property="csysPotStyleDate" />
+    <result column="CSYS_POT_STYLE_SHAPE" jdbcType="VARCHAR" property="csysPotStyleShape" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    <!--
+      WARNING - @mbg.generated
+    -->
+    CSYS_POT_STYLE_ID, CSYS_POT_STYLE_NAME, CSYS_POT_STYLE_COLOR, CSYS_POT_STYLE_DESC, 
+    CSYS_POT_STYLE_CREATE_TIME, CSYS_POT_STYLE_CREATE_USER, CSYS_POT_STYLE_MODIFY_USER, 
+    CSYS_POT_STYLE_MODIFY_TIME, CSYS_POT_STYLE_IS_DELETE, CSYS_POT_STYLE_TIME, CSYS_POT_STYLE_DATE, 
+    CSYS_POT_STYLE_SHAPE
+  </sql>
+</mapper>
