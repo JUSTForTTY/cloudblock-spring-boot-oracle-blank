@@ -194,21 +194,9 @@ public class SystemBizImpl implements SystemBiz {
                     String csysReturn = map.get("CSYS_RETURN").toString();
                     /*存储过程业务提示标识：1.success：成功；2.fail：失败；3.warning：警告；4.info：信息*/
                     //成功
-                    if ("1".equals(csysReturn)) {
-                        if (map.get("CSYS_OPERATE") != null) {
-                            if ("onInitRun".equals(map.get("CSYS_OPERATE").toString())) {
-                                logger.info("实例化操作");
-                                CsysWorkflowRun csysWorkflowRun = new CsysWorkflowRun();
-                                csysWorkflowRun.setCsysWorkflowId(map.get("CSYS_WORKFLOWID").toString());
-                                csysWorkflowRun
-                                        .setCsysWorkflowRunTable(map.get("CSYS_TABLENAME").toString());
-                                csysWorkflowRun
-                                        .setCsysWorkflowRunTableVal(map.get("CSYS_TABLEVALUE").toString());
-                                workflowInterface.onInitRun(baseUserList, csysWorkflowRun);
-                            }
-                        }
+                    if ("success".equals(csysReturn)) {
                         //失败
-                    } else if ("2".equals(csysReturn)) {
+                    } else if ("fail".equals(csysReturn)) {
                         //判断是否需要回滚
                         if (map.get("CSYS_ROLLBACK") != null) {
                             if ("1".equals(map.get("CSYS_ROLLBACK").toString())) {
