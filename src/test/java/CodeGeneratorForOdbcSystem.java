@@ -16,7 +16,7 @@ import static com.company.project.core.constant.ProjectConstant.*;
 /**
  * 代码生成器，根据数据表名称生成对应的Model、Mapper、Service、Controller简化开发。
  */
-public class CodeGeneratorForOdbc {
+public class CodeGeneratorForOdbcSystem {
     //JDBC配置，请修改为你项目的实际配置
     private static final String ODBC_URL = "jdbc:oracle:thin:@172.16.8.107:1521:orcl";
     private static final String ODBC_URL_OUTER = "jdbc:oracle:thin:@172.16.8.107:1521:orcl";
@@ -46,7 +46,7 @@ public class CodeGeneratorForOdbc {
 //            genCode(cc[i]);
 //            System.out.println("正在执行-----------" + cc[i]);
 //        }
-        genCode("CSYS_POT_GR");
+        genCode("CSYS_POT_PUB_PAGE");
         //genCode("输入表名","输入自定义Model名称");
     }
 
@@ -207,7 +207,7 @@ public class CodeGeneratorForOdbc {
             if (!file1.getParentFile().exists()) {
                 file1.getParentFile().mkdirs();
             }
-            cfg.getTemplate("biz-impl.ftl").process(data,
+            cfg.getTemplate("biz-impl-sys.ftl").process(data,
                     new FileWriter(file1));
             System.out.println(modelNameUpperCamel + "BizImpl.java 生成成功");
         } catch (Exception e) {

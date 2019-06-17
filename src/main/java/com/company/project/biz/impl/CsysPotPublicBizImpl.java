@@ -3,14 +3,12 @@ package com.company.project.biz.impl;
 import com.company.project.service.CommonService;
 import com.company.project.service.CsysPotPublicService;
 import com.company.project.biz.CsysPotPublicBiz;
-
+import com.company.project.model.CsysPotPublic;
+import com.company.project.model.CsysUserView;
 import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
 import tk.mybatis.mapper.entity.Condition;
 import com.company.project.core.utils.DateUtils;
-import com.company.project.model.CsysPotPublic;
-import com.company.project.model.CsysUserView;
-
 import java.util.List;
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
@@ -19,7 +17,7 @@ import javax.annotation.Resource;
 
 
 /**
- * Created by tty on 2019/01/23.
+ * Created by tty on 2019/06/15.
  */
 @Component
 @Transactional
@@ -56,7 +54,7 @@ public class CsysPotPublicBizImpl  implements CsysPotPublicBiz {
 		return pageInfo;
 	
 	}
-	public PageInfo getPageDataSettingsByCondition(Integer page,Integer size,CsysUserView baseUserView,CsysPotPublic csysPotPublic){
+	public PageInfo getPageDataSettingsByCondition(Integer page,Integer size,CsysUserView csysUserView,CsysPotPublic csysPotPublic){
 	
 		PageHelper.startPage(page, size);
 		csysPotPublic.setCsysPotPublicIsDelete("0");
@@ -66,25 +64,25 @@ public class CsysPotPublicBizImpl  implements CsysPotPublicBiz {
 		return pageInfo;
 	
 	}
-	public String insertDataSettings(CsysUserView baseUserView,CsysPotPublic csysPotPublic){
+	public String insertDataSettings(CsysUserView csysUserView,CsysPotPublic csysPotPublic){
 		
 		//获取sequence
 		String sequence=commonService.getSequence("CsysPotPublic");
 		csysPotPublic.setCsysPotPublicId(sequence);
 		csysPotPublic.setCsysPotPublicCreateTime(DateUtils.newTimestamp());
-		csysPotPublic.setCsysPotPublicCreateUser(baseUserView.getCsysUserId());
+		csysPotPublic.setCsysPotPublicCreateUser(csysUserView.getCsysUserId());
 		csysPotPublic.setCsysPotPublicModifyTime(DateUtils.newTimestamp());
-		csysPotPublic.setCsysPotPublicModifyUser(baseUserView.getCsysUserId());
+		csysPotPublic.setCsysPotPublicModifyUser(csysUserView.getCsysUserId());
 		csysPotPublic.setCsysPotPublicIsDelete("0");
 		csysPotPublicService.save(csysPotPublic);
 		
-		return sequence;
+		return csysPotPublic.getCsysPotPublicId();
 	}
 	
  
-	public void updateDataSettings(CsysUserView baseUserView,CsysPotPublic csysPotPublic){
+	public void updateDataSettings(CsysUserView csysUserView,CsysPotPublic csysPotPublic){
 		csysPotPublic.setCsysPotPublicModifyTime(DateUtils.newTimestamp());
-		csysPotPublic.setCsysPotPublicModifyUser(baseUserView.getCsysUserId());
+		csysPotPublic.setCsysPotPublicModifyUser(csysUserView.getCsysUserId());
 		csysPotPublicService.update(csysPotPublic);
 	
 	}

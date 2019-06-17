@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.company.project.dao.CsysCodemasterMapper">
+  <resultMap id="BaseResultMap" type="com.company.project.model.CsysCodemaster">
+    <!--
+      WARNING - @mbg.generated
+    -->
+    <id column="CSYS_CODEMASTER_ID" jdbcType="VARCHAR" property="csysCodemasterId" />
+    <result column="CSYS_CODEMASTER_CODE" jdbcType="VARCHAR" property="csysCodemasterCode" />
+    <result column="CSYS_CODEMASTER_TYPE" jdbcType="VARCHAR" property="csysCodemasterType" />
+    <result column="CSYS_CODEMASTER_DESC" jdbcType="VARCHAR" property="csysCodemasterDesc" />
+    <result column="CSYS_CODEMASTER_CREATE_TIME" jdbcType="TIMESTAMP" property="csysCodemasterCreateTime" />
+    <result column="CSYS_CODEMASTER_MODIFY_TIME" jdbcType="TIMESTAMP" property="csysCodemasterModifyTime" />
+    <result column="CSYS_CODEMASTER_CREATE_USER" jdbcType="VARCHAR" property="csysCodemasterCreateUser" />
+    <result column="CSYS_CODEMASTER_MODIFY_USER" jdbcType="VARCHAR" property="csysCodemasterModifyUser" />
+    <result column="CSYS_CODEMASTER_IS_DELETE" jdbcType="CHAR" property="csysCodemasterIsDelete" />
+    <result column="CSYS_CODEMASTER_TIME" jdbcType="TIMESTAMP" property="csysCodemasterTime" />
+    <result column="CSYS_CODEMASTER_DATE" jdbcType="TIMESTAMP" property="csysCodemasterDate" />
+    <result column="CSYS_CODEMASTER_TYPE_DESC" jdbcType="VARCHAR" property="csysCodemasterTypeDesc" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    <!--
+      WARNING - @mbg.generated
+    -->
+    CSYS_CODEMASTER_ID, CSYS_CODEMASTER_CODE, CSYS_CODEMASTER_TYPE, CSYS_CODEMASTER_DESC, 
+    CSYS_CODEMASTER_CREATE_TIME, CSYS_CODEMASTER_MODIFY_TIME, CSYS_CODEMASTER_CREATE_USER, 
+    CSYS_CODEMASTER_MODIFY_USER, CSYS_CODEMASTER_IS_DELETE, CSYS_CODEMASTER_TIME, CSYS_CODEMASTER_DATE, 
+    CSYS_CODEMASTER_TYPE_DESC
+  </sql>
+</mapper>

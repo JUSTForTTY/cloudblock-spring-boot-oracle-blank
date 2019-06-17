@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.company.project.dao.CsysPotGrMapper">
+  <resultMap id="BaseResultMap" type="com.company.project.model.CsysPotGr">
+    <!--
+      WARNING - @mbg.generated
+    -->
+    <id column="CSYS_POT_GR_ID" jdbcType="VARCHAR" property="csysPotGrId" />
+    <result column="CSYS_POT_GROUP_ID" jdbcType="VARCHAR" property="csysPotGroupId" />
+    <result column="CSYS_POT_GROUP_NAME" jdbcType="VARCHAR" property="csysPotGroupName" />
+    <result column="CSYS_POT_ID" jdbcType="VARCHAR" property="csysPotId" />
+    <result column="CSYS_POT_NAME" jdbcType="VARCHAR" property="csysPotName" />
+    <result column="CSYS_POT_GR_DESC" jdbcType="VARCHAR" property="csysPotGrDesc" />
+    <result column="CSYS_POT_GR_CREATE_TIME" jdbcType="TIMESTAMP" property="csysPotGrCreateTime" />
+    <result column="CSYS_POT_GR_CREATE_USER" jdbcType="VARCHAR" property="csysPotGrCreateUser" />
+    <result column="CSYS_POT_GR_MODIFY_USER" jdbcType="VARCHAR" property="csysPotGrModifyUser" />
+    <result column="CSYS_POT_GR_MODIFY_TIME" jdbcType="TIMESTAMP" property="csysPotGrModifyTime" />
+    <result column="CSYS_POT_GR_IS_DELETE" jdbcType="CHAR" property="csysPotGrIsDelete" />
+    <result column="CSYS_POT_GR_TIME" jdbcType="TIMESTAMP" property="csysPotGrTime" />
+    <result column="CSYS_POT_GR_DATE" jdbcType="TIMESTAMP" property="csysPotGrDate" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    <!--
+      WARNING - @mbg.generated
+    -->
+    CSYS_POT_GR_ID, CSYS_POT_GROUP_ID, CSYS_POT_GROUP_NAME, CSYS_POT_ID, CSYS_POT_NAME, 
+    CSYS_POT_GR_DESC, CSYS_POT_GR_CREATE_TIME, CSYS_POT_GR_CREATE_USER, CSYS_POT_GR_MODIFY_USER, 
+    CSYS_POT_GR_MODIFY_TIME, CSYS_POT_GR_IS_DELETE, CSYS_POT_GR_TIME, CSYS_POT_GR_DATE
+  </sql>
+</mapper>

@@ -1,8 +1,8 @@
 package com.company.project.service.impl;
 
-import com.company.project.dao.CsysPotPublicMapper;
-import com.company.project.model.CsysPotPublic;
-import com.company.project.service.CsysPotPublicService;
+import com.company.project.dao.CsysPotStyleMapper;
+import com.company.project.model.CsysPotStyle;
+import com.company.project.service.CsysPotStyleService;
 import com.company.project.core.service.AbstractService;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -15,8 +15,8 @@ import javax.annotation.Resource;
  */
 @Service
 @Transactional
-public class CsysPotPublicServiceImpl extends AbstractService<CsysPotPublic> implements CsysPotPublicService {
+public class CsysPotStyleServiceImpl extends AbstractService<CsysPotStyle> implements CsysPotStyleService {
     @Resource
-    private CsysPotPublicMapper csysPotPublicMapper;
+    private CsysPotStyleMapper csysPotStyleMapper;
 
 }

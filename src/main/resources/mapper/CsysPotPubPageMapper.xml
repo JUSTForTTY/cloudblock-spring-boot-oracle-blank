@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.company.project.dao.CsysPotPubPageMapper">
+  <resultMap id="BaseResultMap" type="com.company.project.model.CsysPotPubPage">
+    <!--
+      WARNING - @mbg.generated
+    -->
+    <id column="CSYS_POT_PUB_PAGE_ID" jdbcType="VARCHAR" property="csysPotPubPageId" />
+    <result column="CSYS_POT_PUBLIC_ID" jdbcType="VARCHAR" property="csysPotPublicId" />
+    <result column="CSYS_PAGE_ID" jdbcType="VARCHAR" property="csysPageId" />
+    <result column="CSYS_POT_PUB_PAGE_DESC" jdbcType="VARCHAR" property="csysPotPubPageDesc" />
+    <result column="CSYS_POT_PUB_PAGE_CREATE_TIME" jdbcType="TIMESTAMP" property="csysPotPubPageCreateTime" />
+    <result column="CSYS_POT_PUB_PAGE_CREATE_USER" jdbcType="VARCHAR" property="csysPotPubPageCreateUser" />
+    <result column="CSYS_POT_PUB_PAGE_MODIFY_TIME" jdbcType="TIMESTAMP" property="csysPotPubPageModifyTime" />
+    <result column="CSYS_POT_PUB_PAGE_MODIFY_USER" jdbcType="VARCHAR" property="csysPotPubPageModifyUser" />
+    <result column="CSYS_POT_PUB_PAGE_IS_DELETE" jdbcType="CHAR" property="csysPotPubPageIsDelete" />
+    <result column="CSYS_POT_PUB_PAGE_TIME" jdbcType="TIMESTAMP" property="csysPotPubPageTime" />
+    <result column="CSYS_POT_PUB_PAGE_DATE" jdbcType="TIMESTAMP" property="csysPotPubPageDate" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    <!--
+      WARNING - @mbg.generated
+    -->
+    CSYS_POT_PUB_PAGE_ID, CSYS_POT_PUBLIC_ID, CSYS_PAGE_ID, CSYS_POT_PUB_PAGE_DESC, CSYS_POT_PUB_PAGE_CREATE_TIME, 
+    CSYS_POT_PUB_PAGE_CREATE_USER, CSYS_POT_PUB_PAGE_MODIFY_TIME, CSYS_POT_PUB_PAGE_MODIFY_USER, 
+    CSYS_POT_PUB_PAGE_IS_DELETE, CSYS_POT_PUB_PAGE_TIME, CSYS_POT_PUB_PAGE_DATE
+  </sql>
+</mapper>

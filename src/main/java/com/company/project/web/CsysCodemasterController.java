@@ -3,10 +3,10 @@ package com.company.project.web;
 import com.company.project.core.result.Result;
 import com.company.project.core.result.ResultGenerator;
 import com.company.project.core.utils.AuthUtils;
-import com.company.project.model.CsysPotPublic;
+import com.company.project.model.CsysCodemaster;
 import com.company.project.model.CsysUserView;
 import com.company.project.biz.AuthLoginBiz;
-import com.company.project.biz.CsysPotPublicBiz;
+import com.company.project.biz.CsysCodemasterBiz;
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
 import org.springframework.web.bind.annotation.*;
@@ -21,12 +21,12 @@ import java.util.Map;
 * Created by tty on 2019/06/15.
 */
 @RestController
-@RequestMapping("/csyspotpublic")
-public class CsysPotPublicController {
+@RequestMapping("/csyscodemaster")
+public class CsysCodemasterController {
 	private final Log logger = LogFactory.getLog(getClass());
 	
     @Resource
-    private CsysPotPublicBiz csysPotPublicBiz;
+    private CsysCodemasterBiz csysCodemasterBiz;
     
     @Resource
 	private AuthLoginBiz authloginBiz;
@@ -36,7 +36,7 @@ public class CsysPotPublicController {
 
     @PostMapping
     public Result insertSettingsData(@RequestHeader(value = "access_token") String access_token,@RequestHeader(value = "refresh_token") String refresh_token,
-    @RequestBody CsysPotPublic csysPotPublic) {
+    @RequestBody CsysCodemaster csysCodemaster) {
     
     	Map<String,String> param = new HashMap<>();
     	
@@ -67,7 +67,7 @@ public class CsysPotPublicController {
 
 		/*--------------end 此段代码可优化成redis-----------------------*/
 		
-        String insertId=csysPotPublicBiz.insertDataSettings(baseUserList.get(0),csysPotPublic);
+        String insertId=csysCodemasterBiz.insertDataSettings(baseUserList.get(0),csysCodemaster);
         
         if(tokenRefreshFlag) {
         	param.put("access_token", token);
@@ -108,7 +108,7 @@ public class CsysPotPublicController {
 		
 		try{
 		
-        csysPotPublicBiz.deleteDataSettings(ids);
+        csysCodemasterBiz.deleteDataSettings(ids);
         if(tokenRefreshFlag) {
         	param.put("access_token", token);
         	param.put("refresh_token", refreshtoken);
@@ -125,7 +125,7 @@ public class CsysPotPublicController {
 
     @PutMapping
     public Result update(@RequestHeader(value = "access_token") String access_token,@RequestHeader(value = "refresh_token") String refresh_token,
-    @RequestBody CsysPotPublic csysPotPublic) {
+    @RequestBody CsysCodemaster csysCodemaster) {
     
     	Map<String,String> param = new HashMap<>();
     	/*---------------------------start 授权验证------------------------*/
@@ -155,7 +155,7 @@ public class CsysPotPublicController {
 
 		/*--------------end 此段代码可优化成redis-----------------------*/
 		
-        csysPotPublicBiz.updateDataSettings(baseUserList.get(0),csysPotPublic);
+        csysCodemasterBiz.updateDataSettings(baseUserList.get(0),csysCodemaster);
         if(tokenRefreshFlag) {
         	param.put("access_token", token);
         	param.put("refresh_token", refreshtoken);
@@ -192,13 +192,13 @@ public class CsysPotPublicController {
 		/*---------------------------end 授权验证------------------------*/
  		try{
  		
-        CsysPotPublic csysPotPublic = csysPotPublicBiz.getDataSettings(id);
+        CsysCodemaster csysCodemaster = csysCodemasterBiz.getDataSettings(id);
         if(tokenRefreshFlag) {
         	param.put("access_token", token);
         	param.put("refresh_token", refreshtoken);
         	 
 		}
-        return ResultGenerator.genSuccessResult(csysPotPublic,param);
+        return ResultGenerator.genSuccessResult(csysCodemaster,param);
         
          } catch (Exception e) {
         
@@ -210,7 +210,7 @@ public class CsysPotPublicController {
 
   	@PostMapping("/condition")
     public Result detailByCondition(@RequestHeader(value = "access_token") String access_token,@RequestHeader(value = "refresh_token") String refresh_token,
-    @RequestBody CsysPotPublic csysPotPublic) {
+    @RequestBody CsysCodemaster csysCodemaster) {
     
     	Map<String,String> param = new HashMap<>();
 		 /*---------------------------start 授权验证------------------------*/
@@ -230,13 +230,13 @@ public class CsysPotPublicController {
 		/*---------------------------end 授权验证------------------------*/
  		try{
  		
-        List<CsysPotPublic> csysPotPubliclst = csysPotPublicBiz.getDataSettingsByCondition(csysPotPublic);
+        List<CsysCodemaster> csysCodemasterlst = csysCodemasterBiz.getDataSettingsByCondition(csysCodemaster);
         if(tokenRefreshFlag) {
         	param.put("access_token", token);
         	param.put("refresh_token", refreshtoken);
         	 
 		}
-        return ResultGenerator.genSuccessResult(csysPotPubliclst,param);
+        return ResultGenerator.genSuccessResult(csysCodemasterlst,param);
         
          } catch (Exception e) {
         
@@ -268,7 +268,7 @@ public class CsysPotPublicController {
 		
         
         try{
-         PageInfo pageInfo=csysPotPublicBiz.getPageDataSettings(page,size);
+         PageInfo pageInfo=csysCodemasterBiz.getPageDataSettings(page,size);
         if(tokenRefreshFlag) {
         	param.put("access_token", token);
         	param.put("refresh_token", refreshtoken);
@@ -286,7 +286,7 @@ public class CsysPotPublicController {
     
     @PostMapping("/listCondition")
     public Result listByCondition(@RequestHeader(value = "access_token") String access_token,@RequestHeader(value = "refresh_token") String refresh_token,
-    @RequestParam(defaultValue = "0") Integer page, @RequestParam(defaultValue = "0") Integer size,@RequestBody CsysPotPublic csysPotPublic) {
+    @RequestParam(defaultValue = "0") Integer page, @RequestParam(defaultValue = "0") Integer size,@RequestBody CsysCodemaster csysCodemaster) {
     
     	Map<String,String> param = new HashMap<>();
         /*---------------------------start 授权验证------------------------*/
@@ -315,7 +315,7 @@ public class CsysPotPublicController {
 		/*--------------end 此段代码可优化成redis-----------------------*/
         
         try{
-         PageInfo pageInfo=csysPotPublicBiz.getPageDataSettingsByCondition(page,size,baseUserList.get(0),csysPotPublic);
+         PageInfo pageInfo=csysCodemasterBiz.getPageDataSettingsByCondition(page,size,baseUserList.get(0),csysCodemaster);
         if(tokenRefreshFlag) {
         	param.put("access_token", token);
         	param.put("refresh_token", refreshtoken);

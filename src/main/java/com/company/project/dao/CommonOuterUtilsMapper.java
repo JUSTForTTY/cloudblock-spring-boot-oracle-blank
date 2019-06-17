@@ -8,7 +8,9 @@ public interface CommonOuterUtilsMapper {
 
 	String selectBySequence(CommonBean commonBean);
 
-	void getOracleSequence(Map<String, Object> params);
+	void   updateOracleSequence(Map<String, Object> params);
+	
+	String getOracleSequence(Map<String, Object> params);
 
 	void cloneWorkFlow(Map<String, Object> map);
 	

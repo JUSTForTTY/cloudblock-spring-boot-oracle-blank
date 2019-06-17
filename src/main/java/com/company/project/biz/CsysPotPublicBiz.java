@@ -5,7 +5,7 @@ import com.github.pagehelper.PageInfo;
 import java.util.List;
 
 /**
- * Created by tty on 2019/01/23.
+ * Created by tty on 2019/06/15.
  */
 public interface CsysPotPublicBiz  {
 
@@ -32,25 +32,25 @@ public interface CsysPotPublicBiz  {
 	 * @param CsysPotPublic
 	 * @return
 	 */
-	public PageInfo getPageDataSettingsByCondition(Integer page,Integer size,CsysUserView baseUserView,CsysPotPublic csysPotPublic);
+	public PageInfo getPageDataSettingsByCondition(Integer page,Integer size,CsysUserView csysUserView,CsysPotPublic csysPotPublic);
 	/**
 	 * 新增数据
 	 * @param CsysPotPublic
 	 * @return
 	 */
-	public String insertDataSettings(CsysUserView baseUserView,CsysPotPublic csysPotPublic);
+	public String insertDataSettings(CsysUserView csysUserView,CsysPotPublic csysPotPublic);
 	/**
 	 * 更新
 	 * @param CsysPotPublic
 	 * @return
 	 */
-	public void updateDataSettings(CsysUserView baseUserView,CsysPotPublic csysPotPublic);
-	
+	public void updateDataSettings(CsysUserView csysUserView,CsysPotPublic csysPotPublic);
+
 	/**
 	 * 删除
 	 * @param CsysPotPublic
 	 * @return
 	 */
 	public void deleteDataSettings(String ids);
-	
+
 }

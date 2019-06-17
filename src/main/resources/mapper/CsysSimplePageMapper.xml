@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.company.project.dao.CsysSimplePageMapper">
+  <resultMap id="BaseResultMap" type="com.company.project.model.CsysSimplePage">
+    <!--
+      WARNING - @mbg.generated
+    -->
+    <id column="CSYS_PAGE_ID" jdbcType="VARCHAR" property="csysPageId" />
+    <result column="CSYS_PAGE_NAME" jdbcType="VARCHAR" property="csysPageName" />
+    <result column="CSYS_PAGE_LAYOUT_ID" jdbcType="VARCHAR" property="csysPageLayoutId" />
+    <result column="CSYS_PAGE_SORT" jdbcType="DECIMAL" property="csysPageSort" />
+    <result column="CSYS_PAGE_ROUTH_PATH" jdbcType="VARCHAR" property="csysPageRouthPath" />
+    <result column="CSYS_PAGE_SELECTOR" jdbcType="VARCHAR" property="csysPageSelector" />
+    <result column="CSYS_PAGE_STATUS" jdbcType="CHAR" property="csysPageStatus" />
+    <result column="CSYS_PAGE_GITSTATUS" jdbcType="CHAR" property="csysPageGitstatus" />
+    <result column="CSYS_PAGE_TYPE" jdbcType="CHAR" property="csysPageType" />
+    <result column="CSYS_PAGE_CREATE_TIME" jdbcType="TIMESTAMP" property="csysPageCreateTime" />
+    <result column="CSYS_PAGE_MODIFY_TIME" jdbcType="TIMESTAMP" property="csysPageModifyTime" />
+    <result column="CSYS_PAGE_CREATE_USER" jdbcType="VARCHAR" property="csysPageCreateUser" />
+    <result column="CSYS_PAGE_MODIFY_USER" jdbcType="VARCHAR" property="csysPageModifyUser" />
+    <result column="CSYS_PAGE_IS_DELETE" jdbcType="CHAR" property="csysPageIsDelete" />
+    <result column="CSYS_PAGE_CODE_NAME" jdbcType="VARCHAR" property="csysPageCodeName" />
+    <result column="CY_SYS_PAGE_TEMP_ID" jdbcType="VARCHAR" property="cySysPageTempId" />
+    <result column="CSYS_PAGE_TIME" jdbcType="TIMESTAMP" property="csysPageTime" />
+    <result column="CSYS_PAGE_DATE" jdbcType="TIMESTAMP" property="csysPageDate" />
+  </resultMap>
+  <resultMap extends="BaseResultMap" id="ResultMapWithBLOBs" type="com.company.project.model.CsysSimplePage">
+    <!--
+      WARNING - @mbg.generated
+    -->
+    <result column="CSYS_PAGE_HTML_CODE" jdbcType="CLOB" property="csysPageHtmlCode" />
+    <result column="CSYS_PAGE_SETTINGS_JSON" jdbcType="CLOB" property="csysPageSettingsJson" />
+    <result column="CSYS_PAGE_INFO_JSON" jdbcType="CLOB" property="csysPageInfoJson" />
+    <result column="CSYS_PAGE_HTML_DROP_CODE" jdbcType="CLOB" property="csysPageHtmlDropCode" />
+    <result column="CSYS_PAGE_HTML_TS_CODE" jdbcType="CLOB" property="csysPageHtmlTsCode" />
+    <result column="CSYS_PAGE_HTML_DATA_CODE" jdbcType="CLOB" property="csysPageHtmlDataCode" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    <!--
+      WARNING - @mbg.generated
+    -->
+    CSYS_PAGE_ID, CSYS_PAGE_NAME, CSYS_PAGE_LAYOUT_ID, CSYS_PAGE_SORT, CSYS_PAGE_ROUTH_PATH, 
+    CSYS_PAGE_SELECTOR, CSYS_PAGE_STATUS, CSYS_PAGE_GITSTATUS, CSYS_PAGE_TYPE, CSYS_PAGE_CREATE_TIME, 
+    CSYS_PAGE_MODIFY_TIME, CSYS_PAGE_CREATE_USER, CSYS_PAGE_MODIFY_USER, CSYS_PAGE_IS_DELETE, 
+    CSYS_PAGE_CODE_NAME, CY_SYS_PAGE_TEMP_ID, CSYS_PAGE_TIME, CSYS_PAGE_DATE
+  </sql>
+  <sql id="Blob_Column_List">
+    <!--
+      WARNING - @mbg.generated
+    -->
+    CSYS_PAGE_HTML_CODE, CSYS_PAGE_SETTINGS_JSON, CSYS_PAGE_INFO_JSON, CSYS_PAGE_HTML_DROP_CODE, 
+    CSYS_PAGE_HTML_TS_CODE, CSYS_PAGE_HTML_DATA_CODE
+  </sql>
+</mapper>

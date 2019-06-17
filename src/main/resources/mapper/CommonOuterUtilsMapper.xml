@@ -15,8 +15,23 @@
 	</resultMap>
 
 	<!--调用存储过程 -->
+	<!--
 	<select id="getOracleSequence" parameterType="HashMap"
-		statementType="CALLABLE">
+		statementType="CALLABLE" useCache="false" flushCache="false">
 		call pro_getRunningNO(#{tableName,mode=IN,jdbcType=VARCHAR}, #{cursor, mode=OUT, jdbcType=CURSOR, resultMap=cursorMap})
+	</select>
+	 -->
+	
+	<update id="updateOracleSequence" parameterType="HashMap">
+
+		 update CSYS_SEQUENCE set CSYS_SEQUENCE_SEQNO=CSYS_SEQUENCE_SEQNO+1 where CSYS_SEQUENCE_TABLENAME='${tableName}'
+		 
+
+	</update>
+	<select id="getOracleSequence" parameterType="HashMap"    timeout="8"  resultType="String">
+ 
+		 select CSYS_SEQUENCE_SEQNO  from CSYS_SEQUENCE where CSYS_SEQUENCE_TABLENAME='${tableName}'
+		 
+
 	</select>
 </mapper>
