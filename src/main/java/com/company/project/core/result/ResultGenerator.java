@@ -33,12 +33,29 @@ public class ResultGenerator {
                 .setExtraData(extraData);
         		 
     }
+    public static Result genSuccessResult(Object data,Object extraData,Map<String,String> param,Map<String, List<Map<String, Object>>> logData) {
+        return new Result()
+                .setCode(ResultCode.SUCCESS)
+                .setMessage(DEFAULT_SUCCESS_MESSAGE)
+                .setParam(param)
+                .setData(data)
+                .setExtraData(extraData)
+        		.setLogData(logData);
+        		 
+    }
 
     public static Result genFailResult(String message,Map<String,String> param) {
         return new Result()
                 .setCode(ResultCode.FAIL)
                 .setMessage(message)
         		.setParam(param);
+    }
+    public static Result genFailResult(String message,Map<String,String> param,Map<String, List<Map<String, Object>>> logData) {
+        return new Result()
+                .setCode(ResultCode.FAIL)
+                .setMessage(message)
+        		.setParam(param)
+        		.setLogData(logData);
     }
     
     public static Result genUnauthorizedResult(Map<String,String> param) {
@@ -58,6 +75,14 @@ public class ResultGenerator {
                 .setCode(ResultCode.INTERNAL_SERVER_ERROR)
                 .setMessage(ResultCode.INTERNAL_SERVER_ERROR.getMessage())
                 .setParam(param);
+    }
+    public static Result genServerErrorResult(Map<String,String> param,Map<String, List<Map<String, Object>>> logData) {
+        return new Result()
+                .setCode(ResultCode.INTERNAL_SERVER_ERROR)
+                .setMessage(ResultCode.INTERNAL_SERVER_ERROR.getMessage())
+                .setParam(param)
+                .setLogData(logData);
+                
     }
     public static Result genInvalidParamResult(Map<String,String> param) {
         return new Result()

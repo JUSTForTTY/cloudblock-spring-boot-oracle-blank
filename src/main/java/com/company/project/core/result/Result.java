@@ -13,7 +13,8 @@ public class Result {
     private String message;
     private Map<String,String> param;
     private Object data;
-    private Object extraData;    
+    private Object extraData;
+    private Map<String, List<Map<String, Object>>> logData; 
 
     public Result(){
     }
@@ -30,6 +31,12 @@ public class Result {
         this.data=data;
         this.param=param;
     }
+    public Result(ResultCode resultCode,Map<String,String> param,Map<String, List<Map<String, Object>>> logData) {
+        this.code = resultCode.getCode();
+        this.message=resultCode.getMessage();
+        this.param=param;
+        this.logData=logData;
+    }
     public Result(ResultCode resultCode,Object data,Object extraData,Map<String,String> param) {
         this.code = resultCode.getCode();
         this.message=resultCode.getMessage();
@@ -37,7 +44,14 @@ public class Result {
         this.extraData=extraData;
         this.param=param;
     }
-
+    public Result(ResultCode resultCode,Object data,Object extraData,Map<String,String> param,Map<String, List<Map<String, Object>>> logData) {
+        this.code = resultCode.getCode();
+        this.message=resultCode.getMessage();
+        this.data=data;
+        this.extraData=extraData;
+        this.logData=logData;
+        this.param=param;
+    }
 
 
     public Result setCode(ResultCode resultCode) {
@@ -88,6 +102,16 @@ public class Result {
 
 	public Result setExtraData(Object extraData) {
 		this.extraData = extraData;
+		return this;
+	}
+	
+
+	public Map<String, List<Map<String, Object>>> getLogData() {
+		return logData;
+	}
+
+	public Result setLogData(Map<String, List<Map<String, Object>>> logData) {
+		this.logData = logData;
 		return this;
 	}
 

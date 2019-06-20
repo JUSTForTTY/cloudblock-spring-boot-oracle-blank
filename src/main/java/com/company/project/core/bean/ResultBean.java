@@ -1,22 +1,22 @@
 package com.company.project.core.bean;
 
-import com.github.pagehelper.PageInfo;
-
 import java.util.List;
 import java.util.Map;
 
+import com.github.pagehelper.PageInfo;
+
 public class ResultBean {
 
-
-	private PageInfo data;
+	
+	private  PageInfo data;
 	
 	private  String StringData;
 	
 	private  List<Map<String, Object>> extraData;
 	
-	private  List<Map<String, Object>> logData;
-
-	 
+	private  Map<String, List<Map<String, Object>>> logMap;
+ 
+	
 
 	public PageInfo getData() {
 		return data;
@@ -42,14 +42,15 @@ public class ResultBean {
 		StringData = stringData;
 	}
 
-	public List<Map<String, Object>> getLogData() {
-		return logData;
+	public Map<String, List<Map<String, Object>>> getLogMap() {
+		return logMap;
 	}
 
-	public void setLogData(List<Map<String, Object>> logData) {
-		this.logData = logData;
+	public void setLogMap(Map<String, List<Map<String, Object>>> logMap) {
+		this.logMap = logMap;
 	}
 
+	
 	 
 	
 }
