@@ -13,6 +13,8 @@ public class ResultBean {
 	private  String StringData;
 	
 	private  List<Map<String, Object>> extraData;
+	
+	private  List<Map<String, Object>> logData;
 
 	 
 
@@ -38,6 +40,14 @@ public class ResultBean {
 
 	public void setStringData(String stringData) {
 		StringData = stringData;
+	}
+
+	public List<Map<String, Object>> getLogData() {
+		return logData;
+	}
+
+	public void setLogData(List<Map<String, Object>> logData) {
+		this.logData = logData;
 	}
 
 	 
