@@ -267,7 +267,7 @@ public class CsysPotTrsController {
 		/*---------------------------end 授权验证------------------------*/
  		try{
  		
-        List<CsysPotTrs> csysPotTrslst = csysPotTrsBiz.getDataSettingsByCondition(csysPotTrs);
+        List<CsysPotTrs> csysPotTrslst = csysPotTrsBiz.getInitDataSettingsByCondition(csysPotTrs);
         if(tokenRefreshFlag) {
         	param.put("access_token", token);
         	param.put("refresh_token", refreshtoken);
