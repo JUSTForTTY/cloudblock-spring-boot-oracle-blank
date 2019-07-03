@@ -34,6 +34,12 @@ public interface CsysPotStyleBiz  {
 	 */
 	public PageInfo getPageDataSettingsByCondition(Integer page,Integer size,CsysUserView csysUserView,CsysPotStyle csysPotStyle);
 	/**
+	 * 根据特殊条件获取数据分页
+	 * @param CsysPotStyle
+	 * @return
+	 */
+	public PageInfo getSearchPageDataSettingsByCondition(Integer page,Integer size,CsysUserView csysUserView,CsysPotStyle csysPotStyle);
+	/**
 	 * 新增数据
 	 * @param CsysPotStyle
 	 * @return

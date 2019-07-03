@@ -18,6 +18,70 @@
     <result column="CSYS_POT_STYLE_ID" jdbcType="VARCHAR" property="csysPotStyleId" />
     <result column="CSYS_POT_GROUP_ID" jdbcType="VARCHAR" property="csysPotGroupId" />
   </resultMap>
+  <sql id="Example_Where_Clause">
+    <!--
+      WARNING - @mbg.generated
+    -->
+    <where>
+      <foreach collection="oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause">
+    <!--
+      WARNING - @mbg.generated
+    -->
+    <where>
+      <foreach collection="example.oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
   <sql id="Base_Column_List">
     <!--
       WARNING - @mbg.generated
@@ -27,4 +91,107 @@
     CSYS_POT_PUBLIC_IS_DELETE, CSYS_POT_PUBLIC_DATE, CSYS_POT_PUBLIC_TIME, CSYS_POT_STYLE_ID, 
     CSYS_POT_GROUP_ID
   </sql>
+  <select id="selectByExample" parameterType="com.company.project.model.CsysPotPublicExample" resultMap="BaseResultMap">
+    <!--
+      WARNING - @mbg.generated
+    -->
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from CSYS_POT_PUBLIC
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+  </select>
+  <delete id="deleteByExample" parameterType="com.company.project.model.CsysPotPublicExample">
+    <!--
+      WARNING - @mbg.generated
+    -->
+    delete from CSYS_POT_PUBLIC
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <select id="countByExample" parameterType="com.company.project.model.CsysPotPublicExample" resultType="java.lang.Long">
+    <!--
+      WARNING - @mbg.generated
+    -->
+    select count(*) from CSYS_POT_PUBLIC
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map">
+    <!--
+      WARNING - @mbg.generated
+    -->
+    update CSYS_POT_PUBLIC
+    <set>
+      <if test="record.csysPotPublicId != null">
+        CSYS_POT_PUBLIC_ID = #{record.csysPotPublicId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.csysPotPublicName != null">
+        CSYS_POT_PUBLIC_NAME = #{record.csysPotPublicName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.csysPotPublicDesc != null">
+        CSYS_POT_PUBLIC_DESC = #{record.csysPotPublicDesc,jdbcType=VARCHAR},
+      </if>
+      <if test="record.csysPotPublicCreateTime != null">
+        CSYS_POT_PUBLIC_CREATE_TIME = #{record.csysPotPublicCreateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.csysPotPublicModifyTime != null">
+        CSYS_POT_PUBLIC_MODIFY_TIME = #{record.csysPotPublicModifyTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.csysPotPublicCreateUser != null">
+        CSYS_POT_PUBLIC_CREATE_USER = #{record.csysPotPublicCreateUser,jdbcType=VARCHAR},
+      </if>
+      <if test="record.csysPotPublicModifyUser != null">
+        CSYS_POT_PUBLIC_MODIFY_USER = #{record.csysPotPublicModifyUser,jdbcType=VARCHAR},
+      </if>
+      <if test="record.csysPotPublicIsDelete != null">
+        CSYS_POT_PUBLIC_IS_DELETE = #{record.csysPotPublicIsDelete,jdbcType=CHAR},
+      </if>
+      <if test="record.csysPotPublicDate != null">
+        CSYS_POT_PUBLIC_DATE = #{record.csysPotPublicDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.csysPotPublicTime != null">
+        CSYS_POT_PUBLIC_TIME = #{record.csysPotPublicTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.csysPotStyleId != null">
+        CSYS_POT_STYLE_ID = #{record.csysPotStyleId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.csysPotGroupId != null">
+        CSYS_POT_GROUP_ID = #{record.csysPotGroupId,jdbcType=VARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map">
+    <!--
+      WARNING - @mbg.generated
+    -->
+    update CSYS_POT_PUBLIC
+    set CSYS_POT_PUBLIC_ID = #{record.csysPotPublicId,jdbcType=VARCHAR},
+      CSYS_POT_PUBLIC_NAME = #{record.csysPotPublicName,jdbcType=VARCHAR},
+      CSYS_POT_PUBLIC_DESC = #{record.csysPotPublicDesc,jdbcType=VARCHAR},
+      CSYS_POT_PUBLIC_CREATE_TIME = #{record.csysPotPublicCreateTime,jdbcType=TIMESTAMP},
+      CSYS_POT_PUBLIC_MODIFY_TIME = #{record.csysPotPublicModifyTime,jdbcType=TIMESTAMP},
+      CSYS_POT_PUBLIC_CREATE_USER = #{record.csysPotPublicCreateUser,jdbcType=VARCHAR},
+      CSYS_POT_PUBLIC_MODIFY_USER = #{record.csysPotPublicModifyUser,jdbcType=VARCHAR},
+      CSYS_POT_PUBLIC_IS_DELETE = #{record.csysPotPublicIsDelete,jdbcType=CHAR},
+      CSYS_POT_PUBLIC_DATE = #{record.csysPotPublicDate,jdbcType=TIMESTAMP},
+      CSYS_POT_PUBLIC_TIME = #{record.csysPotPublicTime,jdbcType=TIMESTAMP},
+      CSYS_POT_STYLE_ID = #{record.csysPotStyleId,jdbcType=VARCHAR},
+      CSYS_POT_GROUP_ID = #{record.csysPotGroupId,jdbcType=VARCHAR}
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
 </mapper>

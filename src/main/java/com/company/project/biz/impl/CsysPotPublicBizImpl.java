@@ -4,11 +4,17 @@ import com.company.project.service.CommonService;
 import com.company.project.service.CsysPotPublicService;
 import com.company.project.biz.CsysPotPublicBiz;
 import com.company.project.model.CsysPotPublic;
+import com.company.project.model.CsysPotPublicExample;
 import com.company.project.model.CsysUserView;
+import com.company.project.model.CsysWorkflow;
+import com.company.project.model.CsysWorkflowExample;
+
 import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
 import tk.mybatis.mapper.entity.Condition;
 import com.company.project.core.utils.DateUtils;
+import com.company.project.dao.CsysPotPublicMapper;
+
 import java.util.List;
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
@@ -26,6 +32,8 @@ public class CsysPotPublicBizImpl  implements CsysPotPublicBiz {
     private CsysPotPublicService csysPotPublicService;
 	@Resource
     private CommonService commonService;
+	@Resource
+    private CsysPotPublicMapper csysPotPublicMapper;
     
 	public CsysPotPublic getDataSettings(String id){
 	
@@ -104,6 +112,30 @@ public class CsysPotPublicBizImpl  implements CsysPotPublicBiz {
 		
 		csysPotPublicService.deleteByIds(newids);
 	
+	}
+	@Override
+	public PageInfo getSearchPageDataSettingsByCondition(Integer page, Integer size, CsysUserView csysUserView,
+			CsysPotPublic csysPotPublic) {
+		 
+		PageHelper.startPage(page, size);
+		 
+		CsysPotPublicExample example=new CsysPotPublicExample();
+		
+		example.setOrderByClause("CSYS_POT_PUBLIC_MODIFY_TIME DESC");
+		
+		CsysPotPublicExample.Criteria criteria =example.createCriteria();
+		if(null!=csysPotPublic.getCsysPotPublicName()) {
+			criteria.andCsysPotPublicNameLike("%"+csysPotPublic.getCsysPotPublicName()+"%");
+		}
+		if(null!=csysPotPublic.getCsysPotPublicDesc()) {
+			criteria.andCsysPotPublicDescLike("%"+csysPotPublic.getCsysPotPublicDesc()+"%");
+		}
+		criteria.andCsysPotPublicIsDeleteEqualTo("0");
+		 
+		List<CsysPotPublic> list = csysPotPublicMapper.selectByExample(example);
+        PageInfo pageInfo = new PageInfo(list);
+		
+		return pageInfo;
 	}
 
 	

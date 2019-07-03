@@ -3,12 +3,17 @@ package com.company.project.biz.impl;
 import com.company.project.service.CommonService;
 import com.company.project.service.CsysPotStyleService;
 import com.company.project.biz.CsysPotStyleBiz;
+import com.company.project.model.CsysPotGroup;
+import com.company.project.model.CsysPotGroupExample;
 import com.company.project.model.CsysPotStyle;
+import com.company.project.model.CsysPotStyleExample;
 import com.company.project.model.CsysUserView;
 import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
 import tk.mybatis.mapper.entity.Condition;
 import com.company.project.core.utils.DateUtils;
+import com.company.project.dao.CsysPotStyleMapper;
+
 import java.util.List;
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
@@ -26,7 +31,9 @@ public class CsysPotStyleBizImpl  implements CsysPotStyleBiz {
     private CsysPotStyleService csysPotStyleService;
 	@Resource
     private CommonService commonService;
-    
+	@Resource
+    private CsysPotStyleMapper csysPotStyleMapper;
+	
 	public CsysPotStyle getDataSettings(String id){
 	
 		CsysPotStyle csysPotStyle = new CsysPotStyle();
@@ -104,6 +111,31 @@ public class CsysPotStyleBizImpl  implements CsysPotStyleBiz {
 		
 		csysPotStyleService.deleteByIds(newids);
 	
+	}
+	@Override
+	public PageInfo getSearchPageDataSettingsByCondition(Integer page, Integer size, CsysUserView csysUserView,
+			CsysPotStyle csysPotStyle) {
+		
+		PageHelper.startPage(page, size);
+		 
+		CsysPotStyleExample example=new CsysPotStyleExample();
+		
+		example.setOrderByClause("CSYS_POT_STYLE_MODIFY_TIME DESC");
+		
+		CsysPotStyleExample.Criteria criteria =example.createCriteria();
+		if(null!=csysPotStyle.getCsysPotStyleName()) {
+			criteria.andCsysPotStyleNameLike("%"+csysPotStyle.getCsysPotStyleName()+"%");
+		}
+		if(null!=csysPotStyle.getCsysPotStyleDesc()) {
+			criteria.andCsysPotStyleDescLike("%"+csysPotStyle.getCsysPotStyleDesc()+"%");
+		}
+		criteria.andCsysPotStyleIsDeleteEqualTo("0");
+		 
+		List<CsysPotStyle> list = csysPotStyleMapper.selectByExample(example);
+        PageInfo pageInfo = new PageInfo(list);
+		
+		return pageInfo;
+		 
 	}
 
 	

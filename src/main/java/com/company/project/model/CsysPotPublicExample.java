@@ -175,73 +175,73 @@ public class CsysPotPublicExample {
             return (Criteria) this;
         }
 
-        public Criteria andCsysPotNameIsNull() {
-            addCriterion("CSYS_POT_NAME is null");
+        public Criteria andCsysPotPublicNameIsNull() {
+            addCriterion("CSYS_POT_PUBLIC_NAME is null");
             return (Criteria) this;
         }
 
-        public Criteria andCsysPotNameIsNotNull() {
-            addCriterion("CSYS_POT_NAME is not null");
+        public Criteria andCsysPotPublicNameIsNotNull() {
+            addCriterion("CSYS_POT_PUBLIC_NAME is not null");
             return (Criteria) this;
         }
 
-        public Criteria andCsysPotNameEqualTo(String value) {
-            addCriterion("CSYS_POT_NAME =", value, "csysPotName");
+        public Criteria andCsysPotPublicNameEqualTo(String value) {
+            addCriterion("CSYS_POT_PUBLIC_NAME =", value, "csysPotPublicName");
             return (Criteria) this;
         }
 
-        public Criteria andCsysPotNameNotEqualTo(String value) {
-            addCriterion("CSYS_POT_NAME <>", value, "csysPotName");
+        public Criteria andCsysPotPublicNameNotEqualTo(String value) {
+            addCriterion("CSYS_POT_PUBLIC_NAME <>", value, "csysPotPublicName");
             return (Criteria) this;
         }
 
-        public Criteria andCsysPotNameGreaterThan(String value) {
-            addCriterion("CSYS_POT_NAME >", value, "csysPotName");
+        public Criteria andCsysPotPublicNameGreaterThan(String value) {
+            addCriterion("CSYS_POT_PUBLIC_NAME >", value, "csysPotPublicName");
             return (Criteria) this;
         }
 
-        public Criteria andCsysPotNameGreaterThanOrEqualTo(String value) {
-            addCriterion("CSYS_POT_NAME >=", value, "csysPotName");
+        public Criteria andCsysPotPublicNameGreaterThanOrEqualTo(String value) {
+            addCriterion("CSYS_POT_PUBLIC_NAME >=", value, "csysPotPublicName");
             return (Criteria) this;
         }
 
-        public Criteria andCsysPotNameLessThan(String value) {
-            addCriterion("CSYS_POT_NAME <", value, "csysPotName");
+        public Criteria andCsysPotPublicNameLessThan(String value) {
+            addCriterion("CSYS_POT_PUBLIC_NAME <", value, "csysPotPublicName");
             return (Criteria) this;
         }
 
-        public Criteria andCsysPotNameLessThanOrEqualTo(String value) {
-            addCriterion("CSYS_POT_NAME <=", value, "csysPotName");
+        public Criteria andCsysPotPublicNameLessThanOrEqualTo(String value) {
+            addCriterion("CSYS_POT_PUBLIC_NAME <=", value, "csysPotPublicName");
             return (Criteria) this;
         }
 
-        public Criteria andCsysPotNameLike(String value) {
-            addCriterion("CSYS_POT_NAME like", value, "csysPotName");
+        public Criteria andCsysPotPublicNameLike(String value) {
+            addCriterion("CSYS_POT_PUBLIC_NAME like", value, "csysPotPublicName");
             return (Criteria) this;
         }
 
-        public Criteria andCsysPotNameNotLike(String value) {
-            addCriterion("CSYS_POT_NAME not like", value, "csysPotName");
+        public Criteria andCsysPotPublicNameNotLike(String value) {
+            addCriterion("CSYS_POT_PUBLIC_NAME not like", value, "csysPotPublicName");
             return (Criteria) this;
         }
 
-        public Criteria andCsysPotNameIn(List<String> values) {
-            addCriterion("CSYS_POT_NAME in", values, "csysPotName");
+        public Criteria andCsysPotPublicNameIn(List<String> values) {
+            addCriterion("CSYS_POT_PUBLIC_NAME in", values, "csysPotPublicName");
             return (Criteria) this;
         }
 
-        public Criteria andCsysPotNameNotIn(List<String> values) {
-            addCriterion("CSYS_POT_NAME not in", values, "csysPotName");
+        public Criteria andCsysPotPublicNameNotIn(List<String> values) {
+            addCriterion("CSYS_POT_PUBLIC_NAME not in", values, "csysPotPublicName");
             return (Criteria) this;
         }
 
-        public Criteria andCsysPotNameBetween(String value1, String value2) {
-            addCriterion("CSYS_POT_NAME between", value1, value2, "csysPotName");
+        public Criteria andCsysPotPublicNameBetween(String value1, String value2) {
+            addCriterion("CSYS_POT_PUBLIC_NAME between", value1, value2, "csysPotPublicName");
             return (Criteria) this;
         }
 
-        public Criteria andCsysPotNameNotBetween(String value1, String value2) {
-            addCriterion("CSYS_POT_NAME not between", value1, value2, "csysPotName");
+        public Criteria andCsysPotPublicNameNotBetween(String value1, String value2) {
+            addCriterion("CSYS_POT_PUBLIC_NAME not between", value1, value2, "csysPotPublicName");
             return (Criteria) this;
         }
 
@@ -762,6 +762,146 @@ public class CsysPotPublicExample {
 
         public Criteria andCsysPotPublicTimeNotBetween(Date value1, Date value2) {
             addCriterion("CSYS_POT_PUBLIC_TIME not between", value1, value2, "csysPotPublicTime");
+            return (Criteria) this;
+        }
+
+        public Criteria andCsysPotStyleIdIsNull() {
+            addCriterion("CSYS_POT_STYLE_ID is null");
+            return (Criteria) this;
+        }
+
+        public Criteria andCsysPotStyleIdIsNotNull() {
+            addCriterion("CSYS_POT_STYLE_ID is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andCsysPotStyleIdEqualTo(String value) {
+            addCriterion("CSYS_POT_STYLE_ID =", value, "csysPotStyleId");
+            return (Criteria) this;
+        }
+
+        public Criteria andCsysPotStyleIdNotEqualTo(String value) {
+            addCriterion("CSYS_POT_STYLE_ID <>", value, "csysPotStyleId");
+            return (Criteria) this;
+        }
+
+        public Criteria andCsysPotStyleIdGreaterThan(String value) {
+            addCriterion("CSYS_POT_STYLE_ID >", value, "csysPotStyleId");
+            return (Criteria) this;
+        }
+
+        public Criteria andCsysPotStyleIdGreaterThanOrEqualTo(String value) {
+            addCriterion("CSYS_POT_STYLE_ID >=", value, "csysPotStyleId");
+            return (Criteria) this;
+        }
+
+        public Criteria andCsysPotStyleIdLessThan(String value) {
+            addCriterion("CSYS_POT_STYLE_ID <", value, "csysPotStyleId");
+            return (Criteria) this;
+        }
+
+        public Criteria andCsysPotStyleIdLessThanOrEqualTo(String value) {
+            addCriterion("CSYS_POT_STYLE_ID <=", value, "csysPotStyleId");
+            return (Criteria) this;
+        }
+
+        public Criteria andCsysPotStyleIdLike(String value) {
+            addCriterion("CSYS_POT_STYLE_ID like", value, "csysPotStyleId");
+            return (Criteria) this;
+        }
+
+        public Criteria andCsysPotStyleIdNotLike(String value) {
+            addCriterion("CSYS_POT_STYLE_ID not like", value, "csysPotStyleId");
+            return (Criteria) this;
+        }
+
+        public Criteria andCsysPotStyleIdIn(List<String> values) {
+            addCriterion("CSYS_POT_STYLE_ID in", values, "csysPotStyleId");
+            return (Criteria) this;
+        }
+
+        public Criteria andCsysPotStyleIdNotIn(List<String> values) {
+            addCriterion("CSYS_POT_STYLE_ID not in", values, "csysPotStyleId");
+            return (Criteria) this;
+        }
+
+        public Criteria andCsysPotStyleIdBetween(String value1, String value2) {
+            addCriterion("CSYS_POT_STYLE_ID between", value1, value2, "csysPotStyleId");
+            return (Criteria) this;
+        }
+
+        public Criteria andCsysPotStyleIdNotBetween(String value1, String value2) {
+            addCriterion("CSYS_POT_STYLE_ID not between", value1, value2, "csysPotStyleId");
+            return (Criteria) this;
+        }
+
+        public Criteria andCsysPotGroupIdIsNull() {
+            addCriterion("CSYS_POT_GROUP_ID is null");
+            return (Criteria) this;
+        }
+
+        public Criteria andCsysPotGroupIdIsNotNull() {
+            addCriterion("CSYS_POT_GROUP_ID is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andCsysPotGroupIdEqualTo(String value) {
+            addCriterion("CSYS_POT_GROUP_ID =", value, "csysPotGroupId");
+            return (Criteria) this;
+        }
+
+        public Criteria andCsysPotGroupIdNotEqualTo(String value) {
+            addCriterion("CSYS_POT_GROUP_ID <>", value, "csysPotGroupId");
+            return (Criteria) this;
+        }
+
+        public Criteria andCsysPotGroupIdGreaterThan(String value) {
+            addCriterion("CSYS_POT_GROUP_ID >", value, "csysPotGroupId");
+            return (Criteria) this;
+        }
+
+        public Criteria andCsysPotGroupIdGreaterThanOrEqualTo(String value) {
+            addCriterion("CSYS_POT_GROUP_ID >=", value, "csysPotGroupId");
+            return (Criteria) this;
+        }
+
+        public Criteria andCsysPotGroupIdLessThan(String value) {
+            addCriterion("CSYS_POT_GROUP_ID <", value, "csysPotGroupId");
+            return (Criteria) this;
+        }
+
+        public Criteria andCsysPotGroupIdLessThanOrEqualTo(String value) {
+            addCriterion("CSYS_POT_GROUP_ID <=", value, "csysPotGroupId");
+            return (Criteria) this;
+        }
+
+        public Criteria andCsysPotGroupIdLike(String value) {
+            addCriterion("CSYS_POT_GROUP_ID like", value, "csysPotGroupId");
+            return (Criteria) this;
+        }
+
+        public Criteria andCsysPotGroupIdNotLike(String value) {
+            addCriterion("CSYS_POT_GROUP_ID not like", value, "csysPotGroupId");
+            return (Criteria) this;
+        }
+
+        public Criteria andCsysPotGroupIdIn(List<String> values) {
+            addCriterion("CSYS_POT_GROUP_ID in", values, "csysPotGroupId");
+            return (Criteria) this;
+        }
+
+        public Criteria andCsysPotGroupIdNotIn(List<String> values) {
+            addCriterion("CSYS_POT_GROUP_ID not in", values, "csysPotGroupId");
+            return (Criteria) this;
+        }
+
+        public Criteria andCsysPotGroupIdBetween(String value1, String value2) {
+            addCriterion("CSYS_POT_GROUP_ID between", value1, value2, "csysPotGroupId");
+            return (Criteria) this;
+        }
+
+        public Criteria andCsysPotGroupIdNotBetween(String value1, String value2) {
+            addCriterion("CSYS_POT_GROUP_ID not between", value1, value2, "csysPotGroupId");
             return (Criteria) this;
         }
     }

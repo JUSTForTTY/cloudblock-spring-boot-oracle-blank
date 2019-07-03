@@ -18,6 +18,70 @@
     <result column="CSYS_POT_STYLE_DATE" jdbcType="TIMESTAMP" property="csysPotStyleDate" />
     <result column="CSYS_POT_STYLE_SHAPE" jdbcType="VARCHAR" property="csysPotStyleShape" />
   </resultMap>
+  <sql id="Example_Where_Clause">
+    <!--
+      WARNING - @mbg.generated
+    -->
+    <where>
+      <foreach collection="oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause">
+    <!--
+      WARNING - @mbg.generated
+    -->
+    <where>
+      <foreach collection="example.oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
   <sql id="Base_Column_List">
     <!--
       WARNING - @mbg.generated
@@ -27,4 +91,107 @@
     CSYS_POT_STYLE_MODIFY_TIME, CSYS_POT_STYLE_IS_DELETE, CSYS_POT_STYLE_TIME, CSYS_POT_STYLE_DATE, 
     CSYS_POT_STYLE_SHAPE
   </sql>
+  <select id="selectByExample" parameterType="com.company.project.model.CsysPotStyleExample" resultMap="BaseResultMap">
+    <!--
+      WARNING - @mbg.generated
+    -->
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from CSYS_POT_STYLE
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+  </select>
+  <delete id="deleteByExample" parameterType="com.company.project.model.CsysPotStyleExample">
+    <!--
+      WARNING - @mbg.generated
+    -->
+    delete from CSYS_POT_STYLE
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <select id="countByExample" parameterType="com.company.project.model.CsysPotStyleExample" resultType="java.lang.Long">
+    <!--
+      WARNING - @mbg.generated
+    -->
+    select count(*) from CSYS_POT_STYLE
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map">
+    <!--
+      WARNING - @mbg.generated
+    -->
+    update CSYS_POT_STYLE
+    <set>
+      <if test="record.csysPotStyleId != null">
+        CSYS_POT_STYLE_ID = #{record.csysPotStyleId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.csysPotStyleName != null">
+        CSYS_POT_STYLE_NAME = #{record.csysPotStyleName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.csysPotStyleColor != null">
+        CSYS_POT_STYLE_COLOR = #{record.csysPotStyleColor,jdbcType=VARCHAR},
+      </if>
+      <if test="record.csysPotStyleDesc != null">
+        CSYS_POT_STYLE_DESC = #{record.csysPotStyleDesc,jdbcType=VARCHAR},
+      </if>
+      <if test="record.csysPotStyleCreateTime != null">
+        CSYS_POT_STYLE_CREATE_TIME = #{record.csysPotStyleCreateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.csysPotStyleCreateUser != null">
+        CSYS_POT_STYLE_CREATE_USER = #{record.csysPotStyleCreateUser,jdbcType=VARCHAR},
+      </if>
+      <if test="record.csysPotStyleModifyUser != null">
+        CSYS_POT_STYLE_MODIFY_USER = #{record.csysPotStyleModifyUser,jdbcType=VARCHAR},
+      </if>
+      <if test="record.csysPotStyleModifyTime != null">
+        CSYS_POT_STYLE_MODIFY_TIME = #{record.csysPotStyleModifyTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.csysPotStyleIsDelete != null">
+        CSYS_POT_STYLE_IS_DELETE = #{record.csysPotStyleIsDelete,jdbcType=CHAR},
+      </if>
+      <if test="record.csysPotStyleTime != null">
+        CSYS_POT_STYLE_TIME = #{record.csysPotStyleTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.csysPotStyleDate != null">
+        CSYS_POT_STYLE_DATE = #{record.csysPotStyleDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.csysPotStyleShape != null">
+        CSYS_POT_STYLE_SHAPE = #{record.csysPotStyleShape,jdbcType=VARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map">
+    <!--
+      WARNING - @mbg.generated
+    -->
+    update CSYS_POT_STYLE
+    set CSYS_POT_STYLE_ID = #{record.csysPotStyleId,jdbcType=VARCHAR},
+      CSYS_POT_STYLE_NAME = #{record.csysPotStyleName,jdbcType=VARCHAR},
+      CSYS_POT_STYLE_COLOR = #{record.csysPotStyleColor,jdbcType=VARCHAR},
+      CSYS_POT_STYLE_DESC = #{record.csysPotStyleDesc,jdbcType=VARCHAR},
+      CSYS_POT_STYLE_CREATE_TIME = #{record.csysPotStyleCreateTime,jdbcType=TIMESTAMP},
+      CSYS_POT_STYLE_CREATE_USER = #{record.csysPotStyleCreateUser,jdbcType=VARCHAR},
+      CSYS_POT_STYLE_MODIFY_USER = #{record.csysPotStyleModifyUser,jdbcType=VARCHAR},
+      CSYS_POT_STYLE_MODIFY_TIME = #{record.csysPotStyleModifyTime,jdbcType=TIMESTAMP},
+      CSYS_POT_STYLE_IS_DELETE = #{record.csysPotStyleIsDelete,jdbcType=CHAR},
+      CSYS_POT_STYLE_TIME = #{record.csysPotStyleTime,jdbcType=TIMESTAMP},
+      CSYS_POT_STYLE_DATE = #{record.csysPotStyleDate,jdbcType=TIMESTAMP},
+      CSYS_POT_STYLE_SHAPE = #{record.csysPotStyleShape,jdbcType=VARCHAR}
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
 </mapper>

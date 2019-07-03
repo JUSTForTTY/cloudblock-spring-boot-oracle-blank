@@ -16,6 +16,70 @@
     <result column="CSYS_POT_GROUP_TIME" jdbcType="TIMESTAMP" property="csysPotGroupTime" />
     <result column="CSYS_POT_GROUP_DATE" jdbcType="TIMESTAMP" property="csysPotGroupDate" />
   </resultMap>
+  <sql id="Example_Where_Clause">
+    <!--
+      WARNING - @mbg.generated
+    -->
+    <where>
+      <foreach collection="oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause">
+    <!--
+      WARNING - @mbg.generated
+    -->
+    <where>
+      <foreach collection="example.oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
   <sql id="Base_Column_List">
     <!--
       WARNING - @mbg.generated
@@ -24,4 +88,99 @@
     CSYS_POT_GROUP_CREATE_USER, CSYS_POT_GROUP_MODIFY_USER, CSYS_POT_GROUP_MODIFY_TIME, 
     CSYS_POT_GROUP_IS_DELETE, CSYS_POT_GROUP_TIME, CSYS_POT_GROUP_DATE
   </sql>
+  <select id="selectByExample" parameterType="com.company.project.model.CsysPotGroupExample" resultMap="BaseResultMap">
+    <!--
+      WARNING - @mbg.generated
+    -->
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from CSYS_POT_GROUP
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+  </select>
+  <delete id="deleteByExample" parameterType="com.company.project.model.CsysPotGroupExample">
+    <!--
+      WARNING - @mbg.generated
+    -->
+    delete from CSYS_POT_GROUP
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <select id="countByExample" parameterType="com.company.project.model.CsysPotGroupExample" resultType="java.lang.Long">
+    <!--
+      WARNING - @mbg.generated
+    -->
+    select count(*) from CSYS_POT_GROUP
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map">
+    <!--
+      WARNING - @mbg.generated
+    -->
+    update CSYS_POT_GROUP
+    <set>
+      <if test="record.csysPotGroupId != null">
+        CSYS_POT_GROUP_ID = #{record.csysPotGroupId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.csysPotGroupName != null">
+        CSYS_POT_GROUP_NAME = #{record.csysPotGroupName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.csysPotGroupDesc != null">
+        CSYS_POT_GROUP_DESC = #{record.csysPotGroupDesc,jdbcType=VARCHAR},
+      </if>
+      <if test="record.csysPotGroupCreateTime != null">
+        CSYS_POT_GROUP_CREATE_TIME = #{record.csysPotGroupCreateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.csysPotGroupCreateUser != null">
+        CSYS_POT_GROUP_CREATE_USER = #{record.csysPotGroupCreateUser,jdbcType=VARCHAR},
+      </if>
+      <if test="record.csysPotGroupModifyUser != null">
+        CSYS_POT_GROUP_MODIFY_USER = #{record.csysPotGroupModifyUser,jdbcType=VARCHAR},
+      </if>
+      <if test="record.csysPotGroupModifyTime != null">
+        CSYS_POT_GROUP_MODIFY_TIME = #{record.csysPotGroupModifyTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.csysPotGroupIsDelete != null">
+        CSYS_POT_GROUP_IS_DELETE = #{record.csysPotGroupIsDelete,jdbcType=CHAR},
+      </if>
+      <if test="record.csysPotGroupTime != null">
+        CSYS_POT_GROUP_TIME = #{record.csysPotGroupTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.csysPotGroupDate != null">
+        CSYS_POT_GROUP_DATE = #{record.csysPotGroupDate,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map">
+    <!--
+      WARNING - @mbg.generated
+    -->
+    update CSYS_POT_GROUP
+    set CSYS_POT_GROUP_ID = #{record.csysPotGroupId,jdbcType=VARCHAR},
+      CSYS_POT_GROUP_NAME = #{record.csysPotGroupName,jdbcType=VARCHAR},
+      CSYS_POT_GROUP_DESC = #{record.csysPotGroupDesc,jdbcType=VARCHAR},
+      CSYS_POT_GROUP_CREATE_TIME = #{record.csysPotGroupCreateTime,jdbcType=TIMESTAMP},
+      CSYS_POT_GROUP_CREATE_USER = #{record.csysPotGroupCreateUser,jdbcType=VARCHAR},
+      CSYS_POT_GROUP_MODIFY_USER = #{record.csysPotGroupModifyUser,jdbcType=VARCHAR},
+      CSYS_POT_GROUP_MODIFY_TIME = #{record.csysPotGroupModifyTime,jdbcType=TIMESTAMP},
+      CSYS_POT_GROUP_IS_DELETE = #{record.csysPotGroupIsDelete,jdbcType=CHAR},
+      CSYS_POT_GROUP_TIME = #{record.csysPotGroupTime,jdbcType=TIMESTAMP},
+      CSYS_POT_GROUP_DATE = #{record.csysPotGroupDate,jdbcType=TIMESTAMP}
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
 </mapper>

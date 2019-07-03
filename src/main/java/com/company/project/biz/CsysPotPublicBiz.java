@@ -34,6 +34,12 @@ public interface CsysPotPublicBiz  {
 	 */
 	public PageInfo getPageDataSettingsByCondition(Integer page,Integer size,CsysUserView csysUserView,CsysPotPublic csysPotPublic);
 	/**
+	 * 根据特殊条件获取数据分页
+	 * @param CsysPotPublic
+	 * @return
+	 */
+	public PageInfo getSearchPageDataSettingsByCondition(Integer page,Integer size,CsysUserView csysUserView,CsysPotPublic csysPotPublic);
+	/**
 	 * 新增数据
 	 * @param CsysPotPublic
 	 * @return
