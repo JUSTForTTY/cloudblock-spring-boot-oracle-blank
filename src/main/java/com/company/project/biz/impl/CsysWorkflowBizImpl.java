@@ -8,8 +8,10 @@ import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
 import tk.mybatis.mapper.entity.Condition;
 import com.company.project.core.utils.DateUtils;
+import com.company.project.dao.CsysWorkflowMapper;
 import com.company.project.model.CsysUserView;
 import com.company.project.model.CsysWorkflow;
+import com.company.project.model.CsysWorkflowExample;
 
 import java.util.List;
 import com.github.pagehelper.PageHelper;
@@ -28,6 +30,8 @@ public class CsysWorkflowBizImpl  implements CsysWorkflowBiz {
     private CsysWorkflowService csysWorkflowService;
 	@Resource
     private CommonService commonService;
+	@Resource
+    private CsysWorkflowMapper csysWorkflowMapper;
     
 	public CsysWorkflow getDataSettings(String id){
 	
@@ -59,8 +63,20 @@ public class CsysWorkflowBizImpl  implements CsysWorkflowBiz {
 	public PageInfo getPageDataSettingsByCondition(Integer page,Integer size,CsysUserView baseUserView,CsysWorkflow csysWorkflow){
 	
 		PageHelper.startPage(page, size);
-		csysWorkflow.setCsysWorkflowIsDelete("0");
-        List<CsysWorkflow> list = csysWorkflowService.select(csysWorkflow);
+//		csysWorkflow.setCsysWorkflowIsDelete("0");
+//       List<CsysWorkflow> list = csysWorkflowService.select(csysWorkflow);      
+        CsysWorkflowExample example=new CsysWorkflowExample();
+		
+		example.setOrderByClause("CSYS_WORKFLOW_MODIFY_TIME DESC");
+		
+		CsysWorkflowExample.Criteria criteria =example.createCriteria();
+	 
+		 
+		criteria.andCsysWorkflowNameLike(csysWorkflow.getCsysWorkflowName());
+		criteria.andCsysWorkflowIsDeleteEqualTo("0");
+		criteria.andCsysWorkflowTypeEqualTo(csysWorkflow.getCsysWorkflowType());
+		List<CsysWorkflow> list = csysWorkflowMapper.selectByExample(example);
+        
         PageInfo pageInfo = new PageInfo(list);
 		
 		return pageInfo;
