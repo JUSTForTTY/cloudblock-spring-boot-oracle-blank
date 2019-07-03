@@ -71,7 +71,6 @@ public class CsysWorkflowBizImpl  implements CsysWorkflowBiz {
 		
 		CsysWorkflowExample.Criteria criteria =example.createCriteria();
 	 
-		 
 		criteria.andCsysWorkflowNameLike(csysWorkflow.getCsysWorkflowName());
 		criteria.andCsysWorkflowIsDeleteEqualTo("0");
 		criteria.andCsysWorkflowTypeEqualTo(csysWorkflow.getCsysWorkflowType());
