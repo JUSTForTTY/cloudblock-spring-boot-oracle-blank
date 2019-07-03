@@ -122,6 +122,31 @@ public class CsysWorkflowBizImpl  implements CsysWorkflowBiz {
 		csysWorkflowService.deleteByIds(newids);
 	
 	}
+	@Override
+	public PageInfo getSearchPageDataSettingsByCondition(Integer page, Integer size, CsysUserView baseUserView,
+			CsysWorkflow csysWorkflow) {
+		
+		PageHelper.startPage(page, size);
+        CsysWorkflowExample example=new CsysWorkflowExample();
+		
+		example.setOrderByClause("CSYS_WORKFLOW_MODIFY_TIME DESC");
+		
+		CsysWorkflowExample.Criteria criteria =example.createCriteria();
+		if(null!=csysWorkflow.getCsysWorkflowName()) {
+			criteria.andCsysWorkflowNameLike("%"+csysWorkflow.getCsysWorkflowName()+"%");
+		}
+		if(null!=csysWorkflow.getCsysWorkflowType()) {
+			criteria.andCsysWorkflowTypeEqualTo(csysWorkflow.getCsysWorkflowType());
+		}
+		criteria.andCsysWorkflowIsDeleteEqualTo("0");
+		 
+		List<CsysWorkflow> list = csysWorkflowMapper.selectByExample(example);
+        
+        PageInfo pageInfo = new PageInfo(list);
+		
+		return pageInfo;
+		 
+	}
 
 	
 }

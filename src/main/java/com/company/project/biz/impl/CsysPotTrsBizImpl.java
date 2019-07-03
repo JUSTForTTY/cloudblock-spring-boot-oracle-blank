@@ -8,7 +8,9 @@ import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
 import tk.mybatis.mapper.entity.Condition;
 import com.company.project.core.utils.DateUtils;
+import com.company.project.dao.CsysPotTrsMapper;
 import com.company.project.model.CsysPotTrs;
+import com.company.project.model.CsysPotTrsExample;
 import com.company.project.model.CsysUserView;
 
 import java.util.List;
@@ -28,6 +30,8 @@ public class CsysPotTrsBizImpl  implements CsysPotTrsBiz {
     private CsysPotTrsService csysPotTrsService;
 	@Resource
     private CommonService commonService;
+	@Resource
+    private CsysPotTrsMapper csysPotTrsMapper;
     
 	public CsysPotTrs getDataSettings(String id){
 	
@@ -106,6 +110,22 @@ public class CsysPotTrsBizImpl  implements CsysPotTrsBiz {
 		
 		csysPotTrsService.deleteByIds(newids);
 	
+	}
+	@Override
+	public List<CsysPotTrs> getInitDataSettingsByCondition(CsysPotTrs csysPotTrs) {
+		
+		CsysPotTrsExample example=new CsysPotTrsExample();
+		
+		 
+		CsysPotTrsExample.Criteria criteria =example.createCriteria();
+	 
+		criteria.andCsysPotCurrentIdIsNull();
+		criteria.andCsysWorkflowIdEqualTo(csysPotTrs.getCsysWorkflowId());
+		criteria.andCsysPotTrsIsDeleteEqualTo("0");
+		 
+		List<CsysPotTrs> list = csysPotTrsMapper.selectByExample(example);
+		
+		return null;
 	}
 
 	

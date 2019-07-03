@@ -34,6 +34,12 @@ public interface CsysWorkflowBiz  {
 	 */
 	public PageInfo getPageDataSettingsByCondition(Integer page,Integer size,CsysUserView baseUserView,CsysWorkflow csysWorkflow);
 	/**
+	 * 根据特殊条件获取数据分页
+	 * @param CsysWorkflow
+	 * @return
+	 */
+	public PageInfo getSearchPageDataSettingsByCondition(Integer page,Integer size,CsysUserView baseUserView,CsysWorkflow csysWorkflow);
+	/**
 	 * 新增数据
 	 * @param CsysWorkflow
 	 * @return

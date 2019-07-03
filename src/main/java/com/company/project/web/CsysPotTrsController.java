@@ -245,6 +245,43 @@ public class CsysPotTrsController {
         }
         
     }
+  	@PostMapping("/initcondition")
+    public Result initdetailByCondition(@RequestHeader(value = "access_token") String access_token,@RequestHeader(value = "refresh_token") String refresh_token,
+    @RequestBody CsysPotTrs csysPotTrs) {
+    
+    	Map<String,String> param = new HashMap<>();
+		 /*---------------------------start 授权验证------------------------*/
+		Map<String, Object> authMap = authUtils.doAuth(access_token,refresh_token);
+		boolean tokenRefreshFlag = (boolean) authMap.get("tokenRefreshFlag");
+		boolean tokenFlag = (boolean) authMap.get("tokenFlag");
+		String token = authMap.get("token").toString();
+		String refreshtoken=authMap.get("refreshtoken").toString();
+
+		if (!tokenFlag) {
+			/*
+			 * return code: 401 access_token无效或已过期
+			 */
+			 return ResultGenerator.genUnauthorizedResult(param);
+
+		}
+		/*---------------------------end 授权验证------------------------*/
+ 		try{
+ 		
+        List<CsysPotTrs> csysPotTrslst = csysPotTrsBiz.getDataSettingsByCondition(csysPotTrs);
+        if(tokenRefreshFlag) {
+        	param.put("access_token", token);
+        	param.put("refresh_token", refreshtoken);
+        	 
+		}
+        return ResultGenerator.genSuccessResult(csysPotTrslst,param);
+        
+         } catch (Exception e) {
+        
+        return ResultGenerator.genServerErrorResult(param);
+        
+        }
+        
+    }
     @GetMapping
     public Result list(@RequestHeader(value = "access_token") String access_token,@RequestHeader(value = "refresh_token") String refresh_token,
     @RequestParam(defaultValue = "0") Integer page, @RequestParam(defaultValue = "0") Integer size) {

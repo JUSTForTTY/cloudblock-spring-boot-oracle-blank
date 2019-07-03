@@ -21,6 +21,12 @@ public interface CsysPotTrsBiz  {
 	 * @return
 	 */
 	 public List<CsysPotTrs> getDataSettingsByCondition(CsysPotTrs csysPotTrs);
+	 /**
+	  * 获取条件数据
+	  * @param CsysPotTrs
+	  * @return
+	  */
+	 public List<CsysPotTrs> getInitDataSettingsByCondition(CsysPotTrs csysPotTrs);
 	/**
 	 * 获取数据分页
 	 * @param CsysPotTrs
