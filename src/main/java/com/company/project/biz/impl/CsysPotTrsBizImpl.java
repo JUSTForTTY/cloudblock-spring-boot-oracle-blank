@@ -120,12 +120,14 @@ public class CsysPotTrsBizImpl  implements CsysPotTrsBiz {
 		CsysPotTrsExample.Criteria criteria =example.createCriteria();
 	 
 		criteria.andCsysPotCurrentIdIsNull();
-		criteria.andCsysWorkflowIdEqualTo(csysPotTrs.getCsysWorkflowId());
+		if(null!=csysPotTrs.getCsysWorkflowId()) {
+			criteria.andCsysWorkflowIdEqualTo(csysPotTrs.getCsysWorkflowId());	
+		}
 		criteria.andCsysPotTrsIsDeleteEqualTo("0");
 		 
 		List<CsysPotTrs> list = csysPotTrsMapper.selectByExample(example);
 		
-		return null;
+		return list;
 	}
 
 	
