@@ -63,18 +63,18 @@ public class CsysWorkflowBizImpl  implements CsysWorkflowBiz {
 	public PageInfo getPageDataSettingsByCondition(Integer page,Integer size,CsysUserView baseUserView,CsysWorkflow csysWorkflow){
 	
 		PageHelper.startPage(page, size);
-//		csysWorkflow.setCsysWorkflowIsDelete("0");
-//       List<CsysWorkflow> list = csysWorkflowService.select(csysWorkflow);      
-        CsysWorkflowExample example=new CsysWorkflowExample();
-		
-		example.setOrderByClause("CSYS_WORKFLOW_MODIFY_TIME DESC");
-		
-		CsysWorkflowExample.Criteria criteria =example.createCriteria();
-	 
-		criteria.andCsysWorkflowNameLike(csysWorkflow.getCsysWorkflowName());
-		criteria.andCsysWorkflowIsDeleteEqualTo("0");
-		criteria.andCsysWorkflowTypeEqualTo(csysWorkflow.getCsysWorkflowType());
-		List<CsysWorkflow> list = csysWorkflowMapper.selectByExample(example);
+		csysWorkflow.setCsysWorkflowIsDelete("0");
+       List<CsysWorkflow> list = csysWorkflowService.select(csysWorkflow);      
+//        CsysWorkflowExample example=new CsysWorkflowExample();
+//		
+//		example.setOrderByClause("CSYS_WORKFLOW_MODIFY_TIME DESC");
+//		
+//		CsysWorkflowExample.Criteria criteria =example.createCriteria();
+//	 
+//		criteria.andCsysWorkflowNameLike(csysWorkflow.getCsysWorkflowName());
+//		criteria.andCsysWorkflowIsDeleteEqualTo("0");
+//		criteria.andCsysWorkflowTypeEqualTo(csysWorkflow.getCsysWorkflowType());
+//		List<CsysWorkflow> list = csysWorkflowMapper.selectByExample(example);
         
         PageInfo pageInfo = new PageInfo(list);
 		
