@@ -1,0 +1,197 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.company.project.dao.CsysTrsRuledlMapper">
+  <resultMap id="BaseResultMap" type="com.company.project.model.CsysTrsRuledl">
+    <!--
+      WARNING - @mbg.generated
+    -->
+    <id column="CSYS_TRS_RULEDL_ID" jdbcType="VARCHAR" property="csysTrsRuledlId" />
+    <result column="CSYS_TRS_RULE_ID" jdbcType="VARCHAR" property="csysTrsRuleId" />
+    <result column="CSYS_TRS_RULESQL_ID" jdbcType="VARCHAR" property="csysTrsRulesqlId" />
+    <result column="CSYS_TRS_RULEDL_CUR_STYLEID" jdbcType="VARCHAR" property="csysTrsRuledlCurStyleid" />
+    <result column="CSYS_TRS_RULEDL_TARGET_STYLEID" jdbcType="VARCHAR" property="csysTrsRuledlTargetStyleid" />
+    <result column="CSYS_TRS_RULEDL_CREATE_TIME" jdbcType="TIMESTAMP" property="csysTrsRuledlCreateTime" />
+    <result column="CSYS_TRS_RULEDL_CREATE_USER" jdbcType="VARCHAR" property="csysTrsRuledlCreateUser" />
+    <result column="CSYS_TRS_RULEDL_MODIFY_TIME" jdbcType="TIMESTAMP" property="csysTrsRuledlModifyTime" />
+    <result column="CSYS_TRS_RULEDL_MODIFY_USER" jdbcType="VARCHAR" property="csysTrsRuledlModifyUser" />
+    <result column="CSYS_TRS_RULEDL_IS_DELETE" jdbcType="CHAR" property="csysTrsRuledlIsDelete" />
+    <result column="CSYS_TRS_RULEDL_TIME" jdbcType="TIMESTAMP" property="csysTrsRuledlTime" />
+    <result column="CSYS_TRS_RULEDL_DATE" jdbcType="TIMESTAMP" property="csysTrsRuledlDate" />
+  </resultMap>
+  <sql id="Example_Where_Clause">
+    <!--
+      WARNING - @mbg.generated
+    -->
+    <where>
+      <foreach collection="oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause">
+    <!--
+      WARNING - @mbg.generated
+    -->
+    <where>
+      <foreach collection="example.oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List">
+    <!--
+      WARNING - @mbg.generated
+    -->
+    CSYS_TRS_RULEDL_ID, CSYS_TRS_RULE_ID, CSYS_TRS_RULESQL_ID, CSYS_TRS_RULEDL_CUR_STYLEID, 
+    CSYS_TRS_RULEDL_TARGET_STYLEID, CSYS_TRS_RULEDL_CREATE_TIME, CSYS_TRS_RULEDL_CREATE_USER, 
+    CSYS_TRS_RULEDL_MODIFY_TIME, CSYS_TRS_RULEDL_MODIFY_USER, CSYS_TRS_RULEDL_IS_DELETE, 
+    CSYS_TRS_RULEDL_TIME, CSYS_TRS_RULEDL_DATE
+  </sql>
+  <select id="selectByExample" parameterType="com.company.project.model.CsysTrsRuledlExample" resultMap="BaseResultMap">
+    <!--
+      WARNING - @mbg.generated
+    -->
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from CSYS_TRS_RULEDL
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+  </select>
+  <delete id="deleteByExample" parameterType="com.company.project.model.CsysTrsRuledlExample">
+    <!--
+      WARNING - @mbg.generated
+    -->
+    delete from CSYS_TRS_RULEDL
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <select id="countByExample" parameterType="com.company.project.model.CsysTrsRuledlExample" resultType="java.lang.Long">
+    <!--
+      WARNING - @mbg.generated
+    -->
+    select count(*) from CSYS_TRS_RULEDL
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map">
+    <!--
+      WARNING - @mbg.generated
+    -->
+    update CSYS_TRS_RULEDL
+    <set>
+      <if test="record.csysTrsRuledlId != null">
+        CSYS_TRS_RULEDL_ID = #{record.csysTrsRuledlId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.csysTrsRuleId != null">
+        CSYS_TRS_RULE_ID = #{record.csysTrsRuleId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.csysTrsRulesqlId != null">
+        CSYS_TRS_RULESQL_ID = #{record.csysTrsRulesqlId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.csysTrsRuledlCurStyleid != null">
+        CSYS_TRS_RULEDL_CUR_STYLEID = #{record.csysTrsRuledlCurStyleid,jdbcType=VARCHAR},
+      </if>
+      <if test="record.csysTrsRuledlTargetStyleid != null">
+        CSYS_TRS_RULEDL_TARGET_STYLEID = #{record.csysTrsRuledlTargetStyleid,jdbcType=VARCHAR},
+      </if>
+      <if test="record.csysTrsRuledlCreateTime != null">
+        CSYS_TRS_RULEDL_CREATE_TIME = #{record.csysTrsRuledlCreateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.csysTrsRuledlCreateUser != null">
+        CSYS_TRS_RULEDL_CREATE_USER = #{record.csysTrsRuledlCreateUser,jdbcType=VARCHAR},
+      </if>
+      <if test="record.csysTrsRuledlModifyTime != null">
+        CSYS_TRS_RULEDL_MODIFY_TIME = #{record.csysTrsRuledlModifyTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.csysTrsRuledlModifyUser != null">
+        CSYS_TRS_RULEDL_MODIFY_USER = #{record.csysTrsRuledlModifyUser,jdbcType=VARCHAR},
+      </if>
+      <if test="record.csysTrsRuledlIsDelete != null">
+        CSYS_TRS_RULEDL_IS_DELETE = #{record.csysTrsRuledlIsDelete,jdbcType=CHAR},
+      </if>
+      <if test="record.csysTrsRuledlTime != null">
+        CSYS_TRS_RULEDL_TIME = #{record.csysTrsRuledlTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.csysTrsRuledlDate != null">
+        CSYS_TRS_RULEDL_DATE = #{record.csysTrsRuledlDate,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map">
+    <!--
+      WARNING - @mbg.generated
+    -->
+    update CSYS_TRS_RULEDL
+    set CSYS_TRS_RULEDL_ID = #{record.csysTrsRuledlId,jdbcType=VARCHAR},
+      CSYS_TRS_RULE_ID = #{record.csysTrsRuleId,jdbcType=VARCHAR},
+      CSYS_TRS_RULESQL_ID = #{record.csysTrsRulesqlId,jdbcType=VARCHAR},
+      CSYS_TRS_RULEDL_CUR_STYLEID = #{record.csysTrsRuledlCurStyleid,jdbcType=VARCHAR},
+      CSYS_TRS_RULEDL_TARGET_STYLEID = #{record.csysTrsRuledlTargetStyleid,jdbcType=VARCHAR},
+      CSYS_TRS_RULEDL_CREATE_TIME = #{record.csysTrsRuledlCreateTime,jdbcType=TIMESTAMP},
+      CSYS_TRS_RULEDL_CREATE_USER = #{record.csysTrsRuledlCreateUser,jdbcType=VARCHAR},
+      CSYS_TRS_RULEDL_MODIFY_TIME = #{record.csysTrsRuledlModifyTime,jdbcType=TIMESTAMP},
+      CSYS_TRS_RULEDL_MODIFY_USER = #{record.csysTrsRuledlModifyUser,jdbcType=VARCHAR},
+      CSYS_TRS_RULEDL_IS_DELETE = #{record.csysTrsRuledlIsDelete,jdbcType=CHAR},
+      CSYS_TRS_RULEDL_TIME = #{record.csysTrsRuledlTime,jdbcType=TIMESTAMP},
+      CSYS_TRS_RULEDL_DATE = #{record.csysTrsRuledlDate,jdbcType=TIMESTAMP}
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+</mapper>

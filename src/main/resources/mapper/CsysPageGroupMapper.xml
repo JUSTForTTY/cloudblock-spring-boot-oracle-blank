@@ -1,0 +1,217 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.company.project.dao.CsysPageGroupMapper">
+  <resultMap id="BaseResultMap" type="com.company.project.model.CsysPageGroup">
+    <!--
+      WARNING - @mbg.generated
+    -->
+    <id column="CSYS_PAGE_GROUP_ID" jdbcType="VARCHAR" property="csysPageGroupId" />
+    <result column="CSYS_PAGE_ID" jdbcType="VARCHAR" property="csysPageId" />
+    <result column="CSYS_PAGE_NAME" jdbcType="VARCHAR" property="csysPageName" />
+    <result column="CSYS_PAGE_GROUP_CODE" jdbcType="VARCHAR" property="csysPageGroupCode" />
+    <result column="CSYS_PAGE_GROUP_DESC" jdbcType="VARCHAR" property="csysPageGroupDesc" />
+    <result column="FLAG_1" jdbcType="VARCHAR" property="flag1" />
+    <result column="FLAG_2" jdbcType="VARCHAR" property="flag2" />
+    <result column="FLAG_3" jdbcType="VARCHAR" property="flag3" />
+    <result column="CSYS_PAGE_GROUP_CREATE_TIME" jdbcType="TIMESTAMP" property="csysPageGroupCreateTime" />
+    <result column="CSYS_PAGE_GROUP_MODIFY_TIME" jdbcType="TIMESTAMP" property="csysPageGroupModifyTime" />
+    <result column="CSYS_PAGE_GROUP_CREATE_USER" jdbcType="VARCHAR" property="csysPageGroupCreateUser" />
+    <result column="CSYS_PAGE_GROUP_MODIFY_USER" jdbcType="VARCHAR" property="csysPageGroupModifyUser" />
+    <result column="CSYS_PAGE_GROUP_IS_DELETE" jdbcType="CHAR" property="csysPageGroupIsDelete" />
+    <result column="CSYS_CODEMASTER_TIME" jdbcType="TIMESTAMP" property="csysCodemasterTime" />
+    <result column="CSYS_CODEMASTER_DATE" jdbcType="TIMESTAMP" property="csysCodemasterDate" />
+    <result column="REMARK" jdbcType="VARCHAR" property="remark" />
+  </resultMap>
+  <sql id="Example_Where_Clause">
+    <!--
+      WARNING - @mbg.generated
+    -->
+    <where>
+      <foreach collection="oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause">
+    <!--
+      WARNING - @mbg.generated
+    -->
+    <where>
+      <foreach collection="example.oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List">
+    <!--
+      WARNING - @mbg.generated
+    -->
+    CSYS_PAGE_GROUP_ID, CSYS_PAGE_ID, CSYS_PAGE_NAME, CSYS_PAGE_GROUP_CODE, CSYS_PAGE_GROUP_DESC, 
+    FLAG_1, FLAG_2, FLAG_3, CSYS_PAGE_GROUP_CREATE_TIME, CSYS_PAGE_GROUP_MODIFY_TIME, 
+    CSYS_PAGE_GROUP_CREATE_USER, CSYS_PAGE_GROUP_MODIFY_USER, CSYS_PAGE_GROUP_IS_DELETE, 
+    CSYS_CODEMASTER_TIME, CSYS_CODEMASTER_DATE, REMARK
+  </sql>
+  <select id="selectByExample" parameterType="com.company.project.model.CsysPageGroupExample" resultMap="BaseResultMap">
+    <!--
+      WARNING - @mbg.generated
+    -->
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from CSYS_PAGE_GROUP
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+  </select>
+  <delete id="deleteByExample" parameterType="com.company.project.model.CsysPageGroupExample">
+    <!--
+      WARNING - @mbg.generated
+    -->
+    delete from CSYS_PAGE_GROUP
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <select id="countByExample" parameterType="com.company.project.model.CsysPageGroupExample" resultType="java.lang.Long">
+    <!--
+      WARNING - @mbg.generated
+    -->
+    select count(*) from CSYS_PAGE_GROUP
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map">
+    <!--
+      WARNING - @mbg.generated
+    -->
+    update CSYS_PAGE_GROUP
+    <set>
+      <if test="record.csysPageGroupId != null">
+        CSYS_PAGE_GROUP_ID = #{record.csysPageGroupId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.csysPageId != null">
+        CSYS_PAGE_ID = #{record.csysPageId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.csysPageName != null">
+        CSYS_PAGE_NAME = #{record.csysPageName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.csysPageGroupCode != null">
+        CSYS_PAGE_GROUP_CODE = #{record.csysPageGroupCode,jdbcType=VARCHAR},
+      </if>
+      <if test="record.csysPageGroupDesc != null">
+        CSYS_PAGE_GROUP_DESC = #{record.csysPageGroupDesc,jdbcType=VARCHAR},
+      </if>
+      <if test="record.flag1 != null">
+        FLAG_1 = #{record.flag1,jdbcType=VARCHAR},
+      </if>
+      <if test="record.flag2 != null">
+        FLAG_2 = #{record.flag2,jdbcType=VARCHAR},
+      </if>
+      <if test="record.flag3 != null">
+        FLAG_3 = #{record.flag3,jdbcType=VARCHAR},
+      </if>
+      <if test="record.csysPageGroupCreateTime != null">
+        CSYS_PAGE_GROUP_CREATE_TIME = #{record.csysPageGroupCreateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.csysPageGroupModifyTime != null">
+        CSYS_PAGE_GROUP_MODIFY_TIME = #{record.csysPageGroupModifyTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.csysPageGroupCreateUser != null">
+        CSYS_PAGE_GROUP_CREATE_USER = #{record.csysPageGroupCreateUser,jdbcType=VARCHAR},
+      </if>
+      <if test="record.csysPageGroupModifyUser != null">
+        CSYS_PAGE_GROUP_MODIFY_USER = #{record.csysPageGroupModifyUser,jdbcType=VARCHAR},
+      </if>
+      <if test="record.csysPageGroupIsDelete != null">
+        CSYS_PAGE_GROUP_IS_DELETE = #{record.csysPageGroupIsDelete,jdbcType=CHAR},
+      </if>
+      <if test="record.csysCodemasterTime != null">
+        CSYS_CODEMASTER_TIME = #{record.csysCodemasterTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.csysCodemasterDate != null">
+        CSYS_CODEMASTER_DATE = #{record.csysCodemasterDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.remark != null">
+        REMARK = #{record.remark,jdbcType=VARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map">
+    <!--
+      WARNING - @mbg.generated
+    -->
+    update CSYS_PAGE_GROUP
+    set CSYS_PAGE_GROUP_ID = #{record.csysPageGroupId,jdbcType=VARCHAR},
+      CSYS_PAGE_ID = #{record.csysPageId,jdbcType=VARCHAR},
+      CSYS_PAGE_NAME = #{record.csysPageName,jdbcType=VARCHAR},
+      CSYS_PAGE_GROUP_CODE = #{record.csysPageGroupCode,jdbcType=VARCHAR},
+      CSYS_PAGE_GROUP_DESC = #{record.csysPageGroupDesc,jdbcType=VARCHAR},
+      FLAG_1 = #{record.flag1,jdbcType=VARCHAR},
+      FLAG_2 = #{record.flag2,jdbcType=VARCHAR},
+      FLAG_3 = #{record.flag3,jdbcType=VARCHAR},
+      CSYS_PAGE_GROUP_CREATE_TIME = #{record.csysPageGroupCreateTime,jdbcType=TIMESTAMP},
+      CSYS_PAGE_GROUP_MODIFY_TIME = #{record.csysPageGroupModifyTime,jdbcType=TIMESTAMP},
+      CSYS_PAGE_GROUP_CREATE_USER = #{record.csysPageGroupCreateUser,jdbcType=VARCHAR},
+      CSYS_PAGE_GROUP_MODIFY_USER = #{record.csysPageGroupModifyUser,jdbcType=VARCHAR},
+      CSYS_PAGE_GROUP_IS_DELETE = #{record.csysPageGroupIsDelete,jdbcType=CHAR},
+      CSYS_CODEMASTER_TIME = #{record.csysCodemasterTime,jdbcType=TIMESTAMP},
+      CSYS_CODEMASTER_DATE = #{record.csysCodemasterDate,jdbcType=TIMESTAMP},
+      REMARK = #{record.remark,jdbcType=VARCHAR}
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+</mapper>
