@@ -904,6 +904,76 @@ public class CsysTrsRulesqlExample {
             addCriterion("CSYS_TRS_RULESQL_DATE not between", value1, value2, "csysTrsRulesqlDate");
             return (Criteria) this;
         }
+
+        public Criteria andCsysTrsRulesqlDecIsNull() {
+            addCriterion("CSYS_TRS_RULESQL_DEC is null");
+            return (Criteria) this;
+        }
+
+        public Criteria andCsysTrsRulesqlDecIsNotNull() {
+            addCriterion("CSYS_TRS_RULESQL_DEC is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andCsysTrsRulesqlDecEqualTo(String value) {
+            addCriterion("CSYS_TRS_RULESQL_DEC =", value, "csysTrsRulesqlDec");
+            return (Criteria) this;
+        }
+
+        public Criteria andCsysTrsRulesqlDecNotEqualTo(String value) {
+            addCriterion("CSYS_TRS_RULESQL_DEC <>", value, "csysTrsRulesqlDec");
+            return (Criteria) this;
+        }
+
+        public Criteria andCsysTrsRulesqlDecGreaterThan(String value) {
+            addCriterion("CSYS_TRS_RULESQL_DEC >", value, "csysTrsRulesqlDec");
+            return (Criteria) this;
+        }
+
+        public Criteria andCsysTrsRulesqlDecGreaterThanOrEqualTo(String value) {
+            addCriterion("CSYS_TRS_RULESQL_DEC >=", value, "csysTrsRulesqlDec");
+            return (Criteria) this;
+        }
+
+        public Criteria andCsysTrsRulesqlDecLessThan(String value) {
+            addCriterion("CSYS_TRS_RULESQL_DEC <", value, "csysTrsRulesqlDec");
+            return (Criteria) this;
+        }
+
+        public Criteria andCsysTrsRulesqlDecLessThanOrEqualTo(String value) {
+            addCriterion("CSYS_TRS_RULESQL_DEC <=", value, "csysTrsRulesqlDec");
+            return (Criteria) this;
+        }
+
+        public Criteria andCsysTrsRulesqlDecLike(String value) {
+            addCriterion("CSYS_TRS_RULESQL_DEC like", value, "csysTrsRulesqlDec");
+            return (Criteria) this;
+        }
+
+        public Criteria andCsysTrsRulesqlDecNotLike(String value) {
+            addCriterion("CSYS_TRS_RULESQL_DEC not like", value, "csysTrsRulesqlDec");
+            return (Criteria) this;
+        }
+
+        public Criteria andCsysTrsRulesqlDecIn(List<String> values) {
+            addCriterion("CSYS_TRS_RULESQL_DEC in", values, "csysTrsRulesqlDec");
+            return (Criteria) this;
+        }
+
+        public Criteria andCsysTrsRulesqlDecNotIn(List<String> values) {
+            addCriterion("CSYS_TRS_RULESQL_DEC not in", values, "csysTrsRulesqlDec");
+            return (Criteria) this;
+        }
+
+        public Criteria andCsysTrsRulesqlDecBetween(String value1, String value2) {
+            addCriterion("CSYS_TRS_RULESQL_DEC between", value1, value2, "csysTrsRulesqlDec");
+            return (Criteria) this;
+        }
+
+        public Criteria andCsysTrsRulesqlDecNotBetween(String value1, String value2) {
+            addCriterion("CSYS_TRS_RULESQL_DEC not between", value1, value2, "csysTrsRulesqlDec");
+            return (Criteria) this;
+        }
     }
 
     public static class Criteria extends GeneratedCriteria {

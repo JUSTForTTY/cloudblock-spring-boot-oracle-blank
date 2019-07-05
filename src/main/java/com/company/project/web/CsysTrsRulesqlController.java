@@ -18,7 +18,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 /**
-* Created by tty on 2019/07/04.
+* Created by tty on 2019/07/05.
 */
 @RestController
 @RequestMapping("/csystrsrulesql")

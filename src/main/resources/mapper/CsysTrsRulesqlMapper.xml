@@ -17,6 +17,7 @@
     <result column="CSYS_TRS_RULESQL_IS_DELETE" jdbcType="CHAR" property="csysTrsRulesqlIsDelete" />
     <result column="CSYS_TRS_RULESQL_TIME" jdbcType="TIMESTAMP" property="csysTrsRulesqlTime" />
     <result column="CSYS_TRS_RULESQL_DATE" jdbcType="TIMESTAMP" property="csysTrsRulesqlDate" />
+    <result column="CSYS_TRS_RULESQL_DEC" jdbcType="VARCHAR" property="csysTrsRulesqlDec" />
   </resultMap>
   <sql id="Example_Where_Clause">
     <!--
@@ -89,7 +90,7 @@
     CSYS_TRS_RULESQL_ID, CSYS_TRS_RULESQL_RAW_DATA, CSYS_TRS_RULESQL_METHOD, CSYS_TRS_RULESQL_CONTRAST_DATA, 
     CSYS_TRS_RULESQL_INFO, CSYS_TRS_RULESQL_CREATE_TIME, CSYS_TRS_RULESQL_CREATE_USER, 
     CSYS_TRS_RULESQL_MODIFY_TIME, CSYS_TRS_RULESQL_MODIFY_USER, CSYS_TRS_RULESQL_IS_DELETE, 
-    CSYS_TRS_RULESQL_TIME, CSYS_TRS_RULESQL_DATE
+    CSYS_TRS_RULESQL_TIME, CSYS_TRS_RULESQL_DATE, CSYS_TRS_RULESQL_DEC
   </sql>
   <select id="selectByExample" parameterType="com.company.project.model.CsysTrsRulesqlExample" resultMap="BaseResultMap">
     <!--
@@ -168,6 +169,9 @@
       <if test="record.csysTrsRulesqlDate != null">
         CSYS_TRS_RULESQL_DATE = #{record.csysTrsRulesqlDate,jdbcType=TIMESTAMP},
       </if>
+      <if test="record.csysTrsRulesqlDec != null">
+        CSYS_TRS_RULESQL_DEC = #{record.csysTrsRulesqlDec,jdbcType=VARCHAR},
+      </if>
     </set>
     <if test="_parameter != null">
       <include refid="Update_By_Example_Where_Clause" />
@@ -189,7 +193,8 @@
       CSYS_TRS_RULESQL_MODIFY_USER = #{record.csysTrsRulesqlModifyUser,jdbcType=VARCHAR},
       CSYS_TRS_RULESQL_IS_DELETE = #{record.csysTrsRulesqlIsDelete,jdbcType=CHAR},
       CSYS_TRS_RULESQL_TIME = #{record.csysTrsRulesqlTime,jdbcType=TIMESTAMP},
-      CSYS_TRS_RULESQL_DATE = #{record.csysTrsRulesqlDate,jdbcType=TIMESTAMP}
+      CSYS_TRS_RULESQL_DATE = #{record.csysTrsRulesqlDate,jdbcType=TIMESTAMP},
+      CSYS_TRS_RULESQL_DEC = #{record.csysTrsRulesqlDec,jdbcType=VARCHAR}
     <if test="_parameter != null">
       <include refid="Update_By_Example_Where_Clause" />
     </if>

@@ -42,6 +42,9 @@ public class CsysTrsRulesql {
     @Column(name = "CSYS_TRS_RULESQL_DATE")
     private Date csysTrsRulesqlDate;
 
+    @Column(name = "CSYS_TRS_RULESQL_DEC")
+    private String csysTrsRulesqlDec;
+
     /**
      * @return CSYS_TRS_RULESQL_ID
      */
@@ -208,5 +211,19 @@ public class CsysTrsRulesql {
      */
     public void setCsysTrsRulesqlDate(Date csysTrsRulesqlDate) {
         this.csysTrsRulesqlDate = csysTrsRulesqlDate;
+    }
+
+    /**
+     * @return CSYS_TRS_RULESQL_DEC
+     */
+    public String getCsysTrsRulesqlDec() {
+        return csysTrsRulesqlDec;
+    }
+
+    /**
+     * @param csysTrsRulesqlDec
+     */
+    public void setCsysTrsRulesqlDec(String csysTrsRulesqlDec) {
+        this.csysTrsRulesqlDec = csysTrsRulesqlDec;
     }
 }

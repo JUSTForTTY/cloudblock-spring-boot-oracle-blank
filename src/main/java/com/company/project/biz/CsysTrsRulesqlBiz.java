@@ -5,7 +5,7 @@ import com.github.pagehelper.PageInfo;
 import java.util.List;
 
 /**
- * Created by tty on 2019/07/04.
+ * Created by tty on 2019/07/05.
  */
 public interface CsysTrsRulesqlBiz  {
 
