@@ -51,6 +51,18 @@ public class CsysPotTrsCon {
     @Column(name = "CSYS_POT_TRS_CON_IS_DELETE")
     private String csysPotTrsConIsDelete;
 
+    @Column(name = "CSYS_POT_TRS_CON_TYPE")
+    private String csysPotTrsConType;
+
+    @Column(name = "CSYS_TRS_RULE_ID")
+    private String csysTrsRuleId;
+
+    @Column(name = "CSYS_TRS_RULEDL_ID")
+    private String csysTrsRuledlId;
+
+    @Column(name = "CSYS_TRS_RULESQL_ID")
+    private String csysTrsRulesqlId;
+
     /**
      * @return CSYS_POT_TRS_CON_ID
      */
@@ -259,5 +271,61 @@ public class CsysPotTrsCon {
      */
     public void setCsysPotTrsConIsDelete(String csysPotTrsConIsDelete) {
         this.csysPotTrsConIsDelete = csysPotTrsConIsDelete;
+    }
+
+    /**
+     * @return CSYS_POT_TRS_CON_TYPE
+     */
+    public String getCsysPotTrsConType() {
+        return csysPotTrsConType;
+    }
+
+    /**
+     * @param csysPotTrsConType
+     */
+    public void setCsysPotTrsConType(String csysPotTrsConType) {
+        this.csysPotTrsConType = csysPotTrsConType;
+    }
+
+    /**
+     * @return CSYS_TRS_RULE_ID
+     */
+    public String getCsysTrsRuleId() {
+        return csysTrsRuleId;
+    }
+
+    /**
+     * @param csysTrsRuleId
+     */
+    public void setCsysTrsRuleId(String csysTrsRuleId) {
+        this.csysTrsRuleId = csysTrsRuleId;
+    }
+
+    /**
+     * @return CSYS_TRS_RULEDL_ID
+     */
+    public String getCsysTrsRuledlId() {
+        return csysTrsRuledlId;
+    }
+
+    /**
+     * @param csysTrsRuledlId
+     */
+    public void setCsysTrsRuledlId(String csysTrsRuledlId) {
+        this.csysTrsRuledlId = csysTrsRuledlId;
+    }
+
+    /**
+     * @return CSYS_TRS_RULESQL_ID
+     */
+    public String getCsysTrsRulesqlId() {
+        return csysTrsRulesqlId;
+    }
+
+    /**
+     * @param csysTrsRulesqlId
+     */
+    public void setCsysTrsRulesqlId(String csysTrsRulesqlId) {
+        this.csysTrsRulesqlId = csysTrsRulesqlId;
     }
 }

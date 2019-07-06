@@ -20,71 +20,11 @@
     <result column="CSYS_POT_TRS_CON_MODIFY_TIME" jdbcType="TIMESTAMP" property="csysPotTrsConModifyTime" />
     <result column="CSYS_POT_TRS_CON_MODIFY_USER" jdbcType="VARCHAR" property="csysPotTrsConModifyUser" />
     <result column="CSYS_POT_TRS_CON_IS_DELETE" jdbcType="CHAR" property="csysPotTrsConIsDelete" />
+    <result column="CSYS_POT_TRS_CON_TYPE" jdbcType="VARCHAR" property="csysPotTrsConType" />
+    <result column="CSYS_TRS_RULE_ID" jdbcType="VARCHAR" property="csysTrsRuleId" />
+    <result column="CSYS_TRS_RULEDL_ID" jdbcType="VARCHAR" property="csysTrsRuledlId" />
+    <result column="CSYS_TRS_RULESQL_ID" jdbcType="VARCHAR" property="csysTrsRulesqlId" />
   </resultMap>
-  <sql id="Example_Where_Clause">
-    <!--
-      WARNING - @mbg.generated
-    -->
-    <where>
-      <foreach collection="oredCriteria" item="criteria" separator="or">
-        <if test="criteria.valid">
-          <trim prefix="(" prefixOverrides="and" suffix=")">
-            <foreach collection="criteria.criteria" item="criterion">
-              <choose>
-                <when test="criterion.noValue">
-                  and ${criterion.condition}
-                </when>
-                <when test="criterion.singleValue">
-                  and ${criterion.condition} #{criterion.value}
-                </when>
-                <when test="criterion.betweenValue">
-                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
-                </when>
-                <when test="criterion.listValue">
-                  and ${criterion.condition}
-                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
-                    #{listItem}
-                  </foreach>
-                </when>
-              </choose>
-            </foreach>
-          </trim>
-        </if>
-      </foreach>
-    </where>
-  </sql>
-  <sql id="Update_By_Example_Where_Clause">
-    <!--
-      WARNING - @mbg.generated
-    -->
-    <where>
-      <foreach collection="example.oredCriteria" item="criteria" separator="or">
-        <if test="criteria.valid">
-          <trim prefix="(" prefixOverrides="and" suffix=")">
-            <foreach collection="criteria.criteria" item="criterion">
-              <choose>
-                <when test="criterion.noValue">
-                  and ${criterion.condition}
-                </when>
-                <when test="criterion.singleValue">
-                  and ${criterion.condition} #{criterion.value}
-                </when>
-                <when test="criterion.betweenValue">
-                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
-                </when>
-                <when test="criterion.listValue">
-                  and ${criterion.condition}
-                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
-                    #{listItem}
-                  </foreach>
-                </when>
-              </choose>
-            </foreach>
-          </trim>
-        </if>
-      </foreach>
-    </where>
-  </sql>
   <sql id="Base_Column_List">
     <!--
       WARNING - @mbg.generated
@@ -92,121 +32,7 @@
     CSYS_POT_TRS_CON_ID, CSYS_WORKFLOW_ID, CSYS_POT_TRS_ID, CSYS_POT_TRS_CON_RAW_DATA, 
     CSYS_POT_TRS_CON_METHOD, CSYS_POT_TRS_CON_CONTRAST_DATA, CSYS_POT_TRS_CON_INFO, CSYS_POT_TRS_CON_DESC, 
     CSYS_POT_TRS_CON_TIME, CSYS_POT_TRS_CON_DATE, CSYS_POT_TRS_CON_CREATE_TIME, CSYS_POT_TRS_CON_CREATE_USER, 
-    CSYS_POT_TRS_CON_MODIFY_TIME, CSYS_POT_TRS_CON_MODIFY_USER, CSYS_POT_TRS_CON_IS_DELETE
+    CSYS_POT_TRS_CON_MODIFY_TIME, CSYS_POT_TRS_CON_MODIFY_USER, CSYS_POT_TRS_CON_IS_DELETE, 
+    CSYS_POT_TRS_CON_TYPE, CSYS_TRS_RULE_ID, CSYS_TRS_RULEDL_ID, CSYS_TRS_RULESQL_ID
   </sql>
-  <select id="selectByExample" parameterType="com.company.project.model.CsysPotTrsConExample" resultMap="BaseResultMap">
-    <!--
-      WARNING - @mbg.generated
-    -->
-    select
-    <if test="distinct">
-      distinct
-    </if>
-    <include refid="Base_Column_List" />
-    from CSYS_POT_TRS_CON
-    <if test="_parameter != null">
-      <include refid="Example_Where_Clause" />
-    </if>
-    <if test="orderByClause != null">
-      order by ${orderByClause}
-    </if>
-  </select>
-  <delete id="deleteByExample" parameterType="com.company.project.model.CsysPotTrsConExample">
-    <!--
-      WARNING - @mbg.generated
-    -->
-    delete from CSYS_POT_TRS_CON
-    <if test="_parameter != null">
-      <include refid="Example_Where_Clause" />
-    </if>
-  </delete>
-  <select id="countByExample" parameterType="com.company.project.model.CsysPotTrsConExample" resultType="java.lang.Long">
-    <!--
-      WARNING - @mbg.generated
-    -->
-    select count(*) from CSYS_POT_TRS_CON
-    <if test="_parameter != null">
-      <include refid="Example_Where_Clause" />
-    </if>
-  </select>
-  <update id="updateByExampleSelective" parameterType="map">
-    <!--
-      WARNING - @mbg.generated
-    -->
-    update CSYS_POT_TRS_CON
-    <set>
-      <if test="record.csysPotTrsConId != null">
-        CSYS_POT_TRS_CON_ID = #{record.csysPotTrsConId,jdbcType=VARCHAR},
-      </if>
-      <if test="record.csysWorkflowId != null">
-        CSYS_WORKFLOW_ID = #{record.csysWorkflowId,jdbcType=VARCHAR},
-      </if>
-      <if test="record.csysPotTrsId != null">
-        CSYS_POT_TRS_ID = #{record.csysPotTrsId,jdbcType=VARCHAR},
-      </if>
-      <if test="record.csysPotTrsConRawData != null">
-        CSYS_POT_TRS_CON_RAW_DATA = #{record.csysPotTrsConRawData,jdbcType=VARCHAR},
-      </if>
-      <if test="record.csysPotTrsConMethod != null">
-        CSYS_POT_TRS_CON_METHOD = #{record.csysPotTrsConMethod,jdbcType=VARCHAR},
-      </if>
-      <if test="record.csysPotTrsConContrastData != null">
-        CSYS_POT_TRS_CON_CONTRAST_DATA = #{record.csysPotTrsConContrastData,jdbcType=VARCHAR},
-      </if>
-      <if test="record.csysPotTrsConInfo != null">
-        CSYS_POT_TRS_CON_INFO = #{record.csysPotTrsConInfo,jdbcType=VARCHAR},
-      </if>
-      <if test="record.csysPotTrsConDesc != null">
-        CSYS_POT_TRS_CON_DESC = #{record.csysPotTrsConDesc,jdbcType=VARCHAR},
-      </if>
-      <if test="record.csysPotTrsConTime != null">
-        CSYS_POT_TRS_CON_TIME = #{record.csysPotTrsConTime,jdbcType=TIMESTAMP},
-      </if>
-      <if test="record.csysPotTrsConDate != null">
-        CSYS_POT_TRS_CON_DATE = #{record.csysPotTrsConDate,jdbcType=TIMESTAMP},
-      </if>
-      <if test="record.csysPotTrsConCreateTime != null">
-        CSYS_POT_TRS_CON_CREATE_TIME = #{record.csysPotTrsConCreateTime,jdbcType=TIMESTAMP},
-      </if>
-      <if test="record.csysPotTrsConCreateUser != null">
-        CSYS_POT_TRS_CON_CREATE_USER = #{record.csysPotTrsConCreateUser,jdbcType=VARCHAR},
-      </if>
-      <if test="record.csysPotTrsConModifyTime != null">
-        CSYS_POT_TRS_CON_MODIFY_TIME = #{record.csysPotTrsConModifyTime,jdbcType=TIMESTAMP},
-      </if>
-      <if test="record.csysPotTrsConModifyUser != null">
-        CSYS_POT_TRS_CON_MODIFY_USER = #{record.csysPotTrsConModifyUser,jdbcType=VARCHAR},
-      </if>
-      <if test="record.csysPotTrsConIsDelete != null">
-        CSYS_POT_TRS_CON_IS_DELETE = #{record.csysPotTrsConIsDelete,jdbcType=CHAR},
-      </if>
-    </set>
-    <if test="_parameter != null">
-      <include refid="Update_By_Example_Where_Clause" />
-    </if>
-  </update>
-  <update id="updateByExample" parameterType="map">
-    <!--
-      WARNING - @mbg.generated
-    -->
-    update CSYS_POT_TRS_CON
-    set CSYS_POT_TRS_CON_ID = #{record.csysPotTrsConId,jdbcType=VARCHAR},
-      CSYS_WORKFLOW_ID = #{record.csysWorkflowId,jdbcType=VARCHAR},
-      CSYS_POT_TRS_ID = #{record.csysPotTrsId,jdbcType=VARCHAR},
-      CSYS_POT_TRS_CON_RAW_DATA = #{record.csysPotTrsConRawData,jdbcType=VARCHAR},
-      CSYS_POT_TRS_CON_METHOD = #{record.csysPotTrsConMethod,jdbcType=VARCHAR},
-      CSYS_POT_TRS_CON_CONTRAST_DATA = #{record.csysPotTrsConContrastData,jdbcType=VARCHAR},
-      CSYS_POT_TRS_CON_INFO = #{record.csysPotTrsConInfo,jdbcType=VARCHAR},
-      CSYS_POT_TRS_CON_DESC = #{record.csysPotTrsConDesc,jdbcType=VARCHAR},
-      CSYS_POT_TRS_CON_TIME = #{record.csysPotTrsConTime,jdbcType=TIMESTAMP},
-      CSYS_POT_TRS_CON_DATE = #{record.csysPotTrsConDate,jdbcType=TIMESTAMP},
-      CSYS_POT_TRS_CON_CREATE_TIME = #{record.csysPotTrsConCreateTime,jdbcType=TIMESTAMP},
-      CSYS_POT_TRS_CON_CREATE_USER = #{record.csysPotTrsConCreateUser,jdbcType=VARCHAR},
-      CSYS_POT_TRS_CON_MODIFY_TIME = #{record.csysPotTrsConModifyTime,jdbcType=TIMESTAMP},
-      CSYS_POT_TRS_CON_MODIFY_USER = #{record.csysPotTrsConModifyUser,jdbcType=VARCHAR},
-      CSYS_POT_TRS_CON_IS_DELETE = #{record.csysPotTrsConIsDelete,jdbcType=CHAR}
-    <if test="_parameter != null">
-      <include refid="Update_By_Example_Where_Clause" />
-    </if>
-  </update>
 </mapper>
