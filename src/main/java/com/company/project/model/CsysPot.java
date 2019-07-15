@@ -59,9 +59,18 @@ public class CsysPot {
 
     @Column(name = "CSYS_POT_STYLE_ID")
     private String csysPotStyleId;
-    
+
     @Column(name = "CSYS_TRS_RULE_ID")
     private String csysTrsRuleId;
+
+    @Column(name = "CSYS_POT_IS_EXCRETE")
+    private String csysPotIsExcrete;
+
+    @Column(name = "CSYS_POT_IS_FIRST_PIECE")
+    private String csysPotIsFirstPiece;
+
+    @Column(name = "CSYS_POT_SORT")
+    private Short csysPotSort;
 
     /**
      * @return CSYS_POT_ID
@@ -315,12 +324,59 @@ public class CsysPot {
         this.csysPotStyleId = csysPotStyleId;
     }
 
-	public String getCsysTrsRuleId() {
-		return csysTrsRuleId;
-	}
+    /**
+     * @return CSYS_TRS_RULE_ID
+     */
+    public String getCsysTrsRuleId() {
+        return csysTrsRuleId;
+    }
 
-	public void setCsysTrsRuleId(String csysTrsRuleId) {
-		this.csysTrsRuleId = csysTrsRuleId;
-	}
-    
+    /**
+     * @param csysTrsRuleId
+     */
+    public void setCsysTrsRuleId(String csysTrsRuleId) {
+        this.csysTrsRuleId = csysTrsRuleId;
+    }
+
+    /**
+     * @return CSYS_POT_IS_EXCRETE
+     */
+    public String getCsysPotIsExcrete() {
+        return csysPotIsExcrete;
+    }
+
+    /**
+     * @param csysPotIsExcrete
+     */
+    public void setCsysPotIsExcrete(String csysPotIsExcrete) {
+        this.csysPotIsExcrete = csysPotIsExcrete;
+    }
+
+    /**
+     * @return CSYS_POT_IS_FIRST_PIECE
+     */
+    public String getCsysPotIsFirstPiece() {
+        return csysPotIsFirstPiece;
+    }
+
+    /**
+     * @param csysPotIsFirstPiece
+     */
+    public void setCsysPotIsFirstPiece(String csysPotIsFirstPiece) {
+        this.csysPotIsFirstPiece = csysPotIsFirstPiece;
+    }
+
+    /**
+     * @return CSYS_POT_SORT
+     */
+    public Short getCsysPotSort() {
+        return csysPotSort;
+    }
+
+    /**
+     * @param csysPotSort
+     */
+    public void setCsysPotSort(Short csysPotSort) {
+        this.csysPotSort = csysPotSort;
+    }
 }

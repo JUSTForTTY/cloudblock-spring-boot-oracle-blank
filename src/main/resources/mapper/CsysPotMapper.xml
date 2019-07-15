@@ -21,6 +21,12 @@
     <result column="CSYS_POT_IS_DELETE" jdbcType="CHAR" property="csysPotIsDelete" />
     <result column="CSYS_POT_TIME" jdbcType="TIMESTAMP" property="csysPotTime" />
     <result column="CSYS_POT_DATE" jdbcType="TIMESTAMP" property="csysPotDate" />
+    <result column="CSYS_POT_GROUP_ID" jdbcType="VARCHAR" property="csysPotGroupId" />
+    <result column="CSYS_POT_STYLE_ID" jdbcType="VARCHAR" property="csysPotStyleId" />
+    <result column="CSYS_TRS_RULE_ID" jdbcType="VARCHAR" property="csysTrsRuleId" />
+    <result column="CSYS_POT_IS_EXCRETE" jdbcType="CHAR" property="csysPotIsExcrete" />
+    <result column="CSYS_POT_IS_FIRST_PIECE" jdbcType="CHAR" property="csysPotIsFirstPiece" />
+    <result column="CSYS_POT_SORT" jdbcType="DECIMAL" property="csysPotSort" />
   </resultMap>
   <sql id="Example_Where_Clause">
     <!--
@@ -93,7 +99,8 @@
     CSYS_POT_ID, CSYS_POT_PUBLIC_ID, CSYS_POT_NAME, CSYS_WORKFLOW_ID, CSYS_WORKFLOW_NAME, 
     CSYS_POT_TABLE, CSYS_POT_TYPE, CSYS_POT_ATRRIBUTE, CSYS_POT_DESC, CSYS_POT_CREATE_TIME, 
     CSYS_POT_CREATE_USER, CSYS_POT_MODIFY_TIME, CSYS_POT_MODIFY_USER, CSYS_POT_IS_DELETE, 
-    CSYS_POT_TIME, CSYS_POT_DATE
+    CSYS_POT_TIME, CSYS_POT_DATE, CSYS_POT_GROUP_ID, CSYS_POT_STYLE_ID, CSYS_TRS_RULE_ID, 
+    CSYS_POT_IS_EXCRETE, CSYS_POT_IS_FIRST_PIECE, CSYS_POT_SORT
   </sql>
   <select id="selectByExample" parameterType="com.company.project.model.CsysPotExample" resultMap="BaseResultMap">
     <!--
@@ -184,6 +191,24 @@
       <if test="record.csysPotDate != null">
         CSYS_POT_DATE = #{record.csysPotDate,jdbcType=TIMESTAMP},
       </if>
+      <if test="record.csysPotGroupId != null">
+        CSYS_POT_GROUP_ID = #{record.csysPotGroupId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.csysPotStyleId != null">
+        CSYS_POT_STYLE_ID = #{record.csysPotStyleId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.csysTrsRuleId != null">
+        CSYS_TRS_RULE_ID = #{record.csysTrsRuleId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.csysPotIsExcrete != null">
+        CSYS_POT_IS_EXCRETE = #{record.csysPotIsExcrete,jdbcType=CHAR},
+      </if>
+      <if test="record.csysPotIsFirstPiece != null">
+        CSYS_POT_IS_FIRST_PIECE = #{record.csysPotIsFirstPiece,jdbcType=CHAR},
+      </if>
+      <if test="record.csysPotSort != null">
+        CSYS_POT_SORT = #{record.csysPotSort,jdbcType=DECIMAL},
+      </if>
     </set>
     <if test="_parameter != null">
       <include refid="Update_By_Example_Where_Clause" />
@@ -209,7 +234,13 @@
       CSYS_POT_MODIFY_USER = #{record.csysPotModifyUser,jdbcType=VARCHAR},
       CSYS_POT_IS_DELETE = #{record.csysPotIsDelete,jdbcType=CHAR},
       CSYS_POT_TIME = #{record.csysPotTime,jdbcType=TIMESTAMP},
-      CSYS_POT_DATE = #{record.csysPotDate,jdbcType=TIMESTAMP}
+      CSYS_POT_DATE = #{record.csysPotDate,jdbcType=TIMESTAMP},
+      CSYS_POT_GROUP_ID = #{record.csysPotGroupId,jdbcType=VARCHAR},
+      CSYS_POT_STYLE_ID = #{record.csysPotStyleId,jdbcType=VARCHAR},
+      CSYS_TRS_RULE_ID = #{record.csysTrsRuleId,jdbcType=VARCHAR},
+      CSYS_POT_IS_EXCRETE = #{record.csysPotIsExcrete,jdbcType=CHAR},
+      CSYS_POT_IS_FIRST_PIECE = #{record.csysPotIsFirstPiece,jdbcType=CHAR},
+      CSYS_POT_SORT = #{record.csysPotSort,jdbcType=DECIMAL}
     <if test="_parameter != null">
       <include refid="Update_By_Example_Where_Clause" />
     </if>
