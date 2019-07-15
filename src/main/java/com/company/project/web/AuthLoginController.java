@@ -58,14 +58,17 @@ public class AuthLoginController {
 		 
 		List<CsysUserView> baseUserList = CsysUserViewBiz.login(baseUserView);
 
-		logger.info("长度"+baseUserList.size());
+		/*判断账户类型，如果账户为私人账号，替换token，如果账户为公用账户，不替换token*/
 		if (baseUserList.size() > 0) {
 			CsysUserView currentBaseUserView = baseUserList.get(0);
 
+			
 			logger.info("获取token中......");
 
 			String token, refresh_token;
 			try {
+				
+			if("0".equals(currentBaseUserView.getCsysUserHp())) {
 				token = JWTUtil.createJWT(currentBaseUserView.getCsysUserId(),
 						currentBaseUserView.getCsysUserUsername(), 1000 * 60 * 2);
 
@@ -90,6 +93,16 @@ public class AuthLoginController {
 				 */
 				 
 				return ResultGenerator.genSuccessResult(userdata,param);
+			}else {
+				
+				/*
+				 * return code: 0 请求成功
+				 */
+					 
+				return ResultGenerator.genSuccessResult(currentBaseUserView,param);
+					
+				}
+				 
 
 			} catch (Exception e) {
 

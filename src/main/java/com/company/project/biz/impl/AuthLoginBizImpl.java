@@ -48,6 +48,8 @@ public class AuthLoginBizImpl  implements AuthLoginBiz {
 	
 	}
 	public List<CsysUserView> login(CsysUserView CsysUserView){
+		//用户名转大写
+		CsysUserView.setCsysUserUsername(CsysUserView.getCsysUserUsername().toUpperCase());
 		if(null!=CsysUserView.getCsysUserPassword()&&!"".equals(CsysUserView.getCsysUserPassword())) {
 			CsysUserView.setCsysUserPassword(Md5Encrypt.md5(CsysUserView.getCsysUserPassword()));	
 		}
