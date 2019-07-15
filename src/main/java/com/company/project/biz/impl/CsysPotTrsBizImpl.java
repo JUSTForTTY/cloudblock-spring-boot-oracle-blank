@@ -2,6 +2,7 @@ package com.company.project.biz.impl;
 
 import com.company.project.service.CommonService;
 import com.company.project.service.CsysPotTrsService;
+import com.company.project.biz.CsysPotBiz;
 import com.company.project.biz.CsysPotTrsBiz;
 
 import org.springframework.stereotype.Component;
@@ -9,11 +10,18 @@ import org.springframework.transaction.annotation.Transactional;
 import tk.mybatis.mapper.entity.Condition;
 import com.company.project.core.utils.DateUtils;
 import com.company.project.dao.CsysPotTrsMapper;
+import com.company.project.model.CsysMenuAuthView;
+import com.company.project.model.CsysMenuAuthViewExample;
+import com.company.project.model.CsysPot;
 import com.company.project.model.CsysPotTrs;
 import com.company.project.model.CsysPotTrsExample;
 import com.company.project.model.CsysUserView;
 
+import java.util.ArrayList;
+import java.util.LinkedHashSet;
 import java.util.List;
+import java.util.Set;
+
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
 
@@ -32,6 +40,9 @@ public class CsysPotTrsBizImpl  implements CsysPotTrsBiz {
     private CommonService commonService;
 	@Resource
     private CsysPotTrsMapper csysPotTrsMapper;
+	@Resource
+    private CsysPotBiz csysPotBiz;
+	
     
 	public CsysPotTrs getDataSettings(String id){
 	
@@ -82,6 +93,11 @@ public class CsysPotTrsBizImpl  implements CsysPotTrsBiz {
 		csysPotTrs.setCsysPotTrsIsDelete("0");
 		csysPotTrsService.save(csysPotTrs);
 		
+		 //更新节点序列
+		List<CsysPotTrs> headTrs=getInitDataSettingsByCondition(csysPotTrs);
+		short sortNum=0;
+		recursiveTree(headTrs.get(0),sortNum,baseUserView);
+		
 		return sequence;
 	}
 	
@@ -90,6 +106,11 @@ public class CsysPotTrsBizImpl  implements CsysPotTrsBiz {
 		csysPotTrs.setCsysPotTrsModifyTime(DateUtils.newTimestamp());
 		csysPotTrs.setCsysPotTrsModifyUser(baseUserView.getCsysUserId());
 		csysPotTrsService.update(csysPotTrs);
+		
+		 //更新节点序列
+		List<CsysPotTrs> headTrs=getInitDataSettingsByCondition(csysPotTrs);
+		short sortNum=0;
+		recursiveTree(headTrs.get(0),sortNum,baseUserView);
 	
 	}
 	
@@ -128,6 +149,44 @@ public class CsysPotTrsBizImpl  implements CsysPotTrsBiz {
 		List<CsysPotTrs> list = csysPotTrsMapper.selectByExample(example);
 		
 		return list;
+	}
+	
+	//节点序号排序
+	private void recursiveTree(CsysPotTrs csysPotTrs,short sortNum,CsysUserView baseUserView) {
+
+		//更新序号
+		CsysPot csysPot=new CsysPot();
+		csysPot.setCsysPotId(csysPotTrs.getCsysPotTrsId());
+		csysPot.setCsysPotSort(sortNum);
+		csysPotBiz.updateDataSettings(baseUserView, csysPot);
+		 
+		//查询下一节点，并生成节点序号
+		CsysPotTrs nextCsysPotTrs=new CsysPotTrs();
+		nextCsysPotTrs.setCsysPotCurrentId(csysPotTrs.getCsysPotTrsPointId());
+		nextCsysPotTrs.setCsysWorkflowId(csysPotTrs.getCsysWorkflowId());
+		
+		List<CsysPotTrs> nextPotTrsList= getDataSettingsByCondition(nextCsysPotTrs);
+		 
+		for(CsysPotTrs cpt:nextPotTrsList) {
+			
+			//如果是维修节点，不进行排序
+			
+			CsysPot	 targetPot= csysPotBiz.getDataSettings(cpt.getCsysPotTrsPointId());
+			if(!"LHCsysPotStyle20190620042709661000002".equals(targetPot.getCsysPotStyleId())) {
+			
+				sortNum++;
+				//更新序号
+				nextCsysPotTrs.setCsysPotTrsPointId(nextPotTrsList.get(0).getCsysPotTrsPointId());
+				recursiveTree(nextCsysPotTrs,sortNum,baseUserView);
+			}
+			
+		}
+		if(nextPotTrsList.size()>0) {
+			
+			 
+			
+		}
+	 
 	}
 
 	
