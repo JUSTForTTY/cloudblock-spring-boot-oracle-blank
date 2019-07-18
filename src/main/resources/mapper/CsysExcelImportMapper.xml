@@ -23,6 +23,7 @@
     <result column="CSYS_EXCEL_IMPORT_IS_DELETE" jdbcType="CHAR" property="csysExcelImportIsDelete" />
     <result column="CSYS_EXCEL_IMPORT_TIME" jdbcType="TIMESTAMP" property="csysExcelImportTime" />
     <result column="CSYS_EXCEL_IMPORT_DATE" jdbcType="TIMESTAMP" property="csysExcelImportDate" />
+    <result column="CSYS_EXCEL_IMPORT_MODEL" jdbcType="VARCHAR" property="csysExcelImportModel" />
   </resultMap>
   <sql id="Example_Where_Clause">
     <!--
@@ -96,7 +97,7 @@
     CSYS_EXCEL_IMPORT_DL_NAME, CSYS_EXCEL_IMPORT_FILE, CSYS_EXCEL_IMPORT_READ_ROW, CSYS_EXCEL_IMPORT_BF_PRC, 
     CSYS_EXCEL_IMPORT_CR_PRC, CSYS_EXCEL_IMPORT_AF_PRC, CSYS_EXCEL_IMPORT_DESC, CSYS_EXCEL_IMPORT_CREATE_TIME, 
     CSYS_EXCEL_IMPORT_MODIFY_TIME, CSYS_EXCEL_IMPORT_CREATE_USER, CSYS_EXCEL_IMPORT_MODIFY_USER, 
-    CSYS_EXCEL_IMPORT_IS_DELETE, CSYS_EXCEL_IMPORT_TIME, CSYS_EXCEL_IMPORT_DATE
+    CSYS_EXCEL_IMPORT_IS_DELETE, CSYS_EXCEL_IMPORT_TIME, CSYS_EXCEL_IMPORT_DATE, CSYS_EXCEL_IMPORT_MODEL
   </sql>
   <select id="selectByExample" parameterType="com.company.project.model.CsysExcelImportExample" resultMap="BaseResultMap">
     <!--
@@ -193,6 +194,9 @@
       <if test="record.csysExcelImportDate != null">
         CSYS_EXCEL_IMPORT_DATE = #{record.csysExcelImportDate,jdbcType=TIMESTAMP},
       </if>
+      <if test="record.csysExcelImportModel != null">
+        CSYS_EXCEL_IMPORT_MODEL = #{record.csysExcelImportModel,jdbcType=VARCHAR},
+      </if>
     </set>
     <if test="_parameter != null">
       <include refid="Update_By_Example_Where_Clause" />
@@ -220,7 +224,8 @@
       CSYS_EXCEL_IMPORT_MODIFY_USER = #{record.csysExcelImportModifyUser,jdbcType=VARCHAR},
       CSYS_EXCEL_IMPORT_IS_DELETE = #{record.csysExcelImportIsDelete,jdbcType=CHAR},
       CSYS_EXCEL_IMPORT_TIME = #{record.csysExcelImportTime,jdbcType=TIMESTAMP},
-      CSYS_EXCEL_IMPORT_DATE = #{record.csysExcelImportDate,jdbcType=TIMESTAMP}
+      CSYS_EXCEL_IMPORT_DATE = #{record.csysExcelImportDate,jdbcType=TIMESTAMP},
+      CSYS_EXCEL_IMPORT_MODEL = #{record.csysExcelImportModel,jdbcType=VARCHAR}
     <if test="_parameter != null">
       <include refid="Update_By_Example_Where_Clause" />
     </if>

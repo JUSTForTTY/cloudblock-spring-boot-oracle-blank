@@ -144,7 +144,7 @@ public class CsysPotTrsController {
 		}
 		/*---------------------------end 授权验证------------------------*/
 		
-		try{
+	 
 		//获取用户信息
 		/*--------------start 此段代码可优化成redis-----------------------*/
 			CsysUserView baseUserView=new CsysUserView();
@@ -163,11 +163,7 @@ public class CsysPotTrsController {
 		}
         return ResultGenerator.genSuccessResult(param);
         
-        } catch (Exception e) {
-        
-        return ResultGenerator.genServerErrorResult(param);
-        
-        }
+         
     }
 
     @GetMapping("/{id}")

@@ -26,6 +26,10 @@ public class DynamicSql {
 	 * 主键名
 	 */
 	private String primaryName;
+	/*
+	 * where条件
+	 */
+	private String whereCondition;
 
 	public String getTableName() {
 		return tableName;
@@ -57,6 +61,20 @@ public class DynamicSql {
 
 	public void setPrimaryName(String primaryName) {
 		this.primaryName = primaryName;
+	}
+	
+	public String getWhereCondition() {
+		return whereCondition;
+	}
+
+	public void setWhereCondition(String whereCondition) {
+		this.whereCondition = whereCondition;
+	}
+
+	@Override
+	public String toString() {
+		return "DynamicSql [tableName=" + tableName + ", cloumn=" + cloumn + ", valueList=" + valueList
+				+ ", primaryName=" + primaryName + ",whereCondition="+whereCondition+"]";
 	}
 
 }

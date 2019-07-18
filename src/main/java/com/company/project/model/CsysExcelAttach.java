@@ -48,6 +48,12 @@ public class CsysExcelAttach {
     @Column(name = "CSYS_EXCEL_ATTACH_DATE")
     private Date csysExcelAttachDate;
 
+    @Column(name = "CSYS_EXCEL_ATTACH_IS_PRIMARY")
+    private String csysExcelAttachIsPrimary;
+
+    @Column(name = "CSYS_EXCEL_ATTACH_TRANSFERSQL")
+    private String csysExcelAttachTransfersql;
+
     /**
      * @return CSYS_EXCEL_ATTACH_ID
      */
@@ -242,5 +248,33 @@ public class CsysExcelAttach {
      */
     public void setCsysExcelAttachDate(Date csysExcelAttachDate) {
         this.csysExcelAttachDate = csysExcelAttachDate;
+    }
+
+    /**
+     * @return CSYS_EXCEL_ATTACH_IS_PRIMARY
+     */
+    public String getCsysExcelAttachIsPrimary() {
+        return csysExcelAttachIsPrimary;
+    }
+
+    /**
+     * @param csysExcelAttachIsPrimary
+     */
+    public void setCsysExcelAttachIsPrimary(String csysExcelAttachIsPrimary) {
+        this.csysExcelAttachIsPrimary = csysExcelAttachIsPrimary;
+    }
+
+    /**
+     * @return CSYS_EXCEL_ATTACH_TRANSFERSQL
+     */
+    public String getCsysExcelAttachTransfersql() {
+        return csysExcelAttachTransfersql;
+    }
+
+    /**
+     * @param csysExcelAttachTransfersql
+     */
+    public void setCsysExcelAttachTransfersql(String csysExcelAttachTransfersql) {
+        this.csysExcelAttachTransfersql = csysExcelAttachTransfersql;
     }
 }

@@ -24,6 +24,7 @@ import java.util.Set;
 
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
+import com.jcraft.jsch.Logger;
 
 import javax.annotation.Resource;
 
@@ -93,10 +94,12 @@ public class CsysPotTrsBizImpl  implements CsysPotTrsBiz {
 		csysPotTrs.setCsysPotTrsIsDelete("0");
 		csysPotTrsService.save(csysPotTrs);
 		
-		 //更新节点序列
+		//更新节点序列
 		List<CsysPotTrs> headTrs=getInitDataSettingsByCondition(csysPotTrs);
 		short sortNum=0;
-		recursiveTree(headTrs.get(0),sortNum,baseUserView);
+		ArrayList potArray = new ArrayList(); 
+		potArray.add(headTrs.get(0).getCsysPotTrsPointId());
+		recursiveTree(headTrs.get(0),sortNum,potArray,baseUserView);
 		
 		return sequence;
 	}
@@ -107,10 +110,17 @@ public class CsysPotTrsBizImpl  implements CsysPotTrsBiz {
 		csysPotTrs.setCsysPotTrsModifyUser(baseUserView.getCsysUserId());
 		csysPotTrsService.update(csysPotTrs);
 		
-		 //更新节点序列
-		List<CsysPotTrs> headTrs=getInitDataSettingsByCondition(csysPotTrs);
+		//更新节点序列
+		CsysPotTrs csysPotTrsData=new CsysPotTrs();
+		csysPotTrsData.setCsysPotTrsId(csysPotTrs.getCsysPotTrsId());
+		CsysPotTrs currentCsysPotTrs=csysPotTrsService.selectOne(csysPotTrsData);
+			 
+		List<CsysPotTrs> headTrs=getInitDataSettingsByCondition(currentCsysPotTrs);
 		short sortNum=0;
-		recursiveTree(headTrs.get(0),sortNum,baseUserView);
+		ArrayList potArray = new ArrayList(); 
+		potArray.add(headTrs.get(0).getCsysPotTrsPointId());
+		System.out.println("检测数据"+headTrs.size());
+		recursiveTree(headTrs.get(0),sortNum,potArray,baseUserView);
 	
 	}
 	
@@ -152,42 +162,43 @@ public class CsysPotTrsBizImpl  implements CsysPotTrsBiz {
 	}
 	
 	//节点序号排序
-	private void recursiveTree(CsysPotTrs csysPotTrs,short sortNum,CsysUserView baseUserView) {
+	private void recursiveTree(CsysPotTrs csysPotTrs,short sortNum,ArrayList potArray,CsysUserView baseUserView) {
 
-		//更新序号
-		CsysPot csysPot=new CsysPot();
-		csysPot.setCsysPotId(csysPotTrs.getCsysPotTrsId());
-		csysPot.setCsysPotSort(sortNum);
-		csysPotBiz.updateDataSettings(baseUserView, csysPot);
-		 
-		//查询下一节点，并生成节点序号
-		CsysPotTrs nextCsysPotTrs=new CsysPotTrs();
-		nextCsysPotTrs.setCsysPotCurrentId(csysPotTrs.getCsysPotTrsPointId());
-		nextCsysPotTrs.setCsysWorkflowId(csysPotTrs.getCsysWorkflowId());
-		
-		List<CsysPotTrs> nextPotTrsList= getDataSettingsByCondition(nextCsysPotTrs);
-		 
-		for(CsysPotTrs cpt:nextPotTrsList) {
-			
-			//如果是维修节点，不进行排序
-			
-			CsysPot	 targetPot= csysPotBiz.getDataSettings(cpt.getCsysPotTrsPointId());
-			if(!"LHCsysPotStyle20190620042709661000002".equals(targetPot.getCsysPotStyleId())) {
-			
-				sortNum++;
+				
 				//更新序号
-				nextCsysPotTrs.setCsysPotTrsPointId(nextPotTrsList.get(0).getCsysPotTrsPointId());
-				recursiveTree(nextCsysPotTrs,sortNum,baseUserView);
+				CsysPot csysPot=new CsysPot();
+				csysPot.setCsysPotId(csysPotTrs.getCsysPotTrsPointId());
+				csysPot.setCsysPotSort(sortNum);
+				csysPotBiz.updateDataSettings(baseUserView, csysPot);
+				 
+				//查询下一节点，并生成节点序号
+				CsysPotTrs nextCsysPotTrs=new CsysPotTrs();
+				nextCsysPotTrs.setCsysPotCurrentId(csysPotTrs.getCsysPotTrsPointId());
+				nextCsysPotTrs.setCsysWorkflowId(csysPotTrs.getCsysWorkflowId());
+				
+				List<CsysPotTrs> nextPotTrsList= getDataSettingsByCondition(nextCsysPotTrs);
+				sortNum++;
+				for(CsysPotTrs cpt:nextPotTrsList) {
+					
+					//如果已经排序过得节点，不继续操作
+					if(!potArray.contains(cpt.getCsysPotTrsPointId())) {
+					 
+					//如果是维修节点，不进行排序
+					
+					CsysPot	 targetPot= csysPotBiz.getDataSettings(cpt.getCsysPotTrsPointId());
+					if(!"LHCsysPotStyle20190620042709661000002".equals(targetPot.getCsysPotStyleId())) {
+						potArray.add(cpt.getCsysPotTrsPointId());
+						 
+						//更新序号
+						nextCsysPotTrs.setCsysPotTrsPointId(cpt.getCsysPotTrsPointId());
+						recursiveTree(nextCsysPotTrs,sortNum,potArray,baseUserView);
+					}
+					
+			   }
+				
 			}
-			
+				 
 		}
-		if(nextPotTrsList.size()>0) {
-			
-			 
-			
-		}
-	 
-	}
 
 	
 }

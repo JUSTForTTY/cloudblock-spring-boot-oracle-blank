@@ -60,6 +60,9 @@ public class CsysExcelImport {
     @Column(name = "CSYS_EXCEL_IMPORT_DATE")
     private Date csysExcelImportDate;
 
+    @Column(name = "CSYS_EXCEL_IMPORT_MODEL")
+    private String csysExcelImportModel;
+
     /**
      * @return CSYS_EXCEL_IMPORT_ID
      */
@@ -310,5 +313,19 @@ public class CsysExcelImport {
      */
     public void setCsysExcelImportDate(Date csysExcelImportDate) {
         this.csysExcelImportDate = csysExcelImportDate;
+    }
+
+    /**
+     * @return CSYS_EXCEL_IMPORT_MODEL
+     */
+    public String getCsysExcelImportModel() {
+        return csysExcelImportModel;
+    }
+
+    /**
+     * @param csysExcelImportModel
+     */
+    public void setCsysExcelImportModel(String csysExcelImportModel) {
+        this.csysExcelImportModel = csysExcelImportModel;
     }
 }

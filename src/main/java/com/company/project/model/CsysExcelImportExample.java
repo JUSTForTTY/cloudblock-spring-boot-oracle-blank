@@ -1314,6 +1314,76 @@ public class CsysExcelImportExample {
             addCriterion("CSYS_EXCEL_IMPORT_DATE not between", value1, value2, "csysExcelImportDate");
             return (Criteria) this;
         }
+
+        public Criteria andCsysExcelImportModelIsNull() {
+            addCriterion("CSYS_EXCEL_IMPORT_MODEL is null");
+            return (Criteria) this;
+        }
+
+        public Criteria andCsysExcelImportModelIsNotNull() {
+            addCriterion("CSYS_EXCEL_IMPORT_MODEL is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andCsysExcelImportModelEqualTo(String value) {
+            addCriterion("CSYS_EXCEL_IMPORT_MODEL =", value, "csysExcelImportModel");
+            return (Criteria) this;
+        }
+
+        public Criteria andCsysExcelImportModelNotEqualTo(String value) {
+            addCriterion("CSYS_EXCEL_IMPORT_MODEL <>", value, "csysExcelImportModel");
+            return (Criteria) this;
+        }
+
+        public Criteria andCsysExcelImportModelGreaterThan(String value) {
+            addCriterion("CSYS_EXCEL_IMPORT_MODEL >", value, "csysExcelImportModel");
+            return (Criteria) this;
+        }
+
+        public Criteria andCsysExcelImportModelGreaterThanOrEqualTo(String value) {
+            addCriterion("CSYS_EXCEL_IMPORT_MODEL >=", value, "csysExcelImportModel");
+            return (Criteria) this;
+        }
+
+        public Criteria andCsysExcelImportModelLessThan(String value) {
+            addCriterion("CSYS_EXCEL_IMPORT_MODEL <", value, "csysExcelImportModel");
+            return (Criteria) this;
+        }
+
+        public Criteria andCsysExcelImportModelLessThanOrEqualTo(String value) {
+            addCriterion("CSYS_EXCEL_IMPORT_MODEL <=", value, "csysExcelImportModel");
+            return (Criteria) this;
+        }
+
+        public Criteria andCsysExcelImportModelLike(String value) {
+            addCriterion("CSYS_EXCEL_IMPORT_MODEL like", value, "csysExcelImportModel");
+            return (Criteria) this;
+        }
+
+        public Criteria andCsysExcelImportModelNotLike(String value) {
+            addCriterion("CSYS_EXCEL_IMPORT_MODEL not like", value, "csysExcelImportModel");
+            return (Criteria) this;
+        }
+
+        public Criteria andCsysExcelImportModelIn(List<String> values) {
+            addCriterion("CSYS_EXCEL_IMPORT_MODEL in", values, "csysExcelImportModel");
+            return (Criteria) this;
+        }
+
+        public Criteria andCsysExcelImportModelNotIn(List<String> values) {
+            addCriterion("CSYS_EXCEL_IMPORT_MODEL not in", values, "csysExcelImportModel");
+            return (Criteria) this;
+        }
+
+        public Criteria andCsysExcelImportModelBetween(String value1, String value2) {
+            addCriterion("CSYS_EXCEL_IMPORT_MODEL between", value1, value2, "csysExcelImportModel");
+            return (Criteria) this;
+        }
+
+        public Criteria andCsysExcelImportModelNotBetween(String value1, String value2) {
+            addCriterion("CSYS_EXCEL_IMPORT_MODEL not between", value1, value2, "csysExcelImportModel");
+            return (Criteria) this;
+        }
     }
 
     public static class Criteria extends GeneratedCriteria {

@@ -8,6 +8,8 @@
     <result column="CSYS_EXCEL_ATTACH_ID" jdbcType="VARCHAR" property="csysExcelAttachId" />
     <result column="CSYS_EXCEL_ATTACH_FIELD_ROW" jdbcType="DECIMAL" property="csysExcelAttachFieldRow" />
     <result column="CSYS_EXCEL_ATTACH_FIELD_COLUMN" jdbcType="DECIMAL" property="csysExcelAttachFieldColumn" />
+    <result column="CSYS_EXCEL_ATTACH_IS_PRIMARY" jdbcType="CHAR" property="csysExcelAttachIsPrimary" />
+    <result column="CSYS_EXCEL_ATTACH_TRANSFERSQL" jdbcType="VARCHAR" property="csysExcelAttachTransfersql" />
     <result column="CSYS_EXCEL_ATTACH_FIELD_NAME" jdbcType="VARCHAR" property="csysExcelAttachFieldName" />
     <result column="CSYS_EXCEL_ATTACH_FIELD_DESC" jdbcType="VARCHAR" property="csysExcelAttachFieldDesc" />
     <result column="CSYS_EXCEL_IMPORT_ID" jdbcType="VARCHAR" property="csysExcelImportId" />
@@ -104,13 +106,14 @@
       WARNING - @mbg.generated
     -->
     CSYS_EXCEL_ATTACH_ID, CSYS_EXCEL_ATTACH_FIELD_ROW, CSYS_EXCEL_ATTACH_FIELD_COLUMN, 
-    CSYS_EXCEL_ATTACH_FIELD_NAME, CSYS_EXCEL_ATTACH_FIELD_DESC, CSYS_EXCEL_IMPORT_ID, 
-    CSYS_EXCEL_IMPORT_NAME, CSYS_EXCEL_IMPORT_TYPE, CSYS_EXCEL_IMPORT_DL_NAME, CSYS_EXCEL_IMPORT_FILE, 
-    CSYS_EXCEL_IMPORT_READ_ROW, CSYS_EXCEL_IMPORT_BF_PRC, CSYS_EXCEL_IMPORT_CR_PRC, CSYS_EXCEL_IMPORT_AF_PRC, 
-    CSYS_EXCEL_IMPORT_DESC, CSYS_EXCEL_IMPORT_TIME, CSYS_EXCEL_IMPORT_DATE, CSYS_FIELD_INFO_ID, 
-    CSYS_FIELD_INFO_NAME, CSYS_FIELD_INFO_RELNAME, CSYS_FIELD_INFO_REGION, CSYS_FIELD_INFO_ATTRIBUTE, 
-    CSYS_FIELD_INFO_TYPE, CSYS_FIELD_INFO_DEFAULT, CSYS_FIELD_INFO_DATE, CSYS_VIEW_EXPLAIN_ID, 
-    CSYS_VIEW_EXPLAIN_NAME, CSYS_VIEW_EXPLAIN_TYPE, CSYS_VIEW_EXPLAIN_DESC
+    CSYS_EXCEL_ATTACH_IS_PRIMARY, CSYS_EXCEL_ATTACH_TRANSFERSQL, CSYS_EXCEL_ATTACH_FIELD_NAME, 
+    CSYS_EXCEL_ATTACH_FIELD_DESC, CSYS_EXCEL_IMPORT_ID, CSYS_EXCEL_IMPORT_NAME, CSYS_EXCEL_IMPORT_TYPE, 
+    CSYS_EXCEL_IMPORT_DL_NAME, CSYS_EXCEL_IMPORT_FILE, CSYS_EXCEL_IMPORT_READ_ROW, CSYS_EXCEL_IMPORT_BF_PRC, 
+    CSYS_EXCEL_IMPORT_CR_PRC, CSYS_EXCEL_IMPORT_AF_PRC, CSYS_EXCEL_IMPORT_DESC, CSYS_EXCEL_IMPORT_TIME, 
+    CSYS_EXCEL_IMPORT_DATE, CSYS_FIELD_INFO_ID, CSYS_FIELD_INFO_NAME, CSYS_FIELD_INFO_RELNAME, 
+    CSYS_FIELD_INFO_REGION, CSYS_FIELD_INFO_ATTRIBUTE, CSYS_FIELD_INFO_TYPE, CSYS_FIELD_INFO_DEFAULT, 
+    CSYS_FIELD_INFO_DATE, CSYS_VIEW_EXPLAIN_ID, CSYS_VIEW_EXPLAIN_NAME, CSYS_VIEW_EXPLAIN_TYPE, 
+    CSYS_VIEW_EXPLAIN_DESC
   </sql>
   <select id="selectByExample" parameterType="com.company.project.model.CsysExcelImportViewExample" resultMap="BaseResultMap">
     <!--
@@ -161,6 +164,12 @@
       </if>
       <if test="record.csysExcelAttachFieldColumn != null">
         CSYS_EXCEL_ATTACH_FIELD_COLUMN = #{record.csysExcelAttachFieldColumn,jdbcType=DECIMAL},
+      </if>
+      <if test="record.csysExcelAttachIsPrimary != null">
+        CSYS_EXCEL_ATTACH_IS_PRIMARY = #{record.csysExcelAttachIsPrimary,jdbcType=CHAR},
+      </if>
+      <if test="record.csysExcelAttachTransfersql != null">
+        CSYS_EXCEL_ATTACH_TRANSFERSQL = #{record.csysExcelAttachTransfersql,jdbcType=VARCHAR},
       </if>
       <if test="record.csysExcelAttachFieldName != null">
         CSYS_EXCEL_ATTACH_FIELD_NAME = #{record.csysExcelAttachFieldName,jdbcType=VARCHAR},
@@ -253,6 +262,8 @@
     set CSYS_EXCEL_ATTACH_ID = #{record.csysExcelAttachId,jdbcType=VARCHAR},
       CSYS_EXCEL_ATTACH_FIELD_ROW = #{record.csysExcelAttachFieldRow,jdbcType=DECIMAL},
       CSYS_EXCEL_ATTACH_FIELD_COLUMN = #{record.csysExcelAttachFieldColumn,jdbcType=DECIMAL},
+      CSYS_EXCEL_ATTACH_IS_PRIMARY = #{record.csysExcelAttachIsPrimary,jdbcType=CHAR},
+      CSYS_EXCEL_ATTACH_TRANSFERSQL = #{record.csysExcelAttachTransfersql,jdbcType=VARCHAR},
       CSYS_EXCEL_ATTACH_FIELD_NAME = #{record.csysExcelAttachFieldName,jdbcType=VARCHAR},
       CSYS_EXCEL_ATTACH_FIELD_DESC = #{record.csysExcelAttachFieldDesc,jdbcType=VARCHAR},
       CSYS_EXCEL_IMPORT_ID = #{record.csysExcelImportId,jdbcType=VARCHAR},

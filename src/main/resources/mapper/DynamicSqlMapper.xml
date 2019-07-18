@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.company.project.dao.DynamicSqlMapper">
+
+	<insert id="insertData" parameterType="java.util.Map">
+		insert into ${tableName}
+		(${cloumn}) values
+		<foreach collection="valueList" item="value" separator=","
+			open="(" close=")">
+			#{value}
+		</foreach>
+	</insert>
+	<update id="updateData" parameterType="java.util.Map">
+		update  ${tableName}
+		 set 
+		<foreach collection="valueList" item="map" separator=",">
+			
+			 <foreach collection="map" item="value" index="key" separator=",">
+  			  ${key} = ${value}
+  			</foreach>
+			 
+		</foreach>
+		${whereCondition}
+	
+	</update>
+</mapper>

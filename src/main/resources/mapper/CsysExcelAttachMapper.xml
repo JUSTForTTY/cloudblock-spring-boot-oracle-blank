@@ -19,6 +19,8 @@
     <result column="CSYS_EXCEL_ATTACH_IS_DELETE" jdbcType="CHAR" property="csysExcelAttachIsDelete" />
     <result column="CSYS_EXCEL_ATTACH_TIME" jdbcType="TIMESTAMP" property="csysExcelAttachTime" />
     <result column="CSYS_EXCEL_ATTACH_DATE" jdbcType="TIMESTAMP" property="csysExcelAttachDate" />
+    <result column="CSYS_EXCEL_ATTACH_IS_PRIMARY" jdbcType="CHAR" property="csysExcelAttachIsPrimary" />
+    <result column="CSYS_EXCEL_ATTACH_TRANSFERSQL" jdbcType="VARCHAR" property="csysExcelAttachTransfersql" />
   </resultMap>
   <sql id="Example_Where_Clause">
     <!--
@@ -92,7 +94,7 @@
     CSYS_EXCEL_ATTACH_FIELD_COLUMN, CSYS_EXCEL_ATTACH_FIELD_NAME, CSYS_EXCEL_ATTACH_FIELD_DESC, 
     CSYS_EXCEL_ATTACH_CREATE_TIME, CSYS_EXCEL_ATTACH_MODIFY_TIME, CSYS_EXCEL_ATTACH_CREATE_USER, 
     CSYS_EXCEL_ATTACH_MODIFY_USER, CSYS_EXCEL_ATTACH_IS_DELETE, CSYS_EXCEL_ATTACH_TIME, 
-    CSYS_EXCEL_ATTACH_DATE
+    CSYS_EXCEL_ATTACH_DATE, CSYS_EXCEL_ATTACH_IS_PRIMARY, CSYS_EXCEL_ATTACH_TRANSFERSQL
   </sql>
   <select id="selectByExample" parameterType="com.company.project.model.CsysExcelAttachExample" resultMap="BaseResultMap">
     <!--
@@ -177,6 +179,12 @@
       <if test="record.csysExcelAttachDate != null">
         CSYS_EXCEL_ATTACH_DATE = #{record.csysExcelAttachDate,jdbcType=TIMESTAMP},
       </if>
+      <if test="record.csysExcelAttachIsPrimary != null">
+        CSYS_EXCEL_ATTACH_IS_PRIMARY = #{record.csysExcelAttachIsPrimary,jdbcType=CHAR},
+      </if>
+      <if test="record.csysExcelAttachTransfersql != null">
+        CSYS_EXCEL_ATTACH_TRANSFERSQL = #{record.csysExcelAttachTransfersql,jdbcType=VARCHAR},
+      </if>
     </set>
     <if test="_parameter != null">
       <include refid="Update_By_Example_Where_Clause" />
@@ -200,7 +208,9 @@
       CSYS_EXCEL_ATTACH_MODIFY_USER = #{record.csysExcelAttachModifyUser,jdbcType=VARCHAR},
       CSYS_EXCEL_ATTACH_IS_DELETE = #{record.csysExcelAttachIsDelete,jdbcType=CHAR},
       CSYS_EXCEL_ATTACH_TIME = #{record.csysExcelAttachTime,jdbcType=TIMESTAMP},
-      CSYS_EXCEL_ATTACH_DATE = #{record.csysExcelAttachDate,jdbcType=TIMESTAMP}
+      CSYS_EXCEL_ATTACH_DATE = #{record.csysExcelAttachDate,jdbcType=TIMESTAMP},
+      CSYS_EXCEL_ATTACH_IS_PRIMARY = #{record.csysExcelAttachIsPrimary,jdbcType=CHAR},
+      CSYS_EXCEL_ATTACH_TRANSFERSQL = #{record.csysExcelAttachTransfersql,jdbcType=VARCHAR}
     <if test="_parameter != null">
       <include refid="Update_By_Example_Where_Clause" />
     </if>

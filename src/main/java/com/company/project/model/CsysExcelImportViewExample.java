@@ -295,6 +295,146 @@ public class CsysExcelImportViewExample {
             return (Criteria) this;
         }
 
+        public Criteria andCsysExcelAttachIsPrimaryIsNull() {
+            addCriterion("CSYS_EXCEL_ATTACH_IS_PRIMARY is null");
+            return (Criteria) this;
+        }
+
+        public Criteria andCsysExcelAttachIsPrimaryIsNotNull() {
+            addCriterion("CSYS_EXCEL_ATTACH_IS_PRIMARY is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andCsysExcelAttachIsPrimaryEqualTo(String value) {
+            addCriterion("CSYS_EXCEL_ATTACH_IS_PRIMARY =", value, "csysExcelAttachIsPrimary");
+            return (Criteria) this;
+        }
+
+        public Criteria andCsysExcelAttachIsPrimaryNotEqualTo(String value) {
+            addCriterion("CSYS_EXCEL_ATTACH_IS_PRIMARY <>", value, "csysExcelAttachIsPrimary");
+            return (Criteria) this;
+        }
+
+        public Criteria andCsysExcelAttachIsPrimaryGreaterThan(String value) {
+            addCriterion("CSYS_EXCEL_ATTACH_IS_PRIMARY >", value, "csysExcelAttachIsPrimary");
+            return (Criteria) this;
+        }
+
+        public Criteria andCsysExcelAttachIsPrimaryGreaterThanOrEqualTo(String value) {
+            addCriterion("CSYS_EXCEL_ATTACH_IS_PRIMARY >=", value, "csysExcelAttachIsPrimary");
+            return (Criteria) this;
+        }
+
+        public Criteria andCsysExcelAttachIsPrimaryLessThan(String value) {
+            addCriterion("CSYS_EXCEL_ATTACH_IS_PRIMARY <", value, "csysExcelAttachIsPrimary");
+            return (Criteria) this;
+        }
+
+        public Criteria andCsysExcelAttachIsPrimaryLessThanOrEqualTo(String value) {
+            addCriterion("CSYS_EXCEL_ATTACH_IS_PRIMARY <=", value, "csysExcelAttachIsPrimary");
+            return (Criteria) this;
+        }
+
+        public Criteria andCsysExcelAttachIsPrimaryLike(String value) {
+            addCriterion("CSYS_EXCEL_ATTACH_IS_PRIMARY like", value, "csysExcelAttachIsPrimary");
+            return (Criteria) this;
+        }
+
+        public Criteria andCsysExcelAttachIsPrimaryNotLike(String value) {
+            addCriterion("CSYS_EXCEL_ATTACH_IS_PRIMARY not like", value, "csysExcelAttachIsPrimary");
+            return (Criteria) this;
+        }
+
+        public Criteria andCsysExcelAttachIsPrimaryIn(List<String> values) {
+            addCriterion("CSYS_EXCEL_ATTACH_IS_PRIMARY in", values, "csysExcelAttachIsPrimary");
+            return (Criteria) this;
+        }
+
+        public Criteria andCsysExcelAttachIsPrimaryNotIn(List<String> values) {
+            addCriterion("CSYS_EXCEL_ATTACH_IS_PRIMARY not in", values, "csysExcelAttachIsPrimary");
+            return (Criteria) this;
+        }
+
+        public Criteria andCsysExcelAttachIsPrimaryBetween(String value1, String value2) {
+            addCriterion("CSYS_EXCEL_ATTACH_IS_PRIMARY between", value1, value2, "csysExcelAttachIsPrimary");
+            return (Criteria) this;
+        }
+
+        public Criteria andCsysExcelAttachIsPrimaryNotBetween(String value1, String value2) {
+            addCriterion("CSYS_EXCEL_ATTACH_IS_PRIMARY not between", value1, value2, "csysExcelAttachIsPrimary");
+            return (Criteria) this;
+        }
+
+        public Criteria andCsysExcelAttachTransfersqlIsNull() {
+            addCriterion("CSYS_EXCEL_ATTACH_TRANSFERSQL is null");
+            return (Criteria) this;
+        }
+
+        public Criteria andCsysExcelAttachTransfersqlIsNotNull() {
+            addCriterion("CSYS_EXCEL_ATTACH_TRANSFERSQL is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andCsysExcelAttachTransfersqlEqualTo(String value) {
+            addCriterion("CSYS_EXCEL_ATTACH_TRANSFERSQL =", value, "csysExcelAttachTransfersql");
+            return (Criteria) this;
+        }
+
+        public Criteria andCsysExcelAttachTransfersqlNotEqualTo(String value) {
+            addCriterion("CSYS_EXCEL_ATTACH_TRANSFERSQL <>", value, "csysExcelAttachTransfersql");
+            return (Criteria) this;
+        }
+
+        public Criteria andCsysExcelAttachTransfersqlGreaterThan(String value) {
+            addCriterion("CSYS_EXCEL_ATTACH_TRANSFERSQL >", value, "csysExcelAttachTransfersql");
+            return (Criteria) this;
+        }
+
+        public Criteria andCsysExcelAttachTransfersqlGreaterThanOrEqualTo(String value) {
+            addCriterion("CSYS_EXCEL_ATTACH_TRANSFERSQL >=", value, "csysExcelAttachTransfersql");
+            return (Criteria) this;
+        }
+
+        public Criteria andCsysExcelAttachTransfersqlLessThan(String value) {
+            addCriterion("CSYS_EXCEL_ATTACH_TRANSFERSQL <", value, "csysExcelAttachTransfersql");
+            return (Criteria) this;
+        }
+
+        public Criteria andCsysExcelAttachTransfersqlLessThanOrEqualTo(String value) {
+            addCriterion("CSYS_EXCEL_ATTACH_TRANSFERSQL <=", value, "csysExcelAttachTransfersql");
+            return (Criteria) this;
+        }
+
+        public Criteria andCsysExcelAttachTransfersqlLike(String value) {
+            addCriterion("CSYS_EXCEL_ATTACH_TRANSFERSQL like", value, "csysExcelAttachTransfersql");
+            return (Criteria) this;
+        }
+
+        public Criteria andCsysExcelAttachTransfersqlNotLike(String value) {
+            addCriterion("CSYS_EXCEL_ATTACH_TRANSFERSQL not like", value, "csysExcelAttachTransfersql");
+            return (Criteria) this;
+        }
+
+        public Criteria andCsysExcelAttachTransfersqlIn(List<String> values) {
+            addCriterion("CSYS_EXCEL_ATTACH_TRANSFERSQL in", values, "csysExcelAttachTransfersql");
+            return (Criteria) this;
+        }
+
+        public Criteria andCsysExcelAttachTransfersqlNotIn(List<String> values) {
+            addCriterion("CSYS_EXCEL_ATTACH_TRANSFERSQL not in", values, "csysExcelAttachTransfersql");
+            return (Criteria) this;
+        }
+
+        public Criteria andCsysExcelAttachTransfersqlBetween(String value1, String value2) {
+            addCriterion("CSYS_EXCEL_ATTACH_TRANSFERSQL between", value1, value2, "csysExcelAttachTransfersql");
+            return (Criteria) this;
+        }
+
+        public Criteria andCsysExcelAttachTransfersqlNotBetween(String value1, String value2) {
+            addCriterion("CSYS_EXCEL_ATTACH_TRANSFERSQL not between", value1, value2, "csysExcelAttachTransfersql");
+            return (Criteria) this;
+        }
+
         public Criteria andCsysExcelAttachFieldNameIsNull() {
             addCriterion("CSYS_EXCEL_ATTACH_FIELD_NAME is null");
             return (Criteria) this;
