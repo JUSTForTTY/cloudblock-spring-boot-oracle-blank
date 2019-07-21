@@ -70,6 +70,8 @@ public class BuildUrlUtils {
 	public static final String gitProjectUsername = GetPropertiesValue.getValue(configUrl, "gitProject.username");
 
 	public static final String gitProjectPassword = GetPropertiesValue.getValue(configUrl, "gitProject.password");
+	
+	public static final String fileUploadPath = GetPropertiesValue.getValue(configUrl, "fileUpload.position");
 
 	public static final String projectDomainName = GetPropertiesValue.getValue(configUrl, "projectDomainName");
 }
